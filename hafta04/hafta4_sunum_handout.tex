@@ -1,0 +1,642 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 4]{MMAT105 Genel Matematik}
+\subtitle{Hafta 4: Rasyonel Sayılar, Ondalık Sayılar, Dört İşlem ve Sıralama}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.6\textwidth}
+\textbf{3. hafta: bölünebilme, EBOB, EKOK}
+\begin{enumerate}
+\item Üç basamaklı \(\ab{37a}\) sayısı hem \(3\) hem \(4\) ile tam bölünebildiğine göre \(a\) rakamı kaçtır?
+\item \(\text{EBOB}(24,36)\) ve \(\text{EKOK}(24,36)\) kaçtır?
+\item \(12\) ve \(18\) ile bölündüğünde her ikisinde de \(5\) kalanını veren iki basamaklı en küçük doğal sayı kaçtır?
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(a=2\) \\ {\small (\(4\): \(a\in\{2,6\}\); \ \(3\): \(a\in\{2,5,8\}\))}
+\item \(12\) \ ve \ \(72\)
+\item \(\text{EKOK}+5=36+5=41\) \\ {\small (\(5\) de sağlar ama tek basamaklı)}
+\end{enumerate}
+\end{columns}
+\vspace{4pt}
+\small Bu hafta EKOK'u \textbf{payda eşitlemede}, EBOB'u \textbf{sadeleştirmede} kullanacağız.
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Rasyonel sayı, kesir türleri
+\item Genişletme, sadeleştirme
+\item Sayı doğrusu
+\item Kesirlerde dört işlem
+\item Merdiven kesirler
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Ondalık \(\leftrightarrow\) kesir
+\item Ondalıklarda dört işlem
+\item Devirli ondalık sayılar
+\item Bilimsel gösterim
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{9}
+\item Sıralama yöntemleri
+\item Negatif rasyoneller
+\item İki sayı arasında sayı
+\item Karma işlem, kesir problemleri
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Rasyonel Sayılar ve Kesirlerde Dört İşlem}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Rasyonel Sayılar, Kesir Türleri ve Kesirlerde Dört İşlem
+\end{frame}
+
+\subsection{Rasyonel sayılar}
+\begin{frame}{Rasyonel Sayılar ve Kesir Türleri}
+\begin{block}{Tanım}
+\small
+\[\mathbb{Q}=\left\{\tfrac{a}{b}\ :\ a,b\in\mathbb{Z},\ b\neq 0\right\},\qquad \mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\qquad(\text{her } n\in\mathbb{Z} \text{ için } n=\tfrac{n}{1})\]
+\vspace{-10pt}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item \(a,b>0\) iken \textbf{basit kesir}: \(a<b\); \quad \textbf{bileşik kesir}: \(a\ge b\) \quad (ör. \(\frac{3}{5}\) basit; \(\frac{7}{4},\ \frac{5}{5}\) bileşik)
+\item \textbf{Tam sayılı kesir}: \(\displaystyle n\tfrac{p}{q}=n+\frac{p}{q}=\frac{n\cdot q+p}{q}\) \quad (ör. \(2\frac{1}{3}=\frac{7}{3}\))
+\item \textbf{Genişletme / sadeleştirme}: \(\frac{a}{b}=\frac{a\cdot k}{b\cdot k}\ (k\neq 0)\); \ en sade biçim için pay ve payda EBOB'a bölünür.
+\item \textbf{Denk kesirler}: \(\frac{a}{b}=\frac{c}{d}\iff a\cdot d=b\cdot c\) \quad (\(b,d\neq 0\)); \ ör. \(\frac{3}{4}=\frac{9}{12}=\frac{15}{20}\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\small\(\frac{0}{5}=0\) ama \(\frac{5}{0}\) \textbf{tanımsız}. \quad Toplamlarda sadeleştirme yapılmaz: \(\frac{2+3}{2+5}=\frac{5}{7}\neq\frac{3}{5}\). \quad \(-\frac{a}{b}=\frac{-a}{b}=\frac{a}{-b}\).
+\end{alertblock}
+\end{frame}
+
+\soru{Rasyonel Sayılar -- Örnek 1}
+{\(\dfrac{0}{7},\quad \dfrac{7}{0},\quad -\dfrac{3}{4},\quad 5,\quad 2{,}5,\quad \dfrac{12}{-4}\) \\[4pt] ifadelerinden hangileri rasyonel sayıdır? Hangileri tam sayıdır?}
+{\(\frac{0}{7}=0\), \ \(5=\frac{5}{1}\), \ \(2{,}5=\frac{5}{2}\), \ \(-\frac{3}{4}\), \ \(\frac{12}{-4}=-3\) \quad \(\Rightarrow\) bunlar rasyoneldir.\\
+\(\frac{7}{0}\) \textbf{tanımsızdır}, rasyonel sayı değildir.\\[4pt]
+Tam sayı olanlar: \(\frac{0}{7}=0\), \ \(5\), \ \(\frac{12}{-4}=-3\).}
+
+\soru{Kesir Türleri -- Örnek 2}
+{\(\dfrac{3}{7},\quad \dfrac{9}{4},\quad \dfrac{6}{6},\quad \dfrac{11}{12},\quad \dfrac{13}{5}\) \\[4pt] kesirlerinden hangileri basit, hangileri bileşik kesirdir?}
+{Basit (pay \(<\) payda): \(\dfrac{3}{7},\ \dfrac{11}{12}\) \quad (değeri \(1\)'den küçük)\\[4pt]
+Bileşik (pay \(\ge\) payda): \(\dfrac{9}{4},\ \dfrac{6}{6},\ \dfrac{13}{5}\) \quad (değeri \(1\)'e eşit veya büyük)}
+
+\soru{Tam Sayılı Kesir -- Örnek 3}
+{\(3\dfrac{2}{5}\) sayısını bileşik kesir olarak, \(\dfrac{23}{4}\) kesrini tam sayılı kesir olarak yazınız.}
+{\[3\frac{2}{5}=\frac{3\cdot 5+2}{5}=\frac{17}{5}\]
+\(23=4\cdot 5+3\) \ (bölüm \(5\), kalan \(3\)):
+\[\frac{23}{4}=5\frac{3}{4}\]}
+
+\soru{Sadeleştirme -- Genişletme: Örnek 4}
+{\(\dfrac{84}{126}\) kesrini en sade biçimde yazınız. \(\dfrac{3}{8}\) kesrini paydası \(56\) olacak şekilde genişletiniz.}
+{\(\text{EBOB}(84,126)=42\):
+\[\frac{84}{126}=\frac{84\div 42}{126\div 42}=\frac{2}{3}\]
+\(56=8\cdot 7\) \(\Rightarrow\) \(7\) ile genişlet: \quad \(\dfrac{3}{8}=\dfrac{3\cdot 7}{8\cdot 7}=\dfrac{21}{56}\)}
+
+\soru{Sayı Doğrusu -- Örnek 5}
+{\(-\dfrac{7}{3}\) ve \(\dfrac{11}{4}\) sayıları hangi iki ardışık tam sayı arasındadır? Hangisi \(0\)'a daha yakındır?}
+{\(-\frac{7}{3}=-2\frac{1}{3}\): \(-3\) ile \(-2\) arasında; \quad \(\frac{11}{4}=2\frac{3}{4}\): \(2\) ile \(3\) arasında.\\[2pt]
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\draw[->] (-3.6,0)--(3.6,0);
+\foreach \x in {-3,...,3} {\draw (\x,0.1)--(\x,-0.1) node[below] {\small \(\x\)};}
+\fill[uyarikirmizi] (-7/3,0) circle (2.5pt) node[above] {\small \(-\frac{7}{3}\)};
+\fill[cozumyesil] (11/4,0) circle (2.5pt) node[above] {\small \(\frac{11}{4}\)};
+\end{tikzpicture}
+\end{center}
+\(0\)'a uzaklıklar: \(\frac{7}{3}=\frac{28}{12}<\frac{33}{12}=\frac{11}{4}\) \(\Rightarrow\) \(-\frac{7}{3}\) daha yakın.}
+
+\subsection{Toplama ve çıkarma}
+\begin{frame}{Kesirlerde Toplama ve Çıkarma}
+\begin{block}{Kural}
+\begin{itemize}
+\item Paydalar eşitse: \(\dfrac{a}{c}\pm\dfrac{b}{c}=\dfrac{a\pm b}{c}\)
+\item Paydalar farklıysa önce paydalar eşitlenir. En küçük ortak payda \(=\) paydaların \textbf{EKOK}'u.
+\item Tam sayılı kesirler önce bileşik kesre çevrilir.
+\item Sonuç en sade biçimde yazılır.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hata}
+\(\dfrac{1}{2}+\dfrac{1}{3}\neq\dfrac{1+1}{2+3}=\dfrac{2}{5}\). \quad Doğrusu: \(\dfrac{3}{6}+\dfrac{2}{6}=\dfrac{5}{6}\). \quad Paydalar toplanmaz!
+\end{alertblock}
+\end{frame}
+
+\soru{Toplama -- Çıkarma: Örnek 6}
+{\(\dfrac{2}{3}+\dfrac{3}{4}-\dfrac{5}{6}\) işleminin sonucu kaçtır?}
+{\(\text{EKOK}(3,4,6)=12\):
+\[\frac{2}{3}+\frac{3}{4}-\frac{5}{6}=\frac{8}{12}+\frac{9}{12}-\frac{10}{12}=\frac{7}{12}\]}
+
+\soru{Toplama -- Çıkarma: Örnek 7}
+{\(\dfrac{5}{12}+\dfrac{7}{18}\) işleminin sonucu kaçtır?}
+{\(12=2^2\cdot 3\), \ \(18=2\cdot 3^2\) \(\Rightarrow\) \(\text{EKOK}=2^2\cdot 3^2=36\):
+\[\frac{5}{12}+\frac{7}{18}=\frac{15}{36}+\frac{14}{36}=\frac{29}{36}\]
+(\(12\cdot 18=216\) de ortak paydadır ama sayılar büyür.)}
+
+\soru{Tam Sayılı Kesirler -- Örnek 8}
+{\(3\dfrac{1}{4}-1\dfrac{2}{3}\) işleminin sonucu kaçtır?}
+{\[3\frac{1}{4}-1\frac{2}{3}=\frac{13}{4}-\frac{5}{3}=\frac{39}{12}-\frac{20}{12}=\frac{19}{12}=1\frac{7}{12}\]}
+
+\subsection{Çarpma, bölme, merdiven kesirler}
+\begin{frame}{Kesirlerde Çarpma, Bölme ve Merdiven Kesirler}
+\begin{block}{Kural}
+\[\frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d},\qquad \frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}\qquad(b,c,d\neq 0)\]
+\vspace{-6pt}
+\begin{itemize}
+\item Çarpmadan önce çapraz sadeleştirme yapmak işlemi kısaltır.
+\item Bölmede: birinci kesir aynen yazılır, ikinci kesir \textbf{ters çevrilip} çarpılır.
+\item \textbf{Merdiven kesir}: En alttaki (en içteki) kesirden başlanarak yukarı doğru hesaplanır.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hata: ana kesir çizgisi}
+\[\frac{3}{\ \dfrac{4}{5}\ }=3\cdot\frac{5}{4}=\frac{15}{4}\qquad\text{ama}\qquad \frac{\ \dfrac{3}{4}\ }{5}=\frac{3}{4}\cdot\frac{1}{5}=\frac{3}{20}\]
+\end{alertblock}
+\end{frame}
+
+\soru{Çarpma -- Örnek 9}
+{\(\dfrac{14}{15}\cdot\dfrac{25}{21}\) işleminin sonucu kaçtır?}
+{Çapraz sadeleştirme: \(14\) ile \(21\) (\(\div 7\)), \ \(25\) ile \(15\) (\(\div 5\)):
+\[\frac{14}{15}\cdot\frac{25}{21}=\frac{2}{3}\cdot\frac{5}{3}=\frac{10}{9}\]}
+
+\soru{Bölme -- Örnek 10}
+{\(\dfrac{4}{9}\div\dfrac{8}{15}\) \ ve \ \(\left(-\dfrac{3}{5}\right)\div 6\) işlemlerinin sonuçları nedir?}
+{\[\frac{4}{9}\div\frac{8}{15}=\frac{4}{9}\cdot\frac{15}{8}=\frac{1}{3}\cdot\frac{5}{2}=\frac{5}{6}\]
+\[\left(-\frac{3}{5}\right)\div 6=-\frac{3}{5}\cdot\frac{1}{6}=-\frac{1}{10}\]}
+
+\soru{Merdiven Kesir -- Örnek 11}
+{\(\dfrac{\dfrac{2}{3}-\dfrac{1}{2}}{\dfrac{1}{4}+\dfrac{1}{6}}\) işleminin sonucu kaçtır?}
+{Pay: \(\frac{4}{6}-\frac{3}{6}=\frac{1}{6}\); \quad Payda: \(\frac{3}{12}+\frac{2}{12}=\frac{5}{12}\)
+\[\frac{1}{6}\div\frac{5}{12}=\frac{1}{6}\cdot\frac{12}{5}=\frac{2}{5}\]}
+
+\soru{Merdiven Kesir -- Örnek 12}
+{\(2-\cfrac{1}{2-\cfrac{1}{2-\cfrac{1}{2}}}\) işleminin sonucu kaçtır?}
+{En alttan başla:
+\[2-\tfrac{1}{2}=\tfrac{3}{2}\ \rightarrow\ \tfrac{1}{3/2}=\tfrac{2}{3}\ \rightarrow\ 2-\tfrac{2}{3}=\tfrac{4}{3}\ \rightarrow\ \tfrac{1}{4/3}=\tfrac{3}{4}\ \rightarrow\ 2-\tfrac{3}{4}=\tfrac{5}{4}\]}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \(4\frac{2}{7}\) sayısını bileşik kesir yazınız.
+\item \(\dfrac{90}{150}\) kesrinin en sade biçimi? \(\star\)
+\item \(\dfrac{5}{6}-\dfrac{3}{8}=?\) \(\star\)
+\item \(\dfrac{9}{10}\div\dfrac{3}{5}=?\)
+\item \(1-\cfrac{1}{1-\cfrac{1}{3}}=?\) \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(\frac{30}{7}\)
+\item \(\frac{3}{5}\)
+\item \(\frac{11}{24}\)
+\item \(\frac{3}{2}\)
+\item \(-\frac{1}{2}\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 2)}
+{\(\dfrac{90}{150}\) kesrinin en sade biçimi nedir?}
+{Pay ve payda EBOB'larına bölünür:\\[3pt]
+\(90=2\cdot 3^2\cdot 5\), \ \(150=2\cdot 3\cdot 5^2\) \(\Rightarrow\) \(\text{EBOB}(90,150)=2\cdot 3\cdot 5=30\)
+\[\frac{90}{150}=\frac{90\div 30}{150\div 30}=\frac{3}{5}\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(\dfrac{5}{6}-\dfrac{3}{8}\) işleminin sonucu kaçtır?}
+{Paydalar eşitlenir: \(\text{EKOK}(6,8)=24\).
+\[\frac{5}{6}=\frac{20}{24},\qquad \frac{3}{8}=\frac{9}{24}\]
+\[\frac{20}{24}-\frac{9}{24}=\frac{11}{24}\qquad(\text{\(11\) ile \(24\) aralarında asal: en sade})\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(1-\cfrac{1}{1-\cfrac{1}{3}}\) işleminin sonucu kaçtır?}
+{En alttan başla:
+\[1-\tfrac{1}{3}=\tfrac{2}{3}\ \rightarrow\ \frac{1}{2/3}=\frac{3}{2}\ \rightarrow\ 1-\frac{3}{2}=-\frac{1}{2}\]
+Sonuç negatif olabilir: \(-\dfrac{1}{2}\).}
+
+% =====================================================
+\section{Ders 2: Ondalık Sayılar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Ondalık Sayılar, Devirli Ondalıklar ve Bilimsel Gösterim
+\end{frame}
+
+\subsection{Ondalık ve kesir}
+\begin{frame}{Ondalık Sayılar}
+\begin{block}{Basamaklar ve dönüşüm}
+\(4{,}375\): \ \(4\) birler, \(3\) onda birler, \(7\) yüzde birler, \(5\) binde birler basamağında.
+\begin{itemize}
+\item \textbf{Ondalık \(\to\) kesir:} virgülsüz sayı / (\(1\) ve virgülden sonraki basamak sayısı kadar \(0\)):
+\ \(0{,}25=\dfrac{25}{100}=\dfrac{1}{4}\), \quad \(4{,}375=\dfrac{4375}{1000}=\dfrac{35}{8}\)
+\item \textbf{Kesir \(\to\) ondalık:} paydayı \(10,100,1000,\dots\) yap ya da payı paydaya böl: \ \(\dfrac{3}{4}=\dfrac{75}{100}=0{,}75\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Ne zaman sonlu ondalık?}
+En sade kesrin paydasının asal çarpanları yalnızca \(2\) ve/veya \(5\) ise ondalık açılım sonludur:
+\(\frac{3}{40}=0{,}075\). \ Aksi halde devirlidir: \(\frac{1}{3}=0{,}333\ldots\), \ \(\frac{5}{12}=0{,}41666\ldots\)
+\end{alertblock}
+\end{frame}
+
+\soru{Ondalık \(\to\) Kesir: Örnek 13}
+{\(0{,}25\), \ \(1{,}6\) \ ve \ \(0{,}045\) sayılarını en sade kesir olarak yazınız.}
+{\[0{,}25=\frac{25}{100}=\frac{1}{4},\qquad 1{,}6=\frac{16}{10}=\frac{8}{5}\]
+\[0{,}045=\frac{45}{1000}=\frac{9}{200}\]}
+
+\soru{Kesir \(\to\) Ondalık: Örnek 14}
+{\(\dfrac{7}{8}\) \ ve \ \(\dfrac{3}{20}\) kesirlerini ondalık sayı olarak yazınız.}
+{\(8=2^3\): \ \(5^3=125\) ile genişlet:
+\[\frac{7}{8}=\frac{7\cdot 125}{8\cdot 125}=\frac{875}{1000}=0{,}875\]
+\[\frac{3}{20}=\frac{3\cdot 5}{20\cdot 5}=\frac{15}{100}=0{,}15\]}
+
+\subsection{Dört işlem}
+\begin{frame}{Ondalık Sayılarda Dört İşlem}
+\begin{block}{Kural}
+\begin{itemize}
+\item \textbf{Toplama/çıkarma:} Virgüller alt alta gelecek şekilde yazılır (eksik basamağa \(0\)).
+\item \textbf{Çarpma:} Virgül yokmuş gibi çarpılır; sonuçta virgülden sonra, çarpanlardaki ondalık basamak sayılarının \textbf{toplamı} kadar basamak ayrılır.
+\item \textbf{Bölme:} Pay ve payda aynı \(10^k\) ile genişletilerek virgüllerden kurtulunur:\ \(\dfrac{0{,}36}{0{,}012}=\dfrac{360}{12}\)
+\item \(10,100,1000\) ile çarpma: virgül sağa \(1,2,3\) basamak kayar; bölme: sola kayar.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hata}
+\(0{,}3\cdot 0{,}2=0{,}06\) \ (\(0{,}6\) değil); \quad \(0{,}2^{\,2}=0{,}04\) \ (\(0{,}4\) değil).
+\end{alertblock}
+\end{frame}
+
+\soru{Toplama -- Çıkarma: Örnek 15}
+{\(3{,}75+12{,}4-0{,}08\) işleminin sonucu kaçtır?}
+{Virgülleri hizala:
+\[3{,}75+12{,}40=16{,}15\]
+\[16{,}15-0{,}08=16{,}07\]}
+
+\soru{Çarpma -- Örnek 16}
+{\(2{,}4\cdot 0{,}35\), \ \(0{,}06\cdot 0{,}5\), \ \(3{,}47\cdot 100\), \ \(52{,}1\div 1000\) işlemlerinin sonuçları nedir?}
+{\(24\cdot 35=840\), ondalık basamak \(1+2=3\): \ \(2{,}4\cdot 0{,}35=0{,}840=0{,}84\)\\[3pt]
+\(6\cdot 5=30\), ondalık basamak \(2+1=3\): \ \(0{,}06\cdot 0{,}5=0{,}030=0{,}03\)\\[3pt]
+\(3{,}47\cdot 100=347\) \ (virgül \(2\) sağa), \quad \(52{,}1\div 1000=0{,}0521\) \ (virgül \(3\) sola)}
+
+\soru{Bölme -- Örnek 17}
+{\(\dfrac{0{,}36}{0{,}012}\) \ ve \ \(\dfrac{0{,}24}{0{,}6}+\dfrac{1{,}5}{0{,}05}\) işlemlerinin sonuçları nedir?}
+{Pay ve paydayı \(1000\) ile genişlet: \quad \(\dfrac{0{,}36}{0{,}012}=\dfrac{360}{12}=30\)\\[4pt]
+\(\dfrac{0{,}24}{0{,}6}=\dfrac{24}{60}=0{,}4\), \quad \(\dfrac{1{,}5}{0{,}05}=\dfrac{150}{5}=30\) \quad \(\Rightarrow\) \quad \(0{,}4+30=30{,}4\)}
+
+\subsection{Devirli ondalık sayılar}
+\begin{frame}{Devirli Ondalık Sayılar}
+\begin{block}{Kesre çevirme kuralı}
+\[\text{Kesir}=\frac{\text{(virgülsüz tüm sayı)}-\text{(devretmeyen kısım)}}{9\ldots9\,0\ldots0}\]
+\vspace{-4pt}
+Paydada: \textbf{devreden} basamak sayısı kadar \(9\), ardından \textbf{virgülden sonra devretmeyen} basamak sayısı kadar \(0\).
+\[0{,}\ab{3}=\frac{3-0}{9}=\frac{1}{3},\qquad 1{,}2\ab{3}=\frac{123-12}{90}=\frac{111}{90}=\frac{37}{30}\]
+\end{block}
+\begin{alertblock}{Dikkat}
+\(0{,}\ab{9}=\dfrac{9-0}{9}=1\): \ \(0{,}999\ldots\) ile \(1\) \textbf{aynı sayıdır}. \quad Devirli sayılarla işlem yapmadan önce kesre çevirin.
+\end{alertblock}
+\end{frame}
+
+\soru{Devirli Ondalık -- Örnek 18}
+{\(0{,}\ab{3}\) \ ve \ \(0{,}\ab{27}\) sayılarını en sade kesir olarak yazınız.}
+{\[0{,}\ab{3}=\frac{3}{9}=\frac{1}{3}\]
+İki basamak devrediyor \(\Rightarrow\) paydada iki tane \(9\):
+\[0{,}\ab{27}=\frac{27}{99}=\frac{3}{11}\]}
+
+\soru{Devirli Ondalık -- Örnek 19}
+{\(1{,}2\ab{3}\) sayısını en sade kesir olarak yazınız.}
+{Tüm sayı \(123\), devretmeyen kısım \(12\).\\
+Devreden: \(1\) basamak (\(3\)) \(\Rightarrow\) bir \(9\); \ virgülden sonra devretmeyen: \(1\) basamak (\(2\)) \(\Rightarrow\) bir \(0\).
+\[1{,}2\ab{3}=\frac{123-12}{90}=\frac{111}{90}=\frac{37}{30}\]}
+
+\soru{Devirli Ondalık -- Örnek 20}
+{\(0{,}1\ab{6}\) \ ve \ \(2{,}\ab{45}\) sayılarını en sade kesir olarak yazınız.}
+{\[0{,}1\ab{6}=\frac{16-1}{90}=\frac{15}{90}=\frac{1}{6}\]
+\[2{,}\ab{45}=\frac{245-2}{99}=\frac{243}{99}=\frac{27}{11}\]}
+
+\soru{Devirli Ondalık -- Örnek 21}
+{\(2{,}4\ab{9}\) sayısı hangi sonlu ondalık sayıya eşittir?}
+{\[2{,}4\ab{9}=\frac{249-24}{90}=\frac{225}{90}=\frac{5}{2}=2{,}5\]
+Genel olarak: sondaki \(\ab{9}\) bir önceki basamağı \(1\) artırır (\(0{,}\ab{9}=1\) gibi).}
+
+\soru{Devirli Ondalık -- Örnek 22}
+{\(\dfrac{0{,}\ab{8}}{0{,}\ab{4}}+0{,}\ab{6}\cdot 1{,}5\) işleminin sonucu kaçtır?}
+{\(0{,}\ab{8}=\frac{8}{9}\), \ \(0{,}\ab{4}=\frac{4}{9}\), \ \(0{,}\ab{6}=\frac{2}{3}\), \ \(1{,}5=\frac{3}{2}\)
+\[\frac{8}{9}\div\frac{4}{9}+\frac{2}{3}\cdot\frac{3}{2}=2+1=3\]}
+
+\subsection{Bilimsel gösterim}
+\begin{frame}{Bilimsel Gösterim (Giriş)}
+\begin{block}{Tanım}
+\[a\cdot 10^{n},\qquad 1\le |a|<10,\quad n\in\mathbb{Z}\]
+\(10^{1}=10,\ 10^{2}=100,\ 10^{3}=1000,\ \dots\) \qquad \(10^{0}=1\) \qquad \(10^{-1}=0{,}1,\ 10^{-2}=0{,}01,\ 10^{-3}=0{,}001,\ \dots\)
+\begin{itemize}
+\item Büyük sayı: virgül \(n\) basamak sola kaydırılırsa \(\cdot\,10^{n}\) yazılır.
+\item Küçük sayı: virgül \(n\) basamak sağa kaydırılırsa \(\cdot\,10^{-n}\) yazılır.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Dikkat}
+\(34\cdot 10^{5}\) bilimsel gösterim değildir (\(34\ge 10\)); doğrusu \(3{,}4\cdot 10^{6}\). \ Üslü sayıların özellikleri 9. haftada.
+\end{alertblock}
+\end{frame}
+
+\soru{Bilimsel Gösterim -- Örnek 23}
+{\(3\,400\,000\) \ ve \ \(0{,}00052\) sayılarını bilimsel gösterimle yazınız.}
+{\(3\,400\,000\): virgül \(6\) basamak sola \(\Rightarrow\) \(3{,}4\cdot 10^{6}\)\\[4pt]
+\(0{,}00052\): virgül \(4\) basamak sağa \(\Rightarrow\) \(5{,}2\cdot 10^{-4}\)\\[4pt]
+Kontrol: \(5{,}2\cdot 0{,}0001=0{,}00052\).}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \(0{,}125\) sayısını en sade kesir yazınız.
+\item \(4{,}2\cdot 0{,}05=?\)
+\item \(\dfrac{0{,}72}{0{,}018}=?\) \(\star\)
+\item \(0{,}2\ab{7}\) sayısını en sade kesir yazınız. \(\star\)
+\item \(0{,}0045\cdot 10^{5}\) sayısını bilimsel gösterimle yazınız. \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(\frac{1}{8}\)
+\item \(0{,}21\)
+\item \(40\)
+\item \(\frac{27-2}{90}=\frac{5}{18}\)
+\item \(450=4{,}5\cdot 10^{2}\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(\dfrac{0{,}72}{0{,}018}\) işleminin sonucu kaçtır?}
+{En çok ondalık basamak: \(0{,}018\) (\(3\) basamak) \(\Rightarrow\) pay ve payda \(1000\) ile genişletilir:
+\[\frac{0{,}72}{0{,}018}=\frac{720}{18}=40\]
+Kontrol: \(0{,}018\cdot 40=0{,}72\) \checkmark}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{\(0{,}2\ab{7}\) sayısını en sade kesir olarak yazınız.}
+{Virgülsüz tüm sayı: \(27\); devretmeyen kısım: \(2\).\\[3pt]
+Payda: bir basamak devrediyor \(\to\) bir \(9\); virgülden sonra bir basamak devretmiyor \(\to\) bir \(0\): \(90\).
+\[0{,}2\ab{7}=\frac{27-2}{90}=\frac{25}{90}=\frac{5}{18}\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(0{,}0045\cdot 10^{5}\) sayısını bilimsel gösterimle yazınız.}
+{\(10^{5}\) ile çarpmak virgülü \(5\) basamak sağa kaydırır: \(0{,}0045\cdot 10^{5}=450\).\\[3pt]
+\(450\): virgül \(2\) basamak sola \(\Rightarrow\) \(4{,}5\cdot 10^{2}\) \quad (\(1\le 4{,}5<10\) \checkmark)}
+
+% =====================================================
+\section{Ders 3: Sıralama, Karma İşlem, Kesir Problemleri}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Rasyonel Sayılarda Sıralama, Karma İşlemler ve Kesir Problemleri
+\end{frame}
+
+\subsection{Sıralama}
+\begin{frame}{Rasyonel Sayılarda Sıralama}
+\begin{block}{Yöntemler (\(a,b,c,d>0\))}
+\begin{itemize}
+\item \textbf{Paydalar eşit:} payı büyük olan büyüktür. \quad \textbf{Paylar eşit:} paydası küçük olan büyüktür.
+\item \textbf{Payda (veya pay) eşitleme:} EKOK ile ortak payda / ortak pay bulunur.
+\item \textbf{Ondalığa çevirme:} özellikle ondalık ve devirli sayılar karışıksa.
+\item \textbf{\(1\)'e fark:} basit kesirlerde (\(\frac{13}{14}=1-\frac{1}{14}\)) \(1\)'den eksiği az olan büyüktür; bileşik kesirlerde \(1\)'den fazlası çok olan büyüktür.
+\item \textbf{Çapraz çarpım:} \(\dfrac{a}{b}<\dfrac{c}{d}\iff a\cdot d<b\cdot c\).
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Negatiflerde sıra \textbf{ters döner}: \(\frac{1}{3}<\frac{1}{2}\) ama \(-\frac{1}{2}<-\frac{1}{3}\). \quad Çapraz çarpımda paydalar pozitif olmalı.
+\end{alertblock}
+\end{frame}
+
+\soru{Sıralama -- Örnek 24}
+{\(a=\dfrac{5}{9},\quad b=\dfrac{5}{7},\quad c=\dfrac{5}{12}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{Paylar eşit (\(5\)) \(\Rightarrow\) paydası küçük olan büyük.\\[3pt]
+Paydalar: \(7<9<12\) \(\Rightarrow\) \(b>a>c\)
+\[c<a<b\]}
+
+\soru{Sıralama -- Örnek 25}
+{\(\dfrac{2}{3},\quad \dfrac{3}{4},\quad \dfrac{5}{8}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{\(\text{EKOK}(3,4,8)=24\):
+\[\frac{2}{3}=\frac{16}{24},\qquad \frac{3}{4}=\frac{18}{24},\qquad \frac{5}{8}=\frac{15}{24}\]
+\[\frac{5}{8}<\frac{2}{3}<\frac{3}{4}\]}
+
+\soru{Sıralama -- Örnek 26}
+{\(a=0{,}65,\quad b=\dfrac{2}{3},\quad c=0{,}6\ab{5}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{Ondalığa çevir, basamak basamak karşılaştır:
+\[a=0{,}6500\ldots,\qquad c=0{,}6555\ldots,\qquad b=0{,}6666\ldots\]
+\[a<c<b\]}
+
+\soru{Sıralama -- Örnek 27}
+{\(\dfrac{13}{14},\quad \dfrac{15}{16},\quad \dfrac{17}{18}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{\(1\)'e olan farklar: \ \(\dfrac{1}{14},\ \dfrac{1}{16},\ \dfrac{1}{18}\). \quad \(\dfrac{1}{18}<\dfrac{1}{16}<\dfrac{1}{14}\)\\[3pt]
+\(1\)'e en yakın olan en büyüktür:
+\[\frac{13}{14}<\frac{15}{16}<\frac{17}{18}\]}
+
+\soru{Sıralama -- Örnek 28}
+{\(\dfrac{17}{23}\) \ ile \ \(\dfrac{13}{18}\) \ sayılarından hangisi büyüktür?}
+{Çapraz çarpım (paydalar pozitif):
+\[17\cdot 18=306,\qquad 13\cdot 23=299\]
+\(306>299\) \(\Rightarrow\) \(\dfrac{17}{23}>\dfrac{13}{18}\)}
+
+\soru{Negatif Rasyoneller -- Örnek 29}
+{\(-\dfrac{2}{3},\quad -\dfrac{3}{4},\quad -\dfrac{5}{8}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{Pozitifleri (Örnek 25): \ \(\frac{5}{8}<\frac{2}{3}<\frac{3}{4}\).\\[3pt]
+Negatiflerde sıra ters döner:
+\[-\frac{3}{4}<-\frac{2}{3}<-\frac{5}{8}\]}
+
+\soru{Arasında Sayı -- Örnek 30}
+{\(\dfrac{1}{3}\) ile \(\dfrac{1}{2}\) arasında bir rasyonel sayı yazınız. \(\dfrac{3}{7}\) ile \(\dfrac{4}{7}\) arasında olup paydası \(14\) olan kesir hangisidir?}
+{Ortalama arada kalır: \(\dfrac{\frac{1}{3}+\frac{1}{2}}{2}=\dfrac{5/6}{2}=\dfrac{5}{12}\) \quad (\(\frac{4}{12}<\frac{5}{12}<\frac{6}{12}\))\\[4pt]
+\(\dfrac{3}{7}=\dfrac{6}{14}\), \ \(\dfrac{4}{7}=\dfrac{8}{14}\) \(\Rightarrow\) arada: \(\dfrac{7}{14}=\dfrac{1}{2}\)\\[3pt]
+{\normalsize İki farklı rasyonel sayı arasında sonsuz tane rasyonel sayı vardır.}}
+
+\subsection{Karma işlem ve problemler}
+\begin{frame}{Karma İşlemler ve Kesir Problemleri}
+\begin{block}{Kural}
+\begin{itemize}
+\item İşlem önceliği (1. hafta) aynen geçerlidir: parantez \(\to\) \(\times,\div\) \(\to\) \(+,-\), soldan sağa.
+\item Ondalık ve devirli sayılar önce kesre çevrilir.
+\item Bir bütünün \(\dfrac{a}{b}\)'si \(=\) bütün \(\cdot\dfrac{a}{b}\) \quad (ör. \(60\)'ın \(\frac{3}{4}\)'ü \(=45\))
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hata: ``tamamının'' mı, ``kalanın'' mı?}
+``Tamamının \(\frac{1}{3}\)'ü'' başlangıçtaki bütüne göre; ``kalanın \(\frac{1}{3}\)'ü'' o anda kalan miktara göre hesaplanır.
+\end{alertblock}
+\end{frame}
+
+\soru{Karma İşlem -- Örnek 31}
+{\(\left(1-\dfrac{1}{2}\right)\left(1-\dfrac{1}{3}\right)\left(1-\dfrac{1}{4}\right)\cdots\left(1-\dfrac{1}{10}\right)\) çarpımı kaçtır?}
+{Her parantezi hesapla:
+\[\frac{1}{2}\cdot\frac{2}{3}\cdot\frac{3}{4}\cdots\frac{9}{10}\]
+Her pay bir önceki paydayı sadeleştirir; geriye ilk pay ve son payda kalır:
+\[=\frac{1}{10}\]}
+
+\soru{Kesir Problemi -- Örnek 32}
+{\(360\) TL'nin \(\dfrac{2}{3}\)'ü ile \(\dfrac{5}{8}\)'i arasındaki fark kaç TL'dir?}
+{\[360\cdot\frac{2}{3}=240,\qquad 360\cdot\frac{5}{8}=225\]
+\[240-225=15\ \text{TL}\]
+Kısa yol: \(360\cdot\left(\frac{2}{3}-\frac{5}{8}\right)=360\cdot\frac{1}{24}=15\)}
+
+\soru{Kesir Problemi -- Örnek 33}
+{Bir deponun \(\frac{3}{4}\)'ü doludur. (a) Deponun \textbf{tamamının} \(\frac{1}{3}\)'ü kadar su kullanılırsa, (b) içindeki suyun \(\frac{1}{3}\)'ü kullanılırsa depo kaçta kaçı dolu kalır?}
+{(a) \(\dfrac{3}{4}-\dfrac{1}{3}=\dfrac{9}{12}-\dfrac{4}{12}=\dfrac{5}{12}\)\\[4pt]
+(b) Suyun \(\frac{2}{3}\)'ü kalır: \quad \(\dfrac{3}{4}\cdot\dfrac{2}{3}=\dfrac{1}{2}\)\\[4pt]
+Aynı ``\(\frac{1}{3}\)'', farklı bütün \(\Rightarrow\) farklı sonuç.}
+
+\soru{Kesir Problemi -- Örnek 34}
+{\(120\) sayfalık bir kitabın ilk gün \(\frac{1}{4}\)'ü, ikinci gün kalan sayfaların \(\frac{2}{5}\)'i okunuyor. Okunmamış kaç sayfa kalır?}
+{1. gün: \(120\cdot\frac{1}{4}=30\) sayfa \(\Rightarrow\) kalan \(90\)\\[3pt]
+2. gün: \(90\cdot\frac{2}{5}=36\) sayfa \(\Rightarrow\) kalan \(90-36=54\)\\[3pt]
+Kısa yol: \(120\cdot\frac{3}{4}\cdot\frac{3}{5}=54\) sayfa.}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.6\textwidth}
+\begin{enumerate}
+\item \(\frac{4}{5},\ \frac{5}{6},\ \frac{6}{7}\) küçükten büyüğe?
+\item \(-\frac{1}{2},\ -\frac{2}{5},\ -\frac{3}{7}\) küçükten büyüğe? \(\star\)
+\item \(\frac{2}{9}\) ile \(\frac{1}{3}\)'ün ortalaması? \(\star\)
+\item \(240\) öğrencinin \(\frac{3}{8}\)'i kız ise kaç erkek öğrenci vardır?
+\item \(\left(1+\frac{1}{2}\right)\left(1+\frac{1}{3}\right)\cdots\left(1+\frac{1}{9}\right)=?\) \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(\frac{4}{5}<\frac{5}{6}<\frac{6}{7}\)
+\item \(-\frac{1}{2}<-\frac{3}{7}<-\frac{2}{5}\)
+\item \(\frac{5}{18}\)
+\item \(150\)
+\item \(\frac{10}{2}=5\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(-\dfrac{1}{2},\ -\dfrac{2}{5},\ -\dfrac{3}{7}\) sayılarını küçükten büyüğe sıralayınız.}
+{Önce pozitiflerini sıralayalım: \(\text{EKOK}(2,5,7)=70\).
+\[\frac{1}{2}=\frac{35}{70},\quad \frac{2}{5}=\frac{28}{70},\quad \frac{3}{7}=\frac{30}{70}\ \Rightarrow\ \frac{2}{5}<\frac{3}{7}<\frac{1}{2}\]
+Negatiflerde sıra ters döner: \ \(-\dfrac{1}{2}<-\dfrac{3}{7}<-\dfrac{2}{5}\)}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{\(\dfrac{2}{9}\) ile \(\dfrac{1}{3}\) sayılarının aritmetik ortalaması kaçtır?}
+{\(\dfrac{1}{3}=\dfrac{3}{9}\) \(\Rightarrow\) toplam: \(\dfrac{2}{9}+\dfrac{3}{9}=\dfrac{5}{9}\)
+\[\text{Ortalama}=\frac{5}{9}\div 2=\frac{5}{9}\cdot\frac{1}{2}=\frac{5}{18}\]
+Kontrol: \(\dfrac{4}{18}<\dfrac{5}{18}<\dfrac{6}{18}\) \checkmark}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 5)}
+{\(\left(1+\frac{1}{2}\right)\left(1+\frac{1}{3}\right)\cdots\left(1+\frac{1}{9}\right)\) çarpımı kaçtır?}
+{Her çarpan: \(1+\dfrac{1}{n}=\dfrac{n+1}{n}\).
+\[\frac{3}{2}\cdot\frac{4}{3}\cdot\frac{5}{4}\cdots\frac{10}{9}\]
+Her pay bir sonraki paydayla sadeleşir; yalnız ilk payda ve son pay kalır:
+\[\frac{10}{2}=5\]}
+
+% =====================================================
+\begin{frame}{Özet}
+\small
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item \(\frac{a}{b}\), \(b\neq 0\); \ \(\frac{a}{0}\) tanımsız
+\item Sadeleştir: EBOB'a böl
+\item \(\pm\): EKOK ile payda eşitle
+\item \(\div\): ters çevir, çarp
+\item Merdiven: en alttan başla
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item \(\times\): ondalık basamaklar toplanır
+\item \(\div\): \(10^{k}\) ile genişlet
+\item Devirli: \(\dfrac{\text{tüm}-\text{devretmeyen}}{9\ldots 90\ldots 0}\)
+\item \(0{,}\ab{9}=1\)
+\item \(a\cdot 10^{n}\), \(1\le|a|<10\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item Payda/pay eşitle, ondalığa çevir
+\item \(1\)'e fark, çapraz çarpım
+\item Negatiflerde sıra ters
+\item Ortalama arada kalır
+\item ``Tamamının'' \(\neq\) ``kalanın''
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{2pt}
+\begin{alertblock}{Gelecek hafta}
+Birinci dereceden bir bilinmeyenli denklemler (kesirli denklemlerde bu haftanın payda eşitleme becerisi gerekecek)
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

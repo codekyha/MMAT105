@@ -1,0 +1,62 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 11 -- Alıştırmalar}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\newpage}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 11 Alıştırmaları: Çarpanlara Ayırma ve Özdeşlikler\\ (İki Kare Farkı, Tam Kare, Küp Açılımları)}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\input{hafta11_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small }
+
+\end{document}

@@ -1,0 +1,718 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 10]{MMAT105 Genel Matematik}
+\subtitle{Hafta 10: Köklü Sayılar (Özellikler, Dört İşlem, Eşlenik)}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hesaplayınız:}
+\begin{enumerate}
+\item \(\dfrac{2^3\cdot 2^5}{2^6}=?\)
+\item \(5^{-1}+5^{0}=?\)
+\item \(3^{x-1}=27\) ise \(x=?\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(2^{8-6}=2^2=4\)
+\item \(\dfrac{1}{5}+1=\dfrac{6}{5}\)
+\item \(3^{x-1}=3^3\Rightarrow x=4\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Kök tanımı, kök derecesi
+\item Reel olma koşulu
+\item Kesirli üs
+\item \(\sqrt{a^2}=|a|\)
+\item Kök dışına / içine alma
+\item Ardışık tam sayılar arası
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{6}
+\item Toplama -- çıkarma
+\item Çarpma -- bölme
+\item Ortak kök derecesi
+\item Kökün kökü
+\item Sıralama
+\item Sayısal değer
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{12}
+\item Paydayı rasyonel yapma
+\item Eşlenik ile çarpma
+\item İç içe kökler
+\item Sonsuz iç içe kök
+\item Karma işlemler
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Köklü Sayılar ve Özellikleri}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Kök Tanımı, Kesirli Üs, \(\sqrt{a^2}=|a|\), Kök Dışına Çıkarma
+\end{frame}
+
+\subsection{Tanım}
+\begin{frame}{Köklü Sayı}
+\begin{block}{Tanım (\(n\ge 2\) tam sayı: kök derecesi)}
+\begin{itemize}
+\item \(a\ge 0\) için \(\sqrt{a}\): karesi \(a\) olan \textbf{negatif olmayan} sayı. \ \(\sqrt{49}=7\), \ \(\sqrt{0}=0\).
+\item \(n\) \textbf{çift} ise \(\sqrt[n]{a}\) yalnız \(a\ge 0\) için reeldir ve sonuç \(\ge 0\)'dır: \ \(\sqrt[4]{16}=2\).
+\item \(n\) \textbf{tek} ise \(\sqrt[n]{a}\) her reel \(a\) için tanımlıdır: \ \(\sqrt[3]{8}=2\), \ \(\sqrt[3]{-8}=-2\).
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(\sqrt{9}=3\)'tür, \(\pm 3\) değil. (\(x^2=9\) denkleminin çözümleri \(\pm 3\)'tür.)
+\item \(\sqrt{-4}\) ve \(\sqrt[4]{-16}\) reel sayı değildir; \ \(\sqrt[3]{-27}=-3\) ise reeldir.
+\item \(\sqrt{9+16}=\sqrt{25}=5\) ama \(\sqrt{9}+\sqrt{16}=7\): \ \(\sqrt{a+b}\neq\sqrt{a}+\sqrt{b}\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Tam Kareler ve Tam Küpler (ezberleyin)}
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c|cccccccccc}
+\toprule
+\(n\) & \(1\) & \(2\) & \(3\) & \(4\) & \(5\) & \(6\) & \(7\) & \(8\) & \(9\) & \(10\)\\
+\(n^2\) & \(1\) & \(4\) & \(9\) & \(16\) & \(25\) & \(36\) & \(49\) & \(64\) & \(81\) & \(100\)\\
+\(n^3\) & \(1\) & \(8\) & \(27\) & \(64\) & \(125\) & \(216\) & \(343\) & \(512\) & \(729\) & \(1000\)\\\midrule
+\(n\) & \(11\) & \(12\) & \(13\) & \(14\) & \(15\) & \(16\) & \(17\) & \(18\) & \(19\) & \(20\)\\
+\(n^2\) & \(121\) & \(144\) & \(169\) & \(196\) & \(225\) & \(256\) & \(289\) & \(324\) & \(361\) & \(400\)\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{block}{Dördüncü ve beşinci kuvvetler}
+\(2^4=16,\ 3^4=81,\ 4^4=256,\ 5^4=625\) \qquad \(2^5=32,\ 3^5=243\)
+\end{block}
+\end{frame}
+
+\soru{Kök Hesaplama -- Örnek 1}
+{\(\sqrt{144}+\sqrt[3]{-27}-\sqrt[4]{16}\) işleminin sonucu kaçtır?}
+{\(\sqrt{144}=12\) \ (\(12^2=144\)), \quad \(\sqrt[3]{-27}=-3\) \ (\((-3)^3=-27\)), \quad \(\sqrt[4]{16}=2\) \ (\(2^4=16\))
+\[12+(-3)-2=7\]}
+
+\soru{Reel Olma Koşulu -- Örnek 2}
+{\(\sqrt{-9}\), \ \(\sqrt[3]{-64}\), \ \(\sqrt[4]{-16}\), \ \(\sqrt[5]{-32}\) ifadelerinden hangileri reel sayıdır? Reel olanların değeri kaçtır?}
+{\(\sqrt{-9}\), \(\sqrt[4]{-16}\): çift dereceli kökün içi negatif \(\Rightarrow\) \textbf{reel değil}.\\[3pt]
+\(\sqrt[3]{-64}=-4\) \ (\((-4)^3=-64\)), \quad \(\sqrt[5]{-32}=-2\) \ (\((-2)^5=-32\)).\\[3pt]
+Tek dereceli kökte negatif içerik serbesttir; sonuç negatiftir.}
+
+\soru{Reel Olma Koşulu -- Örnek 3}
+{\(\sqrt{x-3}+\sqrt[4]{6-x}\) ifadesi bir reel sayı belirtiyorsa \(x\) kaç farklı tam sayı değeri alabilir?}
+{İki kök de çift dereceli: içleri \(\ge 0\) olmalı.
+\[x-3\ge 0\Rightarrow x\ge 3,\qquad 6-x\ge 0\Rightarrow x\le 6\]
+\(3\le x\le 6\): \ \(x\in\{3,4,5,6\}\) \(\Rightarrow\) \(4\) tam sayı.}
+
+\subsection{Kesirli üs}
+\begin{frame}{Kök ile Üs Arasındaki İlişki}
+\begin{block}{Kural (\(a>0\), \ \(m\) tam sayı, \ \(n\ge 2\) tam sayı)}
+\[a^{\frac{m}{n}}=\sqrt[n]{a^m}=\left(\sqrt[n]{a}\right)^m\]
+Örnekler: \ \(\sqrt{5}=5^{\frac12}\), \quad \(\sqrt[3]{x^2}=x^{\frac23}\), \quad \(\sqrt[4]{a^3}=a^{\frac34}\), \quad \(\dfrac{1}{\sqrt{x}}=x^{-\frac12}\) \ (\(x>0\))
+\end{block}
+\begin{block}{Neden işe yarar?}
+Kökü üslü sayıya çevirince 9.~haftanın bütün üs kuralları kullanılabilir:
+\(\ 8^{\frac23}=\left(\sqrt[3]{8}\right)^2=2^2=4\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Pay \(\to\) üs, payda \(\to\) kök derecesi: \ \(a^{\frac{2}{3}}=\sqrt[3]{a^2}\) (\(\sqrt[2]{a^3}\) değil).
+\end{alertblock}
+\end{frame}
+
+\soru{Kesirli Üs -- Örnek 4}
+{\(8^{\frac23}+16^{\frac34}\) işleminin sonucu kaçtır?}
+{Önce kök, sonra kuvvet almak kolaydır:
+\[8^{\frac23}=\left(\sqrt[3]{8}\right)^2=2^2=4,\qquad 16^{\frac34}=\left(\sqrt[4]{16}\right)^3=2^3=8\]
+\[4+8=12\]}
+
+\soru{Kesirli Üs -- Örnek 5}
+{\(\sqrt{3^x}=27\) olduğuna göre \(x\) kaçtır?}
+{Kökü üslü yazalım: \ \(\sqrt{3^x}=3^{\frac{x}{2}}\), \quad \(27=3^3\).
+\[3^{\frac{x}{2}}=3^3\ \Rightarrow\ \frac{x}{2}=3\ \Rightarrow\ x=6\]
+Kontrol: \(\sqrt{3^6}=\sqrt{729}=27\) \checkmark.}
+
+\subsection{Mutlak değer}
+\begin{frame}{\(\sqrt{a^2}=|a|\)}
+\begin{block}{Kural}
+\[\sqrt{a^2}=|a|,\qquad \sqrt[n]{a^n}=\begin{cases}a, & n \text{ tek}\\ |a|, & n \text{ çift}\end{cases}\]
+Örnekler: \ \(\sqrt{(-5)^2}=|-5|=5\), \quad \(\sqrt[3]{(-5)^3}=-5\), \quad \(\sqrt[4]{(-2)^4}=2\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(\sqrt{x^2}=x\) \textbf{her zaman} doğru değildir: \(x=-3\) için \(\sqrt{9}=3\neq -3\).
+\item Çift dereceli kökten çıkan ifadenin işaretine bakın: negatifse önüne \(-\) koyun (7.~hafta).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{\(\sqrt{a^2}=|a|\) -- Örnek 6}
+{\(\sqrt{(-7)^2}\), \ \(\sqrt[3]{(-7)^3}\), \ \(\sqrt[4]{(-3)^4}\), \ \(\sqrt[5]{(-1)^5}\) değerleri kaçtır?}
+{Çift derece \(\Rightarrow\) mutlak değer; tek derece \(\Rightarrow\) sayının kendisi.\\[4pt]
+\(\sqrt{(-7)^2}=|-7|=7\), \qquad \(\sqrt[3]{(-7)^3}=-7\)\\[4pt]
+\(\sqrt[4]{(-3)^4}=|-3|=3\), \qquad \(\sqrt[5]{(-1)^5}=-1\)}
+
+\soru{\(\sqrt{a^2}=|a|\) -- Örnek 7}
+{\(\sqrt{(2-\sqrt5)^2}+\sqrt{(3-\sqrt5)^2}\) işleminin sonucu kaçtır?}
+{\(\sqrt4<\sqrt5<\sqrt9\) \(\Rightarrow\) \(2<\sqrt5<3\).\\[3pt]
+\(2-\sqrt5<0\Rightarrow |2-\sqrt5|=\sqrt5-2\); \qquad \(3-\sqrt5>0\Rightarrow |3-\sqrt5|=3-\sqrt5\)
+\[(\sqrt5-2)+(3-\sqrt5)=1\]}
+
+\soru{\(\sqrt{a^2}=|a|\) -- Örnek 8}
+{\(-2<x<3\) olmak üzere \(\sqrt{(x+2)^2}+\sqrt{(x-3)^2}\) ifadesinin eşiti nedir?}
+{\(\sqrt{(x+2)^2}=|x+2|\), \ \(\sqrt{(x-3)^2}=|x-3|\).\\[3pt]
+\(x>-2\Rightarrow x+2>0\Rightarrow |x+2|=x+2\)\\
+\(x<3\Rightarrow x-3<0\Rightarrow |x-3|=3-x\)
+\[(x+2)+(3-x)=5\]}
+
+\subsection{Kök dışına çıkarma}
+\begin{frame}{Kök Dışına Çıkarma ve Kök İçine Alma}
+\begin{block}{Kural (\(a,b\ge 0\))}
+\[\sqrt{a^2\cdot b}=a\sqrt{b},\qquad \sqrt[n]{a^n\cdot b}=a\sqrt[n]{b}\]
+\textbf{Kök dışına:} İçerideki en büyük tam kare (küp) çarpanı bulun: \ \(\sqrt{72}=\sqrt{36\cdot 2}=6\sqrt2\).\\[3pt]
+\textbf{Kök içine:} Dıştaki sayının \(n\). kuvveti içeri girer: \ \(3\sqrt2=\sqrt{9\cdot 2}=\sqrt{18}\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(\sqrt{72}=2\sqrt{18}\) doğru ama sade değil: \(18=9\cdot 2\), çıkarmaya devam!
+\item Kök içine alırken dıştaki sayının \textbf{karesi} girer: \(3\sqrt2\neq\sqrt6\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Kök Dışına Çıkarma -- Örnek 9}
+{\(\sqrt{50}\), \ \(\sqrt{300}\), \ \(\sqrt{72}\), \ \(\sqrt[3]{54}\) sayılarını \(a\sqrt[n]{b}\) biçiminde yazınız.}
+{\(\sqrt{50}=\sqrt{25\cdot 2}=5\sqrt2\), \qquad \(\sqrt{300}=\sqrt{100\cdot 3}=10\sqrt3\)\\[4pt]
+\(\sqrt{72}=\sqrt{36\cdot 2}=6\sqrt2\), \qquad \(\sqrt[3]{54}=\sqrt[3]{27\cdot 2}=3\sqrt[3]{2}\)}
+
+\soru{Kök İçine Alma -- Örnek 10}
+{\(3\sqrt2\), \ \(2\sqrt5\), \ \(2\sqrt[3]{3}\) sayılarını tek kök içinde yazınız. \ \(a\sqrt3=\sqrt{75}\) ise \(a\) kaçtır?}
+{\(3\sqrt2=\sqrt{9\cdot 2}=\sqrt{18}\), \quad \(2\sqrt5=\sqrt{4\cdot 5}=\sqrt{20}\), \quad \(2\sqrt[3]{3}=\sqrt[3]{8\cdot 3}=\sqrt[3]{24}\)\\[4pt]
+\(\sqrt{75}=\sqrt{25\cdot 3}=5\sqrt3\) \(\Rightarrow\) \(a=5\).}
+
+\subsection{İki tam sayı arası}
+\soru{Ardışık Tam Sayılar Arası -- Örnek 11}
+{\(\sqrt{50}\), \ \(\sqrt{110}\) ve \(3\sqrt5\) sayıları hangi iki ardışık tam sayı arasındadır?}
+{İçerideki sayıyı iki ardışık tam kare arasına yerleştirin:\\[3pt]
+\(49<50<64\Rightarrow 7<\sqrt{50}<8\)\\[3pt]
+\(100<110<121\Rightarrow 10<\sqrt{110}<11\)\\[3pt]
+\(3\sqrt5=\sqrt{45}\), \ \(36<45<49\Rightarrow 6<3\sqrt5<7\)}
+
+\soru{Ardışık Tam Sayılar Arası -- Örnek 12}
+{\(4<\sqrt{n}<6\) eşitsizliğini sağlayan kaç \(n\) tam sayısı vardır?}
+{Tüm taraflar pozitif; kareleri alınır:
+\[16<n<36\]
+\(n\in\{17,18,\dots,35\}\) \(\Rightarrow\) \(35-17+1=19\) tam sayı.}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\sqrt{81}-\sqrt[3]{-125}+\sqrt[4]{81}=?\) \(\star\)
+\item \(\sqrt{98}\)'i \(a\sqrt{b}\) biçiminde yazınız.
+\item \(\sqrt{(3-\sqrt{10})^2}=?\) \(\star\)
+\item \(27^{\frac23}=?\)
+\item \(\sqrt{x-2}+\sqrt{8-x}\) reel ise \(x\) kaç tam sayı değeri alır? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(17\)
+\item \(7\sqrt2\)
+\item \(\sqrt{10}-3\)
+\item \(9\)
+\item \(7\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 1)}
+{\(\sqrt{81}-\sqrt[3]{-125}+\sqrt[4]{81}\) işleminin sonucu kaçtır?}
+{\(\sqrt{81}=9\) \ (\(9^2=81\)), \quad \(\sqrt[3]{-125}=-5\) \ (\((-5)^3=-125\)), \quad \(\sqrt[4]{81}=3\) \ (\(3^4=81\))
+\[9-(-5)+3=9+5+3=17\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(\sqrt{(3-\sqrt{10})^2}\) ifadesinin eşiti nedir?}
+{\(\sqrt{(3-\sqrt{10})^2}=|3-\sqrt{10}|\).\\[3pt]
+\(3=\sqrt9<\sqrt{10}\) \(\Rightarrow\) \(3-\sqrt{10}<0\).\\[3pt]
+Negatif sayının mutlak değeri: \ \(|3-\sqrt{10}|=-(3-\sqrt{10})=\sqrt{10}-3\).}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(\sqrt{x-2}+\sqrt{8-x}\) ifadesi reel ise \(x\) kaç farklı tam sayı değeri alabilir?}
+{Karekökün içi negatif olamaz:
+\[x-2\ge 0\Rightarrow x\ge 2,\qquad 8-x\ge 0\Rightarrow x\le 8\]
+\(2\le x\le 8\): \ \(x\in\{2,3,4,5,6,7,8\}\) \(\Rightarrow\) \(7\) tam sayı.}
+
+
+% =====================================================
+\section{Ders 2: Köklü Sayılarda Dört İşlem}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Toplama -- Çıkarma, Çarpma -- Bölme, Ortak Kök Derecesi, Sıralama
+\end{frame}
+
+\subsection{Toplama ve çıkarma}
+\begin{frame}{Toplama ve Çıkarma}
+\begin{block}{Kural}
+Yalnız \textbf{benzer kökler} (derecesi ve içi aynı) toplanır / çıkarılır:
+\[a\sqrt[n]{x}+b\sqrt[n]{x}=(a+b)\sqrt[n]{x}\]
+Önce her kök sadeleştirilir (kök dışına çıkarılır), sonra benzerler toplanır:
+\ \(\sqrt{12}+\sqrt{27}=2\sqrt3+3\sqrt3=5\sqrt3\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(\sqrt2+\sqrt3\neq\sqrt5\) \quad (\(1{,}41+1{,}73\approx 3{,}14\), \ \(\sqrt5\approx 2{,}24\)).
+\item \(\sqrt[3]{2}+\sqrt2\) toplanamaz: dereceler farklı.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Toplama -- Çıkarma -- Örnek 13}
+{\(2\sqrt3+5\sqrt3-4\sqrt3\) \ ve \ \(7\sqrt[3]{2}-2\sqrt[3]{2}\) işlemlerinin sonuçları nedir?}
+{Benzer kökler: katsayılar toplanır, kök aynen kalır.
+\[2\sqrt3+5\sqrt3-4\sqrt3=(2+5-4)\sqrt3=3\sqrt3\]
+\[7\sqrt[3]{2}-2\sqrt[3]{2}=(7-2)\sqrt[3]{2}=5\sqrt[3]{2}\]}
+
+\soru{Toplama -- Çıkarma -- Örnek 14}
+{\(\sqrt{12}+\sqrt{27}-\sqrt{48}\) işleminin sonucu nedir?}
+{Önce sadeleştir:
+\[\sqrt{12}=\sqrt{4\cdot 3}=2\sqrt3,\quad \sqrt{27}=\sqrt{9\cdot 3}=3\sqrt3,\quad \sqrt{48}=\sqrt{16\cdot 3}=4\sqrt3\]
+\[2\sqrt3+3\sqrt3-4\sqrt3=(2+3-4)\sqrt3=\sqrt3\]}
+
+\soru{Toplama -- Çıkarma -- Örnek 15}
+{\(\sqrt{50}-\sqrt{18}+\sqrt8\) işleminin sonucu nedir?}
+{\(\sqrt{50}=5\sqrt2\), \quad \(\sqrt{18}=3\sqrt2\), \quad \(\sqrt8=2\sqrt2\)
+\[5\sqrt2-3\sqrt2+2\sqrt2=4\sqrt2\]}
+
+\soru{Toplama -- Çıkarma -- Örnek 16}
+{\(\sqrt[3]{16}+\sqrt[3]{54}\) işleminin sonucu nedir?}
+{Küp çarpanları ayıralım:
+\[\sqrt[3]{16}=\sqrt[3]{8\cdot 2}=2\sqrt[3]{2},\qquad \sqrt[3]{54}=\sqrt[3]{27\cdot 2}=3\sqrt[3]{2}\]
+\[2\sqrt[3]{2}+3\sqrt[3]{2}=5\sqrt[3]{2}\]}
+
+\subsection{Çarpma ve bölme}
+\begin{frame}{Çarpma ve Bölme}
+\begin{block}{Kural (aynı dereceli kökler; \(n\) çift ise \(a,b\ge 0\); bölmede \(b\neq 0\))}
+\[\sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{a\cdot b},\qquad \frac{\sqrt[n]{a}}{\sqrt[n]{b}}=\sqrt[n]{\frac{a}{b}},\qquad \sqrt{a}\cdot\sqrt{a}=a\]
+Kök dışındaki katsayılar kendi arasında çarpılır: \ \(2\sqrt3\cdot 5\sqrt2=10\sqrt6\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(\sqrt{-4}\cdot\sqrt{-9}=\sqrt{36}\) \textbf{yazılamaz}: \(\sqrt{-4}\) reel değil.
+\item Dereceler farklıysa önce ortak dereceye getirin: \(\sqrt2\cdot\sqrt[3]{3}\neq\sqrt[6]{6}\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Çarpma -- Örnek 17}
+{\(\sqrt5\cdot\sqrt{10}\cdot\sqrt2\) \ ve \ \(2\sqrt5\cdot 3\sqrt{10}\) çarpımları kaçtır?}
+{\[\sqrt5\cdot\sqrt{10}\cdot\sqrt2=\sqrt{5\cdot 10\cdot 2}=\sqrt{100}=10\]
+\[2\sqrt5\cdot 3\sqrt{10}=6\sqrt{50}=6\cdot 5\sqrt2=30\sqrt2\]}
+
+\soru{Bölme -- Örnek 18}
+{\(\dfrac{\sqrt{72}}{\sqrt2}+\dfrac{\sqrt{75}}{\sqrt3}\) işleminin sonucu kaçtır?}
+{\[\frac{\sqrt{72}}{\sqrt2}=\sqrt{\frac{72}{2}}=\sqrt{36}=6,\qquad \frac{\sqrt{75}}{\sqrt3}=\sqrt{25}=5\]
+\[6+5=11\]}
+
+\subsection{Ortak derece, kökün kökü}
+\begin{frame}{Ortak Kök Derecesi ve Kökün Kökü}
+\begin{block}{Kural (\(a\ge 0\); \(m,n,k\) pozitif tam sayılar; kök dereceleri \(\ge 2\))}
+\begin{itemize}
+\item Derece ve üs aynı sayıyla genişletilebilir: \ \(\sqrt[n]{a^m}=\sqrt[n\cdot k]{a^{m\cdot k}}\) \ (\(\sqrt2=\sqrt[6]{2^3}=\sqrt[6]{8}\))
+\item Farklı dereceli kökler, dereceler \textbf{EKOK}'ta eşitlenerek çarpılır / bölünür.
+\item Kökün kökü: \ \(\sqrt[m]{\sqrt[n]{a}}=\sqrt[m\cdot n]{a}\) \qquad (\(\sqrt{\sqrt[3]{64}}=\sqrt[6]{64}=2\))
+\item Katsayıyı içeri alıp sonra birleştirin: \(\sqrt{2\sqrt2}=\sqrt{\sqrt{4\cdot 2}}=\sqrt[4]{8}\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Dereceyi genişletirken içerinin \textbf{üssü} de aynı sayıyla çarpılır: \(\sqrt[3]{3}=\sqrt[6]{3^2}=\sqrt[6]{9}\), \ \(\sqrt[6]{6}\) değil.
+\end{alertblock}
+\end{frame}
+
+\soru{Ortak Derece -- Örnek 19}
+{\(\sqrt2\cdot\sqrt[3]{3}\) çarpımını tek kök olarak yazınız.}
+{Dereceler \(2\) ve \(3\); EKOK \(=6\).
+\[\sqrt2=\sqrt[6]{2^3}=\sqrt[6]{8},\qquad \sqrt[3]{3}=\sqrt[6]{3^2}=\sqrt[6]{9}\]
+\[\sqrt2\cdot\sqrt[3]{3}=\sqrt[6]{8\cdot 9}=\sqrt[6]{72}\]}
+
+\soru{Ortak Derece -- Örnek 20}
+{\(\sqrt[3]{4}\cdot\sqrt[6]{4}\) çarpımı kaçtır?}
+{EKOK\((3,6)=6\): \ \(\sqrt[3]{4}=\sqrt[6]{4^2}=\sqrt[6]{16}\).
+\[\sqrt[6]{16}\cdot\sqrt[6]{4}=\sqrt[6]{64}=\sqrt[6]{2^6}=2\]}
+
+\soru{Kökün Kökü -- Örnek 21}
+{\(\sqrt{\sqrt[3]{64}}\) kaçtır? \ \(\sqrt{2\sqrt2}\) ifadesini tek kök olarak yazınız.}
+{\[\sqrt{\sqrt[3]{64}}=\sqrt[2\cdot 3]{64}=\sqrt[6]{2^6}=2\qquad(\text{veya } \sqrt[3]{64}=4,\ \sqrt4=2)\]
+\(2\)'yi içteki köke alalım: \(2\sqrt2=\sqrt{4\cdot 2}=\sqrt8\).
+\[\sqrt{2\sqrt2}=\sqrt{\sqrt8}=\sqrt[4]{8}\]}
+
+\subsection{Sıralama}
+\begin{frame}{Köklü Sayılarda Sıralama}
+\begin{block}{Yöntem}
+\begin{enumerate}
+\item \textbf{Aynı derece:} Katsayıları kök içine alın; içi büyük olan büyüktür.\\
+\(2\sqrt3=\sqrt{12}\) \ ile \ \(3\sqrt2=\sqrt{18}\) \ \(\Rightarrow\) \ \(2\sqrt3<3\sqrt2\).
+\item \textbf{Farklı derece:} Dereceleri EKOK'ta eşitleyin, sonra içleri karşılaştırın.
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Katsayısı büyük olan büyük değildir: \(3\sqrt2\approx 4{,}24\) \ ama \ \(2\sqrt5\approx 4{,}47\).
+\end{alertblock}
+\end{frame}
+
+\soru{Sıralama -- Örnek 22}
+{\(a=2\sqrt3\), \ \(b=3\sqrt2\), \ \(c=\sqrt{15}\) sayılarını küçükten büyüğe sıralayınız.}
+{Katsayıları köke alalım:
+\[a=\sqrt{4\cdot 3}=\sqrt{12},\qquad b=\sqrt{9\cdot 2}=\sqrt{18},\qquad c=\sqrt{15}\]
+\(12<15<18\) \(\Rightarrow\) \(a<c<b\).}
+
+\soru{Sıralama -- Örnek 23}
+{\(a=\sqrt3\), \ \(b=\sqrt[3]{5}\), \ \(c=\sqrt[6]{30}\) sayılarını küçükten büyüğe sıralayınız.}
+{EKOK\((2,3,6)=6\):
+\[a=\sqrt[6]{3^3}=\sqrt[6]{27},\qquad b=\sqrt[6]{5^2}=\sqrt[6]{25},\qquad c=\sqrt[6]{30}\]
+\(25<27<30\) \(\Rightarrow\) \(b<a<c\).}
+
+\subsection{Sayısal değer}
+\soru{Sayısal Değer -- Örnek 24}
+{\(\sqrt2=a\) ve \(\sqrt3=b\) olduğuna göre \(\sqrt{24}+\sqrt{54}\) ifadesinin \(a\) ve \(b\) türünden eşiti nedir?}
+{\(\sqrt{24}=\sqrt{4\cdot 6}=2\sqrt6\), \quad \(\sqrt{54}=\sqrt{9\cdot 6}=3\sqrt6\)
+\[\sqrt{24}+\sqrt{54}=5\sqrt6=5\sqrt2\cdot\sqrt3=5ab\]}
+
+\soru{Sayısal Değer -- Örnek 25}
+{\(\sqrt{0{,}09}+\sqrt{1{,}21}-\sqrt{0{,}16}\) işleminin sonucu kaçtır?}
+{Ondalık sayıyı kesre çevirin:
+\[\sqrt{\tfrac{9}{100}}=\tfrac{3}{10}=0{,}3,\qquad \sqrt{\tfrac{121}{100}}=1{,}1,\qquad \sqrt{\tfrac{16}{100}}=0{,}4\]
+\[0{,}3+1{,}1-0{,}4=1\]}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\sqrt{75}-\sqrt{27}+\sqrt{12}=?\) \(\star\)
+\item \(\sqrt6\cdot\sqrt{15}\cdot\sqrt{10}=?\)
+\item \(\sqrt2\cdot\sqrt[3]{2}\)'yi tek kök olarak yazınız. \(\star\)
+\item \(\sqrt[4]{\sqrt{256}}=?\)
+\item \(a=3\sqrt3\), \(b=2\sqrt7\), \(c=4\sqrt2\) sıralayınız. \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(4\sqrt3\)
+\item \(30\)
+\item \(\sqrt[6]{32}\)
+\item \(2\)
+\item \(a<b<c\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 1)}
+{\(\sqrt{75}-\sqrt{27}+\sqrt{12}\) işleminin sonucu nedir?}
+{Her kökü sadeleştirelim:\\[3pt]
+\(\sqrt{75}=\sqrt{25\cdot 3}=5\sqrt3\), \quad \(\sqrt{27}=\sqrt{9\cdot 3}=3\sqrt3\), \quad \(\sqrt{12}=\sqrt{4\cdot 3}=2\sqrt3\)
+\[5\sqrt3-3\sqrt3+2\sqrt3=(5-3+2)\sqrt3=4\sqrt3\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(\sqrt2\cdot\sqrt[3]{2}\) çarpımını tek kök olarak yazınız.}
+{Dereceler \(2\) ve \(3\); EKOK \(=6\):
+\[\sqrt2=\sqrt[6]{2^3},\qquad \sqrt[3]{2}=\sqrt[6]{2^2}\]
+\[\sqrt[6]{2^3\cdot 2^2}=\sqrt[6]{2^5}=\sqrt[6]{32}\qquad(\text{üslü: } 2^{\frac12+\frac13}=2^{\frac56})\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(a=3\sqrt3\), \ \(b=2\sqrt7\), \ \(c=4\sqrt2\) sayılarını küçükten büyüğe sıralayınız.}
+{Katsayıları kök içine alalım (karesi girer):
+\[a=\sqrt{9\cdot 3}=\sqrt{27},\qquad b=\sqrt{4\cdot 7}=\sqrt{28},\qquad c=\sqrt{16\cdot 2}=\sqrt{32}\]
+\(27<28<32\) \(\Rightarrow\) \(a<b<c\).}
+
+
+% =====================================================
+\section{Ders 3: Paydayı Rasyonel Yapma ve Eşlenik}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Paydayı Rasyonel Yapma, Eşlenik, İç İçe Kökler
+\end{frame}
+
+\subsection{Tek terimli payda}
+\begin{frame}{Paydayı Rasyonel Yapma: Tek Terimli Payda}
+\begin{block}{Kural (\(b>0\))}
+Pay ve payda, paydayı kökten kurtaran çarpanla genişletilir:
+\[\frac{a}{\sqrt{b}}=\frac{a\cdot\sqrt b}{\sqrt b\cdot\sqrt b}=\frac{a\sqrt b}{b},\qquad \frac{1}{\sqrt[3]{2}}=\frac{\sqrt[3]{4}}{\sqrt[3]{2}\cdot\sqrt[3]{4}}=\frac{\sqrt[3]{4}}{2}\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Yalnız paydayı değil, \textbf{payı da} aynı sayıyla çarpın (kesrin değeri değişmemeli).
+\item Küp kökte \(\sqrt[3]{2}\cdot\sqrt[3]{2}=\sqrt[3]{4}\) yetmez; \(\sqrt[3]{2}\cdot\sqrt[3]{4}=\sqrt[3]{8}=2\) gerekir.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Tek Terimli Payda -- Örnek 26}
+{\(\dfrac{6}{\sqrt2}\) \ ve \ \(\dfrac{10}{\sqrt5}\) kesirlerinin paydalarını rasyonel yapınız.}
+{\[\frac{6}{\sqrt2}=\frac{6\sqrt2}{\sqrt2\cdot\sqrt2}=\frac{6\sqrt2}{2}=3\sqrt2\]
+\[\frac{10}{\sqrt5}=\frac{10\sqrt5}{5}=2\sqrt5\]}
+
+\soru{Tek Terimli Payda -- Örnek 27}
+{\(\dfrac{3}{2\sqrt6}\) \ ve \ \(\dfrac{1}{\sqrt[3]{2}}\) kesirlerinin paydalarını rasyonel yapınız.}
+{\[\frac{3}{2\sqrt6}=\frac{3\sqrt6}{2\cdot 6}=\frac{3\sqrt6}{12}=\frac{\sqrt6}{4}\]
+\[\frac{1}{\sqrt[3]{2}}=\frac{\sqrt[3]{4}}{\sqrt[3]{2}\cdot\sqrt[3]{4}}=\frac{\sqrt[3]{4}}{\sqrt[3]{8}}=\frac{\sqrt[3]{4}}{2}\]}
+
+\subsection{Eşlenik}
+\begin{frame}{Eşlenik ile Çarpma}
+\begin{block}{Kısa kural: iki kare farkı (yalnız eşlenik çarpımı için)}
+\[(x-y)(x+y)=x^2-y^2\qquad\Rightarrow\qquad (\sqrt a-\sqrt b)(\sqrt a+\sqrt b)=a-b\]
+Kontrol (dağılma): \((\sqrt5-\sqrt2)(\sqrt5+\sqrt2)=5+\sqrt{10}-\sqrt{10}-2=3\).
+\end{block}
+\begin{block}{Eşlenik}
+\(\sqrt a-\sqrt b\ \leftrightarrow\ \sqrt a+\sqrt b\), \qquad \(3+\sqrt7\ \leftrightarrow\ 3-\sqrt7\).\\
+Payda iki terimli ise pay ve payda, paydanın \textbf{eşleniği} ile çarpılır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Yalnız ortadaki işaret değişir: \(\sqrt5-\sqrt2\)'nin eşleniği \(\sqrt5+\sqrt2\)'dir (\(-\sqrt5+\sqrt2\) değil).
+\end{alertblock}
+\end{frame}
+
+\soru{Eşlenik -- Örnek 28}
+{\(\dfrac{1}{\sqrt5-\sqrt2}\) kesrinin paydasını rasyonel yapınız.}
+{Eşlenik: \(\sqrt5+\sqrt2\).
+\[\frac{1}{\sqrt5-\sqrt2}\cdot\frac{\sqrt5+\sqrt2}{\sqrt5+\sqrt2}=\frac{\sqrt5+\sqrt2}{5-2}=\frac{\sqrt5+\sqrt2}{3}\]}
+
+\soru{Eşlenik -- Örnek 29}
+{\(\dfrac{2}{3+\sqrt7}\) kesrinin paydasını rasyonel yapınız.}
+{Eşlenik: \(3-\sqrt7\). \ Payda: \((3+\sqrt7)(3-\sqrt7)=3^2-(\sqrt7)^2=9-7=2\).
+\[\frac{2\,(3-\sqrt7)}{2}=3-\sqrt7\]}
+
+\soru{Eşlenik -- Örnek 30}
+{\(\dfrac{8}{\sqrt2}+\dfrac{1}{\sqrt2-1}\) işleminin sonucu nedir?}
+{1. kesir: \(\dfrac{8\sqrt2}{2}=4\sqrt2\).\\[3pt]
+2. kesir: \(\dfrac{\sqrt2+1}{(\sqrt2-1)(\sqrt2+1)}=\dfrac{\sqrt2+1}{2-1}=\sqrt2+1\).
+\[4\sqrt2+\sqrt2+1=5\sqrt2+1\]}
+
+\soru{Eşlenik -- Örnek 31}
+{\(\dfrac{1}{3-\sqrt8}+\dfrac{1}{3+\sqrt8}\) işleminin sonucu kaçtır?}
+{Her iki paydanın eşleniklerle çarpımı: \((3-\sqrt8)(3+\sqrt8)=9-8=1\).
+\[\frac{3+\sqrt8}{1}+\frac{3-\sqrt8}{1}=6\]}
+
+\soru{Eşlenik -- Örnek 32}
+{\(\dfrac{\sqrt3+1}{\sqrt3-1}\) kesrini sadeleştiriniz.}
+{Pay ve paydayı \(\sqrt3+1\) ile çarpalım. Payda: \(3-1=2\).\\[3pt]
+Pay (dağılma): \((\sqrt3+1)(\sqrt3+1)=3+\sqrt3+\sqrt3+1=4+2\sqrt3\)
+\[\frac{4+2\sqrt3}{2}=2+\sqrt3\]}
+
+\subsection{İç içe kökler}
+\begin{frame}{İç İçe Kökler: \(\sqrt{a\pm 2\sqrt b}\)}
+\begin{block}{Kural}
+Toplamı \(a\), çarpımı \(b\) olan \(x\ge y\ge 0\) sayıları bulunursa:
+\[\sqrt{a+2\sqrt b}=\sqrt x+\sqrt y,\qquad \sqrt{a-2\sqrt b}=\sqrt x-\sqrt y\qquad(x+y=a,\ x\cdot y=b)\]
+Kontrol (dağılma): \((\sqrt3+\sqrt2)(\sqrt3+\sqrt2)=3+\sqrt6+\sqrt6+2=5+2\sqrt6\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item İçteki kökün önünde \textbf{\(2\)} olmalı: \(\sqrt{8+\sqrt{60}}\) için önce \(\sqrt{60}=2\sqrt{15}\).
+\item Eksi durumda \textbf{büyük} sayının kökü önce yazılır (sonuç \(\ge 0\) olmalı).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{İç İçe Kök -- Örnek 33}
+{\(\sqrt{5+2\sqrt6}\) ifadesinin eşiti nedir?}
+{Toplamı \(5\), çarpımı \(6\) olan sayılar: \(3\) ve \(2\).
+\[\sqrt{5+2\sqrt6}=\sqrt3+\sqrt2\]
+Kontrol: \((\sqrt3+\sqrt2)(\sqrt3+\sqrt2)=3+2\sqrt6+2=5+2\sqrt6\) \checkmark}
+
+\soru{İç İçe Kök -- Örnek 34}
+{\(\sqrt{7-2\sqrt{12}}\) \ ve \ \(\sqrt{10+\sqrt{96}}\) ifadelerinin eşitleri nedir?}
+{\(\sqrt{7-2\sqrt{12}}\): toplam \(7\), çarpım \(12\) \(\Rightarrow\) \(4\) ve \(3\):
+\(\ \sqrt4-\sqrt3=2-\sqrt3\).\\[4pt]
+\(\sqrt{96}=\sqrt{4\cdot 24}=2\sqrt{24}\): toplam \(10\), çarpım \(24\) \(\Rightarrow\) \(6\) ve \(4\):
+\[\sqrt{10+\sqrt{96}}=\sqrt6+\sqrt4=\sqrt6+2\]}
+
+\soru{Sonsuz İç İçe Kök -- Örnek 35 (ileri)}
+{\(x=\sqrt{6+\sqrt{6+\sqrt{6+\cdots}}}\) olduğuna göre \(x\) kaçtır?}
+{Kökün içinde yine \(x\) vardır: \ \(x=\sqrt{6+x}\), \ \(x>0\).\\[3pt]
+Kare alalım: \ \(x^2=6+x\ \Rightarrow\ x^2-x=6\ \Rightarrow\ x\,(x-1)=6\).\\[3pt]
+Ardışık iki sayının çarpımı \(6=3\cdot 2\) \(\Rightarrow\) \(x=3\). \ (\(0<x\le 1\) iken \(x(x-1)\le 0\); \(x>1\) iken artar; başka pozitif çözüm yok.)\\[3pt]
+Kontrol: \(\sqrt{6+3}=3\) \checkmark}
+
+\soru{Karma -- Örnek 36}
+{\(x=\sqrt3+1\) olduğuna göre \(x^2-2x\) kaçtır?}
+{\(x^2=(\sqrt3+1)(\sqrt3+1)=3+\sqrt3+\sqrt3+1=4+2\sqrt3\)\\[3pt]
+\(2x=2\sqrt3+2\)
+\[x^2-2x=(4+2\sqrt3)-(2\sqrt3+2)=2\]}
+
+\begin{frame}[fragile]{Bilgisayar Köşesi: Python ile köklü sayılar}
+\begin{columns}[t]
+\column{0.46\textwidth}
+\begin{verbatim}
+>>> import math
+>>> round(math.sqrt(72), 4)
+8.4853
+>>> round(6 * math.sqrt(2), 4)
+8.4853
+>>> math.isqrt(50)   # tam kısım
+7
+\end{verbatim}
+\column{0.5\textwidth}
+\begin{verbatim}
+>>> from sympy import sqrt, radsimp
+>>> sqrt(72)
+6*sqrt(2)
+>>> sqrt(12) + sqrt(27)
+5*sqrt(3)
+>>> radsimp(2 / (3 + sqrt(7)))
+3 - sqrt(7)
+\end{verbatim}
+\end{columns}
+\small \verb|math| yaklaşık değer verir; \verb|sympy| kökü sadeleştirir ve paydayı rasyonel yapar.
+\end{frame}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\dfrac{12}{\sqrt6}=?\)
+\item \(\dfrac{6}{\sqrt5+\sqrt2}=?\) \(\star\)
+\item \(\dfrac{1}{\sqrt3-\sqrt2}+\dfrac{1}{\sqrt3+\sqrt2}=?\) \(\star\)
+\item \(\sqrt{9+2\sqrt{14}}=?\) \(\star\)
+\item \(\sqrt{4-2\sqrt3}=?\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(2\sqrt6\)
+\item \(2\sqrt5-2\sqrt2\)
+\item \(2\sqrt3\)
+\item \(\sqrt7+\sqrt2\)
+\item \(\sqrt3-1\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(\dfrac{6}{\sqrt5+\sqrt2}\) kesrinin paydasını rasyonel yapınız.}
+{Eşlenik: \(\sqrt5-\sqrt2\). \ Payda: \((\sqrt5+\sqrt2)(\sqrt5-\sqrt2)=5-2=3\).
+\[\frac{6\,(\sqrt5-\sqrt2)}{3}=2(\sqrt5-\sqrt2)=2\sqrt5-2\sqrt2\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{\(\dfrac{1}{\sqrt3-\sqrt2}+\dfrac{1}{\sqrt3+\sqrt2}\) işleminin sonucu nedir?}
+{Her iki payda için: \((\sqrt3-\sqrt2)(\sqrt3+\sqrt2)=3-2=1\).
+\[\frac{1}{\sqrt3-\sqrt2}=\sqrt3+\sqrt2,\qquad \frac{1}{\sqrt3+\sqrt2}=\sqrt3-\sqrt2\]
+\[(\sqrt3+\sqrt2)+(\sqrt3-\sqrt2)=2\sqrt3\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{\(\sqrt{9+2\sqrt{14}}\) ifadesinin eşiti nedir?}
+{Toplamı \(9\), çarpımı \(14\) olan sayılar: \(7\) ve \(2\) \ (\(7+2=9\), \ \(7\cdot 2=14\)).
+\[\sqrt{9+2\sqrt{14}}=\sqrt7+\sqrt2\]
+Kontrol: \((\sqrt7+\sqrt2)(\sqrt7+\sqrt2)=7+2\sqrt{14}+2=9+2\sqrt{14}\) \checkmark}
+
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item Çift derece: içi \(\ge 0\), sonuç \(\ge 0\)
+\item \(a^{\frac mn}=\sqrt[n]{a^m}\) \ (\(a>0\))
+\item \(\sqrt{a^2}=|a|\)
+\item \(\sqrt{a^2b}=a\sqrt b\) \ (\(a,b\ge 0\))
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Yalnız benzer kökler toplanır
+\item \(\sqrt a\cdot\sqrt b=\sqrt{ab}\) \ (\(a,b\ge 0\))
+\item Farklı derece: EKOK'ta eşitle
+\item \(\sqrt[m]{\sqrt[n]{a}}=\sqrt[mn]{a}\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item \(\dfrac{a}{\sqrt b}=\dfrac{a\sqrt b}{b}\)
+\item Eşlenik çarpımı: \(a-b\)
+\item \(\sqrt{a\pm 2\sqrt b}=\sqrt x\pm\sqrt y\) \ (\(x+y=a\), \(xy=b\))
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Çarpanlara ayırma ve özdeşlikler
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

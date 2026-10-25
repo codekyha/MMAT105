@@ -1,0 +1,351 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 5 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 5 Ders Notu: Birinci Dereceden\\ Bir Bilinmeyenli Denklemler}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır.
+
+% =====================================================
+\section{Denklem, Eşitlik ve Özdeşlik}
+
+\begin{kural}[Tanımlar]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{Eşitlik:} İki ifadenin eşit olduğunu bildiren yazı (ör. \(3+5=8\)).
+\item \textbf{Denklem:} Bilinmeyen içeren ve bilinmeyenin her değeri için doğru \textbf{olmayan} eşitlik (ör. \(2x+3=11\), yalnız \(x=4\) için doğru). Bir denklem bazı değerler için doğru olabilir ya da hiçbir değer için doğru olmayabilir (\(\text{ÇK}=\emptyset\)).
+\item \textbf{Özdeşlik:} Bilinmeyenin \textbf{her} değeri için doğru olan eşitlik (ör. \(2(x+3)=2x+6\)).
+\item Denklemi sağlayan sayıya \textbf{kök} (çözüm), köklerin oluşturduğu kümeye \textbf{çözüm kümesi} denir ve \(\text{ÇK}\) ile gösterilir.
+\end{itemize}
+Bir denklem, dengedeki bir \textbf{terazi} gibidir: iki kefeye aynı işlem yapılırsa denge bozulmaz.
+\end{kural}
+
+\begin{kural}[{{Eşitliğin özellikleri ve \(ax+b=0\) denklemi}}]
+\(a=b\) ise \quad \(a+c=b+c\), \quad \(a-c=b-c\), \quad \(a\cdot c=b\cdot c\), \quad \(c\neq 0\) ise \(\dfrac{a}{c}=\dfrac{b}{c}\).
+\[ax+b=0\quad(a\neq 0)\quad\Longrightarrow\quad x=-\frac{b}{a},\qquad \text{ÇK}=\left\{-\frac{b}{a}\right\}\]
+\textbf{Adımlar:} parantezleri aç \(\to\) bilinmeyenli terimleri bir tarafa, sayıları diğer tarafa topla \(\to\) \(x\)'in katsayısına böl \(\to\) bulduğun değeri denklemde yerine koyarak \textbf{sağla}.
+\end{kural}
+
+\begin{dikkat}[Sık yapılan hatalar]
+Karşı tarafa geçen terimin işareti değişir: \(x+5=9\Rightarrow x=9-5\). \quad Parantezin önündeki eksi, içteki \textbf{her} terimin işaretini değiştirir: \(-(x-3)=-x+3\). \quad Bilinmeyen içeren bir ifadeye bölmeyin (\(0\) olabilir); \textbf{sıfıra bölme tanımsızdır}.
+\end{dikkat}
+
+\begin{ornek}
+Dengedeki bir terazinin sol kefesinde \(4\) özdeş top ve \(3\) kg, sağ kefesinde \(1\) top ve \(15\) kg vardır. Bir top kaç kg'dır?
+\end{ornek}
+\begin{cozum}
+Top \(x\) kg olsun: \(4x+3=x+15\). İki kefeden birer top ve \(3\) kg çıkaralım:
+\[3x=12\ \Rightarrow\ x=4\text{ kg}\qquad(\text{sağlama: } 16+3=19=4+15)\]
+\end{cozum}
+
+\begin{ornek}
+\(7x-3=4x+12\) denkleminin çözüm kümesini bulunuz.
+\end{ornek}
+\begin{cozum}
+\[7x-4x=12+3\ \Rightarrow\ 3x=15\ \Rightarrow\ x=5\qquad \text{ÇK}=\{5\}\]
+Sağlama: \(35-3=32\), \ \(20+12=32\).
+\end{cozum}
+
+\begin{ornek}
+\(-6x+9=0\) denkleminin çözüm kümesini bulunuz.
+\end{ornek}
+\begin{cozum}
+\(a=-6,\ b=9\): \quad \(x=-\dfrac{b}{a}=-\dfrac{9}{-6}=\dfrac{3}{2}\). \quad \(\text{ÇK}=\left\{\dfrac{3}{2}\right\}\). \ Sağlama: \(-6\cdot\dfrac{3}{2}+9=-9+9=0\).
+\end{cozum}
+
+% =====================================================
+\section{Parantezli Denklemler}
+
+\begin{kural}[Parantez açma]
+\(a(b+c)=ab+ac\), \quad \(-(b-c)=-b+c\). İç içe parantezlerde \textbf{en içteki} parantezden başlanır: \( (\ )\rightarrow[\ ]\rightarrow\{\ \}\).
+\end{kural}
+
+\begin{ornek}
+\(4(2x-3)-3(x+1)=2(x+3)\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+\[8x-12-3x-3=2x+6\ \Rightarrow\ 5x-15=2x+6\ \Rightarrow\ 3x=21\ \Rightarrow\ x=7\]
+Sağlama: \(4\cdot 11-3\cdot 8=44-24=20\), \ \(2\cdot 10=20\).
+\end{cozum}
+
+\begin{ornek}
+\(3-\big[2x-(x-5)\big]=4-2x\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+İçten dışa: \(2x-(x-5)=2x-x+5=x+5\).
+\[3-(x+5)=4-2x\ \Rightarrow\ -x-2=4-2x\ \Rightarrow\ x=6\]
+Sağlama: \(3-[12-1]=-8\), \ \(4-12=-8\).
+\end{cozum}
+
+% =====================================================
+\section{Kesirli ve Ondalıklı Katsayılı Denklemler}
+
+\begin{kural}[Paydaları yok etme]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{Kesirli denklem:} Denklemin iki tarafındaki \textbf{her terim} paydaların EKOK'u ile çarpılır.
+\item \textbf{Ondalıklı denklem:} Terimlerdeki en fazla ondalık basamak sayısı \(k\) ise her terim \(10^{k}\) ile çarpılır.
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+Kesir çizgisi parantez gibidir: \(-\dfrac{x-1}{4}\) terimi \(4\) ile çarpılınca \(-(x-1)=-x+1\) olur. Paydası olmayan terimler de EKOK ile çarpılır.
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{x+1}{2}+\dfrac{x-2}{3}=4\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+\(\text{EKOK}(2,3)=6\):
+\[3(x+1)+2(x-2)=24\ \Rightarrow\ 3x+3+2x-4=24\ \Rightarrow\ 5x=25\ \Rightarrow\ x=5\]
+Sağlama: \(\dfrac{6}{2}+\dfrac{3}{3}=3+1=4\).
+\end{cozum}
+
+\begin{ornek}
+\(x-\dfrac{x-1}{4}=\dfrac{x+5}{2}\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+\(\text{EKOK}(4,2)=4\); paydasız \(x\) terimi de çarpılır:
+\[4x-(x-1)=2(x+5)\ \Rightarrow\ 3x+1=2x+10\ \Rightarrow\ x=9\]
+Sağlama: \(9-\dfrac{8}{4}=7\), \ \(\dfrac{14}{2}=7\).
+\end{cozum}
+
+\begin{ornek}
+\(0{,}25x+0{,}5=0{,}2x+0{,}75\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+En fazla \(2\) ondalık basamak var; her terimi \(100\) ile çarpalım:
+\[25x+50=20x+75\ \Rightarrow\ 5x=25\ \Rightarrow\ x=5\]
+Sağlama: \(1{,}25+0{,}5=1{,}75\), \ \(1+0{,}75=1{,}75\).
+\end{cozum}
+
+% =====================================================
+\section{Özel Durumlar ve Parametreli Denklemler}
+
+\begin{kural}[{{\(ax+b=0\) denkleminin çözüm kümesi}}]
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Durum & Anlamı & Çözüm kümesi\\\midrule
+\(a\neq 0\) & tek kök & \(\text{ÇK}=\left\{-\frac{b}{a}\right\}\)\\
+\(a=0\) ve \(b=0\) & \(0\cdot x=0\): her gerçek sayı sağlar (özdeşlik) & \(\text{ÇK}=\mathbb{R}\)\\
+\(a=0\) ve \(b\neq 0\) & \(0\cdot x=-b\neq 0\): hiçbir sayı sağlamaz & \(\text{ÇK}=\emptyset\)\\\bottomrule
+\end{tabular}
+\end{center}
+\(ax+b=cx+d\) denkleminde: \ \(\text{ÇK}=\mathbb{R}\Leftrightarrow a=c\) ve \(b=d\); \quad \(\text{ÇK}=\emptyset\Leftrightarrow a=c\) ve \(b\neq d\); \quad \(a\neq c\) ise tek kök vardır.\\
+Bir sayı denklemin kökü ise, \(x\) yerine yazıldığında denklemi sağlar.
+\end{kural}
+
+\begin{dikkat}
+\(\emptyset\) (boş küme) ile \(\{0\}\) farklıdır: \(3x=0\) denkleminin çözüm kümesi \(\{0\}\)'dır, boş küme değildir.
+\end{dikkat}
+
+\begin{ornek}
+Çözüm kümelerini bulunuz: \ (a) \(4(x-1)+2=2(2x-1)\) \qquad (b) \(5x-3(x+2)=2x+1\)
+\end{ornek}
+\begin{cozum}
+(a) \(4x-2=4x-2\ \Rightarrow\ 0\cdot x=0\): her \(x\) sağlar. \ \(\text{ÇK}=\mathbb{R}\).\\
+(b) \(2x-6=2x+1\ \Rightarrow\ 0\cdot x=7\): hiçbir \(x\) sağlamaz. \ \(\text{ÇK}=\emptyset\).
+\end{cozum}
+
+\begin{ornek}
+\((2a-1)x+3=5x+b-1\) denkleminin çözüm kümesi \(\mathbb{R}\) ise \(a\cdot b\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Katsayılar ve sabitler eşit olmalı: \(2a-1=5\Rightarrow a=3\); \quad \(3=b-1\Rightarrow b=4\). \quad \(a\cdot b=12\).
+\end{cozum}
+
+\begin{ornek}
+\((k+2)x-5=4x+1\) denklemi veriliyor. (a) Çözüm kümesi boş küme ise \(k\) kaçtır? (b) Denklemin kökü \(3\) ise \(k\) kaçtır?
+\end{ornek}
+\begin{cozum}
+(a) \(k+2=4\Rightarrow k=2\); sabitler \(-5\neq 1\) olduğundan gerçekten \(\text{ÇK}=\emptyset\).\\
+(b) \(x=3\) yazılır: \(3(k+2)-5=12+1\Rightarrow 3k+1=13\Rightarrow k=4\). \ Kontrol: \(6x-5=4x+1\Rightarrow x=3\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{x+m}{3}-\dfrac{x-m}{2}=1\) denkleminin kökü \(4\) ise \(m\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(x=4\) yazalım ve \(6\) ile çarpalım:
+\[2(4+m)-3(4-m)=6\ \Rightarrow\ 8+2m-12+3m=6\ \Rightarrow\ 5m=10\ \Rightarrow\ m=2\]
+Kontrol: \(\dfrac{6}{3}-\dfrac{2}{2}=2-1=1\).
+\end{cozum}
+
+% =====================================================
+\section{Paydada Bilinmeyen Olan Denklemler}
+
+\begin{kural}[Çözüm yolu]
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item Paydayı sıfır yapan değerleri yaz ve dışarıda bırak (\textbf{tanımsızlık koşulu}).
+\item Her terimi paydaların EKOK'u ile çarparak paydaları yok et; denklemi çöz.
+\item Bulunan değer tanımsızlık koşuluna uymuyorsa kök değildir, çözüm kümesine alınmaz.
+\end{enumerate}
+\end{kural}
+
+\begin{ornek}
+\(\dfrac{3x-1}{x+2}=2\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+Koşul: \(x\neq-2\). \quad \(3x-1=2(x+2)=2x+4\Rightarrow x=5\). \quad Sağlama: \(\dfrac{14}{7}=2\). \quad \(\text{ÇK}=\{5\}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{5}{x}-\dfrac{2}{3x}=\dfrac{13}{6}\) denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+Koşul: \(x\neq 0\). \ \(\text{EKOK}(x,3x,6)=6x\): \quad \(30-4=13x\Rightarrow x=2\).\\
+Sağlama: \(\dfrac{5}{2}-\dfrac{2}{6}=\dfrac{15}{6}-\dfrac{2}{6}=\dfrac{13}{6}\). \quad \(\text{ÇK}=\{2\}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{3}{x-2}+1=\dfrac{x+1}{x-2}\) denkleminin çözüm kümesini bulunuz.
+\end{ornek}
+\begin{cozum}
+Koşul: \(x\neq 2\). Her terimi \((x-2)\) ile çarpalım:
+\[3+(x-2)=x+1\ \Rightarrow\ x+1=x+1\ \Rightarrow\ 0\cdot x=0\]
+Eşitlik her \(x\) için doğrudur; ancak \(x=2\) tanımsızdır. \quad \(\text{ÇK}=\mathbb{R}\setminus\{2\}\).
+\end{cozum}
+
+% =====================================================
+\section{Sözel İfadeler ve Problemler}
+
+\begin{kural}[Sözel ifadeden denkleme]
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
+\toprule
+İfade (sayı \(x\)) & Cebirsel & İfade & Cebirsel\\\midrule
+\(3\) katının \(5\) fazlası & \(3x+5\) & \(5\) fazlasının \(3\) katı & \(3(x+5)\)\\
+yarısının \(4\) eksiği & \(\frac{x}{2}-4\) & \(4\) eksiğinin yarısı & \(\frac{x-4}{2}\)\\
+ardışık tam sayılar & \(x,\ x+1,\ x+2,\dots\) & ardışık çift / tek sayılar & \(x,\ x+2,\ x+4,\dots\)\\\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Adımlar:} bilinmeyeni seç \(\to\) diğer nicelikleri \(x\) ile yaz \(\to\) denklemi kur ve çöz \(\to\) sağla ve \textbf{sorulan niceliği} yaz.\\
+\textbf{Yaş:} \(t\) yıl sonra herkesin yaşı \(t\) artar. \quad \textbf{Yol:} yol \(=\) hız \(\times\) zaman.
+\end{kural}
+
+\begin{dikkat}
+``sayının \(5\) eksiği'' \(x-5\) iken ``\(5\)'in sayı kadar eksiği'' \(5-x\)'tir. Son adımda sorulan her zaman \(x\) değildir (en büyük sayı, toplam, diğer kişinin yaşı\dots).
+\end{dikkat}
+
+\begin{ornek}
+Bir sayının \(2\) katının \(3\) fazlası, aynı sayının \(4\) katının \(9\) eksiğine eşittir. Bu sayı kaçtır?
+\end{ornek}
+\begin{cozum}
+\(2x+3=4x-9\Rightarrow 12=2x\Rightarrow x=6\). \quad Sağlama: \(15=24-9\).
+\end{cozum}
+
+\begin{ornek}
+Ardışık beş tam sayının toplamı \(115\) ise en küçüğü kaçtır?
+\end{ornek}
+\begin{cozum}
+Sayılar \(x,\ x+1,\ x+2,\ x+3,\ x+4\): \quad \(5x+10=115\Rightarrow x=21\). \quad (Sayılar \(21,\dots,25\).)
+\end{cozum}
+
+\begin{ornek}
+\(40\) kişilik bir sınıfta kız öğrenci sayısı erkek öğrenci sayısından \(6\) fazladır. Sınıfta kaç kız öğrenci vardır?
+\end{ornek}
+\begin{cozum}
+Erkek \(x\), kız \(x+6\): \quad \(2x+6=40\Rightarrow x=17\). \quad Kız öğrenci sayısı \(17+6=23\).
+\end{cozum}
+
+\begin{ornek}
+Ayşe \(10\), annesi \(38\) yaşındadır. Kaç yıl önce annenin yaşı Ayşe'nin yaşının \(5\) katıydı?
+\end{ornek}
+\begin{cozum}
+\(t\) yıl önce: \(38-t=5(10-t)\Rightarrow 38-t=50-5t\Rightarrow 4t=12\Rightarrow t=3\). \quad Sağlama: \(35=5\cdot 7\).
+\end{cozum}
+
+\begin{ornek}
+Bir araç A şehrinden B şehrine saatte \(60\) km hızla gidip saatte \(90\) km hızla dönüyor. Gidiş--dönüş toplam \(5\) saat sürdüğüne göre A ile B arası kaç km'dir?
+\end{ornek}
+\begin{cozum}
+Uzaklık \(x\) km; zaman \(=\) yol \(\div\) hız: \quad \(\dfrac{x}{60}+\dfrac{x}{90}=5\). \ \(\text{EKOK}(60,90)=180\):
+\[3x+2x=900\ \Rightarrow\ x=180\text{ km}\qquad(\text{sağlama: } 3+2=5\text{ saat})\]
+\end{cozum}
+
+\begin{ornek}
+Bir cüzdanda yalnızca \(5\) TL'lik ve \(10\) TL'lik banknotlar vardır. Toplam \(20\) banknot ve \(145\) TL olduğuna göre kaç tane \(10\) TL'lik banknot vardır?
+\end{ornek}
+\begin{cozum}
+\(10\) TL'lik \(x\) tane ise \(5\) TL'lik \(20-x\) tanedir: \quad \(10x+5(20-x)=145\Rightarrow 5x+100=145\Rightarrow x=9\). \ Sağlama: \(9\cdot 10+11\cdot 5=90+55=145\).
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}lp{0.64\textwidth}@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Temel denklem & \(ax+b=0,\ a\neq 0\ \Rightarrow\ x=-\dfrac{b}{a}\)\\
+Eşitliğin özellikleri & iki tarafa aynı sayı eklenir/çıkarılır; aynı sayıyla çarpılır; \(0\)'dan farklı sayıya bölünür\\
+Kesirli denklem & her terim paydaların EKOK'u ile çarpılır\\
+Ondalıklı denklem & \(k\) ondalık basamak \(\Rightarrow\) her terim \(10^{k}\) ile çarpılır\\
+\(\text{ÇK}=\mathbb{R}\) & \(ax+b=cx+d\): \ \(a=c\) ve \(b=d\) (özdeşlik)\\
+\(\text{ÇK}=\emptyset\) & \(ax+b=cx+d\): \ \(a=c\) ve \(b\neq d\)\\
+Kökü verilen denklem & kök \(x\) yerine yazılır, parametre bulunur\\
+Paydada bilinmeyen & önce payda \(\neq 0\) koşulu; koşulu bozan değer atılır\\
+Ardışık sayılar & \(x,\ x+1,\ x+2\); \ çift/tek: \(x,\ x+2,\ x+4\)\\
+Yaş / yol & \(t\) yıl sonra herkes \(+t\); \ yol \(=\) hız \(\times\) zaman\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta5_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Birinci dereceden iki bilinmeyenli denklemler.}
+
+\end{document}

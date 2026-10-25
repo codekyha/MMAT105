@@ -1,0 +1,326 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 1 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\needspace{7\baselineskip}\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 1 Ders Notu: Temel Kavramlar, İşlem Önceliği,\\ Ardışık Sayılar ve Faktöriyel}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır.
+
+% =====================================================
+\section{Sayı Kümeleri}
+
+\begin{kural}[Tanımlar]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Doğal sayılar: \(\mathbb{N}=\{0,1,2,3,\dots\}\); \quad sayma sayıları: \(\mathbb{N}^{+}=\{1,2,3,\dots\}\)
+\item Tam sayılar: \(\mathbb{Z}=\{\dots,-2,-1,0,1,2,\dots\}=\mathbb{Z}^{-}\cup\{0\}\cup\mathbb{Z}^{+}\), \quad \(\mathbb{N}\subset\mathbb{Z}\)
+\item \(a\le b\) tam sayıları için \([a,b]\) aralığındaki tam sayı sayısı: \(b-a+1\)
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+\(0\) bir doğal sayıdır; ne pozitif ne negatiftir; çift bir sayıdır.
+\end{dikkat}
+
+\begin{ornek}
+\(A=\{x\in\mathbb{Z}\,:\,-3<x\le 4\}\) kümesinin kaç elemanı vardır? Bu kümenin doğal sayı olan elemanları hangileridir?
+\end{ornek}
+\begin{cozum}
+\(-3\) dahil değil, \(4\) dahil: \(A=\{-2,-1,0,1,2,3,4\}\) \(\Rightarrow\) \(4-(-2)+1=7\) eleman.\\
+Doğal sayı olanlar: \(0,1,2,3,4\) \ (\(5\) tane).
+\end{cozum}
+
+% =====================================================
+\section{Rakam, Basamak ve Çözümleme}
+
+\begin{kural}[Tanımlar ve çözümleme]
+Rakamlar: \(\{0,1,\dots,9\}\). Bir rakamın basamak değeri, rakamın bulunduğu basamağın değeriyle çarpımıdır.
+\[\ab{ab}=10a+b,\qquad \ab{abc}=100a+10b+c,\qquad \ab{abcd}=1000a+100b+10c+d\quad (a\neq 0)\]
+Sık kullanılan sonuçlar:
+\[\ab{ab}+\ab{ba}=11(a+b),\qquad \ab{ab}-\ab{ba}=9(a-b),\qquad \ab{abc}-\ab{cba}=99(a-c)\]
+\end{kural}
+
+\begin{ornek}
+\(a\) ve \(b\) birbirinden farklı sıfırdan farklı rakamlardır. \(\ab{ab}+\ab{ba}\) toplamı en çok kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\ab{ab}+\ab{ba}=11(a+b)\). Farklı rakamlarla \(a+b\) en çok \(9+8=17\) olur.
+\[11\cdot 17=187\qquad(\text{kontrol: } 98+89=187)\]
+\end{cozum}
+
+\begin{ornek}
+\(\ab{3a}+\ab{a3}=77\) olduğuna göre \(a\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\[(30+a)+(10a+3)=33+11a=77\ \Rightarrow\ 11a=44\ \Rightarrow\ a=4\]
+Kontrol: \(34+43=77\).
+\end{cozum}
+
+\begin{ornek}
+İki basamaklı bir sayının sağına \(5\) yazıldığında elde edilen üç basamaklı sayı, ilk sayıdan \(419\) fazladır. İlk sayı kaçtır?
+\end{ornek}
+\begin{cozum}
+İlk sayı \(x\) olsun. Sağına \(5\) yazmak sayıyı \(10\) ile çarpıp \(5\) eklemektir: \(10x+5\).
+\[(10x+5)-x=419\ \Rightarrow\ 9x=414\ \Rightarrow\ x=46\]
+Kontrol: \(465-46=419\).
+\end{cozum}
+
+% =====================================================
+\section{İşlem Önceliği}
+
+\begin{kural}[İşlem sırası]
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item Parantez içi (en içteki önce): \( (\ )\rightarrow[\ ]\rightarrow\{\ \}\)
+\item Üs alma
+\item Çarpma ve bölme: aynı öncelik, \textbf{soldan sağa}
+\item Toplama ve çıkarma: aynı öncelik, \textbf{soldan sağa}
+\end{enumerate}
+Kesir çizgisi parantez gibi davranır: pay ve payda ayrı ayrı hesaplanır.
+\end{kural}
+
+\begin{dikkat}[Sık yapılan hatalar]
+\(20\div 4\cdot 5=25\) (\(1\) değil); \quad \(-3^2=-9\) ama \((-3)^2=9\); \quad \(48\div 4\div 2=6\) ama \(48\div(4\div 2)=24\).
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{3^2-2\cdot(5-8)}{(-1)^3+2^2}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Pay: \(9-2\cdot(-3)=9+6=15\). \quad Payda: \(-1+4=3\).
+\[\frac{15}{3}=5\]
+\end{cozum}
+
+\begin{ornek}
+\(-(-2)^3-3\cdot\big[-4+2\cdot(1-3)\big]\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\((-2)^3=-8\Rightarrow-(-8)=8\). \quad Köşeli parantez: \(-4+2\cdot(-2)=-4-4=-8\).
+\[8-3\cdot(-8)=8+24=32\]
+\end{cozum}
+
+% =====================================================
+\needspace{12\baselineskip}
+\section{İşaret Kuralları}
+
+\begin{kural}[İşaret]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Çarpma/bölme: aynı işaretler \(\Rightarrow +\), farklı işaretler \(\Rightarrow -\). Tek sayıda negatif çarpan varsa sonuç negatiftir.
+\item \(a>0\) için \((-a)^{2k}>0\), \((-a)^{2k+1}<0\); \quad \((-1)^{\text{çift}}=1\), \((-1)^{\text{tek}}=-1\).
+\item \(a-(-b)=a+b\).
+\end{itemize}
+\end{kural}
+
+\begin{ornek}
+\(a<b<0<c\) olduğuna göre \(\dfrac{a\cdot c}{b}\) ve \((a-b)\cdot c\) ifadelerinin işaretleri nedir?
+\end{ornek}
+\begin{cozum}
+\(a\cdot c\): \((-)(+)=-\); \ bunu \(b<0\) ile bölmek: \((-)/(-)=+\) \(\Rightarrow\) \(\dfrac{a\cdot c}{b}\) \textbf{pozitif}.\\
+\(a<b\Rightarrow a-b<0\); \ \((-)\cdot(+)=-\) \(\Rightarrow\) \((a-b)\cdot c\) \textbf{negatif}.
+\end{cozum}
+
+\begin{ornek}
+\(n\) bir pozitif tam sayıdır. \((-1)^{n}+(-1)^{n+1}+(-1)^{2n}\) ifadesinin değeri kaçtır?
+\end{ornek}
+\begin{cozum}
+\(n\) ile \(n+1\) ardışık olduğundan biri tek, diğeri çifttir: \((-1)^{n}+(-1)^{n+1}=1+(-1)=0\) \ (sıra fark etmez).\\
+\(2n\) her zaman çifttir: \((-1)^{2n}=1\). \quad Sonuç: \(0+1=1\).
+\end{cozum}
+
+% =====================================================
+\section{Tek ve Çift Sayılar}
+
+\begin{kural}[Tek -- çift]
+Çift: \(2k\), \ tek: \(2k+1\) \((k\in\mathbb{Z})\).
+\begin{center}
+\begin{tabular}{c|cc}
+\(\pm\) & T & Ç\\\hline T & Ç & T\\ Ç & T & Ç
+\end{tabular}
+\qquad\qquad
+\begin{tabular}{c|cc}
+\(\cdot\) & T & Ç\\\hline T & T & Ç\\ Ç & Ç & Ç
+\end{tabular}
+\end{center}
+Çarpanlardan en az biri çiftse çarpım çifttir. Çarpım tekse bütün çarpanlar tektir. \(n\) tek ise \(n^{k}\) de tektir.
+\end{kural}
+
+\begin{ornek}
+\(a\) ve \(b\) tam sayılardır. \(a\) çift ve \(a^2+3b\) tek ise \(b\) tek midir, çift midir? \(a\cdot b+b\) tek midir, çift midir?
+\end{ornek}
+\begin{cozum}
+\(a\) çift \(\Rightarrow a^2\) çift. \(\text{Ç}+3b=\text{T}\Rightarrow 3b\) tek \(\Rightarrow b\) \textbf{tek}.\\
+\(a\cdot b\): Ç\(\cdot\)T \(=\) Ç; \ \(\text{Ç}+b=\text{Ç}+\text{T}=\) \textbf{tek}.
+\end{cozum}
+
+% =====================================================
+\section{Ardışık Sayılar}
+
+\begin{kural}[Terim sayısı ve toplam]
+Artış miktarı sabit olan sayılar için:
+\[\text{Terim sayısı}=\frac{\text{Son terim}-\text{İlk terim}}{\text{Artış}}+1,\qquad \text{Toplam}=\text{Terim sayısı}\cdot\frac{\text{İlk terim}+\text{Son terim}}{2}\]
+Özel toplamlar:
+\[1+2+\dots+n=\frac{n(n+1)}{2},\qquad 2+4+\dots+2n=n(n+1),\qquad 1+3+\dots+(2n-1)=n^2\]
+Tek sayıda ardışık terimin toplamı \(=\) terim sayısı \(\times\) ortanca terim.
+\end{kural}
+
+\begin{ornek}
+\(7+12+17+\dots+152\) toplamında kaç terim vardır? Toplam kaçtır?
+\end{ornek}
+\begin{cozum}
+Artış \(5\): \quad \(n=\dfrac{152-7}{5}+1=29+1=30\).
+\[\text{Toplam}=30\cdot\frac{7+152}{2}=15\cdot 159=2385\]
+\end{cozum}
+
+\begin{ornek}
+\(1\)'den \(40\)'a kadar olan çift sayıların toplamı ile tek sayıların toplamı arasındaki fark kaçtır?
+\end{ornek}
+\begin{cozum}
+Çiftler: \(2+4+\dots+40\), \(n=20\): \(20\cdot 21=420\).\\
+Tekler: \(1+3+\dots+39\), \(n=20\): \(20^2=400\).
+\[420-400=20\]
+Kısa yol: \((2-1)+(4-3)+\dots+(40-39)\) \(\Rightarrow\) \(20\) tane \(1\).
+\end{cozum}
+
+\begin{ornek}
+Ardışık \(4\) tek sayının toplamı \(72\) ise en küçüğü kaçtır?
+\end{ornek}
+\begin{cozum}
+Sayılar \(x,\ x+2,\ x+4,\ x+6\):
+\[4x+12=72\ \Rightarrow\ x=15\]
+Sayılar: \(15,17,19,21\). (Kontrol: toplam \(72\).)
+\end{cozum}
+
+\begin{ornek}
+Üç basamaklı doğal sayılardan kaç tanesi \(7\) ile tam bölünür?
+\end{ornek}
+\begin{cozum}
+En küçük: \(7\cdot 15=105\); \ en büyük: \(7\cdot 142=994\).
+\[n=\frac{994-105}{7}+1=127+1=128\qquad(\text{ya da } 142-15+1=128)\]
+\end{cozum}
+
+% =====================================================
+\section{Faktöriyel}
+
+\begin{kural}[Tanım ve özellikler]
+\[n!=1\cdot 2\cdot 3\cdots n\quad(n\in\mathbb{N}^{+}),\qquad 0!=1,\qquad n!=n\cdot(n-1)!\]
+\begin{center}
+\begin{tabular}{cccccccc}
+\toprule
+\(1!\) & \(2!\) & \(3!\) & \(4!\) & \(5!\) & \(6!\) & \(7!\) & \(8!\)\\\midrule
+\(1\) & \(2\) & \(6\) & \(24\) & \(120\) & \(720\) & \(5040\) & \(40320\)\\\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Sadeleştirme:} Küçük faktöriyel ortak çarpan olarak dışarı alınır: \(7!+6!=6!\,(7+1)=8\cdot 6!\).\\
+\textbf{Sondaki sıfır sayısı:} \(n!\) sayısının sonundaki sıfır sayısı \(\left\lfloor\frac{n}{5}\right\rfloor+\left\lfloor\frac{n}{25}\right\rfloor+\left\lfloor\frac{n}{125}\right\rfloor+\cdots\) \ (\(\lfloor x\rfloor\): \(x\)'in tam kısmı)
+\end{kural}
+
+\begin{dikkat}
+\(5!\) ve sonraki bütün faktöriyellerin birler basamağı \(0\)'dır. \quad \((a+b)!\neq a!+b!\), \quad \((2n)!\neq 2\cdot n!\).
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{9!}{7!\cdot 3!}\) ve \(\dfrac{6!+7!+8!}{6!}\) işlemlerinin sonuçları nedir?
+\end{ornek}
+\begin{cozum}
+\[\frac{9!}{7!\cdot 3!}=\frac{9\cdot 8\cdot 7!}{7!\cdot 6}=\frac{72}{6}=12\]
+\[\frac{6!+7!+8!}{6!}=\frac{6!\,(1+7+7\cdot 8)}{6!}=1+7+56=64\]
+\end{cozum}
+
+\begin{ornek}
+\(n!+(n-1)!=7\cdot(n-1)!\) olduğuna göre \(n\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(n!=n\cdot(n-1)!\) yazılırsa:
+\[n\cdot(n-1)!+(n-1)!=(n-1)!\,(n+1)=7\cdot(n-1)!\ \Rightarrow\ n+1=7\ \Rightarrow\ n=6\]
+\end{cozum}
+
+\begin{ornek}
+\(50!\) sayısının sonunda kaç sıfır vardır?
+\end{ornek}
+\begin{cozum}
+Her sıfır bir \(2\cdot 5\) çiftinden gelir; \(2\) çarpanı \(5\)'ten fazla olduğundan \(5\) çarpanlarını saymak yeterlidir.
+\[\left\lfloor\frac{50}{5}\right\rfloor+\left\lfloor\frac{50}{25}\right\rfloor=10+2=12\]
+(\(25\) ve \(50\) sayıları ikişer tane \(5\) çarpanı içerir; ikinci terim bunları sayar.)
+\end{cozum}
+
+\begin{ornek}
+\(1!+2!+3!+\dots+10!\) toplamının birler basamağındaki rakam kaçtır?
+\end{ornek}
+\begin{cozum}
+\(5!\)'den itibaren her terimin birler basamağı \(0\)'dır. Sadece ilk dört terim önemlidir:
+\[1+2+6+24=33\ \Rightarrow\ \text{birler basamağı } 3\]
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Aralıktaki tam sayı sayısı & \([a,b]\): \(b-a+1\)\\
+Çözümleme & \(\ab{ab}\pm\ab{ba}\): \(11(a+b)\), \ \(9(a-b)\); \ \(\ab{abc}-\ab{cba}=99(a-c)\)\\
+İşlem sırası & parantez \(\to\) üs \(\to\) \(\times,\div\) \(\to\) \(+,-\) (soldan sağa)\\
+İşaret & tek sayıda negatif çarpan \(\Rightarrow\) negatif; \ \(-a^2\neq(-a)^2\)\\
+Tek -- çift & bir çarpan çift \(\Rightarrow\) çarpım çift; \ T\(\pm\)T\(=\)Ç\\
+Terim sayısı & \(\dfrac{\text{son}-\text{ilk}}{\text{artış}}+1\)\\
+Ardışık toplam & terim sayısı \(\cdot\dfrac{\text{ilk}+\text{son}}{2}\); \ \(\dfrac{n(n+1)}{2}\), \(n(n+1)\), \(n^2\)\\
+Faktöriyel & \(n!=n\,(n-1)!\), \ \(0!=1\); \ sondaki sıfır: \(\lfloor n/5\rfloor+\lfloor n/25\rfloor+\cdots\)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\needspace{20\baselineskip}
+\input{hafta1_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Asal sayılar, asal çarpanlara ayırma, tam bölenler, bölme.}
+
+\end{document}

@@ -1,0 +1,656 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 2]{MMAT105 Genel Matematik}
+\subtitle{Hafta 2: Asal Sayılar, Asal Çarpanlara Ayırma, Tam Bölenler, Bölme}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hesaplayınız:}
+\begin{enumerate}
+\item \(\ab{ab}+\ab{ba}=132\) ise \(a+b=?\)
+\item \(20\div 4\cdot 5-3^2=?\)
+\item \(\dfrac{6!}{4!}=?\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(11(a+b)=132\Rightarrow 12\)
+\item \(25-9=16\)
+\item \(6\cdot 5=30\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Asal sayı tanımı
+\item \(100\)'e kadar asallar
+\item Asallık testi
+\item Aralarında asal
+\item Asal sayı problemleri
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Asal çarpanlara ayırma
+\item Pozitif / tam bölen sayısı
+\item Bölenler toplamı
+\item Tam kare, tam küp
+\item \(n!\) içinde asal kuvveti
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{10}
+\item Bölme: \(A=B\cdot C+K\)
+\item Bölüm -- kalan problemleri
+\item Ardışık bölmeler
+\item Kalanlarla işlem
+\item Birler basamağı
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Asal Sayılar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Asal Sayılar ve Aralarında Asal Sayılar
+\end{frame}
+
+\subsection{Asal sayı}
+\begin{frame}{Asal Sayı}
+\begin{block}{Tanım}
+\(1\)'den büyük olup \(1\) ve kendisinden başka pozitif böleni olmayan tam sayıya \textbf{asal sayı} denir.
+\[2,\ 3,\ 5,\ 7,\ 11,\ 13,\ 17,\ 19,\ 23,\ 29,\ \dots\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(1\) asal değildir. \(0\) ve negatif sayılar asal değildir.
+\item \(2\) tek çift asal sayıdır; \(2\)'den büyük bütün asallar tektir.
+\item En küçük asal sayı \(2\)'dir (\(1\) değil).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{100'e Kadar Asal Sayılar (25 tane)}
+\begin{center}
+\large
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cccccccccc}
+\toprule
+\(2\) & \(3\) & \(5\) & \(7\) & \(11\) & \(13\) & \(17\) & \(19\) & \(23\) & \(29\)\\
+\(31\) & \(37\) & \(41\) & \(43\) & \(47\) & \(53\) & \(59\) & \(61\) & \(67\) & \(71\)\\
+\(73\) & \(79\) & \(83\) & \(89\) & \(97\) & & & & & \\\bottomrule
+\end{tabular}
+\end{center}
+\begin{block}{Asallık testi}
+\(n>1\) sayısı, karesi \(n\)'den büyük olmayan (yani \(\le\sqrt{n}\) olan) asal sayıların \textbf{hiçbirine} tam bölünmüyorsa asaldır.
+\end{block}
+\end{frame}
+
+\soru{Asal Sayılar -- Örnek 1}
+{\(1\)'den \(30\)'a kadar kaç asal sayı vardır? Bu asal sayıların toplamı kaçtır?}
+{\(2,\ 3,\ 5,\ 7,\ 11,\ 13,\ 17,\ 19,\ 23,\ 29\) \(\Rightarrow\) \(10\) tane.
+\[2+3+5+7+11+13+17+19+23+29=129\]}
+
+\soru{Asal Sayılar -- Örnek 2}
+{\(20\) ile \(50\) arasında kaç asal sayı vardır? Toplamları kaçtır?}
+{\(23,\ 29,\ 31,\ 37,\ 41,\ 43,\ 47\) \(\Rightarrow\) \(7\) tane.
+\[23+29+31+37+41+43+47=251\]}
+
+\soru{Asal Sayılar -- Örnek 3}
+{İki basamaklı en büyük asal sayı ile iki basamaklı en küçük asal sayının farkı kaçtır?}
+{En büyük: \(97\), \quad en küçük: \(11\) \quad (\(10\) asal değil: \(10=2\cdot 5\)).
+\[97-11=86\]}
+
+\soru{Asallık Testi -- Örnek 4}
+{\(91\) ve \(97\) sayıları asal mıdır?}
+{\(9^2=81\le 91<100=10^2\): \(2,3,5,7\) asallarını denemek yeter.\\[3pt]
+\(91=7\cdot 13\) \(\Rightarrow\) \(91\) \textbf{asal değildir}.\\[3pt]
+\(97\): \(2,3,5,7\)'nin hiçbirine tam bölünmez \(\Rightarrow\) \(97\) \textbf{asaldır}.}
+
+\soru{Asallık Testi -- Örnek 5}
+{\(211\) ve \(221\) sayıları asal mıdır?}
+{\(14^2=196\), \(15^2=225\): \(2,3,5,7,11,13\) asallarını denemek yeter.\\[3pt]
+\(221=13\cdot 17\) \(\Rightarrow\) \(221\) \textbf{asal değildir}.\\[3pt]
+\(211\): bu altı asalın hiçbirine tam bölünmez \(\Rightarrow\) \(211\) \textbf{asaldır}.}
+
+\soru{Asal Problemleri -- Örnek 6}
+{\(a\) ve \(b\) asal sayılardır. \(a+b=15\) olduğuna göre \(a\cdot b\) kaçtır?}
+{\(15\) tek. İki tek sayının toplamı çift olurdu \(\Rightarrow\) biri çift asal \(2\) olmalı.
+\[a+b=15\ \Rightarrow\ \{a,b\}=\{2,13\}\ \Rightarrow\ a\cdot b=26\]
+\textbf{Kural:} İki asalın toplamı (veya farkı) tek ise biri \(2\)'dir.}
+
+\soru{Asal Problemleri -- Örnek 7}
+{\(p\) ve \(p+5\) sayılarının ikisi de asal ise \(p\) kaçtır?}
+{\(p\) tek olsaydı \(p+5\) çift ve \(2\)'den büyük olurdu \(\Rightarrow\) asal olamazdı.\\[3pt]
+O halde \(p=2\). \quad Kontrol: \(p+5=7\) asal. \quad Cevap: \(p=2\).}
+
+\soru{Asal Problemleri -- Örnek 8}
+{\(a<b<c\) asal sayılar ve \(a+b+c=30\) ise \(a\) kaçtır? Kaç farklı \((b,c)\) ikilisi vardır?}
+{Üç tek sayının toplamı tek olurdu; \(30\) çift \(\Rightarrow\) \(a=2\).\\[3pt]
+\(b+c=28\), \ \(2<b<c\): \quad \(5+23\), \quad \(11+17\) \quad (\(3+25\): \(25\) asal değil).\\[3pt]
+Cevap: \(a=2\); \ \(2\) ikili.}
+
+\soru{Asal Problemleri -- Örnek 9}
+{\(a\) ve \(b\) asal sayılardır. \(a\cdot b+a=39\) olduğuna göre \(a+b\) kaçtır?}
+{\(a\cdot b+a=a\,(b+1)=39=3\cdot 13\).\\[3pt]
+\(a=3\Rightarrow b+1=13\Rightarrow b=12\) \ (asal değil).\\
+\(a=13\Rightarrow b+1=3\Rightarrow b=2\) \ (asal).
+\[a+b=13+2=15\]}
+
+\subsection{Aralarında asal}
+\begin{frame}{Aralarında Asal Sayılar}
+\begin{block}{Tanım}
+\(1\)'den başka ortak pozitif böleni olmayan iki tam sayıya \textbf{aralarında asal} denir.\\
+Örnek: \(8\) ve \(15\) aralarında asaldır (\(8=2^3\), \(15=3\cdot 5\): ortak asal çarpan yok).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Aralarında asal sayıların kendilerinin asal olması gerekmez: \(8\) ve \(9\).
+\item Ardışık iki pozitif tam sayı her zaman aralarında asaldır.
+\item Farklı iki asal sayı her zaman aralarında asaldır.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Aralarında Asal -- Örnek 10}
+{\((8,15)\), \ \((12,21)\), \ \((14,25)\), \ \((9,27)\) ikililerinden hangileri aralarında asaldır?}
+{\((8,15)\): ortak bölen yalnız \(1\) \(\Rightarrow\) aralarında asal.\\
+\((12,21)\): ikisi de \(3\)'e bölünür \(\Rightarrow\) değil.\\
+\((14,25)\): \(14=2\cdot 7\), \(25=5^2\) \(\Rightarrow\) aralarında asal.\\
+\((9,27)\): ikisi de \(9\)'a bölünür \(\Rightarrow\) değil.}
+
+\soru{Aralarında Asal -- Örnek 11}
+{\(1\)'den \(20\)'ye kadar (\(1\) ve \(20\) dahil) olan tam sayılardan kaç tanesi \(12\) ile aralarında asaldır?}
+{\(12=2^2\cdot 3\): \(2\)'ye ve \(3\)'e bölünmeyen sayılar aranıyor.
+\[1,\ 5,\ 7,\ 11,\ 13,\ 17,\ 19\]
+Cevap: \(7\) tane.}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(50\) ile \(70\) arasında kaç asal sayı vardır? \(\star\)
+\item \(143\) asal mıdır?
+\item \(a,b\) asal ve \(a+b=21\) ise \(a\cdot b=?\) \(\star\)
+\item \(1\)'den \(15\)'e kadar (dahil) kaç sayı \(10\) ile aralarında asaldır? \(\star\)
+\item Rakamları toplamı \(10\) olan kaç tane iki basamaklı asal sayı vardır?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(4\) \ (\(53,59,61,67\))
+\item Hayır, \(143=11\cdot 13\)
+\item \(2\cdot 19=38\)
+\item \(6\)
+\item \(3\) \ (\(19,37,73\))
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 1)}
+{\(50\) ile \(70\) arasında kaç asal sayı vardır?}
+{\(\sqrt{70}<9\) olduğundan \(2,3,5,7\)'ye bölünmeyenler asaldır. Tek sayılardan:\\[3pt]
+\(51=3\cdot17\), \ \(55=5\cdot 11\), \ \(57=3\cdot 19\), \ \(63=3^2\cdot 7\), \ \(65=5\cdot 13\), \ \(69=3\cdot 23\) \ (asal değil)\\[3pt]
+Asal olanlar: \(53,\ 59,\ 61,\ 67\) \(\Rightarrow\) \(4\) tane.}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(a\) ve \(b\) asal sayılardır. \(a+b=21\) ise \(a\cdot b\) kaçtır?}
+{İki tek sayının toplamı çifttir. Toplam \(21\) tek olduğundan sayılardan biri çift olmalı.\\[3pt]
+Tek çift asal \(2\) \(\Rightarrow\) diğeri \(21-2=19\) (asal \checkmark).
+\[a\cdot b=2\cdot 19=38\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(1\)'den \(15\)'e kadar (dahil) kaç sayı \(10\) ile aralarında asaldır?}
+{\(10=2\cdot 5\): sayı \(2\)'ye de \(5\)'e de bölünmemeli.\\[3pt]
+Tek sayılar: \(1,3,5,7,9,11,13,15\) \quad \(\rightarrow\) \(5\) ve \(15\) atılır.\\[3pt]
+Kalanlar: \(1,3,7,9,11,13\) \(\Rightarrow\) \(6\) tane.}
+
+
+% =====================================================
+\section{Ders 2: Asal Çarpanlar ve Bölenler}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Asal Çarpanlara Ayırma, Bölen Sayısı ve Bölenler Toplamı
+\end{frame}
+
+\subsection{Asal çarpanlara ayırma}
+\begin{frame}{Asal Çarpanlara Ayırma}
+\begin{block}{Kural}
+\(1\)'den büyük her tam sayı, asal sayıların çarpımı olarak (sıra dışında) \textbf{tek türlü} yazılır:
+\[n=p_1^{\alpha_1}\cdot p_2^{\alpha_2}\cdots p_k^{\alpha_k}\qquad(p_i \text{ farklı asallar},\ \alpha_i\ge 1)\]
+\textbf{Bölen merdiveni:} Sayı, en küçük asaldan başlayarak, bölüm \(1\) olana kadar bölünür.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(360=2^3\cdot 45\) yazmak yetmez: \(45\) asal değil, ayırmaya devam!
+\item \(1\) bir asal çarpan değildir; merdivene yazılmaz.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Asal Çarpanlar -- Örnek 12}
+{\(360\) sayısını asal çarpanlarına ayırınız.}
+{\begin{minipage}[t]{0.3\linewidth}
+\normalsize
+\begin{tabular}{r|l}
+\(360\) & \(2\)\\ \(180\) & \(2\)\\ \(90\) & \(2\)\\ \(45\) & \(3\)\\ \(15\) & \(3\)\\ \(5\) & \(5\)\\ \(1\) &
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.65\linewidth}
+\vspace{20pt}
+\[360=2^3\cdot 3^2\cdot 5\]
+Kontrol: \(8\cdot 9\cdot 5=360\).
+\end{minipage}}
+
+\soru{Asal Çarpanlar -- Örnek 13}
+{\(84\) ve \(150\) sayılarını asal çarpanlarına ayırınız. Her birinin farklı asal çarpanlarının toplamı kaçtır?}
+{\[84=2^2\cdot 3\cdot 7,\qquad 150=2\cdot 3\cdot 5^2\]
+\(84\): \(2+3+7=12\); \qquad \(150\): \(2+3+5=10\).\\[3pt]
+(Üs toplama dahil edilmez; her asal bir kez sayılır.)}
+
+\subsection{Bölen sayısı}
+\begin{frame}{Bölen Sayısı ve Bölenler Toplamı}
+\begin{block}{\(n=p_1^{\alpha_1}\cdot p_2^{\alpha_2}\cdots p_k^{\alpha_k}\) ise}
+\begin{itemize}
+\item Pozitif bölen sayısı: \(d(n)=(\alpha_1+1)(\alpha_2+1)\cdots(\alpha_k+1)\)
+\item Tam bölen sayısı (negatifler dahil): \(2\cdot d(n)\)
+\item Asal bölen sayısı: \(k\); \quad asal olmayan pozitif bölen sayısı: \(d(n)-k\)
+\item Pozitif bölenler toplamı: \(\dfrac{p_1^{\alpha_1+1}-1}{p_1-1}\cdot\dfrac{p_2^{\alpha_2+1}-1}{p_2-1}\cdots\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(1\) asal olmayan bir bölendir. \quad Üsler toplanmaz, \((\alpha+1)\)'ler \textbf{çarpılır}.
+\end{alertblock}
+\end{frame}
+
+\soru{Bölen Sayısı -- Örnek 14}
+{\(72\) sayısının kaç pozitif böleni vardır?}
+{\(72=2^3\cdot 3^2\) \(\Rightarrow\) \(d(72)=(3+1)(2+1)=12\).\\[3pt]
+Kontrol (liste): \(1,2,3,4,6,8,9,12,18,24,36,72\) \(\Rightarrow\) \(12\) tane.}
+
+\soru{Bölen Sayısı -- Örnek 15}
+{\(360\) sayısının pozitif bölen, tam bölen, asal bölen ve asal olmayan pozitif bölen sayıları kaçtır?}
+{\(360=2^3\cdot 3^2\cdot 5\)
+\begin{itemize}
+\item Pozitif bölen: \(4\cdot 3\cdot 2=24\) \quad Tam bölen: \(2\cdot 24=48\)
+\item Asal bölen: \(2,3,5\) \(\Rightarrow\) \(3\) \quad Asal olmayan pozitif: \(24-3=21\)
+\end{itemize}}
+
+\soru{Bölen Sayısı -- Örnek 16}
+{\(360\) sayısının kaç pozitif böleni tektir? Kaç pozitif böleni çifttir?}
+{Tek bölenler \(2\) çarpanı içermez: \(3^2\cdot 5\)'in bölenleridir.
+\[\text{Tek bölen}=(2+1)(1+1)=6\]
+\[\text{Çift bölen}=24-6=18\]}
+
+\soru{Bölen Sayısı -- Örnek 17}
+{\(2^a\cdot 3^2\) sayısının \(18\) pozitif böleni vardır. \(a\) kaçtır?}
+{\[(a+1)(2+1)=18\ \Rightarrow\ a+1=6\ \Rightarrow\ a=5\]
+Kontrol: \(2^5\cdot 3^2=288\), \ \(d(288)=6\cdot 3=18\).}
+
+\soru{Bölen Sayısı -- Örnek 18}
+{\(12^3\) sayısının kaç pozitif böleni vardır?}
+{\(12=2^2\cdot 3\) \(\Rightarrow\) \(12^3=2^6\cdot 3^3\).
+\[d=(6+1)(3+1)=28\]
+Dikkat: \(d(12)=6\) ama \(d(12^3)\neq 6\cdot 3\).}
+
+\soru{Bölenler Toplamı -- Örnek 19}
+{\(12\) ve \(72\) sayılarının pozitif bölenleri toplamı kaçtır?}
+{\(12=2^2\cdot 3\): \quad \(\dfrac{2^3-1}{2-1}\cdot\dfrac{3^2-1}{3-1}=7\cdot 4=28\)\\[2pt]
+{\normalsize (Kontrol: \(1+2+3+4+6+12=28\))}\\[4pt]
+\(72=2^3\cdot 3^2\): \quad \(\dfrac{2^4-1}{2-1}\cdot\dfrac{3^3-1}{3-1}=15\cdot 13=195\)}
+
+\subsection{Tam kare, tam küp}
+\begin{frame}{Tam Kare ve Tam Küp}
+\begin{block}{Kural}
+Asal çarpanlara ayrılmış bir sayı
+\begin{itemize}
+\item \textbf{tam kare} ise bütün üsler çifttir: \(3600=2^4\cdot 3^2\cdot 5^2=60^2\)
+\item \textbf{tam küp} ise bütün üsler \(3\)'ün katıdır: \(216=2^3\cdot 3^3=6^3\)
+\end{itemize}
+En küçük çarpanı bulmak için her üs, kendisinden küçük olmayan en küçük çift sayıya / \(3\)'ün katına tamamlanır.
+\end{block}
+\begin{block}{\(n!\) içinde \(p\) asalının kuvveti}
+\[\left\lfloor\frac{n}{p}\right\rfloor+\left\lfloor\frac{n}{p^2}\right\rfloor+\left\lfloor\frac{n}{p^3}\right\rfloor+\cdots\qquad(\lfloor\ \rfloor:\ \text{bölümün tam kısmı})\]
+\end{block}
+\end{frame}
+
+\soru{Tam Kare -- Örnek 20}
+{\(180\cdot n\) bir tam kare ise \(n\) en küçük hangi pozitif tam sayıdır?}
+{\(180=2^2\cdot 3^2\cdot 5\): \ \(5\)'in üssü tek, çifte tamamlanmalı.
+\[n=5,\qquad 180\cdot 5=900=30^2\]}
+
+\soru{Tam Küp -- Örnek 21}
+{\(72\cdot n\) bir tam küp ise \(n\) en küçük hangi pozitif tam sayıdır?}
+{\(72=2^3\cdot 3^2\): \ \(3\)'ün üssü \(2\), \(3\)'e tamamlanmalı.
+\[n=3,\qquad 72\cdot 3=216=6^3\]}
+
+\soru{Faktöriyel -- Örnek 22}
+{\(20!\) sayısının asal çarpanlarına ayrılışında \(2\)'nin ve \(3\)'ün üsleri kaçtır?}
+{\[2:\ \left\lfloor\tfrac{20}{2}\right\rfloor+\left\lfloor\tfrac{20}{4}\right\rfloor+\left\lfloor\tfrac{20}{8}\right\rfloor+\left\lfloor\tfrac{20}{16}\right\rfloor=10+5+2+1=18\]
+\[3:\ \left\lfloor\tfrac{20}{3}\right\rfloor+\left\lfloor\tfrac{20}{9}\right\rfloor=6+2=8\]}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(150\)'nin kaç pozitif böleni var?
+\item \(200\)'ün kaç tam böleni var? \(\star\)
+\item \(2^n\cdot 5\)'in \(10\) pozitif böleni varsa \(n=?\) \(\star\)
+\item \(48\cdot k\) tam kare ise en küçük pozitif \(k=?\) \(\star\)
+\item \(15!\) içinde \(3\)'ün üssü kaçtır?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(12\)
+\item \(24\)
+\item \(4\)
+\item \(3\)
+\item \(6\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(200\) sayısının kaç tam böleni vardır?}
+{\(200=2^3\cdot 5^2\)\\[3pt]
+Pozitif bölen sayısı: \((3+1)(2+1)=12\)\\[3pt]
+Tam bölenler pozitif ve negatif bölenlerdir: \(2\cdot 12=24\).}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(2^n\cdot 5\) sayısının \(10\) pozitif böleni varsa \(n\) kaçtır?}
+{Bölen sayısı: \((n+1)(1+1)=2(n+1)\)
+\[2(n+1)=10\ \Rightarrow\ n+1=5\ \Rightarrow\ n=4\]
+Kontrol: \(2^4\cdot 5=80\), \ \(d(80)=5\cdot 2=10\).}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{\(48\cdot k\) bir tam kare ise \(k\) en küçük hangi pozitif tam sayıdır?}
+{\(48=2^4\cdot 3^1\). Tam karede bütün üsler çift olmalı.\\[3pt]
+\(2^4\): üs çift \checkmark; \quad \(3^1\): bir tane daha \(3\) gerekir.
+\[k=3,\qquad 48\cdot 3=144=12^2\]}
+
+
+% =====================================================
+\section{Ders 3: Bölme}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Bölme, Bölüm -- Kalan Problemleri, Birler Basamağı
+\end{frame}
+
+\subsection{Bölme}
+\begin{frame}{Bölme İşlemi}
+\begin{columns}[c]
+\column{0.3\textwidth}
+\centering\Large
+\begin{tabular}{r|l}
+\(A\) & \(B\)\\\cline{2-2}
+ & \(C\)\\
+\(K\) &
+\end{tabular}
+\column{0.66\textwidth}
+\begin{block}{Kural (\(A,B,C,K\) doğal sayılar, \(B\neq 0\))}
+\[A=B\cdot C+K,\qquad 0\le K<B\]
+\(A\): bölünen, \ \(B\): bölen, \ \(C\): bölüm, \ \(K\): kalan.\\
+\(K=0\) ise \(A\), \(B\)'ye tam bölünür.
+\end{block}
+\end{columns}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Kalan bölenden \textbf{küçük} olmalı: en büyük kalan \(B-1\)'dir.
+\item Kalan \(K\) verildiyse bölen en az \(K+1\)'dir.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Bölme -- Örnek 23}
+{\(247\) sayısının \(9\) ile bölümünden elde edilen bölüm ve kalan kaçtır?}
+{\(9\cdot 27=243\le 247<252=9\cdot 28\)
+\[247=9\cdot 27+4\]
+Bölüm \(27\), kalan \(4\) \quad (\(0\le 4<9\) \checkmark).}
+
+\soru{Bölme -- Örnek 24}
+{Bir doğal sayı \(7\) ile bölündüğünde bölüm \(12\) oluyor. Bu sayı en az ve en çok kaçtır?}
+{\(A=7\cdot 12+K\), \ \(0\le K\le 6\).\\[3pt]
+En az: \(K=0\Rightarrow A=84\). \qquad En çok: \(K=6\Rightarrow A=90\).}
+
+\soru{Bölme -- Örnek 25}
+{\(A\) doğal sayısı \(B\)'ye bölündüğünde bölüm \(6\), kalan \(11\)'dir. \(B\) en az kaçtır? Bu durumda \(A\) kaçtır?}
+{Kalan bölenden küçük: \(11<B\Rightarrow B\) en az \(12\).
+\[A=12\cdot 6+11=83\]}
+
+\soru{Bölme -- Örnek 26}
+{Pozitif bir tam sayı \(9\) ile bölündüğünde bölüm ile kalan eşit oluyor. Bu koşulu sağlayan kaç sayı vardır? En büyüğü kaçtır?}
+{Bölüm \(=\) kalan \(=k\): \ \(A=9k+k=10k\).\\[3pt]
+\(0\le k\le 8\) ve \(A>0\) \(\Rightarrow\) \(k=1,2,\dots,8\): \ \(8\) sayı.\\[3pt]
+En büyüğü: \(10\cdot 8=80\) \quad (\(80=9\cdot 8+8\)).}
+
+\subsection{Ardışık bölme}
+\soru{Ardışık Bölme -- Örnek 27}
+{\(A\)'nın \(5\) ile bölümünde bölüm \(B\), kalan \(3\); \ \(B\)'nin \(4\) ile bölümünde bölüm \(2\), kalan \(1\)'dir. \(A\) kaçtır?}
+{Sondan başa:
+\[B=4\cdot 2+1=9,\qquad A=5\cdot 9+3=48\]}
+
+\soru{Ardışık Bölme -- Örnek 28}
+{\(A\)'nın \(3\) ile bölümünde bölüm \(B\), kalan \(2\); \ \(B\)'nin \(5\) ile bölümünde bölüm \(C\), kalan \(4\)'tür. \(A\)'nın \(15\) ile bölümünden kalan kaçtır?}
+{\[B=5C+4,\qquad A=3B+2=3(5C+4)+2=15C+14\]
+\(0\le 14<15\) \(\Rightarrow\) kalan \(14\).\\[3pt]
+Kısa yol: kalan \(=3\cdot 4+2=14\).}
+
+\subsection{Kalanlarla işlem}
+\begin{frame}{Kalanlarla İşlem}
+\begin{block}{Kural}
+\(a\)'nın \(m\) ile bölümünden kalan \(r_1\), \(b\)'nin kalanı \(r_2\) ise:
+\begin{itemize}
+\item \(a+b\)'nin kalanı \(=\) \(r_1+r_2\)'nin \(m\) ile bölümünden kalan
+\item \(a\cdot b\)'nin kalanı \(=\) \(r_1\cdot r_2\)'nin \(m\) ile bölümünden kalan
+\end{itemize}
+\textbf{Birler basamağı} \(=\) sayının \(10\) ile bölümünden kalan.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(r_1+r_2\) veya \(r_1\cdot r_2\) bölenden büyük olabilir: sonucu tekrar \(m\)'ye bölün.
+\end{alertblock}
+\end{frame}
+
+\soru{Kalanlar -- Örnek 29}
+{Bir doğal sayının \(6\) ile bölümünden kalan \(4\)'tür. Aynı sayının \(3\) ile bölümünden kalan kaçtır?}
+{\[A=6k+4=6k+3+1=3(2k+1)+1\]
+Kalan \(1\). \quad (Kontrol: \(10=3\cdot 3+1\), \ \(16=3\cdot 5+1\).)}
+
+\soru{Kalanlar -- Örnek 30}
+{\(a\)'nın \(7\) ile bölümünden kalan \(3\), \(b\)'ninki \(5\)'tir. \(a+b\), \ \(a\cdot b\) ve \(2a+3b\)'nin \(7\) ile bölümünden kalanlar kaçtır?}
+{\(a+b\): \(3+5=8=7+1\) \(\Rightarrow\) kalan \(1\)\\[2pt]
+\(a\cdot b\): \(3\cdot 5=15=14+1\) \(\Rightarrow\) kalan \(1\)\\[2pt]
+\(2a+3b\): \(6+15=21=7\cdot 3\) \(\Rightarrow\) kalan \(0\)}
+
+\soru{Kalanlar -- Örnek 31}
+{Bugün salı. \(100\) gün sonra hangi gün olur?}
+{Günler \(7\)'de bir tekrar eder: \(100=7\cdot 14+2\).\\[3pt]
+Salıdan \(2\) gün sonra: \textbf{perşembe}.}
+
+\soru{Birler Basamağı -- Örnek 32}
+{\(437\cdot 128+59\) sayısının birler basamağındaki rakam kaçtır?}
+{Yalnız birler basamakları (\(10\) ile bölümden kalanlar) önemlidir:
+\[7\cdot 8=56\to 6,\qquad 6+9=15\to 5\]
+Cevap: \(5\) \quad (Kontrol: \(55995\)).}
+
+\soru{Birler Basamağı -- Örnek 33}
+{\(2^{26}\) ve \(3^{2026}\) sayılarının birler basamağındaki rakamlar kaçtır?}
+{\(2\)'nin kuvvetleri: \(2,4,8,6,\ 2,4,8,6,\dots\) (\(4\)'lü tekrar). \(26=4\cdot 6+2\) \(\Rightarrow\) \(4\).\\[3pt]
+\(3\)'ün kuvvetleri: \(3,9,7,1,\dots\) (\(4\)'lü tekrar). \(2026=4\cdot 506+2\) \(\Rightarrow\) \(9\).}
+
+\begin{frame}[fragile]{Bilgisayar Köşesi: Python ile bölüm, kalan ve asallık}
+\begin{columns}[t]
+\column{0.46\textwidth}
+\begin{verbatim}
+>>> divmod(247, 9)
+(27, 4)
+>>> 247 // 9, 247 % 9
+(27, 4)
+>>> (3*5) % 7
+1
+>>> 2**26 % 10
+4
+\end{verbatim}
+\column{0.5\textwidth}
+\begin{verbatim}
+def asal_mi(n):
+    if n < 2:
+        return False
+    d = 2
+    while d * d <= n:
+        if n % d == 0:
+            return False
+        d += 1
+    return True
+\end{verbatim}
+\end{columns}
+\small \verb|while d * d <= n|: yalnızca \(\sqrt{n}\)'e kadar denenir. \ \verb|asal_mi(221)| \(\to\) \verb|False|.
+\end{frame}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(500\)'ün \(13\) ile bölümünde bölüm ve kalan?
+\item \(11\) ile bölündüğünde bölümü \(8\) olan en büyük doğal sayı? \(\star\)
+\item \(a\)'nın \(9\) ile kalanı \(5\), \(b\)'ninki \(7\). \(a+b\) ve \(a\cdot b\)'nin kalanları? \(\star\)
+\item \(2026\cdot 2027\)'nin birler basamağı?
+\item Bugün pazartesi; \(45\) gün sonra hangi gün? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(38\) ve \(6\)
+\item \(98\)
+\item \(3\) ve \(8\)
+\item \(2\)
+\item perşembe
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(11\) ile bölündüğünde bölümü \(8\) olan en büyük doğal sayı kaçtır?}
+{\(A=11\cdot 8+K\), \quad \(0\le K<11\).\\[3pt]
+\(A\)'nın en büyük olması için kalan en büyük olmalı: \(K=10\).
+\[A=88+10=98\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{\(a\)'nın \(9\) ile bölümünden kalan \(5\), \(b\)'ninki \(7\)'dir. \(a+b\) ve \(a\cdot b\)'nin \(9\) ile bölümünden kalanlar kaçtır?}
+{Kalanlarla işlem yapılır, sonuç tekrar \(9\)'a bölünür:\\[3pt]
+\(a+b\): \ \(5+7=12=9+3\) \(\Rightarrow\) kalan \(3\)\\[3pt]
+\(a\cdot b\): \ \(5\cdot 7=35=27+8\) \(\Rightarrow\) kalan \(8\)\\[3pt]
+(Kontrol: \(a=14,\ b=16\): \(30=27+3\), \ \(224=216+8\).)}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 5)}
+{Bugün pazartesi. \(45\) gün sonra hangi gündür?}
+{Günler \(7\)'de bir tekrar eder: \(45=7\cdot 6+3\).\\[3pt]
+\(6\) tam hafta sonra yine pazartesi; \(3\) gün ileri:
+\[\text{pazartesi}\rightarrow\text{salı}\rightarrow\text{çarşamba}\rightarrow\textbf{perşembe}\]}
+
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item \(1\) asal değil; \(2\) tek çift asal
+\item \(\sqrt{n}\)'e kadar asallarla test
+\item İki asalın toplamı tek \(\Rightarrow\) biri \(2\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item \(d(n)=\prod(\alpha_i+1)\)
+\item Tam bölen: \(2\,d(n)\)
+\item Tam kare: üsler çift; tam küp: üsler \(3\)'ün katı
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item \(A=B\cdot C+K\), \(0\le K<B\)
+\item Kalanlar toplanır / çarpılır, sonra tekrar bölünür
+\item Birler basamağı: \(10\)'a göre kalan
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Bölünebilme kuralları, EBOB ve EKOK
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

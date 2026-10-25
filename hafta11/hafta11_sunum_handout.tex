@@ -1,0 +1,636 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+
+\title[MMAT105 -- Hafta 11]{MMAT105 Genel Matematik}
+\subtitle{Hafta 11: Çarpanlara Ayırma ve Özdeşlikler}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hesaplayınız (köklü sayılar):}
+\begin{enumerate}
+\item \(\sqrt{50}+\sqrt{18}=?\)
+\item \(\sqrt{12}\cdot\sqrt{3}=?\)
+\item \(\dfrac{6}{\sqrt{3}}\) ifadesinin paydasını rasyonel yapınız.
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(5\sqrt{2}+3\sqrt{2}=8\sqrt{2}\)
+\item \(\sqrt{36}=6\)
+\item \(\dfrac{6\sqrt{3}}{3}=2\sqrt{3}\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Ortak çarpan parantezi
+\item Gruplandırma
+\item İki kare farkı
+\item Ardışık uygulama
+\item Sayısal hesaplarda kullanım
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Tam kare özdeşlikleri
+\item \(a^2+b^2\), \ \(x^2+\frac{1}{x^2}\)
+\item Eksik terimi bulma
+\item \(x^2+bx+c\), \ \(ax^2+bx+c\)
+\item Çarpım sıfır ise
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{10}
+\item Küp açılımları
+\item Küp toplamı / farkı
+\item \(a^3+b^3\) değer soruları
+\item Rasyonel ifadeleri sadeleştirme
+\item Tanım koşulları
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Ortak Çarpan, Gruplandırma, İki Kare Farkı}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Ortak Çarpan Parantezine Alma, Gruplandırma ve İki Kare Farkı
+\end{frame}
+
+\subsection{Ortak çarpan}
+\begin{frame}{Çarpanlara Ayırma ve Ortak Çarpan}
+\begin{block}{Kural}
+Bir ifadeyi \textbf{çarpanlarına ayırmak}, onu çarpım biçiminde yazmaktır. Her terimde bulunan ortak çarpan parantez dışına alınır:
+\[A\cdot x+A\cdot y=A\,(x+y),\qquad A\cdot x-A\cdot y=A\,(x-y)\]
+Ortak çarpan: katsayıların EBOB'u \(\times\) her terimde bulunan harflerin \textbf{en küçük} kuvvetleri.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(3x^2-3x=3x(x-1)\); \ parantez içindeki \(1\) unutulmamalı.
+\item \(b-a=-(a-b)\): işaret değiştirerek ortak çarpan yakalanır.
+\item Sonucu kontrol için parantezi geri dağıtın.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Ortak Çarpan -- Örnek 1}
+{\(3x^2-6x\) \ ve \ \(4a^2b-6ab^2\) ifadelerini çarpanlarına ayırınız.}
+{\(3x^2-6x\): ortak çarpan \(3x\) \(\Rightarrow\) \(3x(x-2)\).\\[3pt]
+\(4a^2b-6ab^2\): EBOB\((4,6)=2\), harflerde \(a\) ve \(b\) \(\Rightarrow\) ortak çarpan \(2ab\).
+\[4a^2b-6ab^2=2ab\,(2a-3b)\]}
+
+\soru{Ortak Çarpan -- Örnek 2}
+{\(ab+ac-ad\) \ ve \ \(x(a-b)-y(b-a)\) ifadelerini çarpanlarına ayırınız.}
+{\(ab+ac-ad=a\,(b+c-d)\).\\[3pt]
+\(b-a=-(a-b)\) olduğundan \(-y(b-a)=+y(a-b)\):
+\[x(a-b)+y(a-b)=(a-b)(x+y)\]}
+
+\subsection{Gruplandırma}
+\begin{frame}{Gruplandırma}
+\begin{block}{Kural}
+Terimler ikişerli gruplanır, her gruptan ortak çarpan alınır; ortaya çıkan ortak parantez tekrar dışarı alınır:
+\[ax+ay+bx+by=a(x+y)+b(x+y)=(x+y)(a+b)\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+İkinci grupta \(-\) işareti parantezin içine dağıtılırken işaretler değişir:
+\[ax-ay-bx+by=a(x-y)-b(x-y)=(x-y)(a-b)\]
+\end{alertblock}
+\end{frame}
+
+\soru{Gruplandırma -- Örnek 3}
+{\(ax+ay+bx+by\) ifadesini çarpanlarına ayırınız. \(a+b=5\) ve \(x+y=4\) ise ifadenin değeri kaçtır?}
+{\[ax+ay+bx+by=a(x+y)+b(x+y)=(x+y)(a+b)\]
+\[(x+y)(a+b)=4\cdot 5=20\]}
+
+\soru{Gruplandırma -- Örnek 4}
+{\(xy-2x+3y-6\) ifadesini çarpanlarına ayırınız.}
+{\[xy-2x+3y-6=x(y-2)+3(y-2)=(y-2)(x+3)\]
+Kontrol: \((y-2)(x+3)=xy+3y-2x-6\) \checkmark}
+
+\soru{Gruplandırma -- Örnek 5}
+{\(x^3+2x^2-3x-6\) ifadesini çarpanlarına ayırınız.}
+{\[x^3+2x^2-3x-6=x^2(x+2)-3(x+2)=(x+2)(x^2-3)\]
+Dikkat: \(-3x-6=-3(x+2)\); işaret parantezin içinde değişir. (Tam sayı katsayılarla bu kadar ayrılır.)}
+
+\subsection{İki kare farkı}
+\begin{frame}{İki Kare Farkı}
+\begin{block}{Özdeşlik}
+\[a^2-b^2=(a-b)(a+b)\]
+\(x^2-9=(x-3)(x+3)\), \quad \(4x^2-25=(2x-5)(2x+5)\)
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(a^2+b^2\) (iki kare \textbf{toplamı}) reel sayılarda bu yolla çarpanlarına ayrılmaz.
+\item \((a-b)^2\neq a^2-b^2\): \ \((a-b)^2=a^2-2ab+b^2\).
+\item Önce ortak çarpan: \(3x^2-12=3(x^2-4)=3(x-2)(x+2)\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{İki Kare Farkı -- Örnek 6}
+{\(x^2-49\), \ \ \(9a^2-4b^2\) \ ve \ \(25-x^2\) ifadelerini çarpanlarına ayırınız.}
+{\(x^2-49=x^2-7^2=(x-7)(x+7)\)\\[3pt]
+\(9a^2-4b^2=(3a)^2-(2b)^2=(3a-2b)(3a+2b)\)\\[3pt]
+\(25-x^2=5^2-x^2=(5-x)(5+x)\)}
+
+\soru{İki Kare Farkı -- Örnek 7}
+{\(2x^3-18x\) ifadesini çarpanlarına ayırınız.}
+{Önce ortak çarpan \(2x\):
+\[2x^3-18x=2x\,(x^2-9)=2x\,(x-3)(x+3)\]}
+
+\soru{Ardışık Uygulama -- Örnek 8}
+{\(x^4-16\) ifadesini çarpanlarına ayırınız.}
+{\(x^4=(x^2)^2\), \ \(16=4^2\):
+\[x^4-16=(x^2-4)(x^2+4)\]
+\(x^2-4\) yine iki kare farkı:
+\[x^4-16=(x-2)(x+2)(x^2+4)\]
+\(x^2+4\) iki kare toplamıdır, daha fazla ayrılmaz.}
+
+\soru{Sayısal Hesap -- Örnek 9}
+{\(101^2-99^2\) \ ve \ \(49\cdot 51\) işlemlerinin sonucu kaçtır?}
+{\(101^2-99^2=(101-99)(101+99)=2\cdot 200=400\)\\[4pt]
+\(49\cdot 51=(50-1)(50+1)=50^2-1^2=2500-1=2499\)}
+
+\soru{Sayısal Hesap -- Örnek 10}
+{\(2025^2-2024^2\) \ ve \ \((\sqrt{7}-\sqrt{3})(\sqrt{7}+\sqrt{3})\) işlemlerinin sonucu kaçtır?}
+{\(2025^2-2024^2=(2025-2024)(2025+2024)=1\cdot 4049=4049\)\\[4pt]
+\((\sqrt{7}-\sqrt{3})(\sqrt{7}+\sqrt{3})=(\sqrt{7})^2-(\sqrt{3})^2=7-3=4\)}
+
+\soru{İki Kare Farkı -- Örnek 11}
+{\(a-b=3\) ve \(a^2-b^2=27\) olduğuna göre \(a\) ve \(b\) kaçtır?}
+{\[a^2-b^2=(a-b)(a+b)\ \Rightarrow\ 27=3\,(a+b)\ \Rightarrow\ a+b=9\]
+\(a+b=9\) ve \(a-b=3\) taraf tarafa toplanır: \(2a=12\).
+\[a=6,\qquad b=3\]}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(5x^2y-10xy\) ifadesini çarpanlarına ayırınız.
+\item \(x^2-3x+xy-3y\) ifadesini çarpanlarına ayırınız. \(\star\)
+\item \(81-a^4\) ifadesini çarpanlarına ayırınız. \(\star\)
+\item \(102\cdot 98=?\) \(\star\)
+\item \(a+b=8\), \(a-b=2\) ise \(a^2-b^2=?\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(5xy(x-2)\)
+\item \((x-3)(x+y)\)
+\item \((3-a)(3+a)(9+a^2)\)
+\item \(9996\)
+\item \(16\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 2)}
+{\(x^2-3x+xy-3y\) ifadesini çarpanlarına ayırınız.}
+{İlk iki terimden \(x\), son iki terimden \(y\) parantezine alalım:
+\[x^2-3x+xy-3y=x(x-3)+y(x-3)\]
+Ortak parantez \((x-3)\):
+\[=(x-3)(x+y)\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(81-a^4\) ifadesini çarpanlarına ayırınız.}
+{\(81=9^2\), \ \(a^4=(a^2)^2\):
+\[81-a^4=(9-a^2)(9+a^2)\]
+\(9-a^2=3^2-a^2=(3-a)(3+a)\) yine iki kare farkı:
+\[81-a^4=(3-a)(3+a)(9+a^2)\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(102\cdot 98\) işleminin sonucu kaçtır?}
+{İki sayı \(100\)'e eşit uzaklıkta: \(102=100+2\), \ \(98=100-2\).
+\[102\cdot 98=(100+2)(100-2)=100^2-2^2\]
+\[=10000-4=9996\]}
+
+
+% =====================================================
+\section{Ders 2: Tam Kare ve Üç Terimli İfadeler}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Tam Kare Özdeşlikleri, Üç Terimli İfadeler ve Çarpım Sıfır Kuralı
+\end{frame}
+
+\subsection{Tam kare}
+\begin{frame}{Tam Kare Özdeşlikleri}
+\begin{block}{Özdeşlikler}
+\[(a+b)^2=a^2+2ab+b^2,\qquad (a-b)^2=a^2-2ab+b^2\]
+\[a^2+b^2=(a+b)^2-2ab=(a-b)^2+2ab,\qquad (a+b)^2-(a-b)^2=4ab\]
+\[x^2+\frac{1}{x^2}=\Big(x+\frac{1}{x}\Big)^2-2=\Big(x-\frac{1}{x}\Big)^2+2\qquad(x\neq 0)\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\((a+b)^2\neq a^2+b^2\): ortadaki \(2ab\) terimi unutulmamalı. \quad \((x+3)^2=x^2+6x+9\).
+\end{alertblock}
+\end{frame}
+
+\soru{Tam Kare -- Örnek 12}
+{\((x+5)^2\) \ ve \ \((2a-3b)^2\) ifadelerinin açılımını yazınız.}
+{\((x+5)^2=x^2+2\cdot x\cdot 5+5^2=x^2+10x+25\)\\[4pt]
+\((2a-3b)^2=(2a)^2-2\cdot 2a\cdot 3b+(3b)^2=4a^2-12ab+9b^2\)}
+
+\soru{Tam Kare -- Örnek 13}
+{\(103^2\) \ ve \ \(99^2\) sayılarını tam kare özdeşliği ile hesaplayınız.}
+{\(103^2=(100+3)^2=10000+600+9=10609\)\\[4pt]
+\(99^2=(100-1)^2=10000-200+1=9801\)}
+
+\soru{Tam Kare -- Örnek 14}
+{\(a+b=7\) ve \(a\cdot b=10\) olduğuna göre \(a^2+b^2\) kaçtır?}
+{\[(a+b)^2=a^2+2ab+b^2\ \Rightarrow\ a^2+b^2=(a+b)^2-2ab\]
+\[a^2+b^2=7^2-2\cdot 10=49-20=29\]
+(Kontrol: \(a=2,\ b=5\): \(4+25=29\).)}
+
+\soru{Tam Kare -- Örnek 15}
+{\(a-b=3\) ve \(a\cdot b=4\) olduğuna göre \(a^2+b^2\) kaçtır?}
+{\[(a-b)^2=a^2-2ab+b^2\ \Rightarrow\ a^2+b^2=(a-b)^2+2ab\]
+\[a^2+b^2=3^2+2\cdot 4=9+8=17\]
+(Kontrol: \(a=4,\ b=1\): \(16+1=17\).)}
+
+\soru{Tam Kare -- Örnek 16}
+{\((x+y)^2=49\) ve \((x-y)^2=9\) olduğuna göre \(x\cdot y\) kaçtır?}
+{\[(x+y)^2-(x-y)^2=4xy\]
+\[49-9=4xy\ \Rightarrow\ 4xy=40\ \Rightarrow\ xy=10\]}
+
+\soru{Tam Kare -- Örnek 17}
+{\(x+\dfrac{1}{x}=4\) olduğuna göre \(x^2+\dfrac{1}{x^2}\) kaçtır?}
+{Her iki tarafın karesi alınır; \(2\cdot x\cdot\frac{1}{x}=2\):
+\[\Big(x+\frac{1}{x}\Big)^2=x^2+2+\frac{1}{x^2}=16\]
+\[x^2+\frac{1}{x^2}=16-2=14\]}
+
+\soru{Eksik Terim -- Örnek 18}
+{\(x^2+6x+m\) bir tam kare ise \(m\) kaçtır? \(4x^2-kx+25\) bir tam kare ve \(k>0\) ise \(k\) kaçtır?}
+{\(x^2+6x+m=x^2+2\cdot x\cdot 3+3^2\) \(\Rightarrow\) \(m=9\), \ \((x+3)^2\).\\[4pt]
+\(4x^2-kx+25=(2x)^2-kx+5^2\), \ \(k>0\) \(\Rightarrow\) \((2x-5)^2\).\\[3pt]
+Orta terim: \(2\cdot 2x\cdot 5=20x\) \(\Rightarrow\) \(k=20\).}
+
+\subsection{Üç terimli ifadeler}
+\begin{frame}{Üç Terimli İfadeleri Çarpanlarına Ayırma}
+\begin{block}{\(x^2+bx+c\)}
+Çarpımı \(c\), toplamı \(b\) olan iki sayı (\(m\) ve \(n\)) bulunur:
+\[x^2+bx+c=(x+m)(x+n),\qquad m+n=b,\quad m\cdot n=c\]
+\end{block}
+\begin{block}{\(ax^2+bx+c\) (çapraz çarpım yöntemi)}
+\(ax^2\) ve \(c\) çarpanlarına ayrılıp alt alta yazılır; çapraz çarpımların toplamı \(bx\) olmalıdır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(c<0\) ise \(m\) ve \(n\) zıt işaretlidir; \(c>0\) ise ikisi de \(b\) ile aynı işaretlidir.
+\end{alertblock}
+\end{frame}
+
+\soru{Üç Terimli -- Örnek 19}
+{\(x^2+7x+12\) \ ve \ \(x^2-2x-15\) ifadelerini çarpanlarına ayırınız.}
+{\(x^2+7x+12\): \ çarpımı \(12\), toplamı \(7\) \(\Rightarrow\) \(3\) ve \(4\):
+\[x^2+7x+12=(x+3)(x+4)\]
+\(x^2-2x-15\): \ çarpımı \(-15\), toplamı \(-2\) \(\Rightarrow\) \(-5\) ve \(3\):
+\[x^2-2x-15=(x-5)(x+3)\]}
+
+\soru{Üç Terimli -- Örnek 20}
+{\(x^2-xy-6y^2\) ifadesini çarpanlarına ayırınız.}
+{\(y^2\) katsayısı \(-6\), \(xy\) katsayısı \(-1\): \ çarpımı \(-6\), toplamı \(-1\) \(\Rightarrow\) \(-3\) ve \(2\).
+\[x^2-xy-6y^2=(x-3y)(x+2y)\]
+Kontrol: \(x^2+2xy-3xy-6y^2\) \checkmark}
+
+\soru{Çapraz Çarpım -- Örnek 21}
+{\(2x^2+7x+3\) ifadesini çarpanlarına ayırınız.}
+{\begin{minipage}[t]{0.32\linewidth}
+\begin{tabular}{ccc}
+\(2x\) & & \(1\)\\
+\(x\) & & \(3\)
+\end{tabular}\\[4pt]
+\normalsize Çapraz: \(2x\cdot 3+x\cdot 1=7x\) \checkmark
+\end{minipage}\hfill
+\begin{minipage}[t]{0.6\linewidth}
+\(2x^2=2x\cdot x\), \ \(3=1\cdot 3\).
+\[2x^2+7x+3=(2x+1)(x+3)\]
+\end{minipage}}
+
+\soru{Çapraz Çarpım -- Örnek 22}
+{\(6x^2-x-2\) ifadesini çarpanlarına ayırınız.}
+{\begin{minipage}[t]{0.32\linewidth}
+\begin{tabular}{ccc}
+\(2x\) & & \(1\)\\
+\(3x\) & & \(-2\)
+\end{tabular}\\[4pt]
+\normalsize Çapraz: \(2x\cdot(-2)+3x\cdot 1=-x\) \checkmark
+\end{minipage}\hfill
+\begin{minipage}[t]{0.6\linewidth}
+\(6x^2=2x\cdot 3x\), \ \(-2=1\cdot(-2)\).
+\[6x^2-x-2=(2x+1)(3x-2)\]
+\end{minipage}}
+
+\subsection{Çarpım sıfır}
+\begin{frame}{Çarpım Sıfır ise}
+\begin{block}{Kural}
+\[A\cdot B=0\quad\Longleftrightarrow\quad A=0\ \ \text{veya}\ \ B=0\]
+Denklem bir tarafı \(0\) olacak biçimde düzenlenir, diğer taraf çarpanlarına ayrılır ve her çarpan ayrı ayrı sıfıra eşitlenir.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(x^2=4x\) denkleminde iki taraf \(x\)'e bölünürse \(x=0\) kökü kaybolur. Doğrusu: \(x^2-4x=x(x-4)=0\Rightarrow x=0\) veya \(x=4\).
+\end{alertblock}
+\end{frame}
+
+\soru{Çarpım Sıfır -- Örnek 23}
+{\(x^2-5x+6=0\) \ ve \ \(x^2-4x=0\) denklemlerinin çözüm kümelerini bulunuz.}
+{\(x^2-5x+6=(x-2)(x-3)=0\) \(\Rightarrow\) \(x=2\) veya \(x=3\): \ \(\{2,\,3\}\)\\[4pt]
+\(x^2-4x=x(x-4)=0\) \(\Rightarrow\) \(x=0\) veya \(x=4\): \ \(\{0,\,4\}\)}
+
+\soru{Çarpım Sıfır -- Örnek 24}
+{\(2x^2-x-3=0\) denkleminin çözüm kümesini bulunuz.}
+{Çapraz çarpım: \(2x^2=2x\cdot x\), \ \(-3=(-3)\cdot 1\); \ \(2x\cdot 1+x\cdot(-3)=-x\) \checkmark
+\[2x^2-x-3=(2x-3)(x+1)=0\]
+\(2x-3=0\Rightarrow x=\dfrac{3}{2}\), \quad \(x+1=0\Rightarrow x=-1\). \quad ÇK \(=\left\{-1,\ \dfrac{3}{2}\right\}\)}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \((3x-2)^2\) açılımını yazınız.
+\item \(a+b=6\), \(ab=7\) ise \(a^2+b^2=?\) \(\star\)
+\item \(x+\dfrac{1}{x}=5\) ise \(x^2+\dfrac{1}{x^2}=?\) \(\star\)
+\item \(x^2-x-12\) ifadesini çarpanlarına ayırınız.
+\item \(x^2+3x-10=0\) denkleminin çözüm kümesi? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(9x^2-12x+4\)
+\item \(22\)
+\item \(23\)
+\item \((x-4)(x+3)\)
+\item \(\{-5,\ 2\}\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(a+b=6\) ve \(a\cdot b=7\) olduğuna göre \(a^2+b^2\) kaçtır?}
+{\((a+b)^2=a^2+2ab+b^2\) özdeşliğinden:
+\[a^2+b^2=(a+b)^2-2ab\]
+\[a^2+b^2=6^2-2\cdot 7=36-14=22\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(x+\dfrac{1}{x}=5\) olduğuna göre \(x^2+\dfrac{1}{x^2}\) kaçtır?}
+{Karesi alınır; ortadaki terim \(2\cdot x\cdot\frac{1}{x}=2\):
+\[\Big(x+\frac{1}{x}\Big)^2=x^2+2+\frac{1}{x^2}=25\]
+\[x^2+\frac{1}{x^2}=25-2=23\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(x^2+3x-10=0\) denkleminin çözüm kümesini bulunuz.}
+{Çarpımı \(-10\), toplamı \(3\) olan iki sayı: \(5\) ve \(-2\).
+\[x^2+3x-10=(x+5)(x-2)=0\]
+\(x+5=0\Rightarrow x=-5\), \quad \(x-2=0\Rightarrow x=2\). \quad ÇK \(=\{-5,\ 2\}\)}
+
+
+% =====================================================
+\section{Ders 3: Küp Açılımları ve Rasyonel İfadeler}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Küp Açılımları, Küp Toplamı ve Farkı, Rasyonel İfadeleri Sadeleştirme
+\end{frame}
+
+\subsection{Küp açılımları}
+\begin{frame}{Küp Açılımları}
+\begin{block}{Özdeşlikler}
+\[(a+b)^3=a^3+3a^2b+3ab^2+b^3,\qquad (a-b)^3=a^3-3a^2b+3ab^2-b^3\]
+\[a^3+b^3=(a+b)(a^2-ab+b^2),\qquad a^3-b^3=(a-b)(a^2+ab+b^2)\]
+\[a^3+b^3=(a+b)^3-3ab(a+b),\qquad a^3-b^3=(a-b)^3+3ab(a-b)\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\((a+b)^3\neq a^3+b^3\). \quad \(a^3+b^3\) açılımının ikinci çarpanında orta terim \(-ab\)'dir (\(-2ab\) değil).
+\end{alertblock}
+\end{frame}
+
+\soru{Küp Açılımı -- Örnek 25}
+{\((x+2)^3\) \ ve \ \((a-1)^3\) ifadelerinin açılımını yazınız.}
+{\((x+2)^3=x^3+3\cdot x^2\cdot 2+3\cdot x\cdot 2^2+2^3=x^3+6x^2+12x+8\)\\[4pt]
+\((a-1)^3=a^3-3a^2+3a-1\)}
+
+\soru{Küp Toplamı / Farkı -- Örnek 26}
+{\(x^3-8\) \ ve \ \(27a^3+1\) ifadelerini çarpanlarına ayırınız.}
+{\(x^3-8=x^3-2^3=(x-2)(x^2+2x+4)\)\\[4pt]
+\(27a^3+1=(3a)^3+1^3=(3a+1)(9a^2-3a+1)\)}
+
+\soru{Küp Değer Sorusu -- Örnek 27}
+{\(a+b=5\) ve \(a\cdot b=3\) olduğuna göre \(a^3+b^3\) kaçtır?}
+{\[a^3+b^3=(a+b)^3-3ab(a+b)\]
+\[a^3+b^3=5^3-3\cdot 3\cdot 5=125-45=80\]
+İkinci yol: \(a^2+b^2=25-6=19\), \ \((a+b)(a^2-ab+b^2)=5\cdot(19-3)=80\).}
+
+\soru{Küp Değer Sorusu -- Örnek 28}
+{\(a-b=2\) ve \(a\cdot b=15\) olduğuna göre \(a^3-b^3\) kaçtır?}
+{\[a^3-b^3=(a-b)^3+3ab(a-b)\]
+\[a^3-b^3=2^3+3\cdot 15\cdot 2=8+90=98\]
+(Kontrol: \(a=5,\ b=3\): \(125-27=98\).)}
+
+\soru{Küp Değer Sorusu -- Örnek 29}
+{\(x+\dfrac{1}{x}=3\) olduğuna göre \(x^3+\dfrac{1}{x^3}\) kaçtır?}
+{\(a=x\), \(b=\frac{1}{x}\) alınırsa \(ab=1\):
+\[x^3+\frac{1}{x^3}=\Big(x+\frac{1}{x}\Big)^3-3\Big(x+\frac{1}{x}\Big)=27-9=18\]}
+
+\soru{Sayısal Hesap -- Örnek 30}
+{\(\dfrac{13^3-7^3}{6}\) işleminin sonucu kaçtır?}
+{\(13^3-7^3=(13-7)(13^2+13\cdot 7+7^2)\) ve \(13-7=6\):
+\[\frac{13^3-7^3}{6}=169+91+49=309\]}
+
+\subsection{Rasyonel ifadeler}
+\begin{frame}{Rasyonel İfadeleri Sadeleştirme}
+\begin{block}{Kural}
+\(\dfrac{P}{Q}\) ifadesi \(Q\neq 0\) için tanımlıdır. Pay ve payda çarpanlarına ayrılır, \textbf{ortak çarpanlar} sadeleştirilir:
+\[\frac{A\cdot C}{B\cdot C}=\frac{A}{B}\qquad(B\neq 0,\ C\neq 0)\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Yalnız \textbf{çarpanlar} sadeleşir, terimler sadeleşmez: \(\dfrac{x+3}{x}\neq 3\).
+\item Tanım koşulu sadeleştirmeden \textbf{önce}, ilk paydadan yazılır; sadeleşen çarpan da koşula girer.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Sadeleştirme -- Örnek 31}
+{\(\dfrac{x^2-9}{x^2+x-6}\) ifadesini sadeleştiriniz.}
+{\[\frac{x^2-9}{x^2+x-6}=\frac{(x-3)(x+3)}{(x+3)(x-2)}=\frac{x-3}{x-2}\]
+Tanım koşulu (ilk paydadan): \(x\neq -3\) ve \(x\neq 2\).}
+
+\soru{Sadeleştirme -- Örnek 32}
+{\(\dfrac{x^2-4x+4}{x^2-4}\) ifadesini sadeleştiriniz.}
+{\[\frac{x^2-4x+4}{x^2-4}=\frac{(x-2)^2}{(x-2)(x+2)}=\frac{x-2}{x+2}\]
+Tanım koşulu: \(x\neq 2\) ve \(x\neq -2\).}
+
+\soru{Sadeleştirme -- Örnek 33}
+{\(\dfrac{x^3-1}{x^2-1}\) ifadesini sadeleştiriniz.}
+{\[\frac{x^3-1}{x^2-1}=\frac{(x-1)(x^2+x+1)}{(x-1)(x+1)}=\frac{x^2+x+1}{x+1}\]
+Tanım koşulu: \(x\neq 1\) ve \(x\neq -1\).}
+
+\soru{Karma Sadeleştirme -- Örnek 34}
+{\(\dfrac{x^2-4}{x^2-2x}:\dfrac{x^2+2x+1}{x^2+x}\) ifadesinin en sade hali nedir?}
+{\(\dfrac{(x-2)(x+2)}{x(x-2)}=\dfrac{x+2}{x}\), \quad \(\dfrac{(x+1)^2}{x(x+1)}=\dfrac{x+1}{x}\)\\[3pt]
+Bölme: ikinci kesir ters çevrilip çarpılır:
+\[\frac{x+2}{x}\cdot\frac{x}{x+1}=\frac{x+2}{x+1}\qquad(x\neq 0,\ 2,\ -1)\]}
+
+\begin{frame}[fragile]{Bilgisayar Köşesi: Python (sympy) ile açılım ve çarpanlar}
+\begin{columns}[t]
+\column{0.48\textwidth}
+\begin{verbatim}
+>>> from sympy import *
+>>> x = symbols('x')
+>>> expand((x + 2)**3)
+x**3 + 6*x**2 + 12*x + 8
+>>> factor(x**4 - 16)
+(x - 2)*(x + 2)*(x**2 + 4)
+\end{verbatim}
+\column{0.48\textwidth}
+\begin{verbatim}
+>>> factor(6*x**2 - x - 2)
+(2*x + 1)*(3*x - 2)
+>>> cancel((x**2-9)/(x**2+x-6))
+(x - 3)/(x - 2)
+\end{verbatim}
+\end{columns}
+\small \verb|cancel| tanım koşulunu yazmaz: \(x\neq -3\) koşulunu siz eklemelisiniz.
+\end{frame}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \((x-3)^3\) açılımını yazınız.
+\item \(a+b=4\), \(ab=2\) ise \(a^3+b^3=?\) \(\star\)
+\item \(x^3+64\) ifadesini çarpanlarına ayırınız.
+\item \(\dfrac{x^2-16}{x^2-x-12}\) ifadesini sadeleştiriniz. \(\star\)
+\item \(x-\dfrac{1}{x}=2\) ise \(x^3-\dfrac{1}{x^3}=?\) \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(x^3-9x^2+27x-27\)
+\item \(40\)
+\item \((x+4)(x^2-4x+16)\)
+\item \(\dfrac{x+4}{x+3}\), \ \(x\neq 4,\ -3\)
+\item \(14\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(a+b=4\) ve \(a\cdot b=2\) olduğuna göre \(a^3+b^3\) kaçtır?}
+{\[a^3+b^3=(a+b)^3-3ab(a+b)\]
+\[a^3+b^3=4^3-3\cdot 2\cdot 4=64-24=40\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{\(\dfrac{x^2-16}{x^2-x-12}\) ifadesini sadeleştiriniz.}
+{Pay: iki kare farkı. \ Payda: çarpımı \(-12\), toplamı \(-1\) \(\Rightarrow\) \(-4\) ve \(3\).
+\[\frac{x^2-16}{x^2-x-12}=\frac{(x-4)(x+4)}{(x-4)(x+3)}=\frac{x+4}{x+3}\]
+Tanım koşulu: \(x\neq 4\) ve \(x\neq -3\).}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 5)}
+{\(x-\dfrac{1}{x}=2\) olduğuna göre \(x^3-\dfrac{1}{x^3}\) kaçtır?}
+{\(a=x\), \(b=\frac{1}{x}\), \ \(ab=1\) ile \(a^3-b^3=(a-b)^3+3ab(a-b)\):
+\[x^3-\frac{1}{x^3}=\Big(x-\frac{1}{x}\Big)^3+3\Big(x-\frac{1}{x}\Big)=8+6=14\]}
+
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item Önce ortak çarpan
+\item Gruplandırma: ortak parantez
+\item \(a^2-b^2=(a-b)(a+b)\)
+\item \(a^2+b^2\) ayrılmaz
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item \((a\pm b)^2=a^2\pm 2ab+b^2\)
+\item \(a^2+b^2=(a+b)^2-2ab\)
+\item \(x^2+bx+c\): çarpım \(c\), toplam \(b\)
+\item \(AB=0\Rightarrow A=0\) veya \(B=0\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item \(a^3\pm b^3=(a\pm b)(a^2\mp ab+b^2)\)
+\item \(a^3+b^3=(a+b)^3-3ab(a+b)\)
+\item Yalnız çarpanlar sadeleşir; tanım koşulunu yazın
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Oran ve orantı, ortalamalar
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

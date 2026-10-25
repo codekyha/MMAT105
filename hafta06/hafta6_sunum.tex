@@ -1,0 +1,683 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 6]{MMAT105 Genel Matematik}
+\subtitle{Hafta 6: Birinci Dereceden İki Bilinmeyenli Denklemler ve Denklem Sistemleri}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Çözünüz (Hafta 5):}
+\begin{enumerate}
+\item \(3(x-2)+5=2x+7\) ise \(x=?\)
+\item \(\dfrac{x}{2}+\dfrac{x}{3}=10\) ise \(x=?\)
+\item Bir sayının \(3\) katının \(4\) fazlası, aynı sayının \(5\) katının \(6\) eksiğine eşittir. Sayı kaçtır?
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(3x-1=2x+7\Rightarrow x=8\)
+\item \(\dfrac{5x}{6}=10\Rightarrow x=12\)
+\item \(3x+4=5x-6\Rightarrow x=5\)
+\end{enumerate}
+\end{columns}
+\vspace{6pt}
+\begin{block}{Bu hafta}
+Bilinmeyen sayısı ikiye çıkıyor: \(x\) ve \(y\). Tek bir denklem yetmez, \textbf{iki denklem} gerekir.
+\end{block}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item \(ax+by+c=0\) biçimi
+\item Sıralı ikili, çözüm kontrolü
+\item Denklem sistemi
+\item Yok etme yöntemi
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{4}
+\item Yerine koyma yöntemi
+\item Kesirli / ondalıklı sistemler
+\item Simetrik sistemler, \(x+y\), \(x\cdot y\)
+\item Özel durumlar, parametre
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{8}
+\item Sözel ifadeden sisteme
+\item Para, bilet, puan
+\item İki basamaklı sayılar
+\item Bacak sayısı, yaş (giriş)
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: İki Bilinmeyenli Denklem ve Yok Etme}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize İki Bilinmeyenli Denklem, Denklem Sistemi, Yok Etme Yöntemi
+\end{frame}
+
+\subsection{İki bilinmeyenli denklem}
+\begin{frame}{Birinci Dereceden İki Bilinmeyenli Denklem}
+\begin{block}{Tanım}
+\(a,b,c\) gerçek sayılar, \(a\neq 0\) ve \(b\neq 0\) olmak üzere
+\[ax+by+c=0\]
+biçimindeki denkleme \textbf{birinci dereceden iki bilinmeyenli denklem} denir.
+\begin{itemize}
+\item Denklemi sağlayan her \((x,y)\) \textbf{sıralı ikilisi} bir çözümdür.
+\item Tek bir denklemin \textbf{sonsuz sayıda} çözümü vardır: \(x\)'e bir değer verilir, \(y\) bulunur.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\((x,y)\) sıralıdır: \((2,3)\neq(3,2)\). \ İlk bileşen her zaman \(x\), ikinci bileşen \(y\)'dir.
+\end{alertblock}
+\end{frame}
+
+\soru{İki Bilinmeyenli Denklem -- Örnek 1}
+{\(2x+y=7\) denkleminin üç çözümünü yazınız. \((3,2)\) bir çözüm müdür?}
+{\(y=7-2x\): \quad \(x=0\Rightarrow y=7\), \ \(x=1\Rightarrow y=5\), \ \(x=2\Rightarrow y=3\)\\[3pt]
+Çözümler: \((0,7),\ (1,5),\ (2,3),\ \dots\) \ (sonsuz tane)\\[3pt]
+\((3,2)\): \(2\cdot 3+2=8\neq 7\) \(\Rightarrow\) çözüm \textbf{değildir}. \ (Oysa \((2,3)\) çözümdür!)}
+
+\soru{Çözüm Kontrolü -- Örnek 2}
+{\((3,-1)\), \ \((-2,4)\), \ \((1,2)\) ikililerinden hangileri \(3x+2y-7=0\) denklemini sağlar?}
+{\((3,-1)\): \ \(9-2-7=0\) \ \checkmark\\[2pt]
+\((-2,4)\): \ \(-6+8-7=-5\neq 0\) \ \(\times\)\\[2pt]
+\((1,2)\): \ \(3+4-7=0\) \ \checkmark\\[4pt]
+Cevap: \((3,-1)\) ve \((1,2)\).}
+
+\soru{Çözüm Kontrolü -- Örnek 3}
+{\((2,k)\) ikilisi \(5x-3y=1\) denklemini sağlıyorsa \(k\) kaçtır?}
+{\(x=2,\ y=k\) yazılır:
+\[5\cdot 2-3k=1\ \Rightarrow\ 10-3k=1\ \Rightarrow\ 3k=9\ \Rightarrow\ k=3\]}
+
+\soru{Çözüm Kontrolü -- Örnek 4}
+{\((a,\ a+1)\) ikilisi \(4x-y=8\) denkleminin bir çözümü ise \(a\) kaçtır?}
+{\[4a-(a+1)=8\ \Rightarrow\ 3a-1=8\ \Rightarrow\ a=3\]
+Çözüm ikilisi: \((3,4)\). \ Kontrol: \(12-4=8\).}
+
+\soru{Doğal Sayı Çözümleri -- Örnek 5}
+{\(2x+3y=24\) denklemini sağlayan kaç tane \((x,y)\) doğal sayı ikilisi vardır? \ (\(\mathbb{N}=\{0,1,2,\dots\}\))}
+{\(2x=24-3y\) çift olmalı \(\Rightarrow\) \(y\) çift; \ \(3y\le 24\Rightarrow y\le 8\).\\[3pt]
+\(y=0,2,4,6,8\ \Rightarrow\ x=12,9,6,3,0\)\\[3pt]
+\((12,0),(9,2),(6,4),(3,6),(0,8)\) \(\Rightarrow\) \textbf{5 tane}.}
+
+\subsection{Denklem sistemi ve yok etme}
+\begin{frame}{Denklem Sistemi ve Yok Etme Yöntemi}
+\begin{block}{Denklem sistemi}
+\[\begin{cases}a_1x+b_1y=c_1\\ a_2x+b_2y=c_2\end{cases}\]
+Sistemin çözümü: \textbf{iki denklemi birlikte} sağlayan \((x,y)\) ikilisidir.
+\end{block}
+\begin{block}{Yok etme yöntemi}
+\begin{enumerate}
+\item Bir bilinmeyenin katsayılarını (gerekirse denklemleri sabitlerle çarparak) eşit ya da zıt yap.
+\item Denklemleri taraf tarafa topla (zıt ise) ya da çıkar (eşit ise): bir bilinmeyen yok olur.
+\item Bulunan değeri denklemlerden birinde yerine koy; sonra iki denklemde de kontrol et.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Yok Etme -- Sık Yapılan Hatalar}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Denklemi bir sayıyla çarparken \textbf{sağ tarafı unutmak}: \(\ 2\cdot(x-y=3)\Rightarrow 2x-2y=\mathbf{6}\).
+\item Çıkarırken işareti dağıtmamak: \((2x+3y)-(2x-y)=3y+y=4y\) \ (\(2y\) değil).
+\item Yalnızca \(x\)'i bulup durmak: soru genellikle \(y\)'yi, \(x+y\)'yi ya da \(x\cdot y\)'yi sorar.
+\item Kontrolü atlamak: bulunan ikili \textbf{iki denklemi de} sağlamalıdır.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Yok Etme -- Örnek 6}
+{\(\begin{cases}x+y=12\\ x-y=4\end{cases}\) \quad sisteminin çözümü nedir?}
+{\(y\)'lerin katsayıları zıt: taraf tarafa toplayalım.
+\[2x=16\ \Rightarrow\ x=8,\qquad 8+y=12\ \Rightarrow\ y=4\]
+Çözüm: \((8,4)\). \ Kontrol: \(8-4=4\) \checkmark}
+
+\soru{Yok Etme -- Örnek 7}
+{\(\begin{cases}2x+3y=13\\ 2x-y=1\end{cases}\) \quad sisteminin çözümü nedir?}
+{\(x\)'lerin katsayıları eşit: taraf tarafa çıkaralım.
+\[(2x+3y)-(2x-y)=13-1\ \Rightarrow\ 4y=12\ \Rightarrow\ y=3\]
+\(2x-3=1\Rightarrow x=2\). \quad Çözüm: \((2,3)\).}
+
+\soru{Yok Etme -- Örnek 8}
+{\(\begin{cases}3x+2y=16\\ x-2y=0\end{cases}\) \quad ise \(x\) ve \(y\) kaçtır?}
+{Topla: \(4x=16\Rightarrow x=4\).\\[3pt]
+\(4-2y=0\Rightarrow y=2\). \quad Çözüm: \((4,2)\).\\[3pt]
+Kontrol: \(3\cdot 4+2\cdot 2=16\) \checkmark}
+
+\soru{Yok Etme -- Örnek 9 (Çarparak eşitleme)}
+{\(\begin{cases}3x+4y=10\\ 2x-3y=1\end{cases}\) \quad sisteminin çözümü nedir?}
+{\(y\)'yi yok edelim: 1. denklem \(\times 3\), 2. denklem \(\times 4\):
+\[9x+12y=30,\qquad 8x-12y=4\]
+Topla: \(17x=34\Rightarrow x=2\); \quad \(6+4y=10\Rightarrow y=1\). \quad Çözüm: \((2,1)\).}
+
+\soru{Yok Etme -- Örnek 10}
+{\(\begin{cases}5x+2y=4\\ 3x-4y=18\end{cases}\) \quad sisteminin çözümü nedir?}
+{1. denklem \(\times 2\): \(10x+4y=8\). \ 2. denklemle topla:
+\[13x=26\ \Rightarrow\ x=2\]
+\(10+2y=4\Rightarrow y=-3\). \quad Çözüm: \((2,-3)\).\\[2pt]
+Kontrol: \(6-4\cdot(-3)=18\) \checkmark}
+
+\soru{Önce Düzenle -- Örnek 11}
+{\(\begin{cases}2(x+1)-y=5\\ x+3(y-2)=-1\end{cases}\) \quad sisteminin çözümü nedir?}
+{Düzenle: \(2x-y=3\) \ ve \ \(x+3y=5\).\\[3pt]
+1. denklem \(\times 3\): \(6x-3y=9\); \ topla: \(7x=14\Rightarrow x=2\).\\[3pt]
+\(4-y=3\Rightarrow y=1\). \quad Çözüm: \((2,1)\).}
+
+\soru{Yok Etme -- Örnek 12}
+{\(\begin{cases}4x-3y=-1\\ 6x+5y=27\end{cases}\) \quad ise \(x\cdot y\) kaçtır?}
+{\(x\)'i yok edelim: 1. denklem \(\times 3\), 2. denklem \(\times 2\):
+\[12x-9y=-3,\qquad 12x+10y=54\]
+Çıkar: \(19y=57\Rightarrow y=3\); \quad \(4x-9=-1\Rightarrow x=2\).
+\[x\cdot y=2\cdot 3=6\]}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \((-1,m)\) ikilisi \(3x+2y=5\) denklemini sağlıyorsa \(m=?\)
+\item \(x+y=9\), \ \(x-y=3\) ise \((x,y)=?\)
+\item \(3x-y=7\), \ \(x+y=5\) ise \((x,y)=?\) \(\star\)
+\item \(2x+5y=1\), \ \(3x-2y=11\) ise \((x,y)=?\) \(\star\)
+\item \(x+2y=10\) denklemini sağlayan kaç \((x,y)\) doğal sayı ikilisi vardır? \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(m=4\)
+\item \((6,3)\)
+\item \((3,2)\)
+\item \((3,-1)\)
+\item \(6\) \ (\(y=0,1,\dots,5\))
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(\begin{cases}3x-y=7\\ x+y=5\end{cases}\) \quad sisteminin çözümü nedir?}
+{\(y\)'lerin katsayıları zıt (\(-1\) ve \(+1\)): taraf tarafa toplayalım.
+\[(3x-y)+(x+y)=7+5\ \Rightarrow\ 4x=12\ \Rightarrow\ x=3\]
+\(3+y=5\Rightarrow y=2\). \quad Çözüm: \((3,2)\).\\[3pt]
+Kontrol: \(3\cdot 3-2=7\) \checkmark, \ \(3+2=5\) \checkmark}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(\begin{cases}2x+5y=1\\ 3x-2y=11\end{cases}\) \quad sisteminin çözümü nedir?}
+{\(y\)'yi yok edelim: 1. denklem \(\times 2\), 2. denklem \(\times 5\):
+\[4x+10y=2,\qquad 15x-10y=55\]
+Topla: \(19x=57\Rightarrow x=3\). \quad \(6+5y=1\Rightarrow 5y=-5\Rightarrow y=-1\).\\[3pt]
+Çözüm: \((3,-1)\). \ Kontrol: \(9-2\cdot(-1)=11\) \checkmark}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(x+2y=10\) denklemini sağlayan kaç \((x,y)\) doğal sayı ikilisi vardır?}
+{\(x=10-2y\ge 0\) olmalı \(\Rightarrow\) \(2y\le 10\Rightarrow y\le 5\).\\[3pt]
+\(y=0,1,2,3,4,5\ \Rightarrow\ x=10,8,6,4,2,0\)\\[3pt]
+\((10,0),(8,1),(6,2),(4,3),(2,4),(0,5)\) \(\Rightarrow\) \textbf{6 tane}.}
+
+% =====================================================
+\section{Ders 2: Yerine Koyma, Özel Durumlar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Yerine Koyma Yöntemi, Kısa Yollar ve Özel Durumlar
+\end{frame}
+
+\subsection{Yerine koyma}
+\begin{frame}{Yerine Koyma Yöntemi}
+\begin{block}{Adımlar}
+\begin{enumerate}
+\item Denklemlerden birinde bir bilinmeyeni yalnız bırak: ör. \(y=\dots\)
+\item Bu ifadeyi \textbf{diğer} denklemde yerine koy: tek bilinmeyenli denklem elde edilir.
+\item Çöz, sonra bulunan değeri geri koyarak ikinci bilinmeyeni bul.
+\end{enumerate}
+Bir bilinmeyenin katsayısı \(1\) veya \(-1\) ise bu yöntem hızlıdır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Yerine koyarken \textbf{parantez} kullanın: \(3x+2y\) içinde \(y=2x-1\) \(\Rightarrow\) \(3x+2(2x-1)\), \ \(3x+4x-1\) değil!\\
+İfadeyi elde ettiğiniz denklemin kendisine geri koymayın (\(0=0\) çıkar, bilgi vermez).
+\end{alertblock}
+\end{frame}
+
+\soru{Yerine Koyma -- Örnek 13}
+{\(\begin{cases}y=2x-1\\ 3x+2y=12\end{cases}\) \quad sisteminin çözümü nedir?}
+{\[3x+2(2x-1)=12\ \Rightarrow\ 7x-2=12\ \Rightarrow\ x=2\]
+\(y=2\cdot 2-1=3\). \quad Çözüm: \((2,3)\).}
+
+\soru{Yerine Koyma -- Örnek 14}
+{\(\begin{cases}x-3y=1\\ 2x-5y=4\end{cases}\) \quad sisteminin çözümü nedir?}
+{1. denklemden \(x=3y+1\):
+\[2(3y+1)-5y=4\ \Rightarrow\ y+2=4\ \Rightarrow\ y=2\]
+\(x=3\cdot 2+1=7\). \quad Çözüm: \((7,2)\).}
+
+\soru{Yerine Koyma -- Örnek 15}
+{\(\begin{cases}x=2y\\ 3x+y=21\end{cases}\) \quad ise \(x+y\) kaçtır?}
+{\[3(2y)+y=21\ \Rightarrow\ 7y=21\ \Rightarrow\ y=3,\quad x=6\]
+\[x+y=9\]}
+
+\subsection{Kesirli ve ondalıklı katsayılar}
+\begin{frame}{Kesirli ve Ondalıklı Katsayılar}
+\begin{block}{Önce temizle}
+\begin{itemize}
+\item \textbf{Kesirli:} Her denklemi kendi paydalarının EKOK'u ile çarp.
+\item \textbf{Ondalıklı:} Her denklemi \(10\), \(100\), \dots\ ile çarp.
+\end{itemize}
+Sonra yok etme ya da yerine koyma ile çöz.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Çarparken \textbf{her terimi} (sağ taraf dahil) çarpın: \(\dfrac{x}{2}+\dfrac{y}{3}=4\ \xrightarrow{\ \times 6\ }\ 3x+2y=24\) \ (\(3x+2y=4\) değil).
+\end{alertblock}
+\end{frame}
+
+\soru{Kesirli Katsayılar -- Örnek 16}
+{\(\begin{cases}\dfrac{x}{2}+\dfrac{y}{3}=4\\[8pt] \dfrac{x}{4}-\dfrac{y}{6}=0\end{cases}\) \quad sisteminin çözümü nedir?}
+{1. denklem \(\times 6\): \(3x+2y=24\); \quad 2. denklem \(\times 12\): \(3x-2y=0\).\\[3pt]
+Topla: \(6x=24\Rightarrow x=4\); \quad \(12+2y=24\Rightarrow y=6\).\\[3pt]
+Çözüm: \((4,6)\). \ Kontrol: \(2+2=4\), \ \(1-1=0\) \checkmark}
+
+\soru{Ondalıklı Katsayılar -- Örnek 17}
+{\(\begin{cases}0{,}2x+0{,}5y=1{,}9\\ 0{,}3x-0{,}1y=0{,}3\end{cases}\) \quad sisteminin çözümü nedir?}
+{\(\times 10\): \ \(2x+5y=19\) \ ve \ \(3x-y=3\ \Rightarrow\ y=3x-3\).
+\[2x+5(3x-3)=19\ \Rightarrow\ 17x=34\ \Rightarrow\ x=2\]
+\(y=3\cdot 2-3=3\). \quad Çözüm: \((2,3)\).}
+
+\subsection{Simetrik sistemler}
+\begin{frame}{Kısa Yol: Simetrik Sistemler}
+\begin{block}{Katsayılar yer değiştirmişse}
+\[\begin{cases}ax+by=m\\ bx+ay=n\end{cases}\quad(a\neq b)\]
+\begin{itemize}
+\item Topla: \((a+b)(x+y)=m+n\ \Rightarrow\ x+y=\dfrac{m+n}{a+b}\) \quad (\(a+b\neq 0\))
+\item Çıkar: \((a-b)(x-y)=m-n\ \Rightarrow\ x-y=\dfrac{m-n}{a-b}\)
+\end{itemize}
+Sonra \(x+y\) ve \(x-y\)'den \(x\) ve \(y\) bulunur: \(x=\dfrac{(x+y)+(x-y)}{2}\).
+\end{block}
+\begin{alertblock}{İpucu}
+Soru \(x+y\), \(x-y\) ya da \(x\cdot y\) istiyorsa önce denklemleri toplamayı / çıkarmayı deneyin; çoğu zaman \(x\) ve \(y\)'yi tek tek bulmaya gerek kalmaz.
+\end{alertblock}
+\end{frame}
+
+\soru{Simetrik Sistem -- Örnek 18}
+{\(\begin{cases}3x+2y=12\\ 2x+3y=13\end{cases}\) \quad sisteminin çözümü nedir?}
+{Topla: \(5x+5y=25\Rightarrow x+y=5\).\\[3pt]
+Çıkar: \(x-y=-1\).\\[3pt]
+\(2x=5+(-1)=4\Rightarrow x=2\), \ \(y=3\). \quad Çözüm: \((2,3)\).}
+
+\soru{Simetrik Sistem -- Örnek 19}
+{\(\begin{cases}7x+4y=37\\ 4x+7y=40\end{cases}\) \quad ise \(x\cdot y\) kaçtır?}
+{Topla: \(11(x+y)=77\Rightarrow x+y=7\).\\[3pt]
+Çıkar: \(3(x-y)=-3\Rightarrow x-y=-1\).\\[3pt]
+\(x=3\), \ \(y=4\) \(\Rightarrow\) \(x\cdot y=12\).}
+
+\soru{İfade İstenmesi -- Örnek 20}
+{\(2x+y=11\) ve \(x+2y=7\) olduğuna göre \(x+y\) kaçtır?}
+{\(x\) ve \(y\)'yi bulmadan, iki denklemi toplayalım:
+\[3x+3y=18\ \Rightarrow\ x+y=6\]
+(İstenirse: çıkarınca \(x-y=4\), buradan \(x=5,\ y=1\).)}
+
+\soru{İfade İstenmesi -- Örnek 21}
+{\(x+y=8\) ve \(x-y=2\) olduğuna göre \(x\cdot y\) ve \(\dfrac{x}{y}\) kaçtır?}
+{Topla: \(2x=10\Rightarrow x=5\); \quad \(y=3\).
+\[x\cdot y=15,\qquad \frac{x}{y}=\frac{5}{3}\]}
+
+\subsection{Özel durumlar}
+\begin{frame}{Özel Durumlar: Kaç Çözüm Var?}
+\begin{block}{\(a_1x+b_1y=c_1\), \ \(a_2x+b_2y=c_2\) sistemi \quad (oranlar tanımlı)}
+\[\renewcommand{\arraystretch}{1.2}
+\begin{array}{lll}
+\text{Koşul} & \text{Çözüm sayısı} & \text{Doğrular}\\\hline
+\dfrac{a_1}{a_2}\neq\dfrac{b_1}{b_2} & \text{tek çözüm} & \text{kesişen}\\[10pt]
+\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}\neq\dfrac{c_1}{c_2} & \text{çözüm yok} & \text{paralel}\\[10pt]
+\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}=\dfrac{c_1}{c_2} & \text{sonsuz çözüm} & \text{çakışık}
+\end{array}\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+İki denklemi de \textbf{aynı biçimde} (\(ax+by=c\)) yazın; \(x\) katsayısını \(x\) katsayısıyla, \(y\)'yi \(y\)'yle, sabiti sabitle oranlayın. Tek çözümde \(\frac{c_1}{c_2}\)'ye bakmaya gerek yoktur.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Grafik Yorumu: Her Denklem Bir Doğrudur}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.55]
+\draw[->,gray] (-0.5,0)--(5,0) node[below]{\scriptsize \(x\)};
+\draw[->,gray] (0,-1.5)--(0,5) node[left]{\scriptsize \(y\)};
+\draw[thick,anamavi] (-0.5,4.5)--(4.5,-0.5);
+\draw[thick,uyarikirmizi] (1,-1)--(5,3);
+\fill (3,1) circle (3pt);
+\node[above right] at (3,1) {\scriptsize \((3,1)\)};
+\end{tikzpicture}\\
+\textbf{Kesişen}: tek çözüm\\
+{\small \(x+y=4\), \ \(x-y=2\)}
+\column{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.55]
+\draw[->,gray] (-0.5,0)--(5,0) node[below]{\scriptsize \(x\)};
+\draw[->,gray] (0,-1.5)--(0,5) node[left]{\scriptsize \(y\)};
+\draw[thick,anamavi] (-0.5,4.5)--(4.5,-0.5);
+\draw[thick,uyarikirmizi] (-0.5,1.5)--(2.5,-1.5);
+\end{tikzpicture}\\
+\textbf{Paralel}: çözüm yok\\
+{\small \(x+y=4\), \ \(x+y=1\)}
+\column{0.32\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.55]
+\draw[->,gray] (-0.5,0)--(5,0) node[below]{\scriptsize \(x\)};
+\draw[->,gray] (0,-1.5)--(0,5) node[left]{\scriptsize \(y\)};
+\draw[line width=3pt,uyarikirmizi!50] (-0.5,4.5)--(4.5,-0.5);
+\draw[thick,anamavi] (-0.5,4.5)--(4.5,-0.5);
+\end{tikzpicture}\\
+\textbf{Çakışık}: sonsuz çözüm\\
+{\small \(x+y=4\), \ \(2x+2y=8\)}
+\end{columns}
+\vspace{6pt}
+\begin{block}{Sezgi}
+Bir denklemin çözümleri bir doğru oluşturur. Sistemin çözümü, iki doğrunun \textbf{ortak noktalarıdır}.
+\end{block}
+\end{frame}
+
+\soru{Özel Durumlar -- Örnek 22}
+{Aşağıdaki sistemlerin kaç çözümü vardır?\\
+(a) \(2x-3y=5,\ 4x-6y=10\) \quad (b) \(2x-3y=5,\ 4x-6y=7\) \quad (c) \(2x-3y=5,\ x+y=5\)}
+{(a) \(\frac{2}{4}=\frac{-3}{-6}=\frac{5}{10}=\frac12\) \(\Rightarrow\) \textbf{sonsuz} çözüm (çakışık)\\[3pt]
+(b) \(\frac{2}{4}=\frac{-3}{-6}=\frac12\neq\frac{5}{7}\) \(\Rightarrow\) çözüm \textbf{yok} (paralel)\\[3pt]
+(c) \(\frac{2}{1}\neq\frac{-3}{1}\) \(\Rightarrow\) \textbf{tek} çözüm: \((4,1)\)}
+
+\soru{Parametreli Soru -- Örnek 23}
+{\(\begin{cases}3x+my=5\\ 6x+4y=7\end{cases}\) \quad sisteminin çözümü yoksa \(m\) kaçtır?}
+{Çözüm yok \(\Rightarrow\) \(\dfrac{3}{6}=\dfrac{m}{4}\neq\dfrac{5}{7}\).
+\[\frac{m}{4}=\frac12\ \Rightarrow\ m=2\]
+Kontrol: \(\frac12\neq\frac57\) \checkmark \ (Sistem: \(3x+2y=5\) ve \(3x+2y=3{,}5\): çelişki.)}
+
+\soru{Parametreli Soru -- Örnek 24}
+{\(\begin{cases}2x-y=3\\ ax+3y=b\end{cases}\) \quad sisteminin sonsuz çözümü varsa \(a+b\) kaçtır?}
+{\[\frac{2}{a}=\frac{-1}{3}=\frac{3}{b}\]
+\(\frac{2}{a}=-\frac13\Rightarrow a=-6\); \quad \(\frac{3}{b}=-\frac13\Rightarrow b=-9\).
+\[a+b=-15\]
+(2. denklem, 1. denklemin \(-3\) katıdır: \(-6x+3y=-9\).)}
+
+\soru{Parametreli Soru -- Örnek 25}
+{\(\begin{cases}(m-1)x+2y=4\\ 3x+y=5\end{cases}\) \quad sisteminin tek çözümü olması için \(m\) hangi değeri \textbf{alamaz}?}
+{Tek çözüm \(\Rightarrow\) \(\dfrac{m-1}{3}\neq\dfrac{2}{1}\ \Rightarrow\ m-1\neq 6\ \Rightarrow\ m\neq 7\).\\[3pt]
+\(m=7\) için: \(6x+2y=4\) ve \(6x+2y=10\) \(\Rightarrow\) çözüm yok.\\[3pt]
+Cevap: \(m=7\) olamaz.}
+
+\soru{Parametreli Soru -- Örnek 26}
+{\(\begin{cases}x+2y=5\\ 3x+ky=15\end{cases}\) \quad sisteminin sonsuz çözümü varsa \(k\) kaçtır? Bu durumda \((1,2)\) bir çözüm müdür?}
+{\(\dfrac13=\dfrac{2}{k}=\dfrac{5}{15}\) \(\Rightarrow\) \(k=6\).\\[3pt]
+Denklemler aynı doğruyu gösterir; \((1,2)\): \(1+4=5\) \checkmark \ ve \(3+12=15\) \checkmark\\[3pt]
+Evet, \((1,2)\) çözümdür (sonsuz çözümden biri).}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \(y=x+2\), \ \(2x+y=11\) ise \((x,y)=?\)
+\item \(5x+3y=21\), \ \(3x+5y=19\) ise \(x+y=?\), \ \(x-y=?\) \(\star\)
+\item \(\dfrac{x}{3}+\dfrac{y}{2}=3\), \ \(x-y=-1\) ise \((x,y)=?\) \(\star\)
+\item \(4x+ky=3\), \ \(2x+3y=5\) sisteminin çözümü yoksa \(k=?\) \(\star\)
+\item \(x-2y=1\), \ \(3x-6y=3\) sisteminin kaç çözümü vardır?
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \((3,5)\)
+\item \(5\); \ \(1\)
+\item \((3,4)\)
+\item \(k=6\)
+\item sonsuz çözüm
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(5x+3y=21\) ve \(3x+5y=19\) ise \(x+y\) ve \(x-y\) kaçtır?}
+{Simetrik sistem. Topla: \(8x+8y=40\Rightarrow x+y=5\).\\[3pt]
+Çıkar: \(2x-2y=2\Rightarrow x-y=1\).\\[3pt]
+(İstenirse: \(2x=6\Rightarrow x=3\), \(y=2\). Kontrol: \(15+6=21\) \checkmark)}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(\dfrac{x}{3}+\dfrac{y}{2}=3\) \ ve \ \(x-y=-1\) ise \((x,y)\) nedir?}
+{1. denklem \(\times 6\): \(2x+3y=18\). \quad 2. denklemden \(x=y-1\):
+\[2(y-1)+3y=18\ \Rightarrow\ 5y=20\ \Rightarrow\ y=4\]
+\(x=4-1=3\). \quad Çözüm: \((3,4)\). \ Kontrol: \(1+2=3\) \checkmark}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{\(\begin{cases}4x+ky=3\\ 2x+3y=5\end{cases}\) \quad sisteminin çözümü yoksa \(k\) kaçtır?}
+{Çözüm yok \(\Rightarrow\) \(\dfrac{4}{2}=\dfrac{k}{3}\neq\dfrac{3}{5}\).
+\[\frac{k}{3}=2\ \Rightarrow\ k=6\]
+Kontrol: \(2\neq\frac35\) \checkmark \ (2. denklem \(\times 2\): \(4x+6y=10\); oysa \(4x+6y=3\): çelişki.)}
+
+% =====================================================
+\section{Ders 3: Sözel Problemler}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Sözel Problemlerden Denklem Sistemi Kurma
+\end{frame}
+
+\begin{frame}{Sözel Problemden Sisteme}
+\begin{block}{Adımlar}
+\begin{enumerate}
+\item İstenen iki büyüklüğe harf ver: \(x=\dots\), \ \(y=\dots\) \ (ne olduklarını yaz!)
+\item Metindeki \textbf{iki ayrı bilgiyi} iki denkleme çevir.
+\item Sistemi çöz; cevabın \textbf{sorulan şey} olduğundan emin ol.
+\item Sonucu metinde kontrol et (sayılar tam sayı mı, rakam mı, anlamlı mı?).
+\end{enumerate}
+\end{block}
+\begin{block}{Sık kullanılan kalıplar}
+\begin{itemize}
+\item Adet ve toplam tutar: \(x+y=\text{adet}\), \ \(p\,x+q\,y=\text{tutar}\)
+\item İki basamaklı sayı: \(\ab{ab}=10a+b\), \ \(\ab{ab}-\ab{ba}=9(a-b)\), \ \(\ab{ab}+\ab{ba}=11(a+b)\)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\soru{İki Sayı -- Örnek 27}
+{İki sayının toplamı \(50\), farkı \(14\)'tür. Büyük sayı kaçtır?}
+{Büyük \(x\), küçük \(y\): \quad \(x+y=50\), \ \(x-y=14\).
+\[2x=64\ \Rightarrow\ x=32,\qquad y=18\]
+Cevap: \(32\).}
+
+\soru{İki Sayı -- Örnek 28}
+{İki sayıdan büyüğü, küçüğünün \(3\) katından \(4\) fazladır. Sayıların toplamı \(44\) olduğuna göre büyük sayı kaçtır?}
+{\(x=3y+4\) \ ve \ \(x+y=44\):
+\[3y+4+y=44\ \Rightarrow\ 4y=40\ \Rightarrow\ y=10\]
+\(x=34\). \quad Kontrol: \(34=3\cdot 10+4\) \checkmark}
+
+\soru{Para -- Örnek 29}
+{Bir cüzdanda yalnızca \(5\) TL'lik ve \(10\) TL'lik banknotlardan toplam \(17\) banknot ve \(120\) TL vardır. Kaç tane \(10\) TL'lik banknot vardır?}
+{\(x\): 5 TL'lik, \ \(y\): 10 TL'lik sayısı.
+\[x+y=17,\qquad 5x+10y=120\ \Rightarrow\ x+2y=24\]
+Çıkar: \(y=7\), \ \(x=10\). \ Kontrol: \(50+70=120\) \checkmark\\
+Cevap: \(7\).}
+
+\soru{Bilet -- Örnek 30}
+{Bir tiyatroda öğrenci bileti \(40\) TL, tam bilet \(70\) TL'dir. Satılan \(30\) bilet için \(1560\) TL toplanmıştır. Kaç öğrenci bileti satılmıştır?}
+{\(x\): öğrenci, \ \(y\): tam. \quad \(x+y=30\), \ \(40x+70y=1560\Rightarrow 4x+7y=156\).
+\[4(30-y)+7y=156\ \Rightarrow\ 3y=36\ \Rightarrow\ y=12\]
+\(x=18\). \ Kontrol: \(720+840=1560\) \checkmark \quad Cevap: \(18\).}
+
+\soru{Alışveriş -- Örnek 31}
+{\(2\) kalem ile \(3\) defter \(85\) TL, \(3\) kalem ile \(2\) defter \(65\) TL'dir. \(1\) kalem ile \(1\) defter kaç TL'dir? Bir defter kaç TL'dir?}
+{\(k\): kalem, \ \(d\): defter. \quad \(2k+3d=85\), \ \(3k+2d=65\).\\[3pt]
+Topla: \(5(k+d)=150\Rightarrow k+d=30\) TL.\\[3pt]
+Çıkar: \(d-k=20\) \(\Rightarrow\) \(d=25\) TL, \ \(k=5\) TL.}
+
+\soru{Bacak Sayısı -- Örnek 32}
+{Bir çiftlikteki tavuk ve tavşanların toplam \(20\) başı ve \(56\) bacağı vardır. Kaç tavşan vardır?}
+{\(t\): tavuk, \ \(r\): tavşan. \quad \(t+r=20\), \ \(2t+4r=56\Rightarrow t+2r=28\).
+\[\text{Çıkar: } r=8,\qquad t=12\]
+Pratik yol: Hepsi tavuk olsaydı \(40\) bacak olurdu; fazla \(16\) bacak, her tavşan \(+2\) \(\Rightarrow\) \(8\) tavşan.}
+
+\soru{Puan -- Örnek 33}
+{\(20\) soruluk bir sınavda doğru cevap \(+5\), yanlış cevap \(-2\) puandır. Bütün soruları cevaplayan Ece \(72\) puan almıştır. Ece kaç soruyu doğru cevaplamıştır?}
+{\(d\): doğru, \ \(y\): yanlış. \quad \(d+y=20\), \ \(5d-2y=72\).
+\[5d-2(20-d)=72\ \Rightarrow\ 7d=112\ \Rightarrow\ d=16\]
+\(y=4\). \ Kontrol: \(80-8=72\) \checkmark}
+
+\soru{İki Basamaklı Sayı -- Örnek 34}
+{İki basamaklı \(\ab{ab}\) sayısının rakamları toplamı \(11\)'dir. Rakamları yer değiştirince sayı \(27\) artıyor. Bu sayı kaçtır?}
+{\(a+b=11\) \ ve \ \(\ab{ba}-\ab{ab}=9(b-a)=27\Rightarrow b-a=3\).
+\[2b=14\ \Rightarrow\ b=7,\quad a=4\]
+Sayı: \(47\). \ Kontrol: \(74-47=27\) \checkmark}
+
+\soru{İki Basamaklı Sayı -- Örnek 35}
+{İki basamaklı \(\ab{ab}\) sayısı, rakamları toplamının \(7\) katına eşittir. Onlar basamağındaki rakam birler basamağındakinden \(3\) fazladır. Sayı kaçtır?}
+{\(10a+b=7(a+b)\Rightarrow 3a=6b\Rightarrow a=2b\).\\[3pt]
+\(a-b=3\Rightarrow 2b-b=3\Rightarrow b=3,\ a=6\).\\[3pt]
+Sayı: \(63\). \ Kontrol: \(7\cdot(6+3)=63\) \checkmark}
+
+\soru{Yaş (Giriş) -- Örnek 36}
+{Ali ile babasının bugünkü yaşları toplamı \(50\)'dir. Babası Ali'den \(26\) yaş büyüktür. Ali kaç yaşındadır? \(5\) yıl sonra yaşları toplamı kaç olur?}
+{\(a\): Ali, \ \(b\): baba. \quad \(a+b=50\), \ \(b-a=26\).
+\[2b=76\Rightarrow b=38,\qquad a=12\]
+\(5\) yıl sonra her biri \(5\) yaş büyür: \(50+2\cdot 5=60\).\\
+{\normalsize (Yaş problemleri 13. haftada ayrıntılı.)}}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item İki sayının toplamı \(40\), büyüğü küçüğünün \(4\) katıdır. Küçük sayı?
+\item \(20\) TL ve \(50\) TL'lik toplam \(12\) banknot \(390\) TL ediyor. Kaç tane \(50\) TL'lik var? \(\star\)
+\item Tavuk ve koyunların toplam \(30\) başı, \(84\) bacağı var. Kaç koyun var? \(\star\)
+\item \(\ab{ab}\): \(a+b=9\), \ \(\ab{ab}-\ab{ba}=45\). \ \(\ab{ab}=?\) \(\star\)
+\item \(3\) simit \(+\) \(2\) çay \(55\) TL, \(1\) simit \(+\) \(2\) çay \(25\) TL. Bir çay kaç TL?
+\end{enumerate}
+\column{0.32\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(8\)
+\item \(5\)
+\item \(12\)
+\item \(72\)
+\item \(5\) TL
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(20\) TL'lik ve \(50\) TL'lik toplam \(12\) banknot \(390\) TL ediyor. Kaç tane \(50\) TL'lik banknot var?}
+{\(x\): 20 TL'lik, \ \(y\): 50 TL'lik sayısı.
+\[x+y=12,\qquad 20x+50y=390\ \Rightarrow\ 2x+5y=39\]
+\(2(12-y)+5y=39\Rightarrow 3y=15\Rightarrow y=5\), \ \(x=7\).\\[2pt]
+Kontrol: \(140+250=390\) \checkmark \quad Cevap: \(5\).}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{Tavuk ve koyunların toplam \(30\) başı ve \(84\) bacağı vardır. Kaç koyun vardır?}
+{\(t\): tavuk, \ \(k\): koyun. \quad \(t+k=30\), \ \(2t+4k=84\Rightarrow t+2k=42\).
+\[\text{Çıkar: } k=12,\qquad t=18\]
+Kontrol: \(36+48=84\) \checkmark \quad Cevap: \(12\) koyun.}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{İki basamaklı \(\ab{ab}\) sayısında \(a+b=9\) ve \(\ab{ab}-\ab{ba}=45\) ise \(\ab{ab}\) kaçtır?}
+{\(\ab{ab}-\ab{ba}=9(a-b)=45\Rightarrow a-b=5\).
+\[a+b=9,\ a-b=5\ \Rightarrow\ 2a=14\ \Rightarrow\ a=7,\ b=2\]
+\(\ab{ab}=72\). \ Kontrol: \(72-27=45\) \checkmark}
+
+% =====================================================
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item \(ax+by+c=0\): sonsuz çözüm
+\item Çözüm \(=\) sıralı ikili \((x,y)\)
+\item Yok etme: katsayıyı eşitle, topla/çıkar
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Yerine koyma: parantezle!
+\item Kesir/ondalık: önce temizle
+\item Simetrik: topla \(\to x+y\), çıkar \(\to x-y\)
+\item Oranlar: tek / yok / sonsuz
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item İki bilgi \(\to\) iki denklem
+\item Adet \(+\) tutar kalıbı
+\item \(\ab{ab}\pm\ab{ba}\) kalıbı
+\item Cevabı metinde kontrol et
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Basit eşitsizlikler (çözüm kümesi, sayı doğrusu) ve mutlak değer
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

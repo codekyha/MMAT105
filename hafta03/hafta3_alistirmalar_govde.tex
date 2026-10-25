@@ -1,0 +1,113 @@
+% Hafta 3 -- alıştırma gövdesi (ders notu ve ayrı alıştırma kağıdı tarafından \input edilir)
+\section{Çözümlü Alıştırmalar}
+Her soruyu önce kendiniz deneyin, sonra çözümü okuyun.
+
+\begin{alistirma}
+\(\ab{6a3}\) üç basamaklı sayısı \(11\) ile bölünebiliyorsa \(a\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+Birler basamağından başlayarak \(+,-,+\): \ \(3-a+6=9-a\). Bu sayı \(11\)'in katı olmalıdır.\\
+\(0\le a\le 9\) olduğundan \(0\le 9-a\le 9\); bu aralıktaki tek \(11\) katı \(0\)'dır: \(9-a=0\Rightarrow a=9\) \ (\(693=11\cdot 63\)).
+\end{cozum}
+
+\begin{alistirma}
+\(\ab{2a5b}\) dört basamaklı sayısı \(5\) ile ve \(9\) ile bölünebiliyorsa \(a\) en çok kaçtır?
+\end{alistirma}
+\begin{cozum}
+\(5\) ile bölünme: \(b\in\{0,5\}\). \quad \(9\) ile bölünme: rakamlar toplamı \(2+a+5+b=7+a+b\) sayısı \(9\)'un katı.\\
+\(b=0\): \(7+a\in\{9\}\) (\(7\le 7+a\le 16\)) \(\Rightarrow a=2\) \quad (\(2250\))\\
+\(b=5\): \(12+a\in\{18\}\) (\(12\le 12+a\le 21\)) \(\Rightarrow a=6\) \quad (\(2655\))\\
+\(a\) en çok \(6\)'dır. \ Kontrol: \(2655=5\cdot 531=9\cdot 295\).
+\end{cozum}
+
+\begin{alistirma}
+\(\ab{3a4b}\) dört basamaklı sayısı \(36\) ile bölünebiliyorsa bu koşulu sağlayan kaç farklı sayı vardır?
+\end{alistirma}
+\begin{cozum}
+\(36=4\cdot 9\) (aralarında asal çarpanlar; \(36=6\cdot 6\) veya \(3\cdot 12\) kullanılamaz).\\
+\(4\) ile bölünme: \(\ab{4b}\in\{40,44,48\}\Rightarrow b\in\{0,4,8\}\).\\
+\(9\) ile bölünme: \(3+a+4+b=7+a+b\) sayısı \(9\)'un katı.\\
+\(b=0\): \(7+a=9\Rightarrow a=2\) \ (\(3240\)); \quad \(b=4\): \(11+a=18\Rightarrow a=7\) \ (\(3744\)); \quad \(b=8\): \(15+a=18\Rightarrow a=3\) \ (\(3348\)).\\
+Cevap: \(3\) farklı sayı. \ (Kontrol: \(3240=36\cdot 90\), \(3348=36\cdot 93\), \(3744=36\cdot 104\).)
+\end{cozum}
+
+\begin{alistirma}
+\(A=2^3\cdot 3^2\cdot 5\) ve \(B=2\cdot 3^3\cdot 5^2\) ise \(\text{EBOB}(A,B)\) ve \(\text{EKOK}(A,B)\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+EBOB: ortak asal çarpanlar en küçük üsleriyle: \ \(2^{1}\cdot 3^{2}\cdot 5^{1}=90\).\\
+EKOK: bütün asal çarpanlar en büyük üsleriyle: \ \(2^{3}\cdot 3^{3}\cdot 5^{2}=8\cdot 27\cdot 25=5400\).\\
+Kontrol: \(A=360\), \(B=1350\); \ \(\text{EBOB}\cdot\text{EKOK}=90\cdot 5400=486\,000=360\cdot 1350=A\cdot B\) \checkmark
+\end{cozum}
+
+\begin{alistirma}
+\(a\) ve \(b\) aralarında asal iki pozitif tam sayıdır ve \(a\cdot b=90\)'dır. \(a+b\) en az kaçtır?
+\end{alistirma}
+\begin{cozum}
+\(90=2\cdot 3^2\cdot 5\). \(a\) ile \(b\) aralarında asal olduğundan her asal çarpan bütün kuvvetiyle \textbf{yalnız birinde} bulunur; \(3^2=9\) bölünemez. Parçalar: \(2\), \(9\), \(5\).\\
+Olası ikililer: \(\{1,90\}\to 91\), \ \(\{2,45\}\to 47\), \ \(\{5,18\}\to 23\), \ \(\{9,10\}\to 19\).\\
+\(a+b\) en az \(9+10=19\). \ (\(\{6,15\}\) çarpımı \(90\) olsa da \(\text{EBOB}(6,15)=3\) olduğundan uygun değildir.)
+\end{cozum}
+
+\begin{alistirma}
+Kenarları \(96\) m ve \(120\) m olan dikdörtgen bir bahçenin çevresine, her köşede birer ağaç olacak ve ardışık ağaçlar arası uzaklıklar eşit olacak biçimde ağaç dikilecektir. En az kaç ağaç gerekir?
+\end{alistirma}
+\begin{cozum}
+En az ağaç için aralık en büyük olmalı ve her kenarı tam bölmeli: \(96=2^5\cdot 3\), \(120=2^3\cdot 3\cdot 5\) \(\Rightarrow\) \(\text{EBOB}(96,120)=2^3\cdot 3=24\) m.\\
+Çevre: \(2\cdot(96+120)=432\) m. \ Kapalı çevre: ağaç sayısı \(=432\div 24=18\) (\(+1\) eklenmez).\\
+Kenar kenar kontrol: \(96\div 24=4\), \(120\div 24=5\) aralık \(\Rightarrow\) \(2\cdot(4+5)=18\) aralık \(=18\) ağaç.
+\end{cozum}
+
+\begin{alistirma}
+Üç otobüs hattından otobüsler sırasıyla \(20\), \(30\) ve \(45\) dakikada bir kalkmaktadır. Üç hattan saat 07{:}15'te birlikte otobüs kalktıktan sonra en erken saat kaçta yeniden birlikte kalkar?
+\end{alistirma}
+\begin{cozum}
+Birlikte kalkış aralığı üç sürenin en küçük ortak katıdır:
+\(20=2^2\cdot 5\), \(30=2\cdot 3\cdot 5\), \(45=3^2\cdot 5\) \(\Rightarrow\) \(\text{EKOK}=2^2\cdot 3^2\cdot 5=180\) dakika \(=3\) saat; \ 07{:}15\(\,+\,3\) saat \(=\) 10{:}15.
+\end{cozum}
+
+\begin{alistirma}
+\(4\), \(6\) ve \(9\) ile bölündüğünde sırasıyla \(2\), \(4\) ve \(7\) kalanını veren üç basamaklı en küçük doğal sayı kaçtır?
+\end{alistirma}
+\begin{cozum}
+Her kalan bölenden \(2\) eksiktir: \(4-2=2\), \(6-2=4\), \(9-2=7\). O halde \(x+2\) sayısı \(4\), \(6\) ve \(9\)'un ortak katıdır.\\
+\(\text{EKOK}(4,6,9)=2^2\cdot 3^2=36\) \(\Rightarrow\) \(x=36k-2\): \ \(34,\ 70,\ 106,\dots\)\\
+Üç basamaklı en küçük: \(x=106\). \ Kontrol: \(106=4\cdot 26+2=6\cdot 17+4=9\cdot 11+7\).
+\end{cozum}
+
+\kendinizoncesi
+\section{Alıştırmalar (Kendiniz Çözün)}
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=4pt]
+\item \(\ab{24a}\) üç basamaklı sayısı \(4\) ile bölünebiliyorsa \(a\) hangi değerleri alabilir?
+\item \(\ab{5a8}\) üç basamaklı sayısı \(3\) ile bölünebiliyorsa \(a\)'nın alabileceği değerlerin toplamı kaçtır?
+\item \(9\,876\,543\) sayısının \(9\) ile ve \(5\) ile bölümünden kalanlar kaçtır?
+\item \(3\,125\,764\) sayısının \(8\) ile bölümünden kalan kaçtır?
+\item \(\text{EBOB}(72,108)\) ve \(\text{EKOK}(72,108)\) kaçtır?
+\item İki pozitif tam sayının EBOB'u \(9\), EKOK'u \(270\)'tir. Sayılardan biri \(54\) ise diğeri kaçtır?
+\item \(\ab{a4b}\) biçimindeki üç basamaklı sayılardan \(6\) ile bölünebilen en büyüğü kaçtır?
+\item Boyutları \(150\) cm \(\times\) \(210\) cm olan dikdörtgen bir zemin, eş kare fayanslarla boşluksuz ve fayans kesilmeden döşenecektir. En az kaç fayans gerekir?
+\item Kenarları \(15\) cm ve \(20\) cm olan eş dikdörtgen kartonlar, aynı yönde ve boşluksuz yan yana dizilerek bir kare oluşturulacaktır. En az kaç karton gerekir?
+\item \(\ab{a1b}\) biçimindeki, \(45\) ile bölünebilen üç basamaklı sayıların toplamı kaçtır?
+\item \(a<b\) olmak üzere EBOB'u \(4\), EKOK'u \(60\) olan kaç farklı \((a,b)\) pozitif tam sayı ikilisi vardır?
+\item Bir kutudaki kalemler \(8\)'er, \(12\)'şer ve \(15\)'er sayıldığında her seferinde \(3\) kalem artmaktadır. Kalem sayısı \(200\)'den az olduğuna göre kutuda en çok kaç kalem vardır?
+\end{enumerate}
+
+\subsection*{Cevap Anahtarı}
+{\small
+\begin{multicols}{2}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=1pt]
+\item \(\ab{4a}\in\{40,44,48\}\Rightarrow a\in\{0,4,8\}\).
+\item \(13+a\) \(3\)'ün katı \(\Rightarrow a\in\{2,5,8\}\); toplam \(15\).
+\item Rakam toplamı \(42\): \(9\) ile kalan \(6\); \(5\) ile kalan \(3\).
+\item Son üç basamak \(764=8\cdot 95+4\Rightarrow\) kalan \(4\).
+\item \(72=2^3\cdot 3^2\), \(108=2^2\cdot 3^3\); EBOB \(36\), EKOK \(216\).
+\item \(54\cdot b=9\cdot 270\Rightarrow b=45\).
+\item \(a=9\); \(b\) çift, \(13+b\) \(3\)'ün katı; en büyük \(948\).
+\item \(\text{EBOB}(150,210)=30\); \(5\cdot 7=35\) fayans.
+\item \(\text{EKOK}(15,20)=60\); \(4\cdot 3=12\) karton.
+\item \(b=0\Rightarrow 810\); \(b=5\Rightarrow 315\); toplam \(1125\).
+\item \(a=4x\), \(b=4y\), \(xy=15\): \((4,60)\), \((12,20)\); \(2\) ikili.
+\item \(x-3\), \(120\)'nin katı: \(3,\ 123\); en çok \(123\).
+\end{enumerate}
+\end{multicols}}

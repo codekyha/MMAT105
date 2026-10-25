@@ -1,0 +1,783 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 1]{MMAT105 Genel Matematik}
+\subtitle{Hafta 1: Temel Kavramlar, İşlem Önceliği, İşaret ve Tek--Çift, Ardışık Sayılar, Faktöriyel}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Dönem Planı}
+\scriptsize
+\begin{columns}[t]
+\column{0.49\textwidth}
+\begin{tabular}{@{}r p{0.86\linewidth}@{}}
+\toprule
+Hf & Konu\\\midrule
+1 & Temel kavramlar, işlem önceliği, ardışık sayılar, faktöriyel\\
+2 & Asal sayılar, asal çarpanlar, tam bölenler, bölme\\
+3 & Bölünebilme kuralları, EBOB -- EKOK\\
+4 & Rasyonel ve ondalık sayılar\\
+5 & 1. derece bir bilinmeyenli denklemler\\
+6 & 1. derece iki bilinmeyenli denklemler\\
+7 & Basit eşitsizlikler, mutlak değer\\
+8 & \textbf{Ara Sınav}\\\bottomrule
+\end{tabular}
+\column{0.49\textwidth}
+\begin{tabular}{@{}r p{0.86\linewidth}@{}}
+\toprule
+Hf & Konu\\\midrule
+9 & Üslü sayılar\\
+10 & Köklü sayılar\\
+11 & Çarpanlara ayırma ve özdeşlikler\\
+12 & Oran -- orantı, ortalamalar\\
+13 & Sayı -- kesir ve yaş problemleri\\
+14 & Yüzde, kâr -- zarar, karışım, faiz; tekrar\\
+15 & \textbf{Final Sınavı}\\\bottomrule
+\end{tabular}
+\end{columns}
+\vspace{6pt}
+\begin{block}{Dersin işleyişi}
+Kısa kural \(\rightarrow\) çözümlü örnekler \(\rightarrow\) sınıfta siz çözün \(\rightarrow\) haftalık çalışma kağıdı
+\end{block}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Sayı kümeleri: \(\mathbb{N}\), \(\mathbb{Z}\)
+\item Rakam ve sayı
+\item Basamak değeri
+\item Çözümleme
+\item En büyük -- en küçük
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item İşlem önceliği
+\item İşaret kuralları
+\item Tek -- çift sayılar
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{8}
+\item Ardışık sayılar: terim sayısı, toplam
+\item Özel toplamlar
+\item Faktöriyel, sadeleştirme
+\item Sondaki sıfırlar, birler basamağı
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Isınma: Kafadan Hesap}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\textbf{Hesaplayınız:}
+\begin{enumerate}
+\item \(7+(-5)\)
+\item \(5-(-8)\)
+\item \(3+4\cdot 2\)
+\item \((-2)\cdot(-6)\)
+\item \(20\div 4\cdot 5\)
+\end{enumerate}
+\column{0.4\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(2\)
+\item \(13\)
+\item \(11\) \quad(\(14\) değil!)
+\item \(12\)
+\item \(25\) \quad(\(1\) değil!)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Sayı Kümeleri, Rakam ve Basamak}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Sayı Kümeleri, Rakam ve Basamak
+\end{frame}
+
+\subsection{Sayı kümeleri}
+\begin{frame}{Sayı Kümeleri}
+\begin{block}{Tanımlar}
+\begin{itemize}
+\item Doğal sayılar: \(\mathbb{N}=\{0,1,2,3,\dots\}\)
+\item Sayma sayıları: \(\mathbb{N}^{+}=\{1,2,3,\dots\}\)
+\item Tam sayılar: \(\mathbb{Z}=\{\dots,-2,-1,0,1,2,\dots\}\)
+\item \(\mathbb{Z}^{+}=\{1,2,3,\dots\}\), \quad \(\mathbb{Z}^{-}=\{\dots,-3,-2,-1\}\), \quad \(\mathbb{Z}=\mathbb{Z}^{-}\cup\{0\}\cup\mathbb{Z}^{+}\)
+\item \(\mathbb{N}\subset\mathbb{Z}\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Dikkat}
+\(0\) bir doğal sayıdır; \(0\) ne pozitif ne negatiftir; \(0\) çift bir sayıdır.
+\end{alertblock}
+\end{frame}
+
+\soru{Sayı Kümeleri -- Örnek 1}
+{\(-3,\ 0,\ 7,\ 2{,}5,\ \dfrac{12}{4},\ -\dfrac{8}{2}\) sayılarından hangileri doğal sayı, hangileri tam sayıdır?}
+{\(\dfrac{12}{4}=3\), \(-\dfrac{8}{2}=-4\) olduğundan:
+\begin{itemize}
+\item Doğal sayılar: \(0,\ 7,\ \dfrac{12}{4}\)
+\item Tam sayılar: \(-3,\ 0,\ 7,\ \dfrac{12}{4},\ -\dfrac{8}{2}\) \quad (\(2{,}5\) tam sayı değildir)
+\end{itemize}}
+
+\soru{Sayı Kümeleri -- Örnek 2}
+{En küçük doğal sayı, en küçük pozitif tam sayı ve en büyük negatif tam sayı toplamı kaçtır?}
+{En küçük doğal sayı \(0\), en küçük pozitif tam sayı \(1\), en büyük negatif tam sayı \(-1\).
+\[0+1+(-1)=0\]}
+
+\soru{Sayı Kümeleri -- Örnek 3}
+{\(-4\) ile \(3\) arasında kaç tane tam sayı vardır? Uçlar dahil edilirse kaç olur?}
+{Arada: \(-3,-2,-1,0,1,2\) \(\Rightarrow\) \(6\) tane.\\[3pt]
+Uçlar dahil: \(3-(-4)+1=8\) tane.\\[3pt]
+\textbf{Genel kural:} \(a<b\) tam sayıları için \([a,b]\) aralığında \(b-a+1\) tam sayı vardır.}
+
+\subsection{Rakam ve basamak}
+\begin{frame}{Rakam, Sayı, Basamak}
+\begin{block}{Tanımlar}
+\begin{itemize}
+\item \textbf{Rakam:} Sayıları yazmakta kullanılan semboller: \(\{0,1,2,\dots,9\}\) \quad (10 tane)
+\item \textbf{Sayı:} Rakamların bir çokluk belirtecek biçimde yan yana yazılması.
+\item \textbf{Basamak değeri:} Rakamın, bulunduğu basamağın değeriyle çarpımı.
+\end{itemize}
+\end{block}
+\begin{block}{Çözümleme}
+\[\ab{ab}=10a+b,\qquad \ab{abc}=100a+10b+c,\qquad \ab{abcd}=1000a+100b+10c+d\]
+Burada \(a\neq 0\) (ilk rakam sıfır olamaz).
+\end{block}
+\end{frame}
+
+\soru{Basamak Değeri -- Örnek 4}
+{\(2403\) sayısının binler, yüzler, onlar ve birler basamaklarındaki rakamların basamak değerleri nedir?}
+{\[2403=2\cdot 1000+4\cdot 100+0\cdot 10+3\cdot 1\]
+Binler: \(2000\), \quad Yüzler: \(400\), \quad Onlar: \(0\), \quad Birler: \(3\)}
+
+\soru{Basamak Değeri -- Örnek 5}
+{\(3050\) sayısının rakamları toplamı ile basamak değerleri toplamı arasındaki fark kaçtır?}
+{Rakamlar toplamı: \(3+0+5+0=8\)\\[3pt]
+Basamak değerleri toplamı: \(3000+0+50+0=3050\) \quad (sayının kendisi!)\\[3pt]
+Fark: \(3050-8=3042\)}
+
+\soru{En Büyük -- En Küçük: Örnek 6}
+{İki basamaklı en büyük doğal sayı ile iki basamaklı en küçük doğal sayının toplamı kaçtır?}
+{En büyük: \(99\), \quad en küçük: \(10\)
+\[99+10=109\]}
+
+\soru{En Büyük -- En Küçük: Örnek 7}
+{Rakamları birbirinden farklı üç basamaklı en büyük doğal sayı ile en küçük doğal sayının farkı kaçtır?}
+{En büyük: \(987\). \quad En küçük: \(102\) \quad (ilk rakam \(0\) olamaz; \(1\), sonra \(0\), sonra \(2\)).
+\[987-102=885\]}
+
+\soru{En Büyük -- En Küçük: Örnek 8 (Tuzak)}
+{Rakamları birbirinden farklı iki basamaklı en küçük \textbf{tam sayı} kaçtır?}
+{Tam sayılarda negatifler de vardır; en küçük, mutlak değerce en büyük negatif sayıdır.\\[3pt]
+Rakamları farklı iki basamaklı en büyük sayı \(98\) \(\Rightarrow\) cevap: \(-98\)\\[3pt]
+\textit{Not:} Rakamları farklı olma şartı yoksa cevap \(-99\) olurdu.}
+
+\soru{Sayma -- Örnek 9}
+{Kaç tane iki basamaklı doğal sayı vardır? Bunlardan kaçının rakamları birbirinden farklıdır?}
+{İki basamaklı sayılar: \(10,11,\dots,99\) \(\Rightarrow\) \(99-10+1=90\) tane.\\[3pt]
+Rakamları farklı olanlar: Onlar basamağı \(9\) seçenek (\(1\)--\(9\)), birler basamağı kalan \(9\) seçenek:
+\[9\cdot 9=81\]
+(Kontrol: rakamları aynı olanlar \(11,22,\dots,99\): \(9\) tane; \(90-9=81\).)}
+
+\soru{Çözümleme -- Örnek 10}
+{\(\ab{ab}\) ve \(\ab{ba}\) iki basamaklı sayılardır. \(\ab{ab}+\ab{ba}=121\) ise \(a+b\) kaçtır?}
+{\[\ab{ab}+\ab{ba}=(10a+b)+(10b+a)=11a+11b=11(a+b)\]
+\[11(a+b)=121\ \Rightarrow\ a+b=11\]}
+
+\soru{Çözümleme -- Örnek 11}
+{\(\ab{ab}-\ab{ba}=54\) ise \(a-b\) kaçtır? Bu koşulu sağlayan en büyük \(\ab{ab}\) sayısı kaçtır?}
+{\[(10a+b)-(10b+a)=9a-9b=9(a-b)=54\ \Rightarrow\ a-b=6\]
+\(a\) en büyük olmalı: \(a=9\Rightarrow b=3\). \quad En büyük \(\ab{ab}=93\).\\[3pt]
+(Kontrol: \(93-39=54\).)}
+
+\soru{Çözümleme -- Örnek 12}
+{\(\ab{abc}\) ve \(\ab{cba}\) üç basamaklı sayılardır. \(\ab{abc}-\ab{cba}=396\) ise \(a-c\) kaçtır?}
+{\[(100a+10b+c)-(100c+10b+a)=99a-99c=99(a-c)\]
+\[99(a-c)=396\ \Rightarrow\ a-c=4\]
+Ortanca rakam \(b\) sonucu etkilemez.}
+
+\soru{Çözümleme -- Örnek 13}
+{İki basamaklı \(\ab{ab}\) sayısı, rakamları toplamının \(4\) katına eşittir. Bu koşulu sağlayan kaç sayı vardır?}
+{\[10a+b=4(a+b)\ \Rightarrow\ 6a=3b\ \Rightarrow\ b=2a\]
+\(a=1,2,3,4\) \(\Rightarrow\) \(12,\ 24,\ 36,\ 48\) \quad (\(a=5\) için \(b=10\) rakam değil)\\[3pt]
+Cevap: \(4\) tane.}
+
+\soru{Basamak Değişimi -- Örnek 14}
+{Üç basamaklı \(\ab{abc}\) sayısında \(a\) rakamı \(2\) artırılır, \(c\) rakamı \(3\) azaltılırsa sayı nasıl değişir?}
+{\(a\) yüzler basamağında: \(2\cdot 100=200\) artış.\\
+\(c\) birler basamağında: \(3\cdot 1=3\) azalış.
+\[200-3=197\ \text{artar.}\]}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item Rakamları farklı dört basamaklı en küçük doğal sayı kaçtır? \(\star\)
+\item \(\ab{ab}+\ab{ba}=88\) ise \(a+b=?\) \(\star\)
+\item \(\ab{ab}-\ab{ba}=45\) ise \(a-b=?\)
+\item \(\ab{4a7}\) sayısında \(a\) yerine \(a+3\) yazılırsa sayı kaç artar? \(\star\)
+\item \(-6\) ile \(5\) arasında (uçlar hariç) kaç tam sayı vardır?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(1023\)
+\item \(8\)
+\item \(5\)
+\item \(30\)
+\item \(10\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 1)}
+{Rakamları birbirinden farklı dört basamaklı en küçük doğal sayı kaçtır?}
+{Basamakları soldan sağa, en küçük uygun rakamla doldururuz:\\[3pt]
+Binler: \(0\) olamaz \(\Rightarrow\) \(1\). \quad Yüzler: kullanılmamış en küçük rakam \(0\).\\[3pt]
+Onlar: \(2\). \quad Birler: \(3\).
+\[\text{Cevap: } 1023\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 2)}
+{\(\ab{ab}\) ve \(\ab{ba}\) iki basamaklı sayılardır. \(\ab{ab}+\ab{ba}=88\) ise \(a+b\) kaçtır?}
+{Çözümleyelim:
+\[\ab{ab}+\ab{ba}=(10a+b)+(10b+a)=11a+11b=11(a+b)\]
+\[11(a+b)=88\ \Rightarrow\ a+b=8\]
+(Örneğin \(35+53=88\).)}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(\ab{4a7}\) üç basamaklı sayısında \(a\) rakamı yerine \(a+3\) yazılırsa sayı kaç artar?}
+{\(a\) rakamı onlar basamağındadır; basamak değeri \(10\cdot a\).\\[3pt]
+Rakam \(3\) artınca basamak değeri \(10\cdot 3=30\) artar.
+\[\big(400+10(a+3)+7\big)-\big(400+10a+7\big)=30\]
+(\(a+3\) rakam olmalı: \(a\le 6\). Örneğin \(427\to 457\).)}
+
+% =====================================================
+\section{Ders 2: İşlem Önceliği, İşaret, Tek--Çift}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize İşlem Önceliği, İşaret Kuralları, Tek -- Çift Sayılar
+\end{frame}
+
+\subsection{İşlem önceliği}
+\begin{frame}{İşlem Önceliği}
+\begin{block}{Sıra}
+\begin{enumerate}
+\item Parantez: önce en içteki \(\ (\ )\ \rightarrow\ [\ ]\ \rightarrow\ \{\ \}\)
+\item Üs alma
+\item Çarpma ve bölme \quad (aynı öncelik, \textbf{soldan sağa})
+\item Toplama ve çıkarma \quad (aynı öncelik, \textbf{soldan sağa})
+\end{enumerate}
+\end{block}
+\begin{alertblock}{En sık yapılan hatalar}
+\begin{itemize}
+\item \(20\div 4\cdot 5=5\cdot 5=25\) \quad (\(20\div 20=1\) değil)
+\item \(-3^2=-9\), \quad ama \quad \((-3)^2=9\)
+\item Kesir çizgisi parantez gibidir: pay ve payda ayrı ayrı hesaplanır.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{İşlem Önceliği -- Örnek 15}
+{\(18-12\div 3\cdot 2+5\) işleminin sonucu kaçtır?}
+{Önce bölme ve çarpma, soldan sağa: \(12\div 3=4\), \ \(4\cdot 2=8\)
+\[18-8+5=15\]}
+
+\soru{İşlem Önceliği -- Örnek 16}
+{\(48\div 4\div 2\) ile \(48\div(4\div 2)\) işlemlerinin sonuçları nedir?}
+{\[48\div 4\div 2=12\div 2=6\]
+\[48\div(4\div 2)=48\div 2=24\]
+Parantez sırayı değiştirir; bölme işleminde birleşme özelliği yoktur.}
+
+\soru{İşlem Önceliği -- Örnek 17}
+{\(5-3\cdot(2-6)+2^3\) işleminin sonucu kaçtır?}
+{Parantez: \(2-6=-4\). \quad Üs: \(2^3=8\).
+\[5-3\cdot(-4)+8=5+12+8=25\]}
+
+\soru{İşlem Önceliği -- Örnek 18}
+{\(3+2\cdot\big[10-(4-1)^2\big]\) işleminin sonucu kaçtır?}
+{\[(4-1)^2=3^2=9,\qquad 10-9=1\]
+\[3+2\cdot 1=5\]}
+
+\soru{İşlem Önceliği -- Örnek 19}
+{\(\big\{8-\big[6-(4-2)\big]\big\}\cdot 3\) işleminin sonucu kaçtır?}
+{En içten dışa:
+\[(4-2)=2\ \rightarrow\ [6-2]=4\ \rightarrow\ \{8-4\}=4\ \rightarrow\ 4\cdot 3=12\]}
+
+\soru{İşlem Önceliği -- Örnek 20}
+{\(\dfrac{12-3\cdot 2}{2\cdot 3-3}+2^3\cdot 3-4^2\div 8\) işleminin sonucu kaçtır?}
+{Kesir: \(\dfrac{12-6}{6-3}=\dfrac{6}{3}=2\)\\[3pt]
+\(2^3\cdot 3=24\), \quad \(4^2\div 8=16\div 8=2\)
+\[2+24-2=24\]}
+
+\subsection{İşaret kuralları}
+\begin{frame}{İşaret Kuralları}
+\begin{columns}[t]
+\column{0.48\textwidth}
+\begin{block}{Çarpma ve bölme}
+\[(+)\cdot(+)=+\qquad (-)\cdot(-)=+\]
+\[(+)\cdot(-)=-\qquad (-)\cdot(+)=-\]
+Bölmede de aynı kural geçerlidir.
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Kuvvetler (\(a>0\))}
+\[(-a)^{2k}=a^{2k}>0\]
+\[(-a)^{2k+1}=-a^{2k+1}<0\]
+\[(-1)^{\text{çift}}=1,\qquad (-1)^{\text{tek}}=-1\]
+\end{block}
+\end{columns}
+\begin{alertblock}{Çıkarma}
+\(a-(-b)=a+b\): \ Negatif bir sayıyı çıkarmak, pozitifini eklemektir.
+\end{alertblock}
+\end{frame}
+
+\soru{İşaret -- Örnek 21}
+{\(-7+(-5)-(-12)\) ve \((-2)\cdot(-3)\cdot(-1)\cdot 4\) işlemlerinin sonuçları nedir?}
+{\[-7-5+12=0\]
+Üç negatif çarpan (tek sayıda) \(\Rightarrow\) sonuç negatif:
+\[(-2)\cdot(-3)\cdot(-1)\cdot 4=-24\]}
+
+\soru{İşaret -- Örnek 22}
+{\((-3)^2-2^3\) ve \((-2)^4-(-3)^3\) işlemlerinin sonuçları nedir?}
+{\[(-3)^2-2^3=9-8=1\]
+\[(-2)^4-(-3)^3=16-(-27)=16+27=43\]}
+
+\soru{İşaret -- Örnek 23}
+{\(-2^2+(-2)^2\) ve \((-1)^{2026}+(-1)^{2027}-1^{2028}\) işlemlerinin sonuçları nedir?}
+{\[-2^2+(-2)^2=-4+4=0\]
+\[(-1)^{2026}+(-1)^{2027}-1^{2028}=1+(-1)-1=-1\]
+Dikkat: \(1^{n}=1\) her \(n\) için; \(-1^{2028}=-(1^{2028})=-1\).}
+
+\soru{İşaret -- Örnek 24}
+{\(a<0<b\) olduğuna göre \(a\cdot b\), \ \(b-a\), \ \(a-b\), \ \(a^2\cdot b\) ifadelerinin işaretleri nedir?}
+{\begin{itemize}
+\item \(a\cdot b\): \((-)\cdot(+)\ \Rightarrow\ \) negatif
+\item \(b-a=b+|a|\ \Rightarrow\ \) pozitif
+\item \(a-b=-(b-a)\ \Rightarrow\ \) negatif
+\item \(a^2>0\), \(b>0\ \Rightarrow\ a^2\cdot b\) pozitif
+\end{itemize}}
+
+\soru{İşaret -- Örnek 25}
+{\(a\cdot b<0\), \quad \(b\cdot c>0\), \quad \(c<0\) olduğuna göre \(a\) ve \(b\)'nin işaretleri nedir?}
+{\(b\cdot c>0\) ve \(c<0\ \Rightarrow\ b<0\)\\[3pt]
+\(a\cdot b<0\) ve \(b<0\ \Rightarrow\ a>0\)\\[3pt]
+Sonuç: \(a>0\), \ \(b<0\), \ \(c<0\)}
+
+\soru{İşaret -- Örnek 26}
+{\(a<0\) ve \(a^3\cdot b>0\) olduğuna göre \(b\)'nin işareti nedir?}
+{\(a<0\Rightarrow a^3<0\) \ (tek kuvvet işareti korur).\\[3pt]
+\(a^3\cdot b>0\) ve \(a^3<0\ \Rightarrow\ b<0\)}
+
+\subsection{Tek ve çift sayılar}
+\begin{frame}{Tek ve Çift Sayılar}
+\begin{block}{Tanım}
+Çift: \(2k\), \quad Tek: \(2k+1\) \qquad (\(k\in\mathbb{Z}\)). \quad \(0\) çifttir; negatif sayılar da tek/çift olabilir.
+\end{block}
+\begin{columns}[t]
+\column{0.48\textwidth}
+\begin{block}{Toplama / çıkarma}
+\begin{tabular}{c|cc}
+\(\pm\) & T & Ç\\\hline
+T & Ç & T\\
+Ç & T & Ç
+\end{tabular}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Çarpma}
+\begin{tabular}{c|cc}
+\(\cdot\) & T & Ç\\\hline
+T & T & Ç\\
+Ç & Ç & Ç
+\end{tabular}
+\end{block}
+\end{columns}
+\vspace{4pt}
+Kısa yol: Çarpanlardan en az biri çift ise çarpım çifttir. \(n\) tek ise \(n^k\) de tektir.
+\end{frame}
+
+\soru{Tek -- Çift: Örnek 27}
+{\(x\) tek, \(y\) çift tam sayılardır. \(x+y\), \ \(x\cdot y\), \ \(x^2+y\), \ \(3x+2y\) ifadeleri tek mi çift mi?}
+{\begin{itemize}
+\item \(x+y\): T \(+\) Ç \(=\) \textbf{tek}
+\item \(x\cdot y\): T \(\cdot\) Ç \(=\) \textbf{çift}
+\item \(x^2+y\): T \(+\) Ç \(=\) \textbf{tek}
+\item \(3x+2y\): T \(+\) Ç \(=\) \textbf{tek}
+\end{itemize}}
+
+\soru{Tek -- Çift: Örnek 28}
+{\(x,y\in\mathbb{Z}\) ve \(3x+2y\) tek sayı ise \(x\) tek midir, çift midir? \(y\) hakkında ne söylenebilir?}
+{\(2y\) her zaman çifttir. \(3x+\text{Ç}=\text{T}\ \Rightarrow\ 3x\) tek \(\Rightarrow\ x\) tek.\\[3pt]
+\(y\) hakkında bilgi yoktur: \(y\) tek de olabilir, çift de.}
+
+\soru{Tek -- Çift: Örnek 29}
+{\(a,b,c\) tam sayılardır. \(a+b\) tek, \(b+c\) çift ise \(a+c\) tek midir, çift midir?}
+{\(a+b\) tek \(\Rightarrow\) \(a\) ile \(b\) farklı türde.\\
+\(b+c\) çift \(\Rightarrow\) \(b\) ile \(c\) aynı türde.\\
+O halde \(a\) ile \(c\) farklı türde \(\Rightarrow\ a+c\) \textbf{tek}.\\[3pt]
+Kontrol: \(a=1,\ b=2,\ c=4\): \(a+c=5\).}
+
+\soru{Tek -- Çift: Örnek 30}
+{\(a\cdot b\) çift ve \(a\) tek ise \(b\) için ne söylenebilir? \(a\cdot b\) tek ise \(a\) ve \(b\) için?}
+{\(a\) tek ve çarpım çift \(\Rightarrow\) \(b\) \textbf{çift} olmak zorunda.\\[3pt]
+Çarpım tek \(\Rightarrow\) çarpanların \textbf{hepsi tek}: \(a\) ve \(b\) tek.}
+
+\begin{frame}[fragile]{Bilgisayar Köşesi: Python da aynı kuralları uygular}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\begin{verbatim}
+>>> 20 / 4 * 5
+25.0
+>>> -3**2
+-9
+>>> (-3)**2
+9
+>>> 2**3**2
+512
+\end{verbatim}
+\column{0.46\textwidth}
+\begin{verbatim}
+>>> 2403 % 10    # birler
+3
+>>> 2403 // 10 % 10  # onlar
+0
+>>> 7 % 2        # tek -> 1
+1
+\end{verbatim}
+\end{columns}
+\small \(2^{3^2}=2^{9}=512\): Üsler sağdan sola hesaplanır. \ \verb|%| kalanı, \verb|//| tam bölümü verir.
+\end{frame}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(24\div 4\cdot 3-2^3=?\) \(\star\)
+\item \(-3^2-(-3)^2+(-1)^{101}=?\) \(\star\)
+\item \(a>0>b\) ise \(a\cdot b^2\) ve \(b-a\) işaretleri?
+\item \(x\) tam sayı ve çift ise \(5x+7\) tek mi çift mi?
+\item \(a\cdot b\cdot c<0\), \(a<0\), \(c>0\) ise \(b\)'nin işareti? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(10\)
+\item \(-19\)
+\item pozitif; negatif
+\item tek
+\item \(b>0\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 1)}
+{\(24\div 4\cdot 3-2^3\) işleminin sonucu kaçtır?}
+{Önce üs: \(2^3=8\).\\[3pt]
+Çarpma ve bölme soldan sağa: \(24\div 4=6\), \quad \(6\cdot 3=18\).
+\[18-8=10\]
+(\(24\div 12=2\) yapmak hatalıdır.)}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(-3^2-(-3)^2+(-1)^{101}\) işleminin sonucu kaçtır?}
+{\(-3^2=-(3^2)=-9\) \quad (üs yalnız \(3\)'e aittir)\\[3pt]
+\((-3)^2=9\), \quad \((-1)^{101}=-1\) \ (tek kuvvet)
+\[-9-9+(-1)=-19\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(a\cdot b\cdot c<0\), \ \(a<0\) ve \(c>0\) ise \(b\)'nin işareti nedir?}
+{\(a\cdot c\): \((-)\cdot(+)\) \(\Rightarrow\) \(a\cdot c<0\).\\[3pt]
+\(a\cdot b\cdot c=(a\cdot c)\cdot b<0\) ve \(a\cdot c<0\) \(\Rightarrow\) \(b\) pozitif olmalı.
+\[b>0\]
+(Kontrol: \(a=-1,\ b=2,\ c=3\): \(abc=-6<0\).)}
+
+% =====================================================
+\section{Ders 3: Ardışık Sayılar ve Faktöriyel}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Ardışık Sayılar ve Faktöriyel
+\end{frame}
+
+\subsection{Ardışık sayılar}
+\begin{frame}{Ardışık Sayılar: Terim Sayısı ve Toplam}
+\begin{block}{Artışı sabit olan sayılar}
+\[\text{Terim sayısı}=\frac{\text{Son terim}-\text{İlk terim}}{\text{Artış}}+1\]
+\[\text{Toplam}=\text{Terim sayısı}\cdot\frac{\text{İlk terim}+\text{Son terim}}{2}\]
+\end{block}
+\begin{block}{Gösterim (\(x\in\mathbb{Z}\))}
+Ardışık tam sayılar: \(x,\ x+1,\ x+2,\dots\) \qquad Ardışık çift / tek sayılar: \(x,\ x+2,\ x+4,\dots\)
+\end{block}
+\begin{alertblock}{Sık yapılan hata}
+Terim sayısında ``\(+1\)'' unutulmamalı: \(3,5,7,\dots,21\) dizisinde \(\frac{21-3}{2}=9\) değil, \(9+1=10\) terim vardır.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Özel Toplamlar ve Ortanca Terim}
+\begin{block}{Özel toplamlar (\(n\in\mathbb{N}^{+}\))}
+\[1+2+3+\dots+n=\frac{n(n+1)}{2}\]
+\[2+4+6+\dots+2n=n(n+1)\qquad\qquad 1+3+5+\dots+(2n-1)=n^2\]
+\end{block}
+\begin{block}{Ortanca terim}
+Artışı sabit, \textbf{tek sayıda} terimin toplamı \(=\) terim sayısı \(\times\) ortanca terim.\\
+Ortanca terim \(=\dfrac{\text{İlk terim}+\text{Son terim}}{2}\).
+\end{block}
+\end{frame}
+
+\soru{Ardışık Sayılar -- Örnek 31}
+{\(5+8+11+\dots+62\) toplamında kaç terim vardır? Toplam kaçtır?}
+{Artış \(3\):
+\[n=\frac{62-5}{3}+1=19+1=20\]
+\[\text{Toplam}=20\cdot\frac{5+62}{2}=10\cdot 67=670\]}
+
+\soru{Ardışık Sayılar -- Örnek 32}
+{\(1+2+\dots+30\) toplamı kaçtır? \(11+12+\dots+30\) toplamı kaçtır?}
+{\[1+2+\dots+30=\frac{30\cdot 31}{2}=465\]
+\(11+\dots+30\): baştaki \(1+\dots+10=\dfrac{10\cdot 11}{2}=55\) çıkarılır:
+\[465-55=410\]
+(Kontrol: \(20\) terim, \(20\cdot\frac{11+30}{2}=410\).)}
+
+\soru{Ardışık Sayılar -- Örnek 33}
+{\(2+4+6+\dots+50\) ve \(1+3+5+\dots+49\) toplamları kaçtır?}
+{Çiftler: \(2n=50\Rightarrow n=25\):
+\[2+4+\dots+50=25\cdot 26=650\]
+Tekler: \(2n-1=49\Rightarrow n=25\):
+\[1+3+\dots+49=25^2=625\]}
+
+\soru{Ardışık Sayılar -- Örnek 34}
+{Ardışık \(5\) tam sayının toplamı \(85\) ise en büyüğü kaçtır?}
+{Terim sayısı tek (\(5\)) \(\Rightarrow\) toplam \(=5\,\cdot\) ortanca terim.
+\[\text{Ortanca}=\frac{85}{5}=17\]
+Sayılar: \(15,16,17,18,19\) \(\Rightarrow\) en büyüğü \(19\).}
+
+\soru{Ardışık Sayılar -- Örnek 35}
+{Ardışık \(3\) çift sayının toplamı \(78\) ise en büyüğü kaçtır?}
+{Sayılar \(x,\ x+2,\ x+4\):
+\[3x+6=78\ \Rightarrow\ 3x=72\ \Rightarrow\ x=24\]
+Sayılar: \(24,26,28\) \(\Rightarrow\) en büyüğü \(28\).\\[3pt]
+(Kısa yol: ortanca \(78/3=26\).)}
+
+\soru{Ardışık Sayılar -- Örnek 36}
+{\(40\) ile \(120\) arasında (uçlar hariç) kaç tek sayı vardır? Bu sayıların toplamı kaçtır?}
+{İlk tek sayı \(41\), son tek sayı \(119\), artış \(2\):
+\[n=\frac{119-41}{2}+1=39+1=40\]
+\[\text{Toplam}=40\cdot\frac{41+119}{2}=40\cdot 80=3200\]}
+
+\soru{Ardışık Sayılar -- Örnek 37}
+{Bir kitabın sayfaları \(1\)'den \(120\)'ye kadar numaralandırılmıştır. Bu iş için toplam kaç rakam kullanılır?}
+{Basamak sayısına göre gruplayalım:
+\begin{itemize}
+\item \(1\)--\(9\): \(9\) sayı \(\times 1\) rakam \(=9\)
+\item \(10\)--\(99\): \(90\) sayı \(\times 2\) rakam \(=180\)
+\item \(100\)--\(120\): \(120-100+1=21\) sayı \(\times 3\) rakam \(=63\)
+\end{itemize}
+Toplam: \(9+180+63=252\) rakam.}
+
+\subsection{Faktöriyel}
+\begin{frame}{Faktöriyel}
+\begin{block}{Tanım}
+\[n!=1\cdot 2\cdot 3\cdots n\quad(n\in\mathbb{N}^{+}),\qquad 0!=1,\qquad n!=n\cdot(n-1)!\]
+\centering
+\begin{tabular}{cccccccc}
+\toprule
+\(1!\) & \(2!\) & \(3!\) & \(4!\) & \(5!\) & \(6!\) & \(7!\) & \(8!\)\\\midrule
+\(1\) & \(2\) & \(6\) & \(24\) & \(120\) & \(720\) & \(5040\) & \(40320\)\\\bottomrule
+\end{tabular}
+\end{block}
+\begin{block}{Sadeleştirme}
+Büyük faktöriyeli küçüğe kadar açın: \(\dfrac{9!}{7!}=\dfrac{9\cdot 8\cdot 7!}{7!}=72\). \quad Toplamda küçük faktöriyeli dışarı alın: \(7!+6!=6!\,(7+1)=8\cdot 6!\).
+\end{block}
+\end{frame}
+
+\begin{frame}{Faktöriyel: Sondaki Sıfırlar ve Birler Basamağı}
+\begin{block}{Sondaki sıfır sayısı}
+Her sıfır bir \(2\cdot 5\) çarpımından gelir; \(n!\) içinde \(2\) çarpanı \(5\)'ten çoktur. Bu yüzden \(5\) çarpanları sayılır:
+\[\left\lfloor\frac{n}{5}\right\rfloor+\left\lfloor\frac{n}{25}\right\rfloor+\left\lfloor\frac{n}{125}\right\rfloor+\cdots\qquad(\lfloor x\rfloor:\ x\text{'in tam kısmı})\]
+\end{block}
+\begin{block}{Birler basamağı}
+\(5!=120\) olduğundan \(n\ge 5\) için \(n!\)'in birler basamağı \(0\)'dır. Toplamlarda yalnız \(1!,2!,3!,4!\) terimlerine bakılır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\((a+b)!\neq a!+b!\), \quad \((2n)!\neq 2\cdot n!\), \quad \(\dfrac{6!}{3!}\neq 2!\) \ (\(\dfrac{6!}{3!}=120\)).
+\end{alertblock}
+\end{frame}
+
+\soru{Faktöriyel -- Örnek 38}
+{\(\dfrac{8!}{6!}\) ve \(\dfrac{7!}{4!\cdot 3!}\) işlemlerinin sonuçları nedir?}
+{\[\frac{8!}{6!}=\frac{8\cdot 7\cdot 6!}{6!}=56\]
+\[\frac{7!}{4!\cdot 3!}=\frac{7\cdot 6\cdot 5\cdot 4!}{4!\cdot 6}=\frac{210}{6}=35\]}
+
+\soru{Faktöriyel -- Örnek 39}
+{\(\dfrac{8!-7!}{6!}\) işleminin sonucu kaçtır?}
+{Küçük faktöriyel \(7!\) ortak çarpan:
+\[8!-7!=7!\,(8-1)=7\cdot 7!\]
+\[\frac{7\cdot 7!}{6!}=\frac{7\cdot 7\cdot 6!}{6!}=49\]}
+
+\soru{Faktöriyel -- Örnek 40}
+{\((n+1)!=20\cdot(n-1)!\) olduğuna göre \(n\) kaçtır?}
+{\((n+1)!=(n+1)\cdot n\cdot(n-1)!\) yazılırsa:
+\[(n+1)\cdot n\cdot(n-1)!=20\cdot(n-1)!\ \Rightarrow\ n(n+1)=20=4\cdot 5\]
+\[n=4\]
+(Kontrol: \(5!=120=20\cdot 3!\).)}
+
+\soru{Faktöriyel -- Örnek 41}
+{\(100!\) sayısının sonunda kaç sıfır vardır?}
+{\(5\) çarpanlarını sayalım:
+\[\left\lfloor\frac{100}{5}\right\rfloor+\left\lfloor\frac{100}{25}\right\rfloor=20+4=24\]
+(\(125>100\) olduğundan sonraki terim \(0\).)\\[3pt]
+Cevap: \(24\) sıfır.}
+
+\soru{Faktöriyel -- Örnek 42}
+{\(n!\) sayısının sonunda tam \(6\) sıfır varsa \(n\) en az kaçtır?}
+{\(n=20\): \(4\) sıfır; \ \(n=24\): \(4+0=4\) sıfır.\\[3pt]
+\(n=25\): \(\left\lfloor\frac{25}{5}\right\rfloor+\left\lfloor\frac{25}{25}\right\rfloor=5+1=6\) sıfır.\\[3pt]
+\(25\) iki tane \(5\) çarpanı getirdiği için sayı \(4\)'ten \(6\)'ya atlar (\(5\) sıfırlı faktöriyel yoktur).
+\[n_{\min}=25\]}
+
+\soru{Faktöriyel -- Örnek 43}
+{\(1!+3!+5!+7!+\dots+21!\) toplamının birler basamağındaki rakam kaçtır? Toplam tek midir, çift midir?}
+{\(5!\) ve sonrası birler basamağı \(0\) olan sayılardır.\\[3pt]
+Önemli terimler: \(1!+3!=1+6=7\) \(\Rightarrow\) birler basamağı \(7\).\\[3pt]
+Birler basamağı tek olduğundan toplam \textbf{tektir}.}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(4+9+14+\dots+99\) toplamı kaçtır? \(\star\)
+\item Ardışık \(4\) çift sayının toplamı \(92\) ise en küçüğü kaçtır? \(\star\)
+\item \(1+2+3+\dots+20=?\)
+\item \(\dfrac{12!}{10!\cdot 2!}=?\)
+\item \(75!\) sayısının sonunda kaç sıfır vardır? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(1030\)
+\item \(20\)
+\item \(210\)
+\item \(66\)
+\item \(18\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 1)}
+{\(4+9+14+\dots+99\) toplamı kaçtır?}
+{Artış \(5\). Terim sayısı:
+\[n=\frac{99-4}{5}+1=19+1=20\]
+\[\text{Toplam}=20\cdot\frac{4+99}{2}=10\cdot 103=1030\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{Ardışık \(4\) çift sayının toplamı \(92\) ise en küçüğü kaçtır?}
+{Sayılar \(x,\ x+2,\ x+4,\ x+6\):
+\[4x+12=92\ \Rightarrow\ 4x=80\ \Rightarrow\ x=20\]
+Sayılar: \(20,22,24,26\) \quad (toplam \(92\) \checkmark).}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 5)}
+{\(75!\) sayısının sonunda kaç sıfır vardır?}
+{\(5\) çarpanlarını sayalım:
+\[\left\lfloor\frac{75}{5}\right\rfloor=15,\qquad \left\lfloor\frac{75}{25}\right\rfloor=3,\qquad \left\lfloor\frac{75}{125}\right\rfloor=0\]
+\[15+3=18\ \text{sıfır}\]
+(\(25,50,75\) ikişer tane \(5\) çarpanı içerir.)}
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item \(\mathbb{N}=\{0,1,2,\dots\}\), \(\mathbb{Z}\); \(0\) çift ve işaretsiz
+\item \([a,b]\) aralığında \(b-a+1\) tam sayı
+\item \(\ab{ab}\pm\ab{ba}\): \(11(a+b)\), \(9(a-b)\)
+\item \(\ab{abc}-\ab{cba}=99(a-c)\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Parantez \(\to\) üs \(\to\) \(\times\div\) \(\to\) \(+-\), soldan sağa
+\item \(-a^2\neq(-a)^2\)
+\item Tek sayıda negatif çarpan \(\Rightarrow\) negatif
+\item Çift çarpan varsa çarpım çift
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item Terim sayısı: \(\dfrac{\text{son}-\text{ilk}}{\text{artış}}+1\)
+\item \(\dfrac{n(n+1)}{2}\), \ \(n(n+1)\), \ \(n^2\)
+\item \(n!=n\,(n-1)!\), \ \(0!=1\)
+\item Sondaki sıfır: \(\lfloor\frac{n}{5}\rfloor+\lfloor\frac{n}{25}\rfloor+\cdots\)
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Asal sayılar, asal çarpanlara ayırma, tam bölenler, bölme
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

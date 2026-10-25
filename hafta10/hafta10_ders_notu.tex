@@ -1,0 +1,334 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 10 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 10 Ders Notu: Köklü Sayılar\\ (Özellikler, Dört İşlem, Eşlenik)}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır.
+
+% =====================================================
+\section{Köklü Sayının Tanımı}
+
+\begin{kural}[Tanım (\(n\ge 2\) tam sayı: kök derecesi)]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \(a\ge 0\) için \(\sqrt{a}\), karesi \(a\) olan \textbf{negatif olmayan} sayıdır: \(\sqrt{49}=7\), \(\sqrt{0}=0\).
+\item \(n\) \textbf{çift} ise \(\sqrt[n]{a}\) yalnız \(a\ge 0\) için reel sayıdır ve \(\sqrt[n]{a}\ge 0\)'dır: \(\sqrt[4]{81}=3\).
+\item \(n\) \textbf{tek} ise \(\sqrt[n]{a}\) her reel \(a\) için tanımlıdır ve işareti \(a\)'nın işaretidir: \(\sqrt[3]{-8}=-2\), \(\sqrt[5]{-1}=-1\).
+\end{itemize}
+\textbf{Tam kareler:} \(1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361,400\)\\
+\textbf{Tam küpler:} \(1,8,27,64,125,216,343,512,729,1000\)
+\end{kural}
+
+\begin{dikkat}
+\(\sqrt{9}=3\)'tür, \(\pm 3\) değildir. \(\sqrt{-4}\), \(\sqrt[4]{-16}\) reel sayı değildir. \(\sqrt{a+b}\neq\sqrt a+\sqrt b\): \(\sqrt{9+16}=5\) ama \(\sqrt9+\sqrt{16}=7\).
+\end{dikkat}
+
+\begin{ornek}
+\(\sqrt{0{,}09}+\sqrt[3]{-0{,}008}\) ve \(\sqrt[4]{\dfrac{1}{81}}\) değerleri kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\sqrt{0{,}09}=0{,}3\) \ (\(0{,}3^2=0{,}09\)); \ \(\sqrt[3]{-0{,}008}=-0{,}2\) \ (\((-0{,}2)^3=-0{,}008\)). Toplam: \(0{,}3-0{,}2=0{,}1\).\\
+\(\sqrt[4]{\frac{1}{81}}=\frac13\) \ (\(3^4=81\)).
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt[4]{10-2x}\) bir reel sayı belirtiyorsa \(x\)'in alabileceği en büyük tam sayı değeri kaçtır? \(x\) kaç farklı pozitif tam sayı değeri alabilir?
+\end{ornek}
+\begin{cozum}
+Çift dereceli kök: \(10-2x\ge 0\Rightarrow x\le 5\). En büyük tam sayı değeri \(5\). Pozitif tam sayı değerleri \(1,2,3,4,5\): \(5\) tane.
+\end{cozum}
+
+% =====================================================
+\section{Kesirli Üs ve \texorpdfstring{\(\sqrt{a^2}=|a|\)}{karekok a kare}}
+
+\begin{kural}[Kural]
+\(a>0\), \(m\) tam sayı ve \(n\ge 2\) tam sayı ise \quad \(a^{\frac mn}=\sqrt[n]{a^m}=\left(\sqrt[n]{a}\right)^m\). \quad Örnek: \(\sqrt[3]{x^2}=x^{\frac23}\), \ \(\dfrac{1}{\sqrt x}=x^{-\frac12}\) (\(x>0\)).\\[2pt]
+Her reel \(a\) için \(\sqrt{a^2}=|a|\); \quad \(\sqrt[n]{a^n}=a\) (\(n\) tek), \quad \(\sqrt[n]{a^n}=|a|\) (\(n\) çift).
+\end{kural}
+
+\begin{dikkat}
+Kesirli üste pay üs, payda kök derecesidir: \(a^{\frac23}=\sqrt[3]{a^2}\). \(\sqrt{x^2}=x\) eşitliği yalnız \(x\ge 0\) iken doğrudur; genel olarak \(\sqrt{x^2}=|x|\) (mutlak değer: 7.~hafta).
+\end{dikkat}
+
+\begin{ornek}
+\(32^{\frac35}+81^{-\frac14}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(32^{\frac35}=\left(\sqrt[5]{32}\right)^3=2^3=8\); \quad \(81^{-\frac14}=\dfrac{1}{81^{\frac14}}=\dfrac{1}{\sqrt[4]{81}}=\dfrac13\). \quad Sonuç: \(8+\dfrac13=\dfrac{25}{3}\).
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt[3]{4^x}=16\) olduğuna göre \(x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\sqrt[3]{4^x}=\sqrt[3]{2^{2x}}=2^{\frac{2x}{3}}\) ve \(16=2^4\). \quad \(\dfrac{2x}{3}=4\Rightarrow x=6\). \quad Kontrol: \(\sqrt[3]{4^6}=\sqrt[3]{4096}=16\).
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt{(\sqrt3-2)^2}+\sqrt{(\sqrt3-1)^2}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(1<\sqrt3<2\) (çünkü \(1<3<4\)). \ \(\sqrt3-2<0\Rightarrow|\sqrt3-2|=2-\sqrt3\); \ \(\sqrt3-1>0\Rightarrow|\sqrt3-1|=\sqrt3-1\).
+\[(2-\sqrt3)+(\sqrt3-1)=1\]
+\end{cozum}
+
+\begin{ornek}
+\(x<0<y\) olmak üzere \(\sqrt{x^2}+\sqrt[3]{y^3}-\sqrt{(x-y)^2}\) ifadesinin eşiti nedir?
+\end{ornek}
+\begin{cozum}
+\(\sqrt{x^2}=|x|=-x\) (\(x<0\)); \quad \(\sqrt[3]{y^3}=y\) (tek derece); \quad \(x-y<0\Rightarrow\sqrt{(x-y)^2}=|x-y|=y-x\).
+\[-x+y-(y-x)=-x+y-y+x=0\]
+\end{cozum}
+
+% =====================================================
+\section{Kök Dışına Çıkarma, Kök İçine Alma, İki Tam Sayı Arası}
+
+\begin{kural}[Kural]
+\(a,b\ge 0\) için \(\sqrt{a^2 b}=a\sqrt b\) \ ve \ \(\sqrt[n]{a^n b}=a\sqrt[n]{b}\). Kök dışına çıkarırken içerideki en büyük tam kare (tam küp) çarpan ayrılır; kök içine alırken dıştaki sayının \(n\). kuvveti içeri girer.\\
+\(k^2<a<(k+1)^2\) ise \(k<\sqrt a<k+1\).
+\end{kural}
+
+\begin{ornek}
+\(\sqrt{2^5\cdot 3^3}\) ve \(\sqrt[3]{2^7\cdot 5^4}\) sayılarını kök dışına çıkararak sadeleştiriniz.
+\end{ornek}
+\begin{cozum}
+Üsleri kök derecesinin katlarına ayıralım:
+\(\sqrt{2^4\cdot 2\cdot 3^2\cdot 3}=2^2\cdot 3\sqrt{2\cdot 3}=12\sqrt6\); \quad
+\(\sqrt[3]{2^6\cdot 2\cdot 5^3\cdot 5}=2^2\cdot 5\sqrt[3]{2\cdot 5}=20\sqrt[3]{10}\).
+\end{cozum}
+
+\begin{ornek}
+\(a\sqrt5=\sqrt{180}\) ve \(2\sqrt[3]{5}=\sqrt[3]{b}\) olduğuna göre \(a+b\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\sqrt{180}=\sqrt{36\cdot 5}=6\sqrt5\Rightarrow a=6\). \quad \(2\sqrt[3]{5}=\sqrt[3]{2^3\cdot 5}=\sqrt[3]{40}\Rightarrow b=40\). \quad \(a+b=46\).
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt{130}\), \(\sqrt[3]{100}\) ve \(2\sqrt7\) sayıları hangi iki ardışık tam sayı arasındadır?
+\end{ornek}
+\begin{cozum}
+\(121<130<144\Rightarrow 11<\sqrt{130}<12\). \quad \(64<100<125\Rightarrow 4<\sqrt[3]{100}<5\).\\
+\(2\sqrt7=\sqrt{28}\), \ \(25<28<36\Rightarrow 5<2\sqrt7<6\).
+\end{cozum}
+
+% =====================================================
+\section{Toplama, Çıkarma, Çarpma ve Bölme}
+
+\begin{kural}[Dört işlem]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Yalnız \textbf{benzer kökler} (aynı derece, aynı iç) toplanır: \(a\sqrt[n]{x}+b\sqrt[n]{x}=(a+b)\sqrt[n]{x}\). Önce sadeleştirin.
+\item Aynı dereceli kökler (\(n\) çift ise \(a,b\ge 0\)): \(\sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{ab}\), \ \(\dfrac{\sqrt[n]{a}}{\sqrt[n]{b}}=\sqrt[n]{\dfrac ab}\) (\(b\neq 0\)).
+\item Derece genişletme (\(a\ge 0\)): \(\sqrt[n]{a^m}=\sqrt[nk]{a^{mk}}\). Farklı dereceler EKOK'ta eşitlenir.
+\item Kökün kökü (\(a\ge 0\)): \(\sqrt[m]{\sqrt[n]{a}}=\sqrt[mn]{a}\).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}[Sık yapılan hatalar]
+\(\sqrt2+\sqrt3\neq\sqrt5\). \ \(\sqrt{-4}\cdot\sqrt{-9}=\sqrt{36}\) yazılamaz (\(\sqrt{-4}\) reel değil). \ \(\sqrt2\cdot\sqrt[3]{3}\neq\sqrt[6]{6}\): dereceyi genişletirken içerinin üssü de çarpılır.
+\end{dikkat}
+
+\begin{ornek}
+\(3\sqrt8-\sqrt{50}+\sqrt{32}\) işleminin sonucu nedir?
+\end{ornek}
+\begin{cozum}
+\(3\sqrt8=3\cdot 2\sqrt2=6\sqrt2\), \ \(\sqrt{50}=5\sqrt2\), \ \(\sqrt{32}=4\sqrt2\). \quad \(6\sqrt2-5\sqrt2+4\sqrt2=5\sqrt2\).
+\end{cozum}
+
+\begin{ornek}
+\(2\sqrt[3]{24}-\sqrt[3]{81}\) işleminin sonucu nedir?
+\end{ornek}
+\begin{cozum}
+\(\sqrt[3]{24}=\sqrt[3]{8\cdot 3}=2\sqrt[3]{3}\), \ \(\sqrt[3]{81}=\sqrt[3]{27\cdot 3}=3\sqrt[3]{3}\). \quad \(2\cdot 2\sqrt[3]{3}-3\sqrt[3]{3}=\sqrt[3]{3}\).
+\end{cozum}
+
+\begin{ornek}
+\((\sqrt{12}+\sqrt{75})\cdot\sqrt3\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Dağılma özelliği: \(\sqrt{12}\cdot\sqrt3+\sqrt{75}\cdot\sqrt3=\sqrt{36}+\sqrt{225}=6+15=21\).\\
+(Diğer yol: \(\sqrt{12}+\sqrt{75}=2\sqrt3+5\sqrt3=7\sqrt3\), \ \(7\sqrt3\cdot\sqrt3=7\cdot 3=21\).)
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt2\cdot\sqrt{18}+\dfrac{\sqrt{63}}{\sqrt7}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\sqrt2\cdot\sqrt{18}=\sqrt{36}=6\), \quad \(\dfrac{\sqrt{63}}{\sqrt7}=\sqrt9=3\). \quad Sonuç: \(9\).
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt[3]{2}\cdot\sqrt[4]{2}\) çarpımını tek kök olarak yazınız. \(\sqrt{3\sqrt[3]{3}}\) ifadesinin en sade biçimi nedir?
+\end{ornek}
+\begin{cozum}
+EKOK\((3,4)=12\): \(\sqrt[3]{2}=\sqrt[12]{2^4}\), \(\sqrt[4]{2}=\sqrt[12]{2^3}\) \(\Rightarrow\) \(\sqrt[12]{2^7}=\sqrt[12]{128}\).\\
+\(3\)'ü içteki köke alalım: \(3\sqrt[3]{3}=\sqrt[3]{27\cdot 3}=\sqrt[3]{81}\). \quad \(\sqrt{\sqrt[3]{81}}=\sqrt[6]{81}=\sqrt[6]{3^4}=\sqrt[3]{3^2}=\sqrt[3]{9}\).
+\end{cozum}
+
+\begin{ornek}
+\(a=\sqrt2\), \(b=\sqrt[3]{3}\), \(c=\sqrt[4]{5}\) sayılarını küçükten büyüğe sıralayınız.
+\end{ornek}
+\begin{cozum}
+EKOK\((2,3,4)=12\): \ \(a=\sqrt[12]{2^6}=\sqrt[12]{64}\), \ \(b=\sqrt[12]{3^4}=\sqrt[12]{81}\), \ \(c=\sqrt[12]{5^3}=\sqrt[12]{125}\). \quad \(64<81<125\Rightarrow a<b<c\).
+\end{cozum}
+
+\begin{ornek}
+\(\sqrt5\approx 2{,}236\) olduğuna göre \(\sqrt{20}+\sqrt{45}-\sqrt{80}\) ifadesinin yaklaşık değeri kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\sqrt{20}=2\sqrt5\), \ \(\sqrt{45}=3\sqrt5\), \ \(\sqrt{80}=4\sqrt5\). \quad \(2\sqrt5+3\sqrt5-4\sqrt5=\sqrt5\approx 2{,}236\).
+\end{cozum}
+
+% =====================================================
+\section{Paydayı Rasyonel Yapma ve Eşlenik}
+
+\begin{kural}[Kural]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Tek terimli payda (\(b>0\)): \(\dfrac{a}{\sqrt b}=\dfrac{a\sqrt b}{b}\). \ Küp kökte: \(\sqrt[3]{x}\cdot\sqrt[3]{x^2}=x\).
+\item \textbf{İki kare farkı} (yalnız eşlenik çarpımı için kısa kural): \((x-y)(x+y)=x^2-y^2\), \ yani \((\sqrt a-\sqrt b)(\sqrt a+\sqrt b)=a-b\) (\(a,b\ge 0\)).
+\item Payda \(\sqrt a\pm\sqrt b\) veya \(c\pm\sqrt b\) ise pay ve payda, paydanın \textbf{eşleniği} (\(\sqrt a\mp\sqrt b\), \(c\mp\sqrt b\)) ile çarpılır.
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+Pay ve payda \textbf{aynı} ifadeyle çarpılmalı. \((\sqrt3+1)^2\) gibi bir kareyi dağılma özelliğiyle adım adım açın: \((\sqrt3+1)(\sqrt3+1)=3+\sqrt3+\sqrt3+1=4+2\sqrt3\) (\(3+1=4\) değil!).
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{15}{\sqrt5}+\sqrt{20}\) işleminin sonucu nedir?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{15}{\sqrt5}=\dfrac{15\sqrt5}{5}=3\sqrt5\), \ \(\sqrt{20}=2\sqrt5\). \quad \(3\sqrt5+2\sqrt5=5\sqrt5\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{2}{\sqrt[3]{4}}\) kesrinin paydasını rasyonel yapınız.
+\end{ornek}
+\begin{cozum}
+\(\sqrt[3]{4}\cdot\sqrt[3]{2}=\sqrt[3]{8}=2\) olduğundan pay ve payda \(\sqrt[3]{2}\) ile çarpılır:
+\(\dfrac{2\sqrt[3]{2}}{\sqrt[3]{8}}=\dfrac{2\sqrt[3]{2}}{2}=\sqrt[3]{2}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{3}{\sqrt7+2}\) kesrinin paydasını rasyonel yapınız.
+\end{ornek}
+\begin{cozum}
+Eşlenik \(\sqrt7-2\): \ payda \((\sqrt7+2)(\sqrt7-2)=7-4=3\). \quad \(\dfrac{3(\sqrt7-2)}{3}=\sqrt7-2\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{\sqrt5+\sqrt3}{\sqrt5-\sqrt3}\) kesrini sadeleştiriniz.
+\end{ornek}
+\begin{cozum}
+Pay ve payda \(\sqrt5+\sqrt3\) ile çarpılır. Payda: \(5-3=2\).\\
+Pay (dağılma): \((\sqrt5+\sqrt3)(\sqrt5+\sqrt3)=5+\sqrt{15}+\sqrt{15}+3=8+2\sqrt{15}\). \quad \(\dfrac{8+2\sqrt{15}}{2}=4+\sqrt{15}\).
+\end{cozum}
+
+\begin{ornek}
+\(x=\dfrac{1}{\sqrt2-1}\) olduğuna göre \(x-\dfrac1x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(x=\dfrac{\sqrt2+1}{(\sqrt2-1)(\sqrt2+1)}=\dfrac{\sqrt2+1}{2-1}=\sqrt2+1\); \quad \(\dfrac1x=\sqrt2-1\).
+\quad \(x-\dfrac1x=(\sqrt2+1)-(\sqrt2-1)=2\).
+\end{cozum}
+
+% =====================================================
+\section{İç İçe Kökler}
+
+\begin{kural}[Kural]
+\(x\ge y\ge 0\), \ \(x+y=a\) \ ve \ \(x\cdot y=b\) ise
+\[\sqrt{a+2\sqrt b}=\sqrt x+\sqrt y,\qquad \sqrt{a-2\sqrt b}=\sqrt x-\sqrt y.\]
+İçteki kökün önünde \(2\) yoksa önce oluşturun: \(\sqrt{60}=2\sqrt{15}\), \ \(\sqrt{56}=2\sqrt{14}\).
+\end{kural}
+
+\begin{ornek}
+\(\sqrt{11+2\sqrt{30}}\) ve \(\sqrt{9-\sqrt{56}}\) ifadelerinin eşitleri nedir?
+\end{ornek}
+\begin{cozum}
+Toplamı \(11\), çarpımı \(30\): \(6\) ve \(5\) \(\Rightarrow\) \(\sqrt{11+2\sqrt{30}}=\sqrt6+\sqrt5\).\\
+\(\sqrt{56}=2\sqrt{14}\); toplamı \(9\), çarpımı \(14\): \(7\) ve \(2\) \(\Rightarrow\) \(\sqrt{9-2\sqrt{14}}=\sqrt7-\sqrt2\) (büyük olan önce).
+\end{cozum}
+
+\begin{ornek}\textit{(İleri örnek)}
+\(x=\sqrt{20+\sqrt{20+\sqrt{20+\cdots}}}\) olduğuna göre \(x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Kökün içinde yine \(x\) vardır: \(x=\sqrt{20+x}\), \(x>0\). Kare alınırsa \(x^2=20+x\Rightarrow x(x-1)=20\). Çarpımı \(20\) olan ardışık iki pozitif sayı \(5\) ve \(4\) \(\Rightarrow\) \(x=5\). (\(x>1\) iken \(x(x-1)\) büyüdükçe büyür, \(0<x\le 1\) iken \(x(x-1)\le 0\); başka pozitif çözüm yoktur.) Kontrol: \(\sqrt{20+5}=5\).
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Tanım & \(n\) çift: \(a\ge 0\) olmalı, \(\sqrt[n]{a}\ge 0\); \ \(n\) tek: her \(a\), \(\sqrt[3]{-8}=-2\)\\
+Kesirli üs & \(a^{\frac mn}=\sqrt[n]{a^m}=\left(\sqrt[n]{a}\right)^m\) \ (\(a>0\))\\
+Mutlak değer & \(\sqrt{a^2}=|a|\); \ \(\sqrt[n]{a^n}=a\) (\(n\) tek), \ \(|a|\) (\(n\) çift)\\
+Kök dışı / içi & \(\sqrt{a^2b}=a\sqrt b\), \ \(\sqrt[n]{a^nb}=a\sqrt[n]{b}\) \ (\(a,b\ge 0\))\\
+Toplama & \(a\sqrt[n]{x}\pm b\sqrt[n]{x}=(a\pm b)\sqrt[n]{x}\) \ (yalnız benzer kökler)\\
+Çarpma / bölme & \(\sqrt[n]{a}\sqrt[n]{b}=\sqrt[n]{ab}\), \ \(\sqrt[n]{a}/\sqrt[n]{b}=\sqrt[n]{a/b}\) \ (\(n\) çift ise \(a,b\ge 0\))\\
+Ortak derece & \(\sqrt[n]{a^m}=\sqrt[nk]{a^{mk}}\); \ \(\sqrt[m]{\sqrt[n]{a}}=\sqrt[mn]{a}\) \ (\(a\ge 0\))\\
+Rasyonel payda & \(\dfrac{a}{\sqrt b}=\dfrac{a\sqrt b}{b}\); \ \((\sqrt a-\sqrt b)(\sqrt a+\sqrt b)=a-b\)\\
+İç içe kök & \(\sqrt{a\pm 2\sqrt b}=\sqrt x\pm\sqrt y\) \ (\(x+y=a\), \(xy=b\), \(x\ge y\))\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta10_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Çarpanlara ayırma ve özdeşlikler.}
+
+\end{document}

@@ -1,0 +1,122 @@
+% Hafta 1 -- alıştırma gövdesi (ders notu ve ayrı alıştırma kağıdı tarafından \input edilir)
+\section{Çözümlü Alıştırmalar}
+Her soruyu önce kendiniz deneyin, sonra çözümü okuyun.
+
+\begin{alistirma}
+Rakamları birbirinden farklı üç basamaklı en büyük çift doğal sayı ile rakamları birbirinden farklı üç basamaklı en küçük tek doğal sayının farkı kaçtır?
+\end{alistirma}
+\begin{cozum}
+\textbf{En büyük çift sayı:} Yüzler basamağına en büyük rakam \(9\), onlara \(8\) yazılır. Birler basamağı çift olmalı ve \(9,8\)'den farklı olmalı: en büyük seçenek \(6\). \(\Rightarrow 986\).\\
+\textbf{En küçük tek sayı:} Yüzler basamağı \(0\) olamaz \(\Rightarrow 1\); onlar \(0\). Birler basamağı tek olmalı ve \(1\)'den farklı olmalı: en küçük seçenek \(3\). \(\Rightarrow 103\).
+\[986-103=883\]
+\end{cozum}
+
+\begin{alistirma}
+\(\ab{abc}\) ve \(\ab{cba}\) üç basamaklı sayılardır. \(\ab{abc}-\ab{cba}=594\) ve \(a+c=12\) olduğuna göre \(a\cdot c\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+Çözümleme: \((100a+10b+c)-(100c+10b+a)=99a-99c=99(a-c)\).
+\[99(a-c)=594\ \Rightarrow\ a-c=6\]
+\(a-c=6\) ve \(a+c=12\) taraf tarafa toplanırsa \(2a=18\Rightarrow a=9\), \ \(c=3\).
+\[a\cdot c=9\cdot 3=27\qquad(\text{kontrol, } b=5 \text{ için: } 953-359=594)\]
+\end{cozum}
+
+\begin{alistirma}
+\(\dfrac{(-2)^3+4^2\div 2}{-3^2+10}\) işleminin sonucu kaçtır?
+\end{alistirma}
+\begin{cozum}
+Kesir çizgisi parantez gibidir; pay ve payda ayrı hesaplanır.\\
+Pay: \((-2)^3=-8\) (tek kuvvet, işaret korunur); \ \(4^2\div 2=16\div 2=8\); \ \(-8+8=0\).\\
+Payda: \(-3^2=-9\) (üs yalnız \(3\)'e ait); \ \(-9+10=1\).
+\[\frac{0}{1}=0\]
+\end{cozum}
+
+\begin{alistirma}
+\(x,y,z\) tam sayılardır. \(x\cdot y\) tek ve \(x+z\) çift ise \(z\) tek midir, çift midir? \(x+y+z\) tek midir, çift midir?
+\end{alistirma}
+\begin{cozum}
+Çarpım tek ise bütün çarpanlar tektir: \(x\) tek, \(y\) tek.\\
+\(x+z\) çift ve \(x\) tek \(\Rightarrow\) \(z\) de tek olmalı (T\(+\)T\(=\)Ç). \quad \(z\) \textbf{tek}.\\
+\(x+y+z=\) T\(+\)T\(+\)T \(=\) Ç\(+\)T \(=\) \textbf{tek}. \quad (Kontrol: \(1+3+5=9\).)
+\end{cozum}
+
+\begin{alistirma}
+\(13+17+21+\dots+97\) toplamında kaç terim vardır? Toplam kaçtır?
+\end{alistirma}
+\begin{cozum}
+Artış \(17-13=4\).
+\[\text{Terim sayısı}=\frac{97-13}{4}+1=\frac{84}{4}+1=21+1=22\]
+\[\text{Toplam}=22\cdot\frac{13+97}{2}=22\cdot 55=1210\]
+\end{cozum}
+
+\begin{alistirma}
+Ardışık \(5\) tam sayının toplamı \(-15\) ise bu sayıların en büyüğü kaçtır?
+\end{alistirma}
+\begin{cozum}
+Terim sayısı tek olduğundan toplam \(=5\cdot\) ortanca terim:
+\[\text{Ortanca}=\frac{-15}{5}=-3\]
+Sayılar: \(-5,\ -4,\ -3,\ -2,\ -1\). \quad En büyüğü \(-1\).\\
+(Dikkat: Negatif sayılarda en büyük, sıfıra en yakın olandır.)
+\end{cozum}
+
+\begin{alistirma}
+\(n\) bir doğal sayıdır. \(\dfrac{(n+2)!}{n!}=56\) olduğuna göre \(n\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+\((n+2)!=(n+2)(n+1)\cdot n!\) yazılırsa:
+\[\frac{(n+2)(n+1)\cdot n!}{n!}=(n+2)(n+1)=56\]
+Ardışık iki doğal sayının çarpımı \(56=7\cdot 8\) \(\Rightarrow\) \(n+1=7\), \(n=6\).\\
+(Kontrol: \(8!/6!=8\cdot 7=56\).)
+\end{cozum}
+
+\begin{alistirma}
+\(2!+4!+6!+\dots+20!\) toplamının birler basamağındaki rakam kaçtır? Bu toplam tek midir, çift midir?
+\end{alistirma}
+\begin{cozum}
+\(n\ge 5\) için \(n!\) içinde \(2\cdot 5=10\) çarpanı bulunur; birler basamağı \(0\)'dır. Bu yüzden \(6!,8!,\dots,20!\) birler basamağını etkilemez.\\
+Kalan terimler: \(2!+4!=2+24=26\) \(\Rightarrow\) birler basamağı \(6\).\\
+Birler basamağı çift olduğundan toplam \textbf{çifttir} (zaten her terim çifttir).
+\end{cozum}
+
+\kendinizoncesi
+\section{Alıştırmalar (Kendiniz Çözün)}
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=6pt]
+\item \(B=\{x\in\mathbb{N}\,:\,x<5\}\) ve \(C=\{x\in\mathbb{Z}\,:\,-2\le x<3\}\) kümelerinin eleman sayıları kaçtır?
+\item \(-7\) ile \(6\) arasında (uçlar hariç) kaç tam sayı vardır?
+\item \(\ab{ab}\) ve \(\ab{ba}\) iki basamaklı sayılardır. \(\ab{ab}+\ab{ba}=143\) ve \(a-b=5\) olduğuna göre \(\ab{ab}\) sayısı kaçtır?
+\item İki basamaklı \(\ab{ab}\) sayısı, rakamları toplamının \(7\) katına eşittir. Bu koşulu sağlayan kaç sayı vardır?
+\item \(36\div 6\cdot 2-3\cdot(2-5)^2\) işleminin sonucu kaçtır?
+\item \(-2^4+(-2)^3-(-1)^{99}\) işleminin sonucu kaçtır?
+\item \(a\cdot b>0\), \ \(b\cdot c<0\) ve \(a<0\) olduğuna göre \(b\) ve \(c\)'nin işaretleri nedir? \(a\cdot c\) pozitif midir, negatif midir?
+\item \(a\) ve \(b\) tam sayılardır. \(a\) tek ve \(a^2\cdot b+a\) çift ise \(b\) tek midir, çift midir?
+\item \(1+3+5+\dots+59\) ve \(2+4+6+\dots+60\) toplamları kaçtır?
+\item Ardışık \(3\) tek sayının toplamı \(117\) ise en büyüğü kaçtır?
+\item İki basamaklı doğal sayılardan kaç tanesi \(6\)'nın katıdır?
+\item \(11+12+13+\dots+40\) toplamı kaçtır?
+\item \(\dfrac{10!}{8!}-\dfrac{7!}{5!}\) işleminin sonucu kaçtır?
+\item \(\dfrac{7!+8!}{9\cdot 6!}\) işleminin sonucu kaçtır?
+\item \(40!\) sayısının sonunda kaç sıfır vardır?
+\end{enumerate}
+
+\subsection*{Cevap Anahtarı}
+{\small
+\begin{multicols}{2}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=1pt]
+\item \(B=\{0,1,2,3,4\}\): \(5\); \ \(C=\{-2,\dots,2\}\): \(5\).
+\item \(-6,\dots,5\): \(5-(-6)+1=12\).
+\item \(a+b=13\), \(a-b=5\Rightarrow a=9,\ b=4\); \ \(94\).
+\item \(10a+b=7a+7b\Rightarrow a=2b\): \(21,42,63,84\); \ \(4\) tane.
+\item \(6\cdot 2-3\cdot 9=12-27=-15\).
+\item \(-16+(-8)-(-1)=-23\).
+\item \(b<0\), \(c>0\); \ \(a\cdot c\) negatif.
+\item \(a^2\) tek; \(a^2b\) tek olmalı \(\Rightarrow\) \(b\) tek.
+\item \(30^2=900\); \ \(30\cdot 31=930\).
+\item Ortanca \(39\): \(37,39,41\); \ en büyük \(41\).
+\item \(12,18,\dots,96\): \(\frac{96-12}{6}+1=15\).
+\item \(\frac{40\cdot 41}{2}-\frac{10\cdot 11}{2}=820-55=765\).
+\item \(10\cdot 9-7\cdot 6=90-42=48\).
+\item \(\frac{6!\,(7+56)}{9\cdot 6!}=\frac{63}{9}=7\).
+\item \(\lfloor 40/5\rfloor+\lfloor 40/25\rfloor=8+1=9\).
+\end{enumerate}
+\end{multicols}}

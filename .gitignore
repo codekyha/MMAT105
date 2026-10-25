@@ -1,0 +1,9 @@
+*.aux
+*.log
+*.nav
+*.snm
+*.toc
+*.vrb
+*.out
+*.synctex.gz
+__pycache__/

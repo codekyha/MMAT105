@@ -1,0 +1,345 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 9 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 9 Ders Notu: Üslü Sayılar -- Özellikler,\\ Dört İşlem ve Üslü Denklemler}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır. Bu hafta üsler \textbf{tam sayıdır}; köklü sayılar ve kesirli üsler gelecek haftanın konusudur.
+
+% =====================================================
+\section{Tanım, İşaret, Sıfır ve Negatif Üs}
+
+\begin{kural}[Tanım]
+\(n\) pozitif tam sayı olmak üzere \(a^n=\underbrace{a\cdot a\cdots a}_{n\ \text{tane}}\) \ (\(a\): taban, \(n\): üs).
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \(a^1=a\); \quad \(a\neq 0\) ise \(a^0=1\); \quad \(0^0\) tanımsızdır.
+\item \(1^n=1\); \quad \(n>0\) ise \(0^n=0\); \quad \((-1)^n=1\) (\(n\) çift), \ \((-1)^n=-1\) (\(n\) tek).
+\item \(a>0\) ise \((-a)^{\text{çift}}>0\), \ \((-a)^{\text{tek}}<0\).
+\item Negatif üs (\(a,b\neq 0\)): \quad \(a^{-n}=\dfrac{1}{a^n}\), \qquad \(\left(\dfrac{a}{b}\right)^{-n}=\left(\dfrac{b}{a}\right)^{n}\).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}[Sık yapılan hatalar]
+\(-a^n=-(a^n)\) ile \((-a)^n\) farklıdır: \(-3^2=-9\), \((-3)^2=9\). \ Negatif üs sayıyı negatif yapmaz: \(2^{-3}=\dfrac18\). \ Ondalık taban önce kesre çevrilir: \(0{,}2=\dfrac15\), \(0{,}25=\dfrac14\), \(1{,}5=\dfrac32\).
+\end{dikkat}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(-2^4+(-2)^4-(-1)^{99}-0^{8}\) \ işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(-2^4=-16\), \ \((-2)^4=16\), \ \((-1)^{99}=-1\) (\(99\) tek), \ \(0^8=0\).
+\[-16+16-(-1)-0=1\]
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(\left(-\dfrac13\right)^{-2}+(0{,}25)^{-1}-\left(\dfrac25\right)^{-1}\) \ işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\left(-\dfrac13\right)^{-2}=(-3)^2=9\), \quad \((0{,}25)^{-1}=\left(\dfrac14\right)^{-1}=4\), \quad \(\left(\dfrac25\right)^{-1}=\dfrac52\).
+\[9+4-\frac52=\frac{26}{2}-\frac52=\frac{21}{2}\]
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(2^{-1}+3^{-1}\) kaçtır? Bu sonuç \((2+3)^{-1}\)'e eşit midir?
+\end{ornek}
+\begin{cozum}
+\(2^{-1}+3^{-1}=\dfrac12+\dfrac13=\dfrac56\). \qquad \((2+3)^{-1}=5^{-1}=\dfrac15\). \quad \(\dfrac56\neq\dfrac15\): \textbf{eşit değil}.\\
+Negatif üs toplamın üzerine dağıtılamaz: \(a^{-1}+b^{-1}\neq (a+b)^{-1}\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(a=-3\) olduğuna göre \(a^2-a^3-(-a)^2+a^0\) ifadesinin değeri kaçtır?
+\end{ornek}
+\begin{cozum}
+\(a^2=9\); \ \(a^3=-27\Rightarrow -a^3=27\); \ \(-a=3\Rightarrow(-a)^2=9\); \ \(a^0=1\).
+\[9+27-9+1=28\]
+\end{cozum}
+
+% =====================================================
+\section{Üslü Sayıların Özellikleri}
+
+\begin{kural}[Özellikler]
+\(a\neq 0,\ b\neq 0\) ve \(m,n\) tam sayılar olmak üzere:\\[2pt]
+\begin{tabular}{@{}ll@{}}
+\(a^m\cdot a^n=a^{m+n}\), \quad \(\dfrac{a^m}{a^n}=a^{m-n}\) & (tabanlar aynı)\\[8pt]
+\(a^n\cdot b^n=(ab)^n\), \quad \(\dfrac{a^n}{b^n}=\left(\dfrac{a}{b}\right)^{n}\) & (üsler aynı)\\[8pt]
+\((a^m)^n=a^{m\cdot n}\) & (üssün üssü)
+\end{tabular}
+
+\textbf{Tabanları eşitleme:} \(4=2^2\), \(8=2^3\), \(16=2^4\), \(0{,}25=2^{-2}\), \(9=3^2\), \(27=3^3\), \(\frac19=3^{-2}\), \(125=5^3\), \(0{,}2=5^{-1}\), \(0{,}04=5^{-2}\).
+\end{kural}
+
+\begin{dikkat}
+\(a^{m^n}=a^{(m^n)}\) ile \((a^m)^n=a^{mn}\) farklıdır: \(2^{3^2}=2^9=512\), \((2^3)^2=2^6=64\). \ \(a^m\cdot a^n\neq a^{mn}\). \ \(4^x=2^{2x}\) doğru; \(4^x=2^{x+2}\) yanlış.
+\end{dikkat}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(a\neq 0\) olmak üzere \(\dfrac{(a^3)^4\cdot a^{-5}}{(a^2)^3}\) ifadesini sadeleştiriniz.
+\end{ornek}
+\begin{cozum}
+\(\dfrac{a^{12}\cdot a^{-5}}{a^{6}}=a^{12-5-6}=a^{1}=a\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(\dfrac{25^3\cdot 125^{-2}}{5^{-4}}\) \ işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(25^3=(5^2)^3=5^6\), \ \(125^{-2}=(5^3)^{-2}=5^{-6}\). \quad \(\dfrac{5^6\cdot 5^{-6}}{5^{-4}}=5^{6-6-(-4)}=5^4=625\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\((0{,}04)^{-1}\cdot(0{,}2)^{3}\) \ işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(0{,}04=5^{-2}\), \ \(0{,}2=5^{-1}\): \quad \((5^{-2})^{-1}\cdot(5^{-1})^{3}=5^{2}\cdot 5^{-3}=5^{-1}=\dfrac15=0{,}2\).\\
+Kontrol: \(25\cdot 0{,}008=0{,}2\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(\dfrac{18^5}{2^4\cdot 9^5}\) \ işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(18^5=(2\cdot 9)^5=2^5\cdot 9^5\) \ \(\Rightarrow\) \ \(\dfrac{2^5\cdot 9^5}{2^4\cdot 9^5}=2^{5-4}=2\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(10^x=a\) olduğuna göre \(0{,}01\cdot 10^{2x+1}\) ifadesini \(a\) türünden yazınız.
+\end{ornek}
+\begin{cozum}
+\(0{,}01=10^{-2}\) \ \(\Rightarrow\) \ \(10^{-2}\cdot 10^{2x+1}=10^{2x-1}=\dfrac{(10^x)^2}{10}=\dfrac{a^2}{10}\).
+\end{cozum}
+
+% =====================================================
+\section{Toplama, Çıkarma ve Bilimsel Gösterim}
+
+\begin{kural}[Toplama -- çıkarma]
+Yalnızca tabanı \textbf{ve} üssü aynı olan terimler toplanır: \(x\cdot a^n+y\cdot a^n=(x+y)\cdot a^n\).
+Üsleri farklı terimlerde \textbf{en küçük kuvvet} ortak çarpan parantezine alınır: \(2^{x+2}+2^x=2^x(4+1)=5\cdot 2^x\).\\
+\textbf{Bilimsel gösterim:} \(a\cdot 10^n\), \ \(1\le|a|<10\), \(n\) tam sayı. Çarpma/bölmede katsayılar ve \(10\)'un kuvvetleri ayrı ayrı işlenir.
+\end{kural}
+
+\begin{dikkat}
+Toplamada üsler toplanmaz: \(2^3+2^4=24\neq 2^7\). \quad \(3^5+3^5+3^5=3\cdot 3^5=3^6\) (\(3^{15}\) değil, \(9^5\) değil).
+\end{dikkat}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(\dfrac{3^{x+2}-3^{x}}{3^{x+1}+3^{x}}\) \ ifadesinin değeri kaçtır?
+\end{ornek}
+\begin{cozum}
+Pay: \(3^x(9-1)=8\cdot 3^x\); \quad payda: \(3^x(3+1)=4\cdot 3^x\). \quad \(\dfrac{8\cdot 3^x}{4\cdot 3^x}=2\) \ (her \(x\) için).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(4^5+4^5+4^5+4^5\) \ ve \ \(2^{20}+2^{20}\) \ toplamlarını \(2\)'nin kuvveti olarak yazınız.
+\end{ornek}
+\begin{cozum}
+\(4^5+4^5+4^5+4^5=4\cdot 4^5=4^6=(2^2)^6=2^{12}\). \qquad \(2^{20}+2^{20}=2\cdot 2^{20}=2^{21}\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(\dfrac{5^{12}-5^{11}}{5^{11}+5^{10}}\) \ işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Pay: \(5^{11}(5-1)=4\cdot 5^{11}\); \quad payda: \(5^{10}(5+1)=6\cdot 5^{10}\).
+\[\frac{4\cdot 5^{11}}{6\cdot 5^{10}}=\frac{4\cdot 5}{6}=\frac{20}{6}=\frac{10}{3}\]
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(\dfrac{0{,}00048\cdot 25\,000\,000}{0{,}0006}\) \ işleminin sonucunu bilimsel gösterimle yazınız.
+\end{ornek}
+\begin{cozum}
+\(\dfrac{(4{,}8\cdot 10^{-4})\cdot(2{,}5\cdot 10^{7})}{6\cdot 10^{-4}}=\dfrac{12\cdot 10^{3}}{6\cdot 10^{-4}}=2\cdot 10^{3-(-4)}=2\cdot 10^{7}\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+Işık saniyede yaklaşık \(3\cdot 10^{8}\) m yol alır. Bir yıl yaklaşık \(3{,}15\cdot 10^{7}\) saniyedir. Işığın bir yılda aldığı yol (ışık yılı) yaklaşık kaç metredir?
+\end{ornek}
+\begin{cozum}
+\((3\cdot 10^{8})\cdot(3{,}15\cdot 10^{7})=(3\cdot 3{,}15)\cdot 10^{8+7}=9{,}45\cdot 10^{15}\) m.
+\end{cozum}
+
+% =====================================================
+\section{Sıralama}
+
+\begin{kural}[Sıralama]
+\(a>1\) ise üssü büyük olan büyüktür; \(0<a<1\) ise üs büyüdükçe sayı küçülür. Üsler eşitse (pozitif tabanlarda) tabanı büyük olan büyüktür. Farklı taban ve üslerde ya tabanlar eşitlenir ya da üsler, üslerin EBOB'u ile eşitlenir.
+\end{kural}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(a=(0{,}5)^{-10}\), \ \(b=4^{6}\), \ \(c=8^{3}\) \ sayılarını küçükten büyüğe sıralayınız.
+\end{ornek}
+\begin{cozum}
+\(a=(2^{-1})^{-10}=2^{10}\), \ \(b=2^{12}\), \ \(c=2^{9}\). \ Taban \(2>1\): \(9<10<12\) \(\Rightarrow\) \(c<a<b\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(a=2^{45}\), \ \(b=3^{30}\), \ \(c=7^{15}\) \ sayılarını küçükten büyüğe sıralayınız.
+\end{ornek}
+\begin{cozum}
+Üslerin EBOB'u \(15\): \ \(a=(2^3)^{15}=8^{15}\), \ \(b=(3^2)^{15}=9^{15}\), \ \(c=7^{15}\). \ \(7<8<9\) \(\Rightarrow\) \(c<a<b\).
+\end{cozum}
+
+% =====================================================
+\section{Üslü Denklemler}
+
+\begin{kural}[Üslü denklemler]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \(a\neq 0,\ a\neq 1,\ a\neq -1\) ise: \ \(a^x=a^y\Rightarrow x=y\) \quad ve \quad \(a^x=1\Rightarrow x=0\).
+\item \(a>0,\ b>0,\ a\neq b\) ise: \ \(a^x=b^x\Rightarrow x=0\).
+\item Taban bilinmeyen \(x^a=x^b\) (\(x\) tam sayı): üsler eşit olabilir; ya da taban \(1\) olabilir; taban \(0\) olabilir (iki üs de pozitifse); taban \(-1\) olabilir (iki üs de çift ya da ikisi de tekse). Her aday kontrol edilir.
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+Üsleri farklı terimlerin toplamı varsa önce ortak çarpan parantezi: \(2^{x+3}+2^{x}=9\cdot 2^x\). \ \(1^x=1^y\) ve \((-1)^2=(-1)^4\) olduğundan \(a=0,\pm 1\) tabanlarında üsler eşitlenemez.
+\end{dikkat}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(27^{x-1}=9^{x+1}\) \ denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+\(3^{3x-3}=3^{2x+2}\) \(\Rightarrow\) \(3x-3=2x+2\) \(\Rightarrow\) \(x=5\). \quad Kontrol: \(27^4=3^{12}=9^6\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\((0{,}2)^{x+1}=125^{x-3}\) \ denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+\((0{,}2)^{x+1}=(5^{-1})^{x+1}=5^{-x-1}\), \ \(125^{x-3}=5^{3x-9}\).
+\[-x-1=3x-9\ \Rightarrow\ 8=4x\ \Rightarrow\ x=2\qquad(\text{Kontrol: } 0{,}2^3=0{,}008=125^{-1})\]
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(2^{x+3}+2^{x+1}-2^{x}=72\) \ denklemini çözünüz.
+\end{ornek}
+\begin{cozum}
+\(2^x(8+2-1)=9\cdot 2^x=72\) \(\Rightarrow\) \(2^x=8=2^3\) \(\Rightarrow\) \(x=3\). \quad Kontrol: \(64+16-8=72\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(2^{x-3}=3^{x-3}\) \ ve \ \(5^{y+1}=1\) \ olduğuna göre \(x+y\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Tabanlar farklı, üsler aynı: \(x-3=0\Rightarrow x=3\). \quad \(5^{y+1}=5^0\Rightarrow y=-1\). \quad \(x+y=2\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}
+\(x\) tam sayı olmak üzere \((x+1)^{2x}=(x+1)^{x+3}\) \ denkleminin çözüm kümesi nedir?
+\end{ornek}
+\begin{cozum}
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+\item Üsler eşit: \(2x=x+3\Rightarrow x=3\) (taban \(4\)) \checkmark
+\item Taban \(1\): \(x=0\): \(1^0=1^3=1\) \checkmark
+\item Taban \(0\): \(x=-1\): \(0^{-2}\) tanımsız \(\times\)
+\item Taban \(-1\): \(x=-2\): \((-1)^{-4}=1\), \((-1)^{1}=-1\) \(\times\)
+\end{itemize}
+Çözüm kümesi: \(\{0,\ 3\}\).
+\end{cozum}
+
+\needspace{7\baselineskip}
+\begin{ornek}\textit{(Birler basamağı hatırlatma)}
+\(8^{43}\) sayısının birler basamağındaki rakam kaçtır?
+\end{ornek}
+\begin{cozum}
+\(8\)'in kuvvetlerinin birler basamakları \(8,4,2,6\) biçiminde \(4\)'lü tekrar eder. \(43=4\cdot 10+3\) \(\Rightarrow\) üçüncü terim: \(2\).
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}lp{12.9cm}@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Tanım & \(a^n=a\cdot a\cdots a\) (\(n\) tane); \ \(a^1=a\); \ \(a^0=1\) (\(a\neq 0\)); \ \(0^0\) tanımsız\\
+İşaret & \((-a)^{\text{çift}}>0\), \((-a)^{\text{tek}}<0\) (\(a>0\)); \ \(-a^n\neq(-a)^n\)\\
+Negatif üs & \(a^{-n}=\dfrac{1}{a^n}\), \ \(\left(\dfrac ab\right)^{-n}=\left(\dfrac ba\right)^n\)\\
+Çarpma -- bölme & \(a^m a^n=a^{m+n}\), \ \(\dfrac{a^m}{a^n}=a^{m-n}\), \ \(a^nb^n=(ab)^n\), \ \(\dfrac{a^n}{b^n}=\left(\dfrac ab\right)^n\)\\
+Üssün üssü & \((a^m)^n=a^{mn}\neq a^{m^n}\)\\
+Toplama & benzer terimler: \(xa^n+ya^n=(x+y)a^n\); \ ortak çarpan: \(2^{x+2}+2^x=5\cdot 2^x\)\\
+Bilimsel gösterim & \(a\cdot 10^n\), \ \(1\le|a|<10\)\\
+Sıralama & taban \(>1\): büyük üs büyük; \ \(0<\)taban\(<1\): büyük üs küçük; \ ya tabanlar ya üsler (EBOB ile) eşitlenir\\
+Denklem & \(a^x=a^y\Rightarrow x=y\), \ \(a^x=1\Rightarrow x=0\) (\(a\neq 0,\pm1\)); \ \(a^x=b^x\Rightarrow x=0\) (\(a,b>0,\ a\neq b\))\\
+\(x^a=x^b\) & üsler eşit; taban \(1\); taban \(0\) (üsler pozitif); taban \(-1\) (üsler aynı paritede)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta9_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Köklü sayılar.}
+
+\end{document}

@@ -1,0 +1,344 @@
+% !TEX program = xelatex
+% Bu dosya tex_uret.py tarafından sorular.py'den üretilmiştir; düzenleme için sorular.py'yi değiştirip yeniden üretin.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1.8cm,top=1.9cm,bottom=1.9cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 8 -- Ara Sınav Deneme -- Çözümler}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcommand{\sk}[1]{\textbf{\color{anamavi}#1)}~}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\lineskiplimit}{2pt}\setlength{\lineskip}{4pt}
+\setlength{\columnsep}{0.9cm}
+\setlength{\columnseprule}{0.4pt}
+\newlength{\soruara}\setlength{\soruara}{1.7cm}
+
+\begin{document}
+
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large\bfseries Ara Sınav Deneme -- Cevap Anahtarı ve Çözümler}\\[2pt]
+{\normalsize Hafta 1--7 konuları}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\section*{Cevap Anahtarı}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}|}\hline
+\textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10}\\
+\textbf{\color{cozumyesil}D} & \textbf{\color{cozumyesil}E} & \textbf{\color{cozumyesil}B} & \textbf{\color{cozumyesil}B} & \textbf{\color{cozumyesil}E} & \textbf{\color{cozumyesil}B} & \textbf{\color{cozumyesil}D} & \textbf{\color{cozumyesil}C} & \textbf{\color{cozumyesil}C} & \textbf{\color{cozumyesil}A}\\\hline
+\textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} & \textbf{20}\\
+\textbf{\color{cozumyesil}C} & \textbf{\color{cozumyesil}A} & \textbf{\color{cozumyesil}D} & \textbf{\color{cozumyesil}D} & \textbf{\color{cozumyesil}A} & \textbf{\color{cozumyesil}E} & \textbf{\color{cozumyesil}E} & \textbf{\color{cozumyesil}B} & \textbf{\color{cozumyesil}A} & \textbf{\color{cozumyesil}C}\\\hline
+\end{tabular}
+\end{center}
+{\small\textbf{Satır hâlinde:} 1-D, \ 2-E, \ 3-B, \ 4-B, \ 5-E, \ 6-B, \ 7-D, \ 8-C, \ 9-C, \ 10-A, \ 11-C, \ 12-A, \ 13-D, \ 14-D, \ 15-A, \ 16-E, \ 17-E, \ 18-B, \ 19-A, \ 20-C}
+
+
+\section*{Soruların Konu ve Zorluk Dağılımı}
+\begin{center}\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}r l l c@{\hspace{1.2em}}|@{\hspace{1.2em}}r l l c@{}}
+\toprule
+No & Hafta -- Konu & Düzey & Cevap & No & Hafta -- Konu & Düzey & Cevap\\
+\midrule
+1 & H1 -- İşlem önceliği & Kolay & D & 11 & H4 -- Ondalık sayılar & Orta & C\\
+2 & H1 -- Ardışık sayılar & Orta & E & 12 & H4 -- Rasyonellerde sıralama & Orta & A\\
+3 & H1 -- Faktöriyel & Orta & B & 13 & H5 -- Parantezli denklem & Kolay & D\\
+4 & H2 -- Bölen sayısı & Kolay & B & 14 & H5 -- Kesirli katsayılı denklem & Orta & D\\
+5 & H2 -- Bölme & Orta & E & 15 & H5 -- Parametreli denklem & Zor & A\\
+6 & H2 -- Asal olmayan bölen sayısı & Zor & B & 16 & H6 -- Denklem sistemi & Orta & E\\
+7 & H3 -- 9 ile bölünebilme & Kolay & D & 17 & H6 -- Simetrik sistem & Zor & E\\
+8 & H3 -- EBOB--EKOK & Orta & C & 18 & H7 -- Eşitsizlik (tam sayılar) & Kolay & B\\
+9 & H3 -- EBOB problemi & Zor & C & 19 & H7 -- Mutlak değerli denklem & Orta & A\\
+10 & H4 -- Kesirlerde işlem sırası & Kolay & A & 20 & H7 -- Mutlak değerli eşitsizlik & Orta & C\\
+\bottomrule\end{tabular}
+\end{center}
+{\small Düzey dağılımı: Kolay 6, Orta 10, Zor (TYT orta üstü) 4. \quad Doğru şık dağılımı: A: 4, B: 4, C: 4, D: 4, E: 4.}
+
+\needspace{8\baselineskip}
+\section*{Çözümler}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 1.} {\small\color{gray}(Hafta 1 -- İşlem önceliği; Kolay)}\par
+\(18-4\cdot(7-10)\div 2+(-3)^2\) işleminin sonucu kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-12\) & \sk{B}\(15\) & \sk{C}\(21\) & \sk{D}\(33\) & \sk{E}\(39\)\end{tabular*}}
+\begin{cozum}
+Önce parantez: \(7-10=-3\). Üs: \((-3)^2=9\). Çarpma ve bölme soldan sağa:
+\(4\cdot(-3)=-12\), \ \(-12\div 2=-6\). Son olarak toplama-çıkarma:
+\[18-(-6)+9=18+6+9=33.\]
+\textit{Tipik hatalar:} \((-3)^2\) yerine \(-9\) almak \(\Rightarrow 15\); işlemi soldan sağa öncelik gözetmeden yapmak (\(18-4=14\), \(14\cdot(-3)\ldots\)) \(\Rightarrow -12\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: D}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 2.} {\small\color{gray}(Hafta 1 -- Ardışık sayılar; Orta)}\par
+Ardışık altı çift sayının toplamı \(150\)'dir. Bu sayıların en büyüğü kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(20\) & \sk{B}\(25\) & \sk{C}\(26\) & \sk{D}\(28\) & \sk{E}\(30\)\end{tabular*}}
+\begin{cozum}
+Ardışık sayılarda ortalama \(=\) (ilk terim \(+\) son terim)\(\,/\,2\) \(=\) toplam \(\div\) terim sayısı \(=150\div 6=25\).
+Terim sayısı çift olduğundan \(25\) ortadaki iki terimin (\(24\) ve \(26\)) ortalamasıdır.
+Sayılar: \(20,\ 22,\ 24,\ 26,\ 28,\ 30\). En büyüğü \(30\). (Kontrol: \(20+30=50\), \(3\cdot 50=150\) \checkmark)
+\textit{Tipik hatalar:} ortalamayı (\(25\)) ya da en küçük sayıyı (\(20\)) cevap sanmak.
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: E}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 3.} {\small\color{gray}(Hafta 1 -- Faktöriyel; Orta)}\par
+\(n\) pozitif bir tam sayı olmak üzere \(\dfrac{(n+1)!-n!}{(n-1)!}=49\) olduğuna göre \(n\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(6\) & \sk{B}\(7\) & \sk{C}\(8\) & \sk{D}\(9\) & \sk{E}\(49\)\end{tabular*}}
+\begin{cozum}
+Pay kısmında \(n!\) ortak çarpan parantezine alınır: \((n+1)!-n!=n!\,(n+1-1)=n\cdot n!\).
+\(n!=n\cdot(n-1)!\) olduğundan
+\[\frac{n\cdot n!}{(n-1)!}=n\cdot n=n^2=49\ \Rightarrow\ n=7\quad(n>0).\]
+\textit{Tipik hata:} \((n+1)!-n!=1\cdot n!\) sanıp \(\dfrac{n!}{(n-1)!}=n=49\) bulmak.
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: B}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 4.} {\small\color{gray}(Hafta 2 -- Bölen sayısı; Kolay)}\par
+\(600\) sayısının kaç tane pozitif böleni vardır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(12\) & \sk{B}\(24\) & \sk{C}\(30\) & \sk{D}\(36\) & \sk{E}\(48\)\end{tabular*}}
+\begin{cozum}
+\(600=2^3\cdot 3^1\cdot 5^2\). Pozitif bölen sayısı:
+\[(3+1)(1+1)(2+1)=4\cdot 2\cdot 3=24.\]
+\textit{Tipik hata:} tam bölen sayısını (\(2\cdot 24=48\)) vermek; soru \emph{pozitif} bölenleri soruyor.
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: B}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 5.} {\small\color{gray}(Hafta 2 -- Bölme; Orta)}\par
+\(A\) ve \(B\) doğal sayılardır. \(A\) sayısı \(9\)'a bölündüğünde bölüm \(B\), kalan \(5\)'tir. \(B\) sayısı \(4\)'e bölündüğünde kalan \(3\)'tür. Buna göre \(A\) sayısının \(36\)'ya bölümünden kalan kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(5\) & \sk{B}\(8\) & \sk{C}\(23\) & \sk{D}\(27\) & \sk{E}\(32\)\end{tabular*}}
+\begin{cozum}
+\(A=9B+5\) ve \(B=4k+3\) (\(k\) doğal sayı). Yerine koyalım:
+\[A=9(4k+3)+5=36k+27+5=36k+32.\]
+\(0\le 32<36\) olduğundan kalan \(32\)'dir. (Kontrol: \(k=0\Rightarrow B=3,\ A=32\); \(k=1\Rightarrow B=7,\ A=68=36+32\).)
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: E}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 6.} {\small\color{gray}(Hafta 2 -- Asal olmayan bölen sayısı; Zor)}\par
+\(x\) pozitif tam sayı olmak üzere \(A=2^x\cdot 5^3\) sayısının asal olmayan pozitif bölenlerinin sayısı \(22\)'dir. Buna göre \(x\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(4\) & \sk{B}\(5\) & \sk{C}\(6\) & \sk{D}\(7\) & \sk{E}\(8\)\end{tabular*}}
+\begin{cozum}
+Pozitif bölen sayısı \(d(A)=(x+1)(3+1)=4(x+1)\). Asal bölenler yalnızca \(2\) ve \(5\) (iki tane); \(1\) asal olmayan bir bölendir. O hâlde
+\[4(x+1)-2=22\ \Rightarrow\ 4(x+1)=24\ \Rightarrow\ x+1=6\ \Rightarrow\ x=5.\]
+\textit{Tipik hatalar:} \(4x=24\) yazıp \(x=6\) bulmak; asal bölenleri çıkarmayı unutmak.
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: B}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 7.} {\small\color{gray}(Hafta 3 -- 9 ile bölünebilme; Kolay)}\par
+Üç basamaklı \(\overline{5a6}\) sayısı \(9\) ile tam bölünebildiğine göre \(a\) rakamı kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(1\) & \sk{B}\(3\) & \sk{C}\(4\) & \sk{D}\(7\) & \sk{E}\(8\)\end{tabular*}}
+\begin{cozum}
+\(9\) ile bölünebilme için rakamlar toplamı \(9\)'un katı olmalı: \(5+a+6=11+a\).
+\(a\) bir rakam olduğundan \(11\le 11+a\le 20\); bu aralıktaki tek \(9\) katı \(18\)'dir: \(a=7\). (Kontrol: \(576=9\cdot 64\).)
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: D}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 8.} {\small\color{gray}(Hafta 3 -- EBOB--EKOK; Orta)}\par
+İki pozitif tam sayının EBOB'u \(6\), EKOK'u \(180\)'dir. Sayılardan biri \(36\) olduğuna göre diğeri kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(15\) & \sk{B}\(24\) & \sk{C}\(30\) & \sk{D}\(45\) & \sk{E}\(60\)\end{tabular*}}
+\begin{cozum}
+İki sayının çarpımı \(=\) EBOB \(\cdot\) EKOK:
+\[36\cdot y=6\cdot 180=1080\ \Rightarrow\ y=30.\]
+Kontrol: \(36=2^2\cdot 3^2,\ 30=2\cdot 3\cdot 5\Rightarrow\) EBOB \(=6\), EKOK \(=2^2\cdot 3^2\cdot 5=180\) \checkmark
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: C}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 9.} {\small\color{gray}(Hafta 3 -- EBOB problemi; Zor)}\par
+Kenar uzunlukları \(84\) m ve \(126\) m olan dikdörtgen biçimindeki bir bahçenin kenarları boyunca, her köşeye birer fidan gelecek şekilde fidan dikilecektir. Ardışık iki fidan arasındaki uzaklık her yerde aynı, metre cinsinden bir tam sayı ve \(10\) m'den kısa olacaktır. Buna göre en az kaç fidan gerekir?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(10\) & \sk{B}\(30\) & \sk{C}\(60\) & \sk{D}\(70\) & \sk{E}\(140\)\end{tabular*}}
+\begin{cozum}
+Köşelere fidan geleceği için aralık \(d\), hem \(84\)'ü hem \(126\)'yı bölmelidir; yani \(d\), EBOB\((84,126)=42\)'nin bir bölenidir:
+\(d\in\{1,2,3,6,7,14,21,42\}\). En az fidan için \(d\) en büyük olmalı, ama \(d<10\) koşulu var: \(d=7\).
+Kapalı bir çevre üzerinde fidan sayısı \(=\) çevre \(\div\) aralık:
+\[\frac{2(84+126)}{7}=\frac{420}{7}=60.\]
+\textit{Tipik hatalar:} koşulu unutup \(d=42\) almak \(\Rightarrow 10\); \(d=6\) almak \(\Rightarrow 70\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: C}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 10.} {\small\color{gray}(Hafta 4 -- Kesirlerde işlem sırası; Kolay)}\par
+\(\dfrac{5}{6}-\dfrac{1}{3}\div\dfrac{2}{3}\) işleminin sonucu kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(\dfrac{1}{3}\) & \sk{B}\(\dfrac{1}{2}\) & \sk{C}\(\dfrac{11}{18}\) & \sk{D}\(\dfrac{3}{4}\) & \sk{E}\(\dfrac{7}{6}\)\end{tabular*}}
+\begin{cozum}
+Önce bölme: \(\dfrac{1}{3}\div\dfrac{2}{3}=\dfrac{1}{3}\cdot\dfrac{3}{2}=\dfrac{1}{2}\). Sonra çıkarma:
+\[\frac{5}{6}-\frac{1}{2}=\frac{5}{6}-\frac{3}{6}=\frac{2}{6}=\frac{1}{3}.\]
+\textit{Tipik hata:} önce çıkarma yapmak: \(\left(\frac{5}{6}-\frac{1}{3}\right)\div\frac{2}{3}=\frac{1}{2}\cdot\frac{3}{2}=\frac{3}{4}\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: A}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 11.} {\small\color{gray}(Hafta 4 -- Ondalık sayılar; Orta)}\par
+\(\dfrac{0{,}12}{0{,}04}+\dfrac{1{,}5}{0{,}03}-0{,}2\cdot 15\) işleminin sonucu kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(5\) & \sk{B}\(23\) & \sk{C}\(50\) & \sk{D}\(53\) & \sk{E}\(56\)\end{tabular*}}
+\begin{cozum}
+Pay ve paydayı \(100\) ile genişletelim:
+\(\dfrac{0{,}12}{0{,}04}=\dfrac{12}{4}=3\), \quad \(\dfrac{1{,}5}{0{,}03}=\dfrac{150}{3}=50\), \quad \(0{,}2\cdot 15=3\).
+\[3+50-3=50.\]
+\textit{Tipik hatalar:} \(\dfrac{1{,}5}{0{,}03}\)'te virgülleri eşitlemeden \(\dfrac{15}{3}=5\) almak \(\Rightarrow 3+5-3=5\); \(0{,}2\cdot 15=30\) sanmak \(\Rightarrow 23\); çıkarmayı unutmak \(\Rightarrow 53\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: C}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 12.} {\small\color{gray}(Hafta 4 -- Rasyonellerde sıralama; Orta)}\par
+\(a=\dfrac{7}{9},\quad b=\dfrac{5}{6},\quad c=\dfrac{11}{14}\) sayılarının doğru sıralanışı aşağıdakilerden hangisidir?
+\par\smallskip\noindent\begin{tabular}{@{}p{0.47\linewidth}p{0.47\linewidth}@{}}\sk{A}\(a<c<b\) & \sk{B}\(a<b<c\)\\[7pt] \sk{C}\(c<a<b\) & \sk{D}\(b<c<a\)\\[7pt] \sk{E}\(b<a<c\) & \end{tabular}
+\begin{cozum}
+Üçü de \(1\)'den küçük ve paydası paydan biraz büyük: \(1\)'e uzaklıklarına bakalım.
+\[1-a=\frac{2}{9},\qquad 1-b=\frac{1}{6},\qquad 1-c=\frac{3}{14}.\]
+Paydaları eşitlemek yerine ondalık yaklaşımla: \(\frac{2}{9}\approx 0{,}222\), \(\frac{3}{14}\approx 0{,}214\), \(\frac{1}{6}\approx 0{,}167\).
+\(1\)'e en uzak olan en küçüktür: \(a<c<b\).
+(Doğrudan kontrol: \(a\approx 0{,}778\), \(c\approx 0{,}786\), \(b\approx 0{,}833\).)
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: A}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 13.} {\small\color{gray}(Hafta 5 -- Parantezli denklem; Kolay)}\par
+\(4(x-3)-3(x+2)=4-x\) denkleminin çözümü kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(1\) & \sk{B}\(5\) & \sk{C}\(7\) & \sk{D}\(11\) & \sk{E}\(22\)\end{tabular*}}
+\begin{cozum}
+Parantezleri açalım (\(-3\) her iki terimle çarpılır):
+\[4x-12-3x-6=4-x\ \Rightarrow\ x-18=4-x\ \Rightarrow\ 2x=22\ \Rightarrow\ x=11.\]
+\textit{Tipik hatalar:} \(-3(x+2)=-3x+6\) yazmak \(\Rightarrow x-6=4-x\Rightarrow x=5\); \(2x=22\)'de bölmeyi unutmak \(\Rightarrow 22\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: D}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 14.} {\small\color{gray}(Hafta 5 -- Kesirli katsayılı denklem; Orta)}\par
+\(\dfrac{x+1}{3}-\dfrac{x-2}{4}=\dfrac{x}{6}\) denkleminin çözümü kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-2\) & \sk{B}\(2\) & \sk{C}\(6\) & \sk{D}\(10\) & \sk{E}\(14\)\end{tabular*}}
+\begin{cozum}
+Paydaların EKOK'u \(12\); her terimi \(12\) ile çarpalım:
+\[4(x+1)-3(x-2)=2x\ \Rightarrow\ 4x+4-3x+6=2x\ \Rightarrow\ x+10=2x\ \Rightarrow\ x=10.\]
+\textit{Tipik hata:} \(-3(x-2)=-3x-6\) yazmak \(\Rightarrow x-2=2x\Rightarrow x=-2\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: D}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 15.} {\small\color{gray}(Hafta 5 -- Parametreli denklem; Zor)}\par
+\(x\)'e bağlı \(\dfrac{ax-2}{3}=x+\dfrac{b}{6}\) denkleminin çözüm kümesi gerçek sayılar kümesi \((\mathbb{R})\) olduğuna göre \(a\cdot b\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-12\) & \sk{B}\(-6\) & \sk{C}\(-4\) & \sk{D}\(6\) & \sk{E}\(12\)\end{tabular*}}
+\begin{cozum}
+Her terimi \(6\) ile çarpalım: \(2(ax-2)=6x+b\Rightarrow 2ax-4=6x+b\).
+Çözüm kümesi \(\mathbb{R}\) ise her \(x\) için eşitlik sağlanmalı: \(x\)'li terimlerin katsayıları ve sabit terimler eşit olmalı.
+\[2a=6\Rightarrow a=3,\qquad b=-4\qquad\Rightarrow\qquad a\cdot b=-12.\]
+\textit{Tipik hata:} sol tarafı \(6\) ile çarparken \(-2\)'yi \(2\) ile çarpmayı unutmak \(\Rightarrow b=-2,\ ab=-6\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: A}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 16.} {\small\color{gray}(Hafta 6 -- Denklem sistemi; Orta)}\par
+\(2x+3y=17\) ve \(3x-y=9\) olduğuna göre \(x\cdot y\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(1\) & \sk{B}\(3\) & \sk{C}\(4\) & \sk{D}\(7\) & \sk{E}\(12\)\end{tabular*}}
+\begin{cozum}
+İkinci denklemden \(y=3x-9\). Birincide yerine koyalım:
+\[2x+3(3x-9)=17\Rightarrow 11x-27=17\Rightarrow 11x=44\Rightarrow x=4,\quad y=3\cdot 4-9=3.\]
+Kontrol: \(8+9=17\) \checkmark, \(12-3=9\) \checkmark. \quad \(x\cdot y=4\cdot 3=12\).
+\textit{Not:} \(4\) ve \(3\) tek tek \(x\) ve \(y\); \(7=x+y\), \(1=x-y\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: E}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 17.} {\small\color{gray}(Hafta 6 -- Simetrik sistem; Zor)}\par
+\(\dfrac{x}{3}+\dfrac{y}{4}=5\) ve \(\dfrac{x}{4}+\dfrac{y}{3}=\dfrac{11}{2}\) olduğuna göre \(x+y\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(6\) & \sk{B}\(\dfrac{49}{8}\) & \sk{C}\(\dfrac{21}{2}\) & \sk{D}\(12\) & \sk{E}\(18\)\end{tabular*}}
+\begin{cozum}
+Katsayılar simetrik: iki denklemi taraf tarafa toplayalım.
+\[\left(\frac{1}{3}+\frac{1}{4}\right)x+\left(\frac{1}{4}+\frac{1}{3}\right)y=5+\frac{11}{2}
+\ \Rightarrow\ \frac{7}{12}(x+y)=\frac{21}{2}\ \Rightarrow\ x+y=\frac{21}{2}\cdot\frac{12}{7}=18.\]
+(Çıkarırsak \(\frac{1}{12}(x-y)=-\frac{1}{2}\Rightarrow x-y=-6\); buradan \(x=6,\ y=12\). Kontrol: \(2+3=5\), \(\frac{3}{2}+4=\frac{11}{2}\) \checkmark)
+\textit{Tipik hatalar:} \(\frac{21}{2}\)'yi cevap sanmak; \(\frac{12}{7}\) yerine \(\frac{7}{12}\) ile çarpmak \(\Rightarrow\frac{49}{8}\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: E}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 18.} {\small\color{gray}(Hafta 7 -- Eşitsizlik (tam sayılar); Kolay)}\par
+\(-2\le 4-x<3\) eşitsizliğini sağlayan kaç tane \(x\) tam sayısı vardır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(4\) & \sk{B}\(5\) & \sk{C}\(6\) & \sk{D}\(7\) & \sk{E}\(8\)\end{tabular*}}
+\begin{cozum}
+Her taraftan \(4\) çıkaralım: \(-6\le -x<-1\). \(-1\) ile çarpınca eşitsizlik yön değiştirir:
+\[6\ge x>1\quad\text{yani}\quad 1<x\le 6.\]
+Tam sayılar: \(2,3,4,5,6\) \(\Rightarrow\) \(5\) tane. (\(1\) dahil değil, \(6\) dahil.)
+\textit{Tipik hata:} uçları karıştırıp \(1\le x\le 6\) almak \(\Rightarrow 6\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: B}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 19.} {\small\color{gray}(Hafta 7 -- Mutlak değerli denklem; Orta)}\par
+\(|2x-5|=7\) denklemini sağlayan \(x\) değerlerinin çarpımı kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-6\) & \sk{B}\(-1\) & \sk{C}\(5\) & \sk{D}\(6\) & \sk{E}\(7\)\end{tabular*}}
+\begin{cozum}
+\(|u|=7\iff u=7\) veya \(u=-7\).
+\[2x-5=7\Rightarrow x=6,\qquad 2x-5=-7\Rightarrow x=-1.\]
+Çarpım: \(6\cdot(-1)=-6\). \textit{Tipik hata:} kökleri toplamak \(\Rightarrow 5\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: A}
+\end{cozum}
+\end{minipage}
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\noindent\textbf{\color{anamavi}Soru 20.} {\small\color{gray}(Hafta 7 -- Mutlak değerli eşitsizlik; Orta)}\par
+\(|3-x|\le 4\) eşitsizliğini sağlayan \(x\) tam sayılarının toplamı kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(20\) & \sk{B}\(21\) & \sk{C}\(27\) & \sk{D}\(28\) & \sk{E}\(35\)\end{tabular*}}
+\begin{cozum}
+\(|3-x|=|x-3|\). \ \(|x-3|\le 4\iff -4\le x-3\le 4\iff -1\le x\le 7\).
+Tam sayılar: \(-1,0,1,\dots,7\). Toplam: \(-1+(0+1+\dots+7)=-1+28=27\).
+\textit{Tipik hatalar:} \(-1\)'i unutmak \(\Rightarrow 28\); uç noktaları dışlamak (\(0,\dots,6\)) \(\Rightarrow 21\).
+\par\smallskip\noindent\textbf{\color{cozumyesil}Cevap: C}
+\end{cozum}
+\end{minipage}
+
+\end{document}

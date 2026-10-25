@@ -1,0 +1,634 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+
+\title[MMAT105 -- Hafta 14]{MMAT105 Genel Matematik}
+\subtitle{Hafta 14: Yüzde, Kâr-Zarar, Karışım ve Faiz Problemleri, Genel Tekrar}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hesaplayınız:}
+\begin{enumerate}
+\item Hangi sayının \(3\) katının \(5\) fazlası \(26\)'dır?
+\item Bir sayının \(\dfrac{2}{5}\)'i \(24\) ise \(\dfrac{3}{4}\)'ü kaçtır?
+\item Baba \(40\), oğlu \(10\) yaşında. Kaç yıl sonra babanın yaşı oğlunun yaşının \(3\) katı olur?
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(3x+5=26\Rightarrow x=7\)
+\item Sayı \(60\); \ \(\tfrac{3}{4}\cdot 60=45\)
+\item \(40+x=3(10+x)\Rightarrow x=5\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Yüzde kavramı
+\item Yüzde artış / azalış
+\item Ardışık yüzde değişim
+\item Kâr -- zarar
+\item Etiket fiyatı, indirim
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Karışım oranı
+\item Su ekleme / buharlaştırma
+\item İki karışımı birleştirme
+\item Saf madde ekleme
+\item Alaşım (altın ayarı)
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{10}
+\item Basit faiz (yıl, ay, gün)
+\item Bileşik faiz (kısa)
+\item Genel tekrar: Hafta 1--14
+\item Final için karma sorular
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Yüzde ve Kâr-Zarar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Yüzde Problemleri, Kâr-Zarar ve İndirim
+\end{frame}
+
+\subsection{Yüzde}
+\begin{frame}{Yüzde Kavramı}
+\begin{block}{Kural}
+\begin{itemize}
+\item \(\%a=\dfrac{a}{100}\). \quad \(x\)'in \(\%a\)'sı: \(\ x\cdot\dfrac{a}{100}\)
+\item \(A\) sayısı, \(B\)'nin yüzde kaçıdır? \ \(\dfrac{A}{B}\cdot 100\)
+\item \(\%a\) artış: \(x\cdot\left(1+\dfrac{a}{100}\right)\); \quad \(\%a\) azalış: \(x\cdot\left(1-\dfrac{a}{100}\right)\)
+\item Sayı verilmemişse başlangıca \(100\) (veya \(100x\)) demek işi kolaylaştırır.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Ardışık yüzdeler \textbf{toplanmaz}, \textbf{çarpılır}: \(\%20\) artıp \(\%20\) azalan fiyat eski fiyata dönmez:
+\(100\to 120\to 96\) \ (\(\%4\) azalır).
+\end{alertblock}
+\end{frame}
+
+\soru{Yüzde -- Örnek 1}
+{\(240\) sayısının \(\%35\)'i ve \(\%12{,}5\)'i kaçtır? \(60\) sayısı, \(240\)'ın yüzde kaçıdır?}
+{\[240\cdot\frac{35}{100}=84,\qquad 240\cdot\frac{12{,}5}{100}=30\]
+\[\frac{60}{240}\cdot 100=25\ \Rightarrow\ \%25\]}
+
+\soru{Yüzde -- Örnek 2}
+{Bir sayının \(\%30\)'u \(72\) ise bu sayının \(\%45\)'i kaçtır?}
+{\[x\cdot\frac{30}{100}=72\ \Rightarrow\ x=240\]
+\[240\cdot\frac{45}{100}=108\]
+Kısa yol: \(\%30\to 72\) ise \(\%15\to 36\), \(\%45\to 72+36=108\).}
+
+\soru{Yüzde Artış / Azalış -- Örnek 3}
+{Fiyatı \(800\) TL olan bir ürüne \(\%15\) zam yapılırsa yeni fiyat kaç TL olur? Zam yerine \(\%15\) indirim yapılsaydı fiyat kaç TL olurdu?}
+{\[800\cdot 1{,}15=920\ \text{TL}\]
+\[800\cdot 0{,}85=680\ \text{TL}\]}
+
+\soru{Yüzde Artış -- Örnek 4}
+{Bir sayının \(\%30\) fazlası \(260\) ise sayı kaçtır?}
+{Sayı \(100x\) olsun; \(\%30\) fazlası \(130x\).
+\[130x=260\ \Rightarrow\ x=2\ \Rightarrow\ \text{sayı}=200\]
+Dikkat: \(260\)'ın \(\%30\)'unu çıkarmak (\(182\)) \textbf{yanlıştır}.}
+
+\soru{Ardışık Yüzde -- Örnek 5}
+{Bir ürünün fiyatı önce \(\%20\) artırılıyor, sonra yeni fiyat üzerinden \(\%20\) azaltılıyor. Son fiyat, ilk fiyata göre yüzde kaç değişmiştir?}
+{İlk fiyat \(100\) olsun:
+\[100\xrightarrow{+\%20}120\xrightarrow{-\%20\ (24)}96\]
+Son fiyat \(96\) \(\Rightarrow\) \(\%4\) \textbf{azalmıştır}.\\[3pt]
+Çarpanlarla: \(1{,}2\cdot 0{,}8=0{,}96\).}
+
+\soru{Yüzde ve Oran -- Örnek 6}
+{Bir sınıftaki öğrencilerin \(\%40\)'ı erkektir. Erkeklerin \(\%25\)'i, kızların \(\%50\)'si gözlüklüdür. Sınıfın yüzde kaçı gözlüklüdür?}
+{Sınıf \(100\) kişi olsun: \(40\) erkek, \(60\) kız.
+\[\text{Gözlüklü}=40\cdot\frac{25}{100}+60\cdot\frac{50}{100}=10+30=40\]
+Sınıfın \(\%40\)'ı gözlüklüdür.}
+
+\subsection{Kâr-zarar}
+\begin{frame}{Kâr -- Zarar ve İndirim}
+\begin{block}{Kural}
+\begin{itemize}
+\item Kâr \(=\) Satış fiyatı \(-\) Maliyet \quad (negatifse zarar)
+\item Kâr / zarar yüzdesi \textbf{maliyet üzerinden}: \ \(\dfrac{\text{Kâr}}{\text{Maliyet}}\cdot 100\)
+\item \(\%a\) kârla satış: \(M\cdot\left(1+\dfrac{a}{100}\right)\); \quad \(\%a\) zararla satış: \(M\cdot\left(1-\dfrac{a}{100}\right)\)
+\item İndirim yüzdesi \textbf{etiket fiyatı üzerinden} hesaplanır.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Kâr yüzdesini satış fiyatına bölmek yanlıştır. Maliyet \(100x\) alınırsa: \(\%25\) kâr \(\to 125x\), \ \(\%20\) zarar \(\to 80x\).
+\end{alertblock}
+\end{frame}
+
+\soru{Kâr-Zarar -- Örnek 7}
+{\(\%25\) kârla \(250\) TL'ye satılan bir malın maliyeti kaç TL'dir?}
+{Maliyet \(100x\) \(\Rightarrow\) satış \(125x\).
+\[125x=250\ \Rightarrow\ x=2\ \Rightarrow\ \text{Maliyet}=200\ \text{TL}\]
+Kontrol: \(200\cdot 1{,}25=250\).}
+
+\soru{Kâr-Zarar -- Örnek 8}
+{\(\%20\) zararla \(240\) TL'ye satılan bir mal, \(\%25\) kârla satılmak istenseydi kaç TL'ye satılmalıydı?}
+{Maliyet \(100x\) \(\Rightarrow\) \(\%20\) zararla satış \(80x\).
+\[80x=240\ \Rightarrow\ x=3\ \Rightarrow\ \text{Maliyet}=300\ \text{TL}\]
+\[\%25\ \text{kârla: } 300\cdot 1{,}25=375\ \text{TL}\]}
+
+\soru{Kâr-Zarar -- Örnek 9}
+{\(3\) tanesi \(10\) TL'ye alınan kalemlerin \(5\) tanesi \(20\) TL'ye satılıyor. Bu satıştan yüzde kaç kâr edilir?}
+{EKOK\((3,5)=15\) kalem düşünelim.
+\[\text{Maliyet}=5\cdot 10=50\ \text{TL},\qquad \text{Satış}=3\cdot 20=60\ \text{TL}\]
+\[\text{Kâr}=10\ \Rightarrow\ \frac{10}{50}\cdot 100=\%20\ \text{kâr}\]}
+
+\soru{İndirim -- Örnek 10}
+{Maliyeti \(400\) TL olan bir ürünün etiket fiyatı \(600\) TL'dir. Ürün etiket fiyatı üzerinden \(\%20\) indirimle satılırsa yüzde kaç kâr edilir?}
+{\[\text{Satış}=600\cdot 0{,}80=480\ \text{TL}\]
+\[\text{Kâr}=480-400=80\ \Rightarrow\ \frac{80}{400}\cdot 100=\%20\]
+Dikkat: Kâr yüzdesi maliyete (\(400\)) bölünerek bulunur.}
+
+\soru{İndirim -- Örnek 11}
+{Bir mağaza etiket fiyatı üzerinden \(\%20\) indirim yaptığında bile maliyet üzerinden \(\%20\) kâr ediyor. İndirimden önce yüzde kaç kârla satış yapıyordu?}
+{Maliyet \(100\) \(\Rightarrow\) indirimli satış \(120\). Etiket \(E\):
+\[E\cdot 0{,}80=120\ \Rightarrow\ E=150\]
+Etiket fiyatı maliyetin \(\%150\)'si \(\Rightarrow\) indirimden önce \(\%50\) kâr.}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(360\)'ın \(\%15\)'i kaçtır?
+\item Hangi sayının \(\%20\) eksiğinin \(\%40\) fazlası \(112\)'dir? \(\star\)
+\item Bir fiyat önce \(\%50\) artıp sonra \(\%20\) azalıyor. Toplam değişim? \(\star\)
+\item \(\%20\) kârla \(240\) TL'ye satılan ürün \(\%20\) zararla kaç TL'ye satılır? \(\star\)
+\item Etiketi \(500\) TL, maliyeti \(280\) TL olan ürün \(\%30\) indirimle satılıyor. Kâr yüzdesi?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(54\)
+\item \(100\)
+\item \(\%20\) artış
+\item \(160\) TL
+\item \(\%25\) \ (\(350\) TL'ye satış)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 2)}
+{Hangi sayının \(\%20\) eksiğinin \(\%40\) fazlası \(112\)'dir?}
+{Sayı \(x\): \ \(\%20\) eksiği \(0{,}8x\); \ bunun \(\%40\) fazlası \(1{,}4\cdot 0{,}8x=1{,}12x\).
+\[1{,}12x=112\ \Rightarrow\ x=100\]
+Kontrol: \(100\to 80\to 112\) \checkmark}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{Bir fiyat önce \(\%50\) artırılıyor, sonra yeni fiyat \(\%20\) azaltılıyor. Toplam değişim yüzde kaçtır?}
+{İlk fiyat \(100\) olsun:
+\[100\xrightarrow{+\%50}150\xrightarrow{-\%20\ (30)}120\]
+Son fiyat \(120\) \(\Rightarrow\) \(\%20\) \textbf{artış}. \ (\(\%50-\%20=\%30\) \textbf{değil}!)}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(\%20\) kârla \(240\) TL'ye satılan bir ürün, \(\%20\) zararla kaç TL'ye satılır?}
+{Maliyet \(100x\) \(\Rightarrow\) \(\%20\) kârla satış \(120x\).
+\[120x=240\ \Rightarrow\ x=2\ \Rightarrow\ \text{Maliyet}=200\ \text{TL}\]
+\[\%20\ \text{zararla: } 200\cdot 0{,}80=160\ \text{TL}\]}
+
+% =====================================================
+\section{Ders 2: Karışım Problemleri}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Karışım Problemleri ve Alaşımlar
+\end{frame}
+
+\subsection{Karışım}
+\begin{frame}{Karışım Problemleri}
+\begin{block}{Kural}
+\[\text{Oran}=\frac{\text{Madde miktarı}}{\text{Karışım miktarı}},\qquad \text{Madde miktarı}=\text{Karışım}\cdot\text{Oran}\]
+\textbf{Tablo yöntemi:} her kap için \ \textit{karışım miktarı} \(\times\) \textit{oran} \(=\) \textit{madde miktarı}; \ madde miktarları toplanır / çıkarılır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Su eklenince / buharlaşınca \textbf{madde miktarı değişmez}, karışım miktarı değişir.
+\item Saf suyun madde oranı \(\%0\), saf tuzun (şekerin) \(\%100\)'dür.
+\item Karışımdan bir miktar \textbf{alınırsa oran değişmez}.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Karışım -- Örnek 12}
+{\(80\) kg tuzlu suyun \(\%15\)'i tuzdur. Bu karışımda kaç kg tuz ve kaç kg su vardır?}
+{\[\text{Tuz}=80\cdot\frac{15}{100}=12\ \text{kg}\]
+\[\text{Su}=80-12=68\ \text{kg}\]}
+
+\soru{Su Ekleme -- Örnek 13}
+{Tuz oranı \(\%30\) olan \(40\) kg tuzlu suya kaç kg saf su eklenirse tuz oranı \(\%20\) olur?}
+{Tuz miktarı değişmez: \(40\cdot 0{,}30=12\) kg.
+\[\frac{12}{40+x}=\frac{20}{100}\ \Rightarrow\ 40+x=60\ \Rightarrow\ x=20\ \text{kg}\]
+(Tablo: \(40\cdot 30+x\cdot 0=(40+x)\cdot 20\).)}
+
+\soru{Buharlaştırma -- Örnek 14}
+{Tuz oranı \(\%20\) olan \(50\) kg tuzlu sudan kaç kg su buharlaştırılırsa tuz oranı \(\%50\) olur?}
+{Tuz: \(50\cdot 0{,}20=10\) kg (değişmez).\\[3pt]
+Son durumda bu \(10\) kg, karışımın yarısı \(\Rightarrow\) karışım \(20\) kg olmalı.
+\[50-x=20\ \Rightarrow\ x=30\ \text{kg}\]}
+
+\soru{İki Karışım -- Örnek 15}
+{Alkol oranı \(\%20\) olan \(40\) L kolonya ile alkol oranı \(\%40\) olan \(10\) L kolonya karıştırılıyor. Yeni karışımın alkol oranı yüzde kaçtır?}
+{\normalsize
+\begin{tabular}{lccc}
+\toprule
+ & Karışım (L) & Oran & Alkol (L)\\\midrule
+1. kap & \(40\) & \(\%20\) & \(8\)\\
+2. kap & \(10\) & \(\%40\) & \(4\)\\
+Toplam & \(50\) & ? & \(12\)\\\bottomrule
+\end{tabular}\\[4pt]
+\large \(\dfrac{12}{50}=\dfrac{24}{100}\ \Rightarrow\ \%24\) \quad (ağırlıklı ortalama)}
+
+\soru{Tablo Yöntemi -- Örnek 16}
+{Tuz oranı \(\%30\) ve \(\%50\) olan iki tuzlu sudan, tuz oranı \(\%35\) olan \(60\) kg karışım hazırlanacaktır. Her birinden kaç kg alınmalıdır?}
+{\(\%30\)'luktan \(x\), \(\%50\)'likten \(y\) kg:
+\[x+y=60,\qquad 0{,}30x+0{,}50y=60\cdot 0{,}35=21\]
+\(0{,}30(60-y)+0{,}50y=21\Rightarrow 18+0{,}20y=21\Rightarrow y=15\), \ \(x=45\).}
+
+\soru{Saf Madde Ekleme -- Örnek 17}
+{Şeker oranı \(\%20\) olan \(40\) kg şekerli suya kaç kg şeker eklenirse şeker oranı \(\%36\) olur?}
+{Şeker: \(8\) kg. Eklenen \(x\) kg şeker hem şekere hem karışıma eklenir:
+\[\frac{8+x}{40+x}=\frac{36}{100}\Rightarrow 800+100x=1440+36x\]
+\[64x=640\ \Rightarrow\ x=10\ \text{kg}\qquad(\text{kontrol: } 18/50=\%36)\]}
+
+\soru{Karışım -- Örnek 18}
+{Tuz oranı \(\%20\) olan bir tuzlu suyun yarısı dökülüyor; dökülen miktar kadar tuz oranı \(\%40\) olan tuzlu su ekleniyor. Son tuz oranı yüzde kaçtır?}
+{Karışım \(100\) kg olsun. Yarısı dökülünce: \(50\) kg, tuz \(10\) kg (oran değişmez).\\[3pt]
+\(\%40\)'lık \(50\) kg eklenir: tuz \(20\) kg.
+\[\frac{10+20}{100}=\%30\]}
+
+\subsection{Alaşım}
+\begin{frame}{Alaşım: Altın Ayarı}
+\begin{block}{Kural}
+Saf altın \(24\) ayardır. \ \(k\) ayar altında saf altın oranı: \(\dfrac{k}{24}\).
+\[\text{Saf altın miktarı}=\text{Kütle}\cdot\frac{\text{Ayar}}{24}\]
+Ör.: \(22\) ayar altının \(\dfrac{22}{24}\)'ü, \(14\) ayar altının \(\dfrac{14}{24}\)'ü saf altındır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Ayar bir yüzde değildir: \(22\) ayar \(\neq\) \(\%22\). \ Önce \(24\)'e bölün.
+\end{alertblock}
+\end{frame}
+
+\soru{Alaşım -- Örnek 19}
+{\(22\) ayar \(60\) g altın bilezikte kaç g saf altın vardır?}
+{\[60\cdot\frac{22}{24}=55\ \text{g}\]
+Geri kalan \(5\) g başka metaldir (bakır, gümüş vb.).}
+
+\soru{Alaşım -- Örnek 20}
+{\(18\) ayar \(40\) g altın ile \(24\) ayar (saf) \(20\) g altın eritilerek karıştırılıyor. Elde edilen altın kaç ayardır?}
+{Saf altın: \ \(40\cdot\dfrac{18}{24}+20=30+20=50\) g; \ toplam kütle \(60\) g.
+\[\text{Ayar}=\frac{50}{60}\cdot 24=20\]}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\%30\) tuzlu \(60\) kg suya kaç kg su eklenirse oran \(\%20\) olur?
+\item \(\%40\) şekerli \(50\) kg sudan kaç kg su buharlaştırılırsa oran \(\%50\) olur? \(\star\)
+\item \(\%10\) tuzlu \(30\) kg ile \(\%30\) tuzlu \(20\) kg karışırsa oran? \(\star\)
+\item \(\%25\) şekerli \(60\) kg suya kaç kg şeker eklenirse oran \(\%40\) olur? \(\star\)
+\item \(18\) ayar \(48\) g bilezikte kaç g saf altın vardır?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(30\) kg
+\item \(10\) kg
+\item \(\%18\)
+\item \(15\) kg
+\item \(36\) g
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{Şeker oranı \(\%40\) olan \(50\) kg şekerli sudan kaç kg su buharlaştırılırsa oran \(\%50\) olur?}
+{Şeker: \(50\cdot 0{,}40=20\) kg (buharlaşmada değişmez).\\[3pt]
+\(20\) kg şeker karışımın yarısı olacak \(\Rightarrow\) karışım \(40\) kg.
+\[50-x=40\ \Rightarrow\ x=10\ \text{kg}\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{Tuz oranı \(\%10\) olan \(30\) kg ile \(\%30\) olan \(20\) kg tuzlu su karıştırılıyor. Yeni oran?}
+{Tuz miktarları: \ \(30\cdot 0{,}10=3\) kg, \quad \(20\cdot 0{,}30=6\) kg.
+\[\frac{3+6}{30+20}=\frac{9}{50}=\frac{18}{100}\ \Rightarrow\ \%18\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{Şeker oranı \(\%25\) olan \(60\) kg şekerli suya kaç kg şeker eklenirse oran \(\%40\) olur?}
+{Şeker: \(15\) kg. \(x\) kg şeker eklenir:
+\[\frac{15+x}{60+x}=\frac{40}{100}\Rightarrow 1500+100x=2400+40x\]
+\[60x=900\ \Rightarrow\ x=15\ \text{kg}\qquad(\text{kontrol: } 30/75=\%40)\]}
+
+% =====================================================
+\section{Ders 3: Faiz ve Genel Tekrar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Faiz Problemleri ve Genel Tekrar (Hafta 1--14)
+\end{frame}
+
+\subsection{Basit faiz}
+\begin{frame}{Basit Faiz}
+\begin{block}{Kural (\(A\): anapara, \(n\): yıllık faiz oranı \%, \(F\): faiz)}
+\[F=\frac{A\cdot n\cdot t}{100}\ (t\ \text{yıl}),\qquad F=\frac{A\cdot n\cdot t}{1200}\ (t\ \text{ay}),\qquad F=\frac{A\cdot n\cdot t}{36000}\ (t\ \text{gün})\]
+Gün hesabında \textbf{\(1\) yıl \(=360\) gün} kabul edilir. \qquad Toplam para (çekilen) \(=A+F\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(n\) her zaman \textbf{yıllık} orandır; süre ay ise paydaya \(1200\) yazılır.
+\item ``Faiz'' ile ``toplam para'' karıştırılmamalı: toplam \(=A+F\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Basit Faiz -- Örnek 21}
+{\(5000\) TL, yıllık \(\%30\) basit faizle \(2\) yıl bankada kalırsa kaç TL faiz getirir? Dönem sonunda toplam kaç TL çekilir?}
+{\[F=\frac{5000\cdot 30\cdot 2}{100}=3000\ \text{TL}\]
+\[A+F=5000+3000=8000\ \text{TL}\]}
+
+\soru{Basit Faiz (Ay / Gün) -- Örnek 22}
+{\(6000\) TL yıllık \(\%24\) basit faizle \(6\) ayda; \ \(9000\) TL yıllık \(\%40\) basit faizle \(90\) günde kaç TL faiz getirir?}
+{\[F=\frac{6000\cdot 24\cdot 6}{1200}=720\ \text{TL}\]
+\[F=\frac{9000\cdot 40\cdot 90}{36000}=900\ \text{TL}\qquad(1\ \text{yıl}=360\ \text{gün})\]}
+
+\soru{Faiz Oranı -- Örnek 23}
+{\(3000\) TL, \(8\) ayda \(400\) TL basit faiz getirmiştir. Yıllık faiz oranı yüzde kaçtır?}
+{\[400=\frac{3000\cdot n\cdot 8}{1200}=20n\ \Rightarrow\ n=20\]
+Yıllık faiz oranı \(\%20\).}
+
+\soru{Faiz Süresi -- Örnek 24}
+{Yıllık \(\%30\) basit faizle bankaya yatırılan bir para, kaç ay sonra kendisinin \(\dfrac{1}{4}\)'ü kadar faiz getirir?}
+{Anapara \(100x\) olsun; faiz \(25x\) olmalı.
+\[25x=\frac{100x\cdot 30\cdot t}{1200}=\frac{30t}{12}\,x\ \Rightarrow\ 300=30t\ \Rightarrow\ t=10\ \text{ay}\]}
+
+\subsection{Bileşik faiz}
+\begin{frame}{Bileşik Faiz (Kısa Bilgi)}
+\begin{block}{Kural}
+Her yılın sonunda faiz anaparaya eklenir ve sonraki yıl faiz bu toplam üzerinden işler:
+\[\text{Toplam para}=A\cdot\left(1+\frac{n}{100}\right)^t\qquad(t\ \text{yıl})\]
+\end{block}
+\begin{alertblock}{Dikkat}
+Soruda ``bileşik'' denmedikçe faiz \textbf{basit faiz}dir. Bileşik faizde kazanç, aynı oranlı basit faizden fazladır.
+\end{alertblock}
+\end{frame}
+
+\soru{Bileşik Faiz -- Örnek 25}
+{\(10000\) TL yıllık \(\%20\) bileşik faizle \(2\) yıl bankada kalırsa toplam kaç TL olur? Basit faizle olsaydı?}
+{\[10000\cdot 1{,}2\cdot 1{,}2=10000\cdot 1{,}44=14400\ \text{TL}\]
+Basit faiz: \(F=\dfrac{10000\cdot 20\cdot 2}{100}=4000\) \(\Rightarrow\) \(14000\) TL.\\[3pt]
+Fark \(400\) TL: ilk yılın faizi (\(2000\) TL) de \(\%20\) kazandı.}
+
+\subsection{Genel tekrar}
+\begin{frame}{Genel Tekrar: Final Kapsamı (Hafta 1--14)}
+\begin{columns}[t]
+\column{0.48\textwidth}
+\begin{block}{Sayılar}
+\begin{itemize}
+\item Temel kavramlar, ardışık sayılar, \(n!\)
+\item Asal, bölen sayısı, bölme
+\item Bölünebilme, EBOB -- EKOK
+\item Rasyonel ve ondalık sayılar
+\end{itemize}
+\end{block}
+\begin{block}{Cebir}
+\begin{itemize}
+\item Denklemler (bir / iki bilinmeyen)
+\item Eşitsizlik ve mutlak değer
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Cebir (devam)}
+\begin{itemize}
+\item Üslü ve köklü ifadeler
+\item Çarpanlara ayırma
+\end{itemize}
+\end{block}
+\begin{block}{Problemler}
+\begin{itemize}
+\item Oran -- orantı, ortalama
+\item Sayı, kesir, yaş problemleri
+\item Yüzde, kâr -- zarar, karışım, faiz
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\soru{Genel Tekrar 1 -- Ardışık Sayılar (Hafta 1)}
+{Ardışık dört çift sayının toplamı \(76\)'dır. Bu sayıların en büyüğü kaçtır?}
+{Sayılar \(x,\ x+2,\ x+4,\ x+6\):
+\[4x+12=76\ \Rightarrow\ x=16\]
+Sayılar \(16,18,20,22\) \(\Rightarrow\) en büyüğü \(22\).}
+
+\soru{Genel Tekrar 2 -- EBOB -- EKOK (Hafta 2--3)}
+{\(72\) ve \(120\) sayılarının EBOB ve EKOK'u kaçtır?}
+{\(72=2^3\cdot 3^2\), \qquad \(120=2^3\cdot 3\cdot 5\)
+\[\text{EBOB}=2^3\cdot 3=24,\qquad \text{EKOK}=2^3\cdot 3^2\cdot 5=360\]
+Kontrol: \(\text{EBOB}\cdot\text{EKOK}=8640=72\cdot 120\).}
+
+\soru{Genel Tekrar 3 -- Ondalık Sayılar (Hafta 4)}
+{\(\dfrac{0{,}3+0{,}12}{0{,}07}\) işleminin sonucu kaçtır?}
+{\[\frac{0{,}3+0{,}12}{0{,}07}=\frac{0{,}42}{0{,}07}=\frac{42}{7}=6\]
+(Pay ve payda \(100\) ile genişletildi.)}
+
+\soru{Genel Tekrar 4 -- Denklem Sistemi (Hafta 5--6)}
+{\(x+y=17\) \ ve \ \(2x-y=4\) ise \(x\) ve \(y\) kaçtır?}
+{Denklemler taraf tarafa toplanır:
+\[3x=21\ \Rightarrow\ x=7,\qquad y=17-7=10\]
+Kontrol: \(2\cdot 7-10=4\) \checkmark}
+
+\soru{Genel Tekrar 5 -- Mutlak Değer (Hafta 7)}
+{\(|2x-3|\le 5\) eşitsizliğini sağlayan kaç tam sayı vardır? Bu tam sayıların toplamı kaçtır?}
+{\[-5\le 2x-3\le 5\ \Rightarrow\ -2\le 2x\le 8\ \Rightarrow\ -1\le x\le 4\]
+Tam sayılar: \(-1,0,1,2,3,4\) \(\Rightarrow\) \(6\) tane; \ toplam \(9\).}
+
+\soru{Genel Tekrar 6 -- Üslü İfadeler (Hafta 9)}
+{\(2^{x+1}+2^{x}=48\) ise \(x\) kaçtır?}
+{\(2^{x+1}=2\cdot 2^x\) \ olduğundan:
+\[2\cdot 2^x+2^x=3\cdot 2^x=48\ \Rightarrow\ 2^x=16=2^4\ \Rightarrow\ x=4\]}
+
+\soru{Genel Tekrar 7 -- Köklü İfadeler (Hafta 10)}
+{\(\sqrt{50}+\sqrt{18}-\sqrt{32}\) işleminin sonucu kaçtır?}
+{\[\sqrt{50}=5\sqrt{2},\quad \sqrt{18}=3\sqrt{2},\quad \sqrt{32}=4\sqrt{2}\]
+\[5\sqrt{2}+3\sqrt{2}-4\sqrt{2}=4\sqrt{2}\]}
+
+\soru{Genel Tekrar 8 -- Çarpanlara Ayırma (Hafta 11)}
+{\(x^2-y^2=24\) \ ve \ \(x+y=6\) ise \(x\) ve \(y\) kaçtır?}
+{\(x^2-y^2=(x-y)(x+y)\) \(\Rightarrow\) \(6(x-y)=24\Rightarrow x-y=4\).
+\[x+y=6,\ x-y=4\ \Rightarrow\ x=5,\ y=1\]}
+
+\soru{Genel Tekrar 9 -- Oran -- Orantı (Hafta 12)}
+{\(\dfrac{a}{3}=\dfrac{b}{4}=\dfrac{c}{5}\) \ ve \ \(a+b+c=48\) ise \(a\), \(b\), \(c\) kaçtır?}
+{Ortak oran \(k\): \ \(a=3k,\ b=4k,\ c=5k\).
+\[12k=48\ \Rightarrow\ k=4\ \Rightarrow\ a=12,\ b=16,\ c=20\]}
+
+\begin{frame}[fragile]{Bilgisayar Köşesi: Python ile faiz}
+\begin{columns}[t]
+\column{0.40\textwidth}
+\small
+\begin{verbatim}
+>>> A, n = 10000, 20
+>>> A*n*2/100         # basit
+4000.0
+>>> A*(1 + n/100)**2  # bileşik
+14400.0
+\end{verbatim}
+\column{0.56\textwidth}
+\small
+\begin{verbatim}
+def basit_faiz(A, n, t, birim="yil"):
+    payda = {"yil": 100, "ay": 1200,
+             "gun": 36000}[birim]
+    return A * n * t / payda
+
+>>> basit_faiz(9000,40,90,"gun")
+900.0
+\end{verbatim}
+\end{columns}
+\small Gün hesabında payda \(36000=100\cdot 360\): yıl \(360\) gün kabul edilir.
+\end{frame}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(4000\) TL, yıllık \(\%30\) basit faizle \(2\) yılda kaç TL faiz getirir?
+\item Yıllık \(\%40\) basit faizle bir para kaç ayda kendisinin yarısı kadar faiz getirir? \(\star\)
+\item Bir para yıllık \(\%20\) yerine \(\%25\) basit faizle yatırılsaydı \(1\) yılda \(100\) TL fazla faiz getirecekti. Anapara? \(\star\)
+\item \(84\) ve \(126\)'nın EBOB ve EKOK'u? \(\star\)
+\item \(\sqrt{12}\cdot\sqrt{27}=?\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(2400\) TL
+\item \(15\) ay
+\item \(2000\) TL
+\item \(42\) ve \(252\)
+\item \(18\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{Yıllık \(\%40\) basit faizle bankaya yatırılan bir para kaç ay sonra kendisinin yarısı kadar faiz getirir?}
+{Anapara \(A\), istenen faiz \(\dfrac{A}{2}\); süre ay \(\Rightarrow\) payda \(1200\):
+\[\frac{A}{2}=\frac{A\cdot 40\cdot t}{1200}\ \Rightarrow\ \frac{1}{2}=\frac{t}{30}\ \Rightarrow\ t=15\ \text{ay}\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{Bir para yıllık \(\%20\) yerine \(\%25\) basit faizle yatırılsaydı \(1\) yılda \(100\) TL fazla faiz getirecekti. Anapara kaç TL'dir?}
+{Oran farkı \(\%5\): \ fazladan gelen faiz anaparanın \(\%5\)'idir.
+\[\frac{A\cdot 25}{100}-\frac{A\cdot 20}{100}=\frac{5A}{100}=100\ \Rightarrow\ A=2000\ \text{TL}\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{\(84\) ve \(126\) sayılarının EBOB ve EKOK'u kaçtır?}
+{\(84=2^2\cdot 3\cdot 7\), \qquad \(126=2\cdot 3^2\cdot 7\)\\[3pt]
+EBOB: ortak asalların en küçük üsleri: \(2\cdot 3\cdot 7=42\)\\[3pt]
+EKOK: tüm asalların en büyük üsleri: \(2^2\cdot 3^2\cdot 7=252\)}
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item \(\%a\) artış: \(x(1+\frac{a}{100})\)
+\item Ardışık yüzdeler çarpılır
+\item Kâr yüzdesi maliyet, indirim etiket üzerinden
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Madde \(=\) karışım \(\times\) oran
+\item Su ekle / buharlaştır: madde sabit
+\item Saf altın \(=\) kütle \(\cdot\frac{\text{ayar}}{24}\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item \(F=\frac{A\,n\,t}{100}\) (yıl), \(1200\) (ay), \(36000\) (gün)
+\item Bileşik: \(A(1+\frac{n}{100})^t\)
+\item Final: Hafta 1--14
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+FİNAL SINAVI (Hafta 1--14 konuları)
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

@@ -1,0 +1,328 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{needspace}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 3 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\needspace{5\baselineskip}\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newenvironment{cozumk}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 3 Ders Notu: Bölünebilme Kuralları,\\ EBOB ve EKOK}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır. Bu notta \(\ab{ab}\), \(\ab{abc}\) gibi gösterimler rakamlarla yazılmış sayılardır; ilk rakam \(0\) olamaz.
+
+% =====================================================
+\section{Temel Bölünebilme Kuralları}
+
+\begin{kural}[Bölünebilme ve kalan]
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.07\linewidth}>{\raggedright\arraybackslash}p{0.44\linewidth}>{\raggedright\arraybackslash}p{0.43\linewidth}@{}}
+\toprule
+Bölen & Sayı bölünür, eğer \dots & Kalan \\\midrule
+\(2\) & birler basamağı çift (\(0,2,4,6,8\)) ise & birler basamağının \(2\)'ye bölümünden kalan\\
+\(5\) & birler basamağı \(0\) veya \(5\) ise & birler basamağının \(5\)'e bölümünden kalan\\
+\(10\) & birler basamağı \(0\) ise & birler basamağındaki rakam\\
+\(3\) & rakamları toplamı \(3\)'ün katı ise & rakamları toplamının \(3\)'e bölümünden kalan\\
+\(9\) & rakamları toplamı \(9\)'un katı ise & rakamları toplamının \(9\)'a bölümünden kalan\\
+\(4\) & son iki basamağın oluşturduğu sayı \(4\)'ün katı ise & son iki basamağın \(4\)'e bölümünden kalan\\
+\(8\) & son üç basamağın oluşturduğu sayı \(8\)'in katı ise & son üç basamağın \(8\)'e bölümünden kalan\\
+\(11\) & birler basamağından başlayarak \(+,-,+,-,\dots\) işaretleriyle alınan toplam \(11\)'in katı ise (\(0\) dahil) & bu toplamın \(11\)'e bölümünden kalan (toplam negatifse \(11\)'in katı eklenir)\\\bottomrule
+\end{tabular}
+\end{kural}
+
+\begin{dikkat}
+\(9\) ile bölünen sayı \(3\) ile, \(8\) ile bölünen sayı \(4\) ile de bölünür; tersleri her zaman doğru değildir (\(12\), \(3\) ile bölünür ama \(9\) ile bölünmez). Bilinmeyen rakam soruda \(0\) değerini de denemeyi unutmayın. \(11\) kuralında işaretler \textbf{sağdan} başlar: \(\ab{abcd}\rightarrow d-c+b-a\).
+\end{dikkat}
+
+\begin{ornek}
+\(\ab{a3b}\) üç basamaklı sayısı hem \(10\) ile hem \(3\) ile bölünebiliyorsa \(a\) hangi değerleri alabilir?
+\end{ornek}
+\begin{cozum}
+\(10\) ile bölünme: \(b=0\). \ Rakamlar toplamı \(a+3\) sayısı \(3\)'ün katı olmalı; \(a\neq 0\) (ilk rakam).
+\[a+3\in\{6,9,12\}\ \Rightarrow\ a\in\{3,6,9\}\qquad(330,\ 630,\ 930)\]
+\end{cozum}
+
+\begin{ornek}
+\(7\,256\,814\) sayısının \(3\) ile ve \(9\) ile bölümünden kalanlar kaçtır?
+\end{ornek}
+\begin{cozum}
+Rakamlar toplamı: \(7+2+5+6+8+1+4=33\). \quad \(33=3\cdot 11\) \(\Rightarrow\) \(3\) ile kalan \(0\); \quad \(33=9\cdot 3+6\) \(\Rightarrow\) \(9\) ile kalan \(6\).
+\end{cozum}
+
+\begin{ornek}
+\(\ab{4a3b}\) dört basamaklı sayısı \(9\) ile bölünebiliyorsa \(a+b\) toplamı hangi değerleri alabilir?
+\end{ornek}
+\begin{cozum}
+Rakamlar toplamı \(7+a+b\) sayısı \(9\)'un katı olmalı. \(0\le a+b\le 18\) olduğundan \(7+a+b\in\{9,18\}\):
+\[a+b=2\quad\text{veya}\quad a+b=11\]
+(\(7+a+b=27\) için \(a+b=20\) olur; iki rakamın toplamı en çok \(18\)'dir.)
+\end{cozum}
+
+\begin{ornek}
+\(\ab{12a4}\) dört basamaklı sayısı \(8\) ile bölünebiliyorsa \(a\) hangi değerleri alabilir?
+\end{ornek}
+\begin{cozum}
+Son üç basamak \(\ab{2a4}\) \(8\)'in katı olmalıdır. \(200\) ile \(299\) arasında \(4\) ile biten \(8\)'in katları: \(224=8\cdot 28\) ve \(264=8\cdot 33\) (\(204, 244, 284\) değil).
+\[a\in\{2,6\}\qquad(1224=8\cdot 153,\ \ 1264=8\cdot 158)\]
+\end{cozum}
+
+\begin{ornek}
+\(\ab{5a17}\) dört basamaklı sayısının \(11\) ile bölümünden kalan \(3\) ise \(a\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Sağdan: \(7-1+a-5=a+1\). \ \(a+1\) sayısının \(11\)'e bölümünden kalan \(3\) olmalı; \(1\le a+1\le 10\) olduğundan \(a+1=3\Rightarrow a=2\).\\
+Kontrol: \(5217=11\cdot 474+3\).
+\end{cozum}
+
+% =====================================================
+\section{Bileşik Sayılarla Bölünebilme}
+
+\begin{kural}[Aralarında asal çarpanlara ayırma]
+Bir sayının bileşik bir sayıyla bölünebilmesi için bölen, \textbf{aralarında asal} (\(1\)'den başka ortak pozitif böleni olmayan) çarpanlara ayrılır ve sayı her çarpanla ayrı ayrı bölünmelidir:
+\[6=2\cdot 3,\ \ 12=3\cdot 4,\ \ 15=3\cdot 5,\ \ 18=2\cdot 9,\ \ 24=3\cdot 8,\ \ 36=4\cdot 9,\ \ 45=5\cdot 9,\ \ 72=8\cdot 9\]
+\end{kural}
+
+\begin{dikkat}
+\(12=2\cdot 6\) veya \(24=4\cdot 6\) gibi ayrıştırmalar \textbf{kullanılamaz}: çarpanlar aralarında asal değildir. Örnek: \(18\) sayısı \(2\) ile ve \(6\) ile bölünür, fakat \(12\) ile bölünmez.
+\end{dikkat}
+
+\begin{ornek}
+\(\ab{a5b}\) üç basamaklı sayısı \(12\) ile bölünebiliyorsa bu koşulu sağlayan kaç farklı sayı vardır?
+\end{ornek}
+\begin{cozum}
+\(12=3\cdot 4\). \ \(4\): \(\ab{5b}\in\{52,56\}\Rightarrow b\in\{2,6\}\).\\
+\(3\): \(a+5+b\) sayısı \(3\)'ün katı.\\
+\(b=2\): \(a+7\) \(3\)'ün katı \(\Rightarrow a\in\{2,5,8\}\) \quad (\(252,\ 552,\ 852\))\\
+\(b=6\): \(a+11\) \(3\)'ün katı \(\Rightarrow a\in\{1,4,7\}\) \quad (\(156,\ 456,\ 756\))\\
+Toplam \(6\) farklı sayı.
+\end{cozum}
+
+\begin{ornek}
+\(\ab{3a16}\) dört basamaklı sayısı \(24\) ile bölünebiliyorsa \(a\) hangi değerleri alabilir?
+\end{ornek}
+\begin{cozum}
+\(24=3\cdot 8\).\\
+\(8\): \(\ab{a16}\) \(8\)'in katı olmalı. \(016, 216, 416, 616, 816\) sayıları \(8\)'in katıdır; \(116, 316, 516, 716, 916\) değildir \(\Rightarrow\) \(a\) çift.\\
+\(3\): \(3+a+1+6=10+a\) \(3\)'ün katı \(\Rightarrow a\in\{2,5,8\}\).\\
+Ortak: \(a\in\{2,8\}\) \quad (\(3216=24\cdot 134\), \ \(3816=24\cdot 159\)).
+\end{cozum}
+
+% =====================================================
+\section{EBOB (En Büyük Ortak Bölen)}
+
+\begin{kural}[EBOB]
+\(\text{EBOB}(a,b)\): pozitif tam sayılar \(a\) ve \(b\)'nin ortak pozitif bölenlerinin en büyüğü.
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{Asal çarpan yöntemi:} Yalnızca \textbf{ortak} asal çarpanlar, \textbf{en küçük} üsleriyle çarpılır.
+\item \textbf{Ortak bölme yöntemi:} Sayılar, hepsini birden bölen asal sayılarla bölünür; bu bölenlerin çarpımı EBOB'dur.
+\item \(\text{EBOB}(a,b)=1\) ise \(a\) ve \(b\) \textbf{aralarında asaldır}.
+\end{itemize}
+\end{kural}
+
+\needspace{11\baselineskip}
+\begin{ornek}
+\(\text{EBOB}(90,120,150)\) kaçtır?
+\end{ornek}
+\begin{cozumk}\par
+\begin{minipage}[t]{0.40\linewidth}
+\begin{tabular}{rrr|l}
+\(90\) & \(120\) & \(150\) & \(2\)\\
+\(45\) & \(60\) & \(75\) & \(3\)\\
+\(15\) & \(20\) & \(25\) & \(5\)\\
+\(3\) & \(4\) & \(5\) & (ortak bölen yok)
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.56\linewidth}
+\[\text{EBOB}=2\cdot 3\cdot 5=30\]
+Asal çarpan yöntemiyle: \(90=2\cdot 3^2\cdot 5\), \(120=2^3\cdot 3\cdot 5\), \(150=2\cdot 3\cdot 5^2\); ortak çarpanların en küçük üsleri \(2\cdot 3\cdot 5=30\).
+\end{minipage}
+\end{cozumk}
+
+\begin{ornek}
+\(A=2^5\cdot 3^2\cdot 7\) ve \(B=2^3\cdot 3^4\cdot 5\) olduğuna göre \(\text{EBOB}(A,B)\) sayısının kaç tane pozitif tam böleni vardır?
+\end{ornek}
+\begin{cozum}
+Ortak asal çarpanlar \(2\) ve \(3\): \ \(\text{EBOB}(A,B)=2^3\cdot 3^2=72\).\\
+Pozitif bölen sayısı (2. hafta): \((3+1)(2+1)=12\).
+\end{cozum}
+
+% =====================================================
+\section{EKOK (En Küçük Ortak Kat) ve EBOB\,\(\cdot\)\,EKOK}
+
+\begin{kural}[EKOK ve temel bağıntı]
+\(\text{EKOK}(a,b)\): pozitif tam sayılar \(a\) ve \(b\)'nin pozitif ortak katlarının en küçüğü.
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{Asal çarpan yöntemi:} \textbf{Bütün} asal çarpanlar, \textbf{en büyük} üsleriyle çarpılır.
+\item \textbf{Bölme tablosu:} Sayılar, en az birini bölen asal sayılarla hepsi \(1\) olana kadar bölünür (bölünmeyen sayı aynen aşağı yazılır); bütün bölenlerin çarpımı EKOK'tur.
+\item İki sayı için: \(\text{EBOB}(a,b)\cdot\text{EKOK}(a,b)=a\cdot b\). \ Aralarında asal ise \(\text{EKOK}(a,b)=a\cdot b\).
+\item \(\text{EBOB}(a,b)\le\min(a,b)\le\max(a,b)\le\text{EKOK}(a,b)\).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+\(\text{EBOB}\cdot\text{EKOK}=\) çarpım bağıntısı yalnızca \textbf{iki} sayı için geçerlidir (\(2,4,8\) için \(2\cdot 8\neq 2\cdot 4\cdot 8\)). Aralarında asal sayıların asal olması gerekmez: \(8\) ve \(15\) aralarında asaldır.
+\end{dikkat}
+
+\needspace{12\baselineskip}
+\begin{ornek}
+\(\text{EKOK}(20,24,30)\) kaçtır?
+\end{ornek}
+\begin{cozumk}\par
+\begin{minipage}[t]{0.40\linewidth}
+\begin{tabular}{rrr|l}
+\(20\) & \(24\) & \(30\) & \(2\)\\
+\(10\) & \(12\) & \(15\) & \(2\)\\
+\(5\) & \(6\) & \(15\) & \(2\)\\
+\(5\) & \(3\) & \(15\) & \(3\)\\
+\(5\) & \(1\) & \(5\) & \(5\)\\
+\(1\) & \(1\) & \(1\) &
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.56\linewidth}
+\[\text{EKOK}=2^3\cdot 3\cdot 5=120\]
+Asal çarpan yöntemiyle: \(20=2^2\cdot 5\), \(24=2^3\cdot 3\), \(30=2\cdot 3\cdot 5\); en büyük üsler \(2^3\), \(3\), \(5\).
+\end{minipage}
+\end{cozumk}
+
+\begin{ornek}
+İki pozitif tam sayının EBOB'u \(8\), EKOK'u \(96\)'dır. Sayılardan biri \(32\) ise diğeri kaçtır?
+\end{ornek}
+\begin{cozum}
+\[32\cdot b=8\cdot 96=768\ \Rightarrow\ b=24\]
+Kontrol: \(32=2^5\), \(24=2^3\cdot 3\) \(\Rightarrow\) \(\text{EBOB}=2^3=8\), \(\text{EKOK}=2^5\cdot 3=96\).
+\end{cozum}
+
+\begin{ornek}
+\(a\) ve \(b\) pozitif tam sayılardır. \(\text{EBOB}(a,b)=6\) ve \(a+b=48\) ise kaç farklı \((a,b)\) sıralı ikilisi vardır?
+\end{ornek}
+\begin{cozum}
+\(a=6x\), \(b=6y\) yazılırsa \(x\) ile \(y\) aralarında asal pozitif tam sayılardır ve \(6(x+y)=48\Rightarrow x+y=8\).\\
+\((x,y)\): \((1,7),(3,5),(5,3),(7,1)\) uygun; \((2,6),(4,4),(6,2)\) aralarında asal değil.\\
+Cevap: \(4\) sıralı ikili: \((6,42),(18,30),(30,18),(42,6)\).
+\end{cozum}
+
+% =====================================================
+\section{EBOB ve EKOK Problemleri}
+
+\begin{kural}[Hangisi?]
+\textbf{EBOB:} büyük bir şeyi eşit parçalara bölme (kesme, fayans döşeme, eşit aralıklı dikme); ``en büyük parça'', ``en az parça''.\\
+\textbf{EKOK:} küçük şeyleri birleştirme (birlikte çalma, yeniden karşılaşma, küçük parçalardan kare oluşturma, hep aynı kalanı veren sayı).\\
+\textbf{Ağaç dikme:} Kapalı çevrede ağaç sayısı \(=\) çevre \(\div\) aralık; iki ucuna da ağaç dikilen açık yolda \(=\) uzunluk \(\div\) aralık \(+1\).\\
+\textbf{Kalanlı sorular:} \(a,b,c\) ile bölündüğünde hep \(r\) kalan sayılar: \(\text{EKOK}\cdot k+r\). \ Kalanlar bölenlerden hep \(t\) eksikse: \(\text{EKOK}\cdot k-t\).
+\end{kural}
+
+\begin{ornek}
+Boyları \(150\) cm, \(210\) cm ve \(270\) cm olan üç kumaş, hiç artmayacak biçimde eşit boyda parçalara kesilecektir. En az kaç parça elde edilir?
+\end{ornek}
+\begin{cozum}
+\(\text{EBOB}(150,210,270)=30\) cm. \quad Parça sayısı: \(\dfrac{150}{30}+\dfrac{210}{30}+\dfrac{270}{30}=5+7+9=21\).
+\end{cozum}
+
+\begin{ornek}
+Kenarları \(24\) cm ve \(36\) cm olan eş dikdörtgen kartonlar, aynı yönde ve boşluksuz yan yana dizilerek bir kare oluşturulacaktır. En az kaç karton gerekir?
+\end{ornek}
+\begin{cozum}
+Karenin kenarı hem \(24\)'ün hem \(36\)'nın katı olmalı ve en küçük olmalı: \(\text{EKOK}(24,36)=72\) cm.
+\[\frac{72}{24}\cdot\frac{72}{36}=3\cdot 2=6\ \text{karton}\]
+\end{cozum}
+
+\begin{ornek}
+Kenar uzunlukları \(42\) m, \(56\) m ve \(70\) m olan üçgen biçimli bir tarlanın çevresine, her köşeye birer ağaç gelecek ve ardışık ağaçlar arası uzaklık eşit olacak biçimde ağaç dikilecektir. En az kaç ağaç gerekir?
+\end{ornek}
+\begin{cozum}
+Aralık: \(\text{EBOB}(42,56,70)=14\) m. \quad Çevre: \(42+56+70=168\) m.\\
+Kapalı çevre: \(168\div 14=12\) ağaç. \quad (Kenar kenar: \(3+4+5=12\) aralık \(=12\) ağaç.)
+\end{cozum}
+
+\begin{ornek}
+\(5\) ile bölündüğünde \(3\), \(6\) ile bölündüğünde \(4\), \(8\) ile bölündüğünde \(6\) kalanını veren en küçük pozitif tam sayı kaçtır?
+\end{ornek}
+\begin{cozum}
+Kalanların her biri bölenden \(2\) eksiktir: \(x+2\) sayısı \(5\), \(6\) ve \(8\)'in ortak katıdır.
+\[x+2=\text{EKOK}(5,6,8)=120\ \Rightarrow\ x=118\]
+Kontrol: \(118=5\cdot 23+3=6\cdot 19+4=8\cdot 14+6\).
+\end{cozum}
+
+\begin{ornek}
+Bir kutudaki cevizler \(6\)'şar, \(9\)'ar ve \(12\)'şer sayıldığında her seferinde \(2\) ceviz artmaktadır. Kutudaki ceviz sayısı \(50\) ile \(100\) arasında ise kaç ceviz vardır?
+\end{ornek}
+\begin{cozum}
+Ceviz sayısı \(x\) ise \(x-2\) sayısı \(\text{EKOK}(6,9,12)=36\)'nın katıdır: \(x\in\{2,38,74,110,\dots\}\).\\
+\(50<x<100\) aralığındaki tek değer \(x=74\).
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+\(2,\ 5,\ 10\) & birler basamağı\\
+\(3,\ 9\) & rakamlar toplamı (kalan da rakamlar toplamından)\\
+\(4,\ 8\) & son iki / son üç basamak\\
+\(11\) & sağdan \(+,-,+,-,\dots\) toplamı\\
+Bileşik bölen & aralarında asal çarpanlar: \(12=3\cdot 4\), \(36=4\cdot 9\), \(72=8\cdot 9\) \ (\(2\cdot 6\) değil)\\
+EBOB & ortak asal çarpanlar, en küçük üs\\
+EKOK & bütün asal çarpanlar, en büyük üs\\
+İki sayı & \(\text{EBOB}(a,b)\cdot\text{EKOK}(a,b)=a\cdot b\); \ aralarında asal \(\Rightarrow\) EBOB \(=1\)\\
+Kesme, fayans, ağaç & EBOB; \ kapalı çevrede ağaç \(=\) çevre \(\div\) aralık\\
+Birlikte çalma & EKOK\\
+Hep \(r\) kalan / hep \(t\) eksik & \(\text{EKOK}\cdot k+r\) \ / \ \(\text{EKOK}\cdot k-t\)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta3_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Rasyonel sayılar ve ondalık sayılar (dört işlem, sıralama).}
+
+\end{document}

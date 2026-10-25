@@ -1,0 +1,188 @@
+% !TEX program = xelatex
+% Bu dosya tex_uret.py tarafından sorular.py'den üretilmiştir; düzenleme için sorular.py'yi değiştirip yeniden üretin.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1.8cm,top=1.9cm,bottom=1.9cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 8 -- Ara Sınav Deneme}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcommand{\sk}[1]{\textbf{\color{anamavi}#1)}~}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\lineskiplimit}{2pt}\setlength{\lineskip}{4pt}
+\setlength{\columnsep}{0.9cm}
+\setlength{\columnseprule}{0.4pt}
+\newlength{\soruara}\setlength{\soruara}{1.7cm}
+
+\begin{document}
+
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large\bfseries Ara Sınav Deneme}\\[2pt]
+{\normalsize Hafta 1--7 konuları}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\begin{minipage}[t]{0.55\textwidth}
+\vspace{2pt}
+\textbf{Ad Soyad:} \rule{0.68\linewidth}{0.4pt}\\[12pt]
+\textbf{Öğrenci No:} \rule{0.6\linewidth}{0.4pt}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.42\textwidth}
+\begin{kural}[Yönerge]
+\small\raggedright
+\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
+\item Soru sayısı: \(20\); \ önerilen süre: \textbf{\(60\) dakika}.
+\item Her soru eşit puanlıdır (\(5\) puan).
+\item Her sorunun yalnızca \textbf{bir} doğru cevabı vardır.
+\item Yanlış cevaplar doğru cevapları götürmez.
+\end{itemize}
+\end{kural}
+\end{minipage}
+
+\vspace{6pt}
+\begin{multicols}{2}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}1.}\ \(18-4\cdot(7-10)\div 2+(-3)^2\) işleminin sonucu kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-12\) & \sk{B}\(15\) & \sk{C}\(21\) & \sk{D}\(33\) & \sk{E}\(39\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}2.}\ Ardışık altı çift sayının toplamı \(150\)'dir. Bu sayıların en büyüğü kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(20\) & \sk{B}\(25\) & \sk{C}\(26\) & \sk{D}\(28\) & \sk{E}\(30\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}3.}\ \(n\) pozitif bir tam sayı olmak üzere \(\dfrac{(n+1)!-n!}{(n-1)!}=49\) olduğuna göre \(n\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(6\) & \sk{B}\(7\) & \sk{C}\(8\) & \sk{D}\(9\) & \sk{E}\(49\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}4.}\ \(600\) sayısının kaç tane pozitif böleni vardır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(12\) & \sk{B}\(24\) & \sk{C}\(30\) & \sk{D}\(36\) & \sk{E}\(48\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}5.}\ \(A\) ve \(B\) doğal sayılardır. \(A\) sayısı \(9\)'a bölündüğünde bölüm \(B\), kalan \(5\)'tir. \(B\) sayısı \(4\)'e bölündüğünde kalan \(3\)'tür. Buna göre \(A\) sayısının \(36\)'ya bölümünden kalan kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(5\) & \sk{B}\(8\) & \sk{C}\(23\) & \sk{D}\(27\) & \sk{E}\(32\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}6.}\ \(x\) pozitif tam sayı olmak üzere \(A=2^x\cdot 5^3\) sayısının asal olmayan pozitif bölenlerinin sayısı \(22\)'dir. Buna göre \(x\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(4\) & \sk{B}\(5\) & \sk{C}\(6\) & \sk{D}\(7\) & \sk{E}\(8\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}7.}\ Üç basamaklı \(\overline{5a6}\) sayısı \(9\) ile tam bölünebildiğine göre \(a\) rakamı kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(1\) & \sk{B}\(3\) & \sk{C}\(4\) & \sk{D}\(7\) & \sk{E}\(8\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}8.}\ İki pozitif tam sayının EBOB'u \(6\), EKOK'u \(180\)'dir. Sayılardan biri \(36\) olduğuna göre diğeri kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(15\) & \sk{B}\(24\) & \sk{C}\(30\) & \sk{D}\(45\) & \sk{E}\(60\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}9.}\ Kenar uzunlukları \(84\) m ve \(126\) m olan dikdörtgen biçimindeki bir bahçenin kenarları boyunca, her köşeye birer fidan gelecek şekilde fidan dikilecektir. Ardışık iki fidan arasındaki uzaklık her yerde aynı, metre cinsinden bir tam sayı ve \(10\) m'den kısa olacaktır. Buna göre en az kaç fidan gerekir?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(10\) & \sk{B}\(30\) & \sk{C}\(60\) & \sk{D}\(70\) & \sk{E}\(140\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}10.}\ \(\dfrac{5}{6}-\dfrac{1}{3}\div\dfrac{2}{3}\) işleminin sonucu kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(\dfrac{1}{3}\) & \sk{B}\(\dfrac{1}{2}\) & \sk{C}\(\dfrac{11}{18}\) & \sk{D}\(\dfrac{3}{4}\) & \sk{E}\(\dfrac{7}{6}\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}11.}\ \(\dfrac{0{,}12}{0{,}04}+\dfrac{1{,}5}{0{,}03}-0{,}2\cdot 15\) işleminin sonucu kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(5\) & \sk{B}\(23\) & \sk{C}\(50\) & \sk{D}\(53\) & \sk{E}\(56\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}12.}\ \(a=\dfrac{7}{9},\quad b=\dfrac{5}{6},\quad c=\dfrac{11}{14}\) sayılarının doğru sıralanışı aşağıdakilerden hangisidir?
+\par\smallskip\noindent\begin{tabular}{@{}p{0.47\linewidth}p{0.47\linewidth}@{}}\sk{A}\(a<c<b\) & \sk{B}\(a<b<c\)\\[7pt] \sk{C}\(c<a<b\) & \sk{D}\(b<c<a\)\\[7pt] \sk{E}\(b<a<c\) & \end{tabular}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}13.}\ \(4(x-3)-3(x+2)=4-x\) denkleminin çözümü kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(1\) & \sk{B}\(5\) & \sk{C}\(7\) & \sk{D}\(11\) & \sk{E}\(22\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}14.}\ \(\dfrac{x+1}{3}-\dfrac{x-2}{4}=\dfrac{x}{6}\) denkleminin çözümü kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-2\) & \sk{B}\(2\) & \sk{C}\(6\) & \sk{D}\(10\) & \sk{E}\(14\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}15.}\ \(x\)'e bağlı \(\dfrac{ax-2}{3}=x+\dfrac{b}{6}\) denkleminin çözüm kümesi gerçek sayılar kümesi \((\mathbb{R})\) olduğuna göre \(a\cdot b\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-12\) & \sk{B}\(-6\) & \sk{C}\(-4\) & \sk{D}\(6\) & \sk{E}\(12\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}16.}\ \(2x+3y=17\) ve \(3x-y=9\) olduğuna göre \(x\cdot y\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(1\) & \sk{B}\(3\) & \sk{C}\(4\) & \sk{D}\(7\) & \sk{E}\(12\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}17.}\ \(\dfrac{x}{3}+\dfrac{y}{4}=5\) ve \(\dfrac{x}{4}+\dfrac{y}{3}=\dfrac{11}{2}\) olduğuna göre \(x+y\) kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(6\) & \sk{B}\(\dfrac{49}{8}\) & \sk{C}\(\dfrac{21}{2}\) & \sk{D}\(12\) & \sk{E}\(18\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}18.}\ \(-2\le 4-x<3\) eşitsizliğini sağlayan kaç tane \(x\) tam sayısı vardır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(4\) & \sk{B}\(5\) & \sk{C}\(6\) & \sk{D}\(7\) & \sk{E}\(8\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}19.}\ \(|2x-5|=7\) denklemini sağlayan \(x\) değerlerinin çarpımı kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(-6\) & \sk{B}\(-1\) & \sk{C}\(5\) & \sk{D}\(6\) & \sk{E}\(7\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\noindent\begin{minipage}{\linewidth}\raggedright
+\textbf{\color{anamavi}20.}\ \(|3-x|\le 4\) eşitsizliğini sağlayan \(x\) tam sayılarının toplamı kaçtır?
+\par\smallskip\noindent{\setlength{\tabcolsep}{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}llll@{}}\sk{A}\(20\) & \sk{B}\(21\) & \sk{C}\(27\) & \sk{D}\(28\) & \sk{E}\(35\)\end{tabular*}}
+\end{minipage}
+\par\vspace{\soruara}
+\end{multicols}
+
+\vspace{6pt}
+\needspace{8\baselineskip}
+\noindent\textbf{\color{anamavi}Cevap tablosu} {\small (işaretlediğiniz şıkları buraya da yazabilirsiniz)}\par\smallskip
+\noindent\renewcommand{\arraystretch}{1.6}\begin{tabular}{|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|>{\centering\arraybackslash}p{1.25cm}|}\hline
+\textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10}\\\hline
+ &  &  &  &  &  &  &  &  & \\\hline
+\textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} & \textbf{20}\\\hline
+ &  &  &  &  &  &  &  &  & \\\hline
+\end{tabular}
+
+\vfill\centering{\small Başarılar!}
+\end{document}

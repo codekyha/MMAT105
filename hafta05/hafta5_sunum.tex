@@ -1,0 +1,637 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 5]{MMAT105 Genel Matematik}
+\subtitle{Hafta 5: Birinci Dereceden Bir Bilinmeyenli Denklemler}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.56\textwidth}
+\textbf{Hafta 4: Rasyonel ve ondalık sayılar}
+\begin{enumerate}
+\item \(\dfrac{2}{3}+\dfrac{5}{6}-\dfrac{1}{4}=?\)\\[4pt]
+\item \(0{,}\overline{3}+0{,}1\overline{6}=?\)\\[4pt]
+\item \(a=\dfrac{2}{3},\ b=\dfrac{3}{5},\ c=\dfrac{5}{8}\) sayılarını küçükten büyüğe sıralayınız.
+\end{enumerate}
+\column{0.40\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(\dfrac{8+10-3}{12}=\dfrac{15}{12}=\dfrac{5}{4}\)\\[4pt]
+\item \(\dfrac{1}{3}+\dfrac{15}{90}=\dfrac{1}{3}+\dfrac{1}{6}=\dfrac{1}{2}\)\\[4pt]
+\item \(b<c<a\) \quad (\(0{,}6<0{,}625<0{,}\overline{6}\))
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item Denklem, eşitlik, özdeşlik
+\item Eşitliğin özellikleri
+\item \(ax+b=0\) ve çözümü
+\item Parantezli denklemler
+\item Sağlama
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Kesirli denklemler
+\item Ondalıklı katsayılar
+\item Özel durumlar: \(\mathbb{R}\), \(\emptyset\)
+\item Parametreli sorular
+\item Paydada bilinmeyen
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item Sözel ifadeyi denkleme çevirme
+\item Sayı problemleri
+\item Ardışık sayılar
+\item Para, yaş, yol: giriş
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Denklem Kavramı ve Çözümü}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Denklem, Eşitlik, Özdeşlik; \(ax+b=0\) Denkleminin Çözümü
+\end{frame}
+
+\subsection{Denklem, eşitlik, özdeşlik}
+\begin{frame}{Denklem, Eşitlik, Özdeşlik}
+\begin{columns}[c]
+\column{0.64\textwidth}
+\begin{block}{Tanımlar}
+\begin{itemize}
+\item \textbf{Eşitlik:} İki ifadenin eşit olduğunu bildiren yazı: \(3+5=8\).
+\item \textbf{Denklem:} Bilinmeyen içeren, her değer için doğru \textbf{olmayan} eşitlik: \(2x+3=11\) (yalnız \(x=4\) için doğru); hiçbir değer için doğru olmayabilir de.
+\item \textbf{Özdeşlik:} Bilinmeyenin \textbf{her} değeri için doğru olan eşitlik: \(2(x+3)=2x+6\).
+\item Denklemi sağlayan değere \textbf{kök}, köklerin kümesine \textbf{çözüm kümesi} (\(\text{ÇK}\)) denir.
+\end{itemize}
+\end{block}
+\column{0.33\textwidth}
+\centering
+\setlength{\unitlength}{1mm}
+\begin{picture}(40,30)
+\thicklines
+\put(20,0){\line(0,1){20}}
+\put(12,0){\line(1,0){16}}
+\put(2,20){\line(1,0){36}}
+\put(2,20){\line(0,-1){6}}\put(38,20){\line(0,-1){6}}
+\put(-3,10){\framebox(10,4){\scriptsize \(3x+2\)}}
+\put(33,10){\framebox(10,4){\scriptsize \(x+10\)}}
+\put(20,20){\circle*{1.5}}
+\end{picture}\\[2pt]
+{\small Terazi dengede \(\Leftrightarrow\) iki kefe eşit}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Eşitliğin Özellikleri ve \(ax+b=0\)}
+\begin{block}{Terazi kuralı: iki kefeye aynı işlemi yap}
+\(a=b\) ise \quad \(a+c=b+c\), \quad \(a-c=b-c\), \quad \(a\cdot c=b\cdot c\), \quad \(c\neq 0\) ise \(\dfrac{a}{c}=\dfrac{b}{c}\).
+\end{block}
+\begin{block}{Birinci dereceden bir bilinmeyenli denklem}
+\[ax+b=0\quad (a\neq 0)\qquad\Longrightarrow\qquad x=-\frac{b}{a},\qquad \text{ÇK}=\left\{-\frac{b}{a}\right\}\]
+Adımlar: parantezleri aç \(\to\) bilinmeyenleri bir tarafa, sayıları öbür tarafa topla \(\to\) katsayıya böl \(\to\) \textbf{sağla}.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Karşı tarafa geçen terimin işareti değişir: \(x+5=9\Rightarrow x=9-5\). \quad \(-(x-3)=-x+3\). \quad \textbf{Sıfıra bölme yoktur.}
+\end{alertblock}
+\end{frame}
+
+\soru{Kavramlar -- Örnek 1}
+{Aşağıdakilerden hangisi denklem, hangisi özdeşlik, hangisi sayısal eşitliktir?
+\[\text{(a) } 2x+3=11\qquad \text{(b) } 2(x+3)=2x+6\qquad \text{(c) } 3+5=8\]}
+{(a) \textbf{Denklem}: yalnız \(x=4\) için doğru (\(8+3=11\)).\\[3pt]
+(b) \textbf{Özdeşlik}: parantez açılınca \(2x+6=2x+6\); her \(x\) için doğru.\\[3pt]
+(c) \textbf{Sayısal eşitlik}: bilinmeyen yok.}
+
+\soru{Terazi -- Örnek 2}
+{Dengedeki bir terazinin bir kefesinde \(3\) özdeş kutu ve \(2\) kg, diğer kefesinde \(1\) kutu ve \(10\) kg vardır. Bir kutu kaç kg'dır?}
+{Kutu \(x\) kg olsun: \quad \(3x+2=x+10\)\\[3pt]
+İki kefeden \(1\) kutu ve \(2\) kg çıkaralım: \quad \(2x=8\ \Rightarrow\ x=4\) kg.\\[3pt]
+Sağlama: \(3\cdot 4+2=14=4+10\).}
+
+\soru{Temel Çözüm -- Örnek 3}
+{\(5x-7=18\) denkleminin çözüm kümesini bulunuz.}
+{\[5x=18+7=25\ \Rightarrow\ x=5\]
+Sağlama: \(5\cdot 5-7=18\) \checkmark \qquad \(\text{ÇK}=\{5\}\)}
+
+\soru{Temel Çözüm -- Örnek 4}
+{\(3x+5=x+9\) denklemini çözünüz.}
+{Bilinmeyenler solda, sayılar sağda toplanır:
+\[3x-x=9-5\ \Rightarrow\ 2x=4\ \Rightarrow\ x=2\]
+Sağlama: \(3\cdot 2+5=11=2+9\) \checkmark \qquad \(\text{ÇK}=\{2\}\)}
+
+\soru{Temel Çözüm -- Örnek 5}
+{\(7-3x=2x-8\) denklemini çözünüz.}
+{\[7+8=2x+3x\ \Rightarrow\ 15=5x\ \Rightarrow\ x=3\]
+Sağlama: \(7-9=-2\), \ \(6-8=-2\) \checkmark \qquad \(\text{ÇK}=\{3\}\)\\[3pt]
+İpucu: \(x\)'leri katsayısı büyük olan tarafa toplamak işaret hatasını azaltır.}
+
+\subsection{Parantezli denklemler}
+\soru{Parantezli -- Örnek 6}
+{\(3(x-2)-2(x+1)=4\) denklemini çözünüz.}
+{Parantezleri açalım (dikkat: \(-2\cdot(+1)=-2\)):
+\[3x-6-2x-2=4\ \Rightarrow\ x-8=4\ \Rightarrow\ x=12\]
+Sağlama: \(3\cdot 10-2\cdot 13=30-26=4\) \checkmark}
+
+\soru{Parantezli -- Örnek 7}
+{\(5-2(3-x)=4(x-1)+1\) denklemini çözünüz.}
+{\[5-6+2x=4x-4+1\ \Rightarrow\ 2x-1=4x-3\ \Rightarrow\ 2=2x\ \Rightarrow\ x=1\]
+Sağlama: \(5-2\cdot 2=1\), \ \(4\cdot 0+1=1\) \checkmark \qquad \(\text{ÇK}=\{1\}\)}
+
+\soru{İç İçe Parantez -- Örnek 8}
+{\(2\big[x-3(x-1)\big]=x+1\) denklemini çözünüz.}
+{En içten başlayalım: \(x-3(x-1)=x-3x+3=-2x+3\)
+\[2(-2x+3)=x+1\ \Rightarrow\ -4x+6=x+1\ \Rightarrow\ 5=5x\ \Rightarrow\ x=1\]
+Sağlama: \(2[1-0]=2=1+1\) \checkmark}
+
+\soru{Sağlama -- Örnek 9}
+{Bir öğrenci \(4(x+1)=2x-6\) denkleminin kökünü \(x=-1\) bulmuştur. Sağlama yaparak kontrol ediniz; yanlışsa doğru kökü bulunuz.}
+{\(x=-1\): \ sol \(=4\cdot 0=0\), \ sağ \(=-2-6=-8\). \ \(0\neq-8\) \(\Rightarrow\) \textbf{yanlış}.\\[3pt]
+Doğrusu: \(4x+4=2x-6\ \Rightarrow\ 2x=-10\ \Rightarrow\ x=-5\)\\[3pt]
+Sağlama: \(4\cdot(-4)=-16\), \ \(2\cdot(-5)-6=-16\) \checkmark}
+
+\soru{Sıfıra Bölme Tuzağı -- Örnek 10}
+{Bir öğrenci \(3x=5x\) denkleminde iki tarafı \(x\)'e bölüp \(3=5\) bulmuş ve ``çözüm yok'' demiştir. Hata nerededir?}
+{\(x=0\) olabileceği için \(x\)'e bölmek \textbf{sıfıra bölme} riski taşır.\\[3pt]
+Doğrusu: \(5x-3x=0\ \Rightarrow\ 2x=0\ \Rightarrow\ x=0\) \qquad \(\text{ÇK}=\{0\}\)\\[3pt]
+Kural: Bilinmeyen içeren bir ifadeye bölmeyin; terimleri bir tarafa toplayın.}
+
+\soru{Karışık -- Örnek 11}
+{\(-(x-4)+3=2(5-x)\) denklemini çözünüz.}
+{\[-x+4+3=10-2x\ \Rightarrow\ -x+7=10-2x\ \Rightarrow\ x=3\]
+Sağlama: \(-(-1)+3=4\), \ \(2\cdot 2=4\) \checkmark \qquad \(\text{ÇK}=\{3\}\)}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \(4x-9=11\)
+\item \(2(x+3)=x+10\)
+\item \(7-(x-2)=3x-3\) \(\star\)
+\item \(3(2x-1)-2(x+4)=5\) \(\star\)
+\item \(5x=-2x\) \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(x=5\)
+\item \(x=4\)
+\item \(x=3\)
+\item \(x=4\)
+\item \(x=0\) \quad (\(7x=0\))
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(7-(x-2)=3x-3\) denklemini çözünüz.}
+{Parantezin önündeki eksi, içteki her terimin işaretini değiştirir:
+\[7-x+2=3x-3\ \Rightarrow\ 9-x=3x-3\]
+\[9+3=3x+x\ \Rightarrow\ 12=4x\ \Rightarrow\ x=3\]
+Sağlama: \(7-1=6\), \ \(9-3=6\) \checkmark \qquad \(\text{ÇK}=\{3\}\)}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(3(2x-1)-2(x+4)=5\) denklemini çözünüz.}
+{Dağılma: \(6x-3-2x-8=5\) \quad (\(-2\cdot 4=-8\))
+\[4x-11=5\ \Rightarrow\ 4x=16\ \Rightarrow\ x=4\]
+Sağlama: \(3\cdot 7-2\cdot 8=21-16=5\) \checkmark \qquad \(\text{ÇK}=\{4\}\)}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(5x=-2x\) denklemini çözünüz.}
+{Bilinmeyenler bir tarafa toplanır: \(5x+2x=0\ \Rightarrow\ 7x=0\ \Rightarrow\ x=0\).\\[3pt]
+\textbf{Dikkat:} İki tarafı \(x\)'e bölmek yanlıştır (\(x=0\) olabilir; \(0\)'a bölme tanımsız). Bölünürse \(5=-2\) gibi yanlış bir sonuç çıkar.\\[3pt]
+Sağlama: \(5\cdot 0=0=-2\cdot 0\) \checkmark \qquad \(\text{ÇK}=\{0\}\)}
+
+% =====================================================
+\section{Ders 2: Kesirli Denklemler ve Özel Durumlar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Kesirli ve Ondalıklı Denklemler, Özel Durumlar, Parametreler, Paydada Bilinmeyen
+\end{frame}
+
+\subsection{Kesirli ve ondalıklı denklemler}
+\begin{frame}{Kesirli ve Ondalıklı Katsayılı Denklemler}
+\begin{block}{Kural}
+\begin{itemize}
+\item \textbf{Kesirli:} Her iki tarafın \textbf{her terimini} paydaların EKOK'u ile çarp; paydalar gider.
+\item \textbf{Ondalıklı:} En çok \(k\) ondalık basamak varsa her terimi \(10^{k}\) ile çarp.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Paydası olmayan terimi çarpmayı unutmak: \(\dfrac{x}{2}+1=3\ \xrightarrow{\cdot 2}\ x+2=6\) \ (\(x+1=6\) değil).
+\item Kesir çizgisi parantezdir: \(-\dfrac{x-3}{2}\ \xrightarrow{\cdot 2}\ -(x-3)=-x+3\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Kesirli -- Örnek 12}
+{\(\dfrac{x}{2}+\dfrac{x}{3}=10\) denklemini çözünüz.}
+{\(\text{EKOK}(2,3)=6\); her terimi \(6\) ile çarpalım:
+\[3x+2x=60\ \Rightarrow\ 5x=60\ \Rightarrow\ x=12\]
+Sağlama: \(6+4=10\) \checkmark}
+
+\soru{Kesirli -- Örnek 13}
+{\(\dfrac{x-1}{3}-\dfrac{x+2}{4}=1\) denklemini çözünüz.}
+{\(\text{EKOK}(3,4)=12\):
+\[4(x-1)-3(x+2)=12\ \Rightarrow\ 4x-4-3x-6=12\ \Rightarrow\ x=22\]
+Sağlama: \(\dfrac{21}{3}-\dfrac{24}{4}=7-6=1\) \checkmark}
+
+\soru{Kesirli -- Örnek 14}
+{\(\dfrac{2x+1}{5}-\dfrac{x-3}{2}=1\) denklemini çözünüz.}
+{\(\text{EKOK}(5,2)=10\):
+\[2(2x+1)-5(x-3)=10\ \Rightarrow\ 4x+2-5x+15=10\ \Rightarrow\ -x=-7\ \Rightarrow\ x=7\]
+Sağlama: \(\dfrac{15}{5}-\dfrac{4}{2}=3-2=1\) \checkmark}
+
+\soru{Ondalıklı -- Örnek 15}
+{\(0{,}2x+1{,}5=0{,}5x-0{,}3\) denklemini çözünüz.}
+{En çok \(1\) ondalık basamak var \(\Rightarrow\) \(10\) ile çarpalım:
+\[2x+15=5x-3\ \Rightarrow\ 18=3x\ \Rightarrow\ x=6\]
+Sağlama: \(1{,}2+1{,}5=2{,}7\), \ \(3-0{,}3=2{,}7\) \checkmark}
+
+\soru{Ondalıklı -- Örnek 16}
+{\(0{,}12x+0{,}3=0{,}06x+0{,}9\) denklemini çözünüz.}
+{En çok \(2\) ondalık basamak var \(\Rightarrow\) \(100\) ile çarpalım:
+\[12x+30=6x+90\ \Rightarrow\ 6x=60\ \Rightarrow\ x=10\]
+Sağlama: \(1{,}2+0{,}3=1{,}5\), \ \(0{,}6+0{,}9=1{,}5\) \checkmark}
+
+\subsection{Özel durumlar ve parametreler}
+\begin{frame}{Özel Durumlar: Sonsuz Çözüm ve Çözümsüzlük}
+\begin{block}{\(ax+b=0\) denkleminde}
+\begin{tabular}{@{}lll@{}}
+\(a\neq 0\) & tek kök \(x=-\dfrac{b}{a}\) & \(\text{ÇK}=\left\{-\dfrac{b}{a}\right\}\)\\[8pt]
+\(a=0,\ b=0\) & \(0\cdot x=0\): her \(x\) sağlar (özdeşlik) & \(\text{ÇK}=\mathbb{R}\)\\[4pt]
+\(a=0,\ b\neq 0\) & \(0\cdot x=-b\neq 0\): hiçbir \(x\) sağlamaz & \(\text{ÇK}=\emptyset\)
+\end{tabular}
+\end{block}
+\begin{block}{\(ax+b=cx+d\) biçiminde}
+\(\text{ÇK}=\mathbb{R}\ \Leftrightarrow\ a=c\) ve \(b=d\); \qquad \(\text{ÇK}=\emptyset\ \Leftrightarrow\ a=c\) ve \(b\neq d\).
+\end{block}
+\begin{alertblock}{Dikkat}
+\(\emptyset\) ile \(\{0\}\) farklıdır: \(\{0\}\) kümesinin bir elemanı (\(0\)) vardır.
+\end{alertblock}
+\end{frame}
+
+\soru{Özel Durum -- Örnek 17}
+{Çözüm kümelerini bulunuz:\\[3pt] (a) \(2(x+3)-x=x+6\) \qquad\qquad (b) \(3x-2=3(x+1)\)}
+{(a) \(2x+6-x=x+6\ \Rightarrow\ x+6=x+6\ \Rightarrow\ 0\cdot x=0\) \quad \(\text{ÇK}=\mathbb{R}\)\\[4pt]
+(b) \(3x-2=3x+3\ \Rightarrow\ 0\cdot x=5\) \quad (hiçbir \(x\) sağlamaz) \quad \(\text{ÇK}=\emptyset\)}
+
+\soru{Parametre -- Örnek 18}
+{\((m-2)x+4=3x-n\) denkleminin çözüm kümesi \(\mathbb{R}\) ise \(m+n\) kaçtır?}
+{Her \(x\) için doğru olmalı: \(x\)'in katsayıları ve sabitler eşit olmalı.
+\[m-2=3\ \Rightarrow\ m=5,\qquad 4=-n\ \Rightarrow\ n=-4\]
+\[m+n=5+(-4)=1\]}
+
+\soru{Parametre -- Örnek 19}
+{\((a+1)x-3=2x+b\) denkleminin çözüm kümesi boş küme ise \(a\) kaçtır? \(b\) için hangi koşul gerekir?}
+{Çözüm kümesi boş \(\Rightarrow\) katsayılar eşit, sabitler farklı:
+\[a+1=2\ \Rightarrow\ a=1,\qquad -3\neq b\ \Rightarrow\ b\neq-3\]
+(\(b=-3\) olsaydı \(\text{ÇK}=\mathbb{R}\) olurdu.)}
+
+\soru{Kök Verilince -- Örnek 20}
+{\(ax-4=2x+a\) denkleminin kökü \(3\) ise \(a\) kaçtır?}
+{Kök denklemi sağlar: \(x=3\) yazalım.
+\[3a-4=6+a\ \Rightarrow\ 2a=10\ \Rightarrow\ a=5\]
+Kontrol: \(5x-4=2x+5\Rightarrow 3x=9\Rightarrow x=3\) \checkmark}
+
+\subsection{Paydada bilinmeyen}
+\begin{frame}{Paydada Bilinmeyen Olan Denklemler}
+\begin{block}{Kural}
+\begin{enumerate}
+\item Önce \textbf{tanımsızlık koşulunu} yaz: payda \(\neq 0\) \ (ör. \(x-2\neq 0\Rightarrow x\neq 2\)).
+\item Paydaları yok et (paydaların EKOK'u ile çarp), denklemi çöz.
+\item Bulunan değer koşula uymuyorsa kök \textbf{değildir}; atılır.
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(\dfrac{x+1}{x-3}=\dfrac{4}{x-3}\) denkleminden \(x=3\) bulup ``\(\text{ÇK}=\{3\}\)'' yazmak. \ \(x=3\) paydayı sıfır yapar!
+\end{alertblock}
+\end{frame}
+
+\soru{Paydada Bilinmeyen -- Örnek 21}
+{\(\dfrac{6}{x-1}=3\) denklemini çözünüz.}
+{Koşul: \(x\neq 1\).
+\[6=3(x-1)\ \Rightarrow\ 6=3x-3\ \Rightarrow\ x=3\]
+\(3\neq 1\), koşula uyar. Sağlama: \(\dfrac{6}{2}=3\) \checkmark \qquad \(\text{ÇK}=\{3\}\)}
+
+\soru{Paydada Bilinmeyen -- Örnek 22}
+{\(\dfrac{x+3}{x-2}=2\) denklemini çözünüz.}
+{Koşul: \(x\neq 2\).
+\[x+3=2(x-2)\ \Rightarrow\ x+3=2x-4\ \Rightarrow\ x=7\]
+Sağlama: \(\dfrac{10}{5}=2\) \checkmark \qquad \(\text{ÇK}=\{7\}\)}
+
+\soru{Tuzak -- Örnek 23}
+{\(\dfrac{x+1}{x-3}=\dfrac{4}{x-3}\) denkleminin çözüm kümesini bulunuz.}
+{Koşul: \(x\neq 3\). \ Paydalar aynı: \(x+1=4\ \Rightarrow\ x=3\).\\[3pt]
+Ama \(x=3\) koşulu bozar (payda \(0\) olur) \(\Rightarrow\) kök değildir.
+\[\text{ÇK}=\emptyset\]}
+
+\soru{Paydada Bilinmeyen -- Örnek 24}
+{\(\dfrac{2}{x}+\dfrac{1}{2x}=\dfrac{5}{4}\) denklemini çözünüz.}
+{Koşul: \(x\neq 0\). \ \(\text{EKOK}(x,\,2x,\,4)=4x\):
+\[8+2=5x\ \Rightarrow\ x=2\]
+Sağlama: \(1+\dfrac{1}{4}=\dfrac{5}{4}\) \checkmark \qquad \(\text{ÇK}=\{2\}\)}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\dfrac{x}{3}+\dfrac{x}{4}=7\)
+\item \(\dfrac{x+2}{3}-\dfrac{x-1}{2}=1\) \(\star\)
+\item \(0{,}3x-0{,}4=0{,}1x+0{,}6\)
+\item \((a-3)x+2=5x+b\) denkleminin çözüm kümesi \(\mathbb{R}\) ise \(a+b=?\) \(\star\)
+\item \(\dfrac{2x+5}{x+1}=3\) \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(x=12\)\\[6pt]
+\item \(x=1\)\\[6pt]
+\item \(x=5\)
+\item \(a=8,\ b=2\Rightarrow 10\)\\[6pt]
+\item \(x=2\) \ (\(x\neq-1\))
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(\dfrac{x+2}{3}-\dfrac{x-1}{2}=1\) denklemini çözünüz.}
+{Her terim \(\text{EKOK}(3,2)=6\) ile çarpılır (sağdaki \(1\) dahil!):
+\[2(x+2)-3(x-1)=6\ \Rightarrow\ 2x+4-3x+3=6\]
+\[-x+7=6\ \Rightarrow\ x=1\]
+Sağlama: \(\dfrac{3}{3}-\dfrac{0}{2}=1\) \checkmark \qquad \(\text{ÇK}=\{1\}\)}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{\((a-3)x+2=5x+b\) denkleminin çözüm kümesi \(\mathbb{R}\) ise \(a+b\) kaçtır?}
+{Çözüm kümesi \(\mathbb{R}\) ise iki taraf özdeştir: \(x\)'in katsayıları ve sabitler eşit olmalı.\\[3pt]
+\(x\)'in katsayıları: \(a-3=5\ \Rightarrow\ a=8\)\\[3pt]
+Sabitler: \(2=b\ \Rightarrow\ b=2\)
+\[a+b=8+2=10\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(\dfrac{2x+5}{x+1}=3\) denklemini çözünüz.}
+{Koşul: \(x+1\neq 0\ \Rightarrow\ x\neq -1\).\\[3pt]
+İki taraf \((x+1)\) ile çarpılır:
+\[2x+5=3(x+1)=3x+3\ \Rightarrow\ x=2\]
+\(2\neq-1\) \checkmark \quad Sağlama: \(\dfrac{9}{3}=3\) \checkmark \qquad \(\text{ÇK}=\{2\}\)}
+
+% =====================================================
+\section{Ders 3: Sözel İfadeler ve Problemler}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Sözel İfadeleri Denkleme Çevirme, Sayı ve Ardışık Sayı Problemleri, Para -- Yaş -- Yol (Giriş)
+\end{frame}
+
+\subsection{Sözel ifadeden denkleme}
+\begin{frame}{Sözel İfadeden Denkleme}
+\begin{columns}[t]
+\column{0.52\textwidth}
+\begin{block}{Çeviri sözlüğü (sayı: \(x\))}
+\small
+\begin{tabular}{@{}ll@{}}
+3 katı & \(3x\)\\
+5 fazlası / 5 eksiği & \(x+5\) / \(x-5\)\\
+yarısı, üçte biri & \(\dfrac{x}{2}\), \ \(\dfrac{x}{3}\)\\[4pt]
+3 katının 5 fazlası & \(3x+5\)\\
+5 fazlasının 3 katı & \(3(x+5)\)\\
+ardışık tam sayılar & \(x,\ x+1,\ x+2\)\\
+ardışık çift / tek & \(x,\ x+2,\ x+4\)
+\end{tabular}
+\end{block}
+\column{0.44\textwidth}
+\begin{block}{Problem çözme adımları}
+\begin{enumerate}
+\item Bilinmeyeni seç (\(x\) = ?)
+\item Diğer nicelikleri \(x\) ile yaz
+\item Denklemi kur ve çöz
+\item Sağla, \textbf{sorulanı} cevapla
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\small ``sayının \(5\) eksiği'' \(x-5\), ama ``\(5\)'in sayı kadar eksiği'' \(5-x\).\\
+Son adımda sorulan \(x\) değil, \(x+2\) olabilir!
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\soru{Çeviri -- Örnek 25}
+{Cebirsel ifadeye çeviriniz (sayı \(x\)):\\
+(a) bir sayının \(3\) katının \(5\) fazlası \quad (b) bir sayının \(5\) fazlasının \(3\) katı\\
+(c) bir sayının yarısının \(4\) eksiği \quad (d) bir sayının \(4\) eksiğinin yarısı}
+{\[\text{(a) } 3x+5\qquad \text{(b) } 3(x+5)\qquad \text{(c) } \frac{x}{2}-4\qquad \text{(d) } \frac{x-4}{2}\]
+Son söylenen işlem en son yapılır: ``\dots\ fazlasının \(3\) katı'' \(\Rightarrow\) önce ekle, sonra çarp.}
+
+\subsection{Sayı problemleri}
+\soru{Sayı Problemi -- Örnek 26}
+{Bir sayının \(3\) katının \(5\) fazlası \(29\) ise bu sayı kaçtır?}
+{\[3x+5=29\ \Rightarrow\ 3x=24\ \Rightarrow\ x=8\]
+Sağlama: \(3\cdot 8+5=29\) \checkmark}
+
+\soru{Sayı Problemi -- Örnek 27}
+{Bir sayının \(4\) fazlasının \(3\) katı, aynı sayının \(5\) katından \(2\) eksiktir. Bu sayı kaçtır?}
+{\[3(x+4)=5x-2\ \Rightarrow\ 3x+12=5x-2\ \Rightarrow\ 14=2x\ \Rightarrow\ x=7\]
+Sağlama: \(3\cdot 11=33\), \ \(35-2=33\) \checkmark}
+
+\soru{Sayı Problemi -- Örnek 28}
+{Bir sayının yarısı ile üçte birinin toplamı \(25\) ise bu sayı kaçtır?}
+{\[\frac{x}{2}+\frac{x}{3}=25\ \xrightarrow{\cdot 6}\ 3x+2x=150\ \Rightarrow\ x=30\]
+Sağlama: \(15+10=25\) \checkmark}
+
+\soru{Bilmece -- Örnek 29}
+{Havada uçan kazlar yerdeki topal kaza: ``Biz, bizim kadar, bizim yarımız kadar, yarımızın yarısı kadar ve bir de sen olursan ancak \(100\) oluruz.'' Havada kaç kaz vardır?}
+{\[x+x+\frac{x}{2}+\frac{x}{4}+1=100\ \xrightarrow{\cdot 4}\ 4x+4x+2x+x+4=400\]
+\[11x=396\ \Rightarrow\ x=36\qquad(36+36+18+9+1=100\ \checkmark)\]}
+
+\subsection{Ardışık sayılar}
+\soru{Ardışık -- Örnek 30}
+{Ardışık üç tam sayının toplamı \(96\) ise en büyüğü kaçtır?}
+{Sayılar \(x,\ x+1,\ x+2\):
+\[3x+3=96\ \Rightarrow\ x=31\]
+Sayılar \(31,\ 32,\ 33\) \(\Rightarrow\) en büyük: \(33\).}
+
+\soru{Ardışık -- Örnek 31}
+{Ardışık üç çift sayıdan en küçüğünün \(3\) katı, en büyüğünün \(2\) katından \(14\) fazladır. Bu üç sayının toplamı kaçtır?}
+{Sayılar \(x,\ x+2,\ x+4\):
+\[3x=2(x+4)+14\ \Rightarrow\ 3x=2x+22\ \Rightarrow\ x=22\]
+Sayılar \(22,\ 24,\ 26\); toplam \(72\). \ (Sağlama: \(66=52+14\) \checkmark)}
+
+\subsection{Para, yaş, yol}
+\soru{Para -- Örnek 32}
+{Ali'nin parası Ayşe'nin parasının \(3\) katıdır. Ali, Ayşe'ye \(40\) TL verirse paraları eşit oluyor. Ayşe'nin parası kaç TL'dir?}
+{Ayşe: \(x\), \ Ali: \(3x\).
+\[3x-40=x+40\ \Rightarrow\ 2x=80\ \Rightarrow\ x=40\]
+Ayşe \(40\) TL, Ali \(120\) TL. \ (Sağlama: \(80=80\) \checkmark)}
+
+\soru{Yaş -- Örnek 33}
+{Bir annenin yaşı kızının yaşının \(4\) katıdır. \(6\) yıl sonra annenin yaşı kızının yaşının \(3\) katı olacaktır. Kızın bugünkü yaşı kaçtır?}
+{Kız: \(x\), anne: \(4x\). \ \(6\) yıl sonra herkes \(6\) yaş büyür:
+\[4x+6=3(x+6)\ \Rightarrow\ 4x+6=3x+18\ \Rightarrow\ x=12\]
+Kız \(12\), anne \(48\). \ (Sağlama: \(54=3\cdot 18\) \checkmark)}
+
+\soru{Yol -- Örnek 34}
+{Aralarında \(450\) km olan iki şehirden iki araç aynı anda birbirine doğru yola çıkıyor. Hızları \(60\) km/sa ve \(90\) km/sa ise kaç saat sonra karşılaşırlar?}
+{Yol \(=\) hız \(\times\) zaman. \(t\) saatte alınan yolların toplamı \(450\) km:
+\[60t+90t=450\ \Rightarrow\ 150t=450\ \Rightarrow\ t=3 \text{ saat}\]}
+
+\soru{Şifre -- Örnek 35}
+{Dört basamaklı bir PIN kodunda soldan ilk iki basamağın oluşturduğu sayı, son iki basamağın oluşturduğu sayının \(2\) katından \(1\) fazladır; bu iki sayının toplamı \(46\)'dır. PIN kodunun rakamları toplamı kaçtır?}
+{Son iki basamak \(x\), ilk iki basamak \(2x+1\):
+\[(2x+1)+x=46\ \Rightarrow\ 3x=45\ \Rightarrow\ x=15\]
+İlk iki basamak \(31\) \(\Rightarrow\) PIN: \(3115\); rakamlar toplamı \(3+1+1+5=10\).}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.64\textwidth}
+\begin{enumerate}
+\item Bir sayının \(2\) katının \(7\) eksiği \(25\) ise sayı kaçtır?
+\item Ardışık dört tek sayının toplamı \(64\) ise en büyüğü kaçtır? \(\star\)
+\item Bir sayının \(3\) fazlasının yarısı, sayının \(3\) eksiğine eşittir. Sayı kaçtır? \(\star\)
+\item Baba \(40\), oğlu \(12\) yaşındadır. Kaç yıl sonra babanın yaşı oğlunun yaşının \(2\) katı olur? \(\star\)
+\item Bir kalem ile bir defter toplam \(50\) TL'dir; defter kalemden \(14\) TL pahalıdır. Kalem kaç TL'dir?
+\end{enumerate}
+\column{0.32\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(16\)\\[8pt]
+\item \(19\) \ (\(13,15,17,19\))\\[8pt]
+\item \(9\)\\[8pt]
+\item \(16\) yıl sonra\\[8pt]
+\item \(18\) TL
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{Ardışık dört tek sayının toplamı \(64\) ise en büyüğü kaçtır?}
+{Ardışık tek sayılar ikişer artar: \(x,\ x+2,\ x+4,\ x+6\).
+\[4x+12=64\ \Rightarrow\ 4x=52\ \Rightarrow\ x=13\]
+Sayılar: \(13,15,17,19\) \ (toplam \(64\) \checkmark) \(\Rightarrow\) en büyüğü \(19\).}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{Bir sayının \(3\) fazlasının yarısı, sayının \(3\) eksiğine eşittir. Sayı kaçtır?}
+{Sayı \(x\): \ ``\(3\) fazlasının yarısı'' \(=\dfrac{x+3}{2}\), \ ``\(3\) eksiği'' \(=x-3\).
+\[\frac{x+3}{2}=x-3\ \Rightarrow\ x+3=2x-6\ \Rightarrow\ x=9\]
+Sağlama: \(\dfrac{12}{2}=6=9-3\) \checkmark}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{Baba \(40\), oğlu \(12\) yaşındadır. Kaç yıl sonra babanın yaşı oğlunun yaşının \(2\) katı olur?}
+{\(t\) yıl sonra: baba \(40+t\), oğul \(12+t\) (ikisi de \(t\) yaş büyür).
+\[40+t=2(12+t)\ \Rightarrow\ 40+t=24+2t\ \Rightarrow\ t=16\]
+Sağlama: \(16\) yıl sonra baba \(56\), oğul \(28\); \ \(56=2\cdot 28\) \checkmark}
+
+% =====================================================
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\small
+\begin{itemize}
+\item \(ax+b=0,\ a\neq0\): \(x=-\dfrac{b}{a}\)
+\item İki tarafa aynı işlem
+\item Karşıya geçen işaret değiştirir
+\item \(0\)'a bölme yok
+\item Her zaman sağla
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\small
+\begin{itemize}
+\item Kesirli: EKOK ile çarp
+\item Ondalıklı: \(10^{k}\) ile çarp
+\item \(a=0,b=0\): \(\text{ÇK}=\mathbb{R}\)
+\item \(a=0,b\neq0\): \(\text{ÇK}=\emptyset\)
+\item Payda \(\neq 0\) koşulu
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\small
+\begin{itemize}
+\item \(3x+5\neq 3(x+5)\)
+\item Ardışık: \(x, x+1, \dots\)
+\item Çift/tek: \(x, x+2, \dots\)
+\item Yaş: herkese aynı süre
+\item Yol \(=\) hız \(\times\) zaman
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Birinci dereceden iki bilinmeyenli denklemler ve denklem sistemleri
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

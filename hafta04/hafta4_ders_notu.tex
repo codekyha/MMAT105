@@ -1,0 +1,316 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 4 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 4 Ders Notu: Rasyonel Sayılar, Ondalık Sayılar,\\ Dört İşlem ve Sıralama}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır. Bu hafta 3. haftadaki EBOB (sadeleştirme) ve EKOK (payda eşitleme) sık sık kullanılır.
+
+% =====================================================
+\section{Rasyonel Sayılar ve Kesir Türleri}
+
+\begin{kural}[Tanımlar]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Rasyonel sayılar: \(\mathbb{Q}=\left\{\dfrac{a}{b}\ :\ a,b\in\mathbb{Z},\ b\neq 0\right\}\). \ Her tam sayı rasyoneldir (\(n=\frac{n}{1}\)): \(\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\).
+\item \(a,b>0\) için: \(a<b\) ise \textbf{basit kesir} (değeri \(1\)'den küçük), \(a\ge b\) ise \textbf{bileşik kesir}.
+\item Tam sayılı kesir: \(n\dfrac{p}{q}=n+\dfrac{p}{q}=\dfrac{n\cdot q+p}{q}\). \ Bileşik kesir \(\to\) tam sayılı: pay paydaya bölünür; bölüm tam kısım, kalan yeni pay olur.
+\item Genişletme / sadeleştirme: \(\dfrac{a}{b}=\dfrac{a\cdot k}{b\cdot k}\ (k\neq 0)\). En sade biçim için pay ve payda \(\text{EBOB}(a,b)\)'ye bölünür.
+\item Denk kesirler: \(\dfrac{a}{b}=\dfrac{c}{d}\iff a\cdot d=b\cdot c\quad(b,d\neq 0)\).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+\(\dfrac{0}{a}=0\ (a\neq 0)\), ama \(\dfrac{a}{0}\) tanımsızdır. \quad Sadeleştirme yalnızca \textbf{çarpanlar} arasında yapılır: \(\dfrac{2+3}{2+5}\neq\dfrac{3}{5}\). \quad \(-\dfrac{a}{b}=\dfrac{-a}{b}=\dfrac{a}{-b}\).
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{36}{48}\) ve \(\dfrac{-15}{25}\) kesirlerini en sade biçimde yazınız. \(5\dfrac{3}{8}\) sayısını bileşik kesir olarak yazınız.
+\end{ornek}
+\begin{cozum}
+\(\text{EBOB}(36,48)=12\Rightarrow\dfrac{36}{48}=\dfrac{3}{4}\); \quad \(\text{EBOB}(15,25)=5\Rightarrow\dfrac{-15}{25}=-\dfrac{3}{5}\); \quad \(5\dfrac{3}{8}=\dfrac{5\cdot 8+3}{8}=\dfrac{43}{8}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{3}{4}\) kesrine denk olan ve paydası \(30\) ile \(50\) arasında (\(30\) ve \(50\) hariç) bir tam sayı olan kaç kesir yazılabilir?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{3}{4}\)'e denk kesirler \(\dfrac{3k}{4k}\ (k\in\mathbb{Z}^{+})\) biçimindedir; payda \(4\)'ün katı olmalı. \(30<4k<50\Rightarrow 4k\in\{32,36,40,44,48\}\):
+\[\frac{24}{32},\ \frac{27}{36},\ \frac{30}{40},\ \frac{33}{44},\ \frac{36}{48}\ \Rightarrow\ 5\ \text{tane.}\]
+\end{cozum}
+
+% =====================================================
+\section{Kesirlerde Dört İşlem ve Merdiven Kesirler}
+
+\begin{kural}[Dört işlem]
+\[\frac{a}{c}\pm\frac{b}{c}=\frac{a\pm b}{c},\qquad \frac{a}{b}\cdot\frac{c}{d}=\frac{a\cdot c}{b\cdot d},\qquad \frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}\qquad(b,c,d\neq 0)\]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Paydalar farklıysa önce eşitlenir; en küçük ortak payda paydaların EKOK'udur.
+\item Çarpmada önce çapraz sadeleştirme yapılabilir. Bölmede ikinci kesir ters çevrilip çarpılır.
+\item Merdiven kesirde en alttaki (en içteki) kesirden başlanır; ana kesir çizgisine dikkat edilir.
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}[Sık yapılan hatalar]
+\(\dfrac{1}{2}+\dfrac{1}{3}\neq\dfrac{2}{5}\) (paydalar toplanmaz); \quad \(\dfrac{3}{\,4/5\,}=\dfrac{15}{4}\) ama \(\dfrac{3/4}{5}=\dfrac{3}{20}\); \quad çarpma ve bölme soldan sağa yapılır.
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{7}{10}-\dfrac{4}{15}+\dfrac{1}{6}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\text{EKOK}(10,15,6)=30\): \quad \(\dfrac{21}{30}-\dfrac{8}{30}+\dfrac{5}{30}=\dfrac{18}{30}=\dfrac{3}{5}\).
+\end{cozum}
+
+\begin{ornek}
+\(\left(2\dfrac{1}{4}-\dfrac{5}{6}\right)\cdot\dfrac{6}{17}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Parantez: \(\dfrac{9}{4}-\dfrac{5}{6}=\dfrac{27}{12}-\dfrac{10}{12}=\dfrac{17}{12}\). \quad Sonra: \(\dfrac{17}{12}\cdot\dfrac{6}{17}=\dfrac{6}{12}=\dfrac{1}{2}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{3}{4}\div\dfrac{9}{8}\cdot\dfrac{3}{2}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Bölme ve çarpma aynı önceliktedir, \textbf{soldan sağa}:
+\[\frac{3}{4}\cdot\frac{8}{9}=\frac{2}{3},\qquad \frac{2}{3}\cdot\frac{3}{2}=1\]
+(Önce \(\frac{9}{8}\cdot\frac{3}{2}\) yapılırsa yanlış olarak \(\frac{4}{9}\) bulunur.)
+\end{cozum}
+
+\begin{ornek}
+\(\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{3}}}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+En alttan: \(1+\frac{1}{3}=\frac{4}{3}\ \rightarrow\ \frac{1}{4/3}=\frac{3}{4}\ \rightarrow\ 1+\frac{3}{4}=\frac{7}{4}\ \rightarrow\ \frac{1}{7/4}=\dfrac{4}{7}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{\frac{1}{2}+\frac{1}{3}}{\frac{1}{2}-\frac{1}{3}}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Pay: \(\frac{5}{6}\), payda: \(\frac{1}{6}\). \quad \(\dfrac{5}{6}\div\dfrac{1}{6}=\dfrac{5}{6}\cdot 6=5\).
+\end{cozum}
+
+% =====================================================
+\section{Ondalık Sayılar}
+
+\begin{kural}[Dönüşüm ve dört işlem]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Ondalık \(\to\) kesir: \(0{,}25=\dfrac{25}{100}=\dfrac{1}{4}\), \ \(4{,}375=\dfrac{4375}{1000}=\dfrac{35}{8}\) (paydada virgülden sonraki basamak sayısı kadar \(0\)).
+\item Kesir \(\to\) ondalık: payda \(10,100,1000,\dots\) yapılır ya da pay paydaya bölünür. En sade kesrin paydasının asal çarpanları yalnızca \(2\) ve/veya \(5\) ise ondalık açılım sonludur, değilse devirlidir.
+\item Toplama/çıkarma: virgüller alt alta. \ Çarpma: virgülsüz çarp, sonuçta çarpanlardaki ondalık basamak sayılarının toplamı kadar basamak ayır.
+\item Bölme: pay ve payda aynı \(10^{k}\) ile genişletilir: \(\dfrac{0{,}36}{0{,}012}=\dfrac{360}{12}=30\). \ \(10^{k}\) ile çarpma virgülü \(k\) basamak sağa, bölme sola kaydırır.
+\end{itemize}
+\end{kural}
+
+\begin{ornek}
+\(0{,}0375\) sayısını en sade kesir olarak yazınız.
+\end{ornek}
+\begin{cozum}
+\(0{,}0375=\dfrac{375}{10000}\); \ \(\text{EBOB}(375,10000)=125\): \quad \(\dfrac{375}{10000}=\dfrac{3}{80}\). \ (Kontrol: \(80=2^4\cdot 5\), sonlu ondalık.)
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{1{,}2\cdot 0{,}15}{0{,}009}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Pay: \(12\cdot 15=180\), ondalık basamak \(1+2=3\) \(\Rightarrow 0{,}180=0{,}18\). \quad \(\dfrac{0{,}18}{0{,}009}=\dfrac{180}{9}=20\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{0{,}3}{0{,}03}+\dfrac{0{,}03}{0{,}3}-\dfrac{3}{0{,}3}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{0{,}3}{0{,}03}=\dfrac{30}{3}=10\), \quad \(\dfrac{0{,}03}{0{,}3}=\dfrac{3}{30}=0{,}1\), \quad \(\dfrac{3}{0{,}3}=\dfrac{30}{3}=10\). \quad Sonuç: \(10+0{,}1-10=0{,}1\).
+\end{cozum}
+
+\subsection*{Devirli ondalık sayılar}
+
+\begin{kural}[Devirli ondalığı kesre çevirme]
+\[\text{Kesir}=\frac{\text{(virgülsüz tüm sayı)}-\text{(devretmeyen kısım)}}{9\ldots9\,0\ldots0}\]
+Paydada \textbf{devreden} basamak sayısı kadar \(9\), ardından \textbf{virgülden sonra devretmeyen} basamak sayısı kadar \(0\) yazılır.
+\quad Örnek: \(1{,}2\ab{3}=\dfrac{123-12}{90}=\dfrac{37}{30}\).
+\end{kural}
+
+\begin{dikkat}
+\(0{,}\ab{9}=\dfrac{9}{9}=1\): \(0{,}999\ldots\) ile \(1\) aynı sayıdır. Benzer şekilde \(0{,}1\ab{9}=0{,}2\). Devirli sayılarla işlem yapmadan önce kesre çevirin.
+\end{dikkat}
+
+\begin{ornek}
+\(0{,}\ab{12}\) ve \(3{,}1\ab{6}\) sayılarını en sade kesir olarak yazınız.
+\end{ornek}
+\begin{cozum}
+\(0{,}\ab{12}=\dfrac{12}{99}=\dfrac{4}{33}\). \quad \(3{,}1\ab{6}=\dfrac{316-31}{90}=\dfrac{285}{90}=\dfrac{19}{6}\) \ (bir basamak devrediyor: bir \(9\); virgülden sonra bir basamak devretmiyor: bir \(0\)).
+\end{cozum}
+
+\begin{ornek}
+\(0{,}\ab{3}+0{,}\ab{6}\) toplamı kaçtır? \(0{,}1\ab{9}\) sayısı hangi sonlu ondalık sayıya eşittir?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{3}{9}+\dfrac{6}{9}=\dfrac{9}{9}=1\) \ (ondalık olarak \(0{,}333\ldots+0{,}666\ldots=0{,}999\ldots=1\)). \quad \(0{,}1\ab{9}=\dfrac{19-1}{90}=\dfrac{18}{90}=\dfrac{1}{5}=0{,}2\).
+\end{cozum}
+
+\subsection*{Bilimsel gösterim}
+
+\begin{kural}[Bilimsel gösterim]
+Bir sayının \(a\cdot 10^{n}\) \((1\le|a|<10,\ n\in\mathbb{Z})\) biçiminde yazılmasıdır. \(10^{0}=1\), \(10^{-1}=0{,}1\), \(10^{-2}=0{,}01\), \(10^{-3}=0{,}001\), \dots\ Virgül \(n\) basamak sola kaydırılırsa \(\cdot 10^{n}\), sağa kaydırılırsa \(\cdot 10^{-n}\) yazılır. (Üslü sayıların özellikleri 9. haftada.)
+\end{kural}
+
+\begin{ornek}
+Işığın boşluktaki hızı yaklaşık \(300\,000\) km/s, bir bakterinin boyu yaklaşık \(0{,}000002\) m'dir. Bu sayıları bilimsel gösterimle yazınız. \(4{,}07\cdot 10^{3}\) ve \(6{,}1\cdot 10^{-2}\) sayılarını ondalık gösterimle yazınız.
+\end{ornek}
+\begin{cozum}
+\(300\,000=3\cdot 10^{5}\); \quad \(0{,}000002=2\cdot 10^{-6}\) (virgül \(6\) basamak sağa). \quad \(4{,}07\cdot 10^{3}=4070\); \quad \(6{,}1\cdot 10^{-2}=0{,}061\).
+\end{cozum}
+
+% =====================================================
+\section{Rasyonel Sayılarda Sıralama}
+
+\begin{kural}[Sıralama yöntemleri (pay ve paydalar pozitif)]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Paydalar eşitse payı büyük olan, paylar eşitse paydası küçük olan büyüktür.
+\item Payda eşitleme (EKOK) veya pay eşitleme; ondalığa çevirip basamak basamak karşılaştırma.
+\item \(1\)'e fark: \(\frac{a}{a+1}=1-\frac{1}{a+1}\); \ \(1\)'den eksiği az olan büyüktür. \(\frac{a+1}{a}=1+\frac{1}{a}\); \ \(1\)'den fazlası çok olan büyüktür.
+\item Çapraz çarpım: \(b,d>0\) için \(\dfrac{a}{b}<\dfrac{c}{d}\iff a\cdot d<b\cdot c\).
+\item Negatif sayılarda sıra ters döner: \(x<y\iff -y<-x\).
+\item \(x<y\) ise \(x<\dfrac{x+y}{2}<y\): iki farklı rasyonel sayı arasında sonsuz tane rasyonel sayı vardır.
+\end{itemize}
+\end{kural}
+
+\begin{ornek}
+\(\dfrac{15}{14},\ \dfrac{17}{16},\ \dfrac{19}{18}\) sayılarını küçükten büyüğe sıralayınız.
+\end{ornek}
+\begin{cozum}
+\(\dfrac{15}{14}=1+\dfrac{1}{14}\), \ \(\dfrac{17}{16}=1+\dfrac{1}{16}\), \ \(\dfrac{19}{18}=1+\dfrac{1}{18}\). \ \(\dfrac{1}{18}<\dfrac{1}{16}<\dfrac{1}{14}\) \(\Rightarrow\) \(\dfrac{19}{18}<\dfrac{17}{16}<\dfrac{15}{14}\).
+\ (Basit kesirlerdeki sıralamanın tersine dikkat!)
+\end{cozum}
+
+\begin{ornek}
+\(a=\dfrac{2}{7}\), \ \(b=0{,}\ab{28}\), \ \(c=0{,}28\) sayılarını küçükten büyüğe sıralayınız.
+\end{ornek}
+\begin{cozum}
+\(a=2\div 7=0{,}285714\ldots\), \quad \(b=0{,}282828\ldots\), \quad \(c=0{,}280000\ldots\) \quad \(\Rightarrow\) \quad \(c<b<a\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{101}{103}\) ile \(\dfrac{102}{104}\) sayılarından hangisi büyüktür? İki yöntemle gösteriniz.
+\end{ornek}
+\begin{cozum}
+\(1\)'e fark: \(1-\dfrac{101}{103}=\dfrac{2}{103}\), \ \(1-\dfrac{102}{104}=\dfrac{2}{104}\). \ \(\dfrac{2}{104}<\dfrac{2}{103}\) olduğundan \(\dfrac{102}{104}\) daha büyüktür.\\
+Çapraz çarpım: \(101\cdot 104=10504\), \ \(102\cdot 103=10506\). \ \(10504<10506\Rightarrow\dfrac{101}{103}<\dfrac{102}{104}\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{2}{5}\) ile \(\dfrac{3}{5}\) arasında olup \(\dfrac{k}{20}\ (k\in\mathbb{Z})\) biçiminde yazılabilen kaç rasyonel sayı vardır?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{2}{5}=\dfrac{8}{20}\), \ \(\dfrac{3}{5}=\dfrac{12}{20}\). \ \(8<k<12\Rightarrow k\in\{9,10,11\}\) \(\Rightarrow\) \(3\) tane: \(\dfrac{9}{20},\ \dfrac{10}{20}=\dfrac{1}{2},\ \dfrac{11}{20}\).
+\end{cozum}
+
+% =====================================================
+\section{Karma İşlemler ve Kesir Problemleri}
+
+\begin{kural}[Karma işlem ve problemler]
+İşlem önceliği (parantez \(\to\) çarpma/bölme \(\to\) toplama/çıkarma, soldan sağa) aynen geçerlidir; ondalık ve devirli sayılar önce kesre çevrilir. Bir bütünün \(\frac{a}{b}\)'si \(=\) bütün \(\cdot\frac{a}{b}\). \ ``Tamamının'' ifadesi başlangıçtaki bütüne, ``kalanın'' ifadesi o anda kalan miktara göre hesaplanır.
+\end{kural}
+
+\begin{ornek}
+\(\left(\dfrac{1}{2}-\dfrac{1}{3}\right)\div\dfrac{1}{6}+0{,}5\cdot\dfrac{4}{5}\) işleminin sonucu kaçtır?
+\end{ornek}
+\begin{cozum}
+Parantez: \(\frac{1}{6}\); \ \(\frac{1}{6}\div\frac{1}{6}=1\). \quad \(0{,}5\cdot\frac{4}{5}=\frac{1}{2}\cdot\frac{4}{5}=\frac{2}{5}\). \quad Sonuç: \(1+\dfrac{2}{5}=\dfrac{7}{5}=1{,}4\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{1}{1\cdot 2}+\dfrac{1}{2\cdot 3}+\dfrac{1}{3\cdot 4}+\dots+\dfrac{1}{9\cdot 10}\) toplamı kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{1}{n(n+1)}=\dfrac{1}{n}-\dfrac{1}{n+1}\) (payda eşitleyerek kontrol edin: \(\frac{(n+1)-n}{n(n+1)}\)). Toplam:
+\[\left(1-\tfrac{1}{2}\right)+\left(\tfrac{1}{2}-\tfrac{1}{3}\right)+\dots+\left(\tfrac{1}{9}-\tfrac{1}{10}\right)=1-\frac{1}{10}=\frac{9}{10}\]
+\end{cozum}
+
+\begin{ornek}
+\(600\) TL harçlığı olan bir öğrenci, harçlığının \(\frac{1}{3}\)'ünü yemeğe, kalan paranın \(\frac{1}{4}\)'ünü kitaba harcıyor. Geriye kaç TL kalır? Harcanan toplam para harçlığın kaçta kaçıdır?
+\end{ornek}
+\begin{cozum}
+Yemek: \(600\cdot\frac{1}{3}=200\) \(\Rightarrow\) kalan \(400\). \ Kitap: \(400\cdot\frac{1}{4}=100\) \(\Rightarrow\) kalan \(300\) TL.\\
+Harcanan: \(200+100=300\) TL \(\Rightarrow\) \(\dfrac{300}{600}=\dfrac{1}{2}\). \ (Kısa yol: kalan \(=600\cdot\frac{2}{3}\cdot\frac{3}{4}=300\).)
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}\footnotesize
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}l p{0.68\textwidth}@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Rasyonel sayı & \(\frac{a}{b}\), \(a,b\in\mathbb{Z}\), \(b\neq 0\); \ \(\frac{a}{0}\) tanımsız; \ \(n\frac{p}{q}=\frac{nq+p}{q}\)\\
+Sadeleştirme / denklik & EBOB'a böl; \ \(\frac{a}{b}=\frac{c}{d}\iff ad=bc\)\\
+Toplama / çıkarma & paydaları EKOK ile eşitle\\
+Çarpma / bölme & \(\frac{a}{b}\cdot\frac{c}{d}=\frac{ac}{bd}\); \ \(\frac{a}{b}\div\frac{c}{d}=\frac{a}{b}\cdot\frac{d}{c}\)\\
+Ondalıkta çarpma / bölme & ondalık basamaklar toplanır; \ bölmede pay ve payda \(10^{k}\) ile genişletilir\\
+Sonlu ondalık & en sade paydanın asal çarpanları yalnızca \(2\), \(5\)\\
+Devirli ondalık & (tüm sayı \(-\) devretmeyen kısım) / (devreden kadar \(9\), devretmeyen kadar \(0\)); \ \(0{,}\ab{9}=1\)\\
+Bilimsel gösterim & \(a\cdot 10^{n}\), \ \(1\le|a|<10\)\\
+Sıralama & payda/pay eşitle, ondalığa çevir, \(1\)'e fark, çapraz çarpım; \ negatiflerde sıra ters: \(x<y\iff -y<-x\)\\
+Arada sayı; teleskopik & \(x<\frac{x+y}{2}<y\); \ \(\frac{1}{n(n+1)}=\frac{1}{n}-\frac{1}{n+1}\)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta4_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Birinci dereceden bir bilinmeyenli denklemler.}
+
+\end{document}

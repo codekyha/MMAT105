@@ -1,0 +1,610 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 12]{MMAT105 Genel Matematik}
+\subtitle{Hafta 12: Oran ve Orantı (Doğru, Ters, Bileşik Orantı), Ortalamalar}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hesaplayınız:}
+\begin{enumerate}
+\item \(x^2-9x+20\) ifadesini çarpanlarına ayırınız.
+\item \(a+b=7\) ve \(a\cdot b=10\) ise \(a^2+b^2=?\)
+\item \(\dfrac{51^2-49^2}{20}=?\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \((x-4)(x-5)\)
+\item \(7^2-2\cdot 10=29\)
+\item \(\dfrac{2\cdot 100}{20}=10\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Oran (birimsiz)
+\item Orantı, içler--dışlar
+\item \(\frac{a}{b}=\frac{c}{d}=k\) özellikleri
+\item \(a:b:c\) ve paylaştırma
+\item Harita ölçeği
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Doğru orantı: \(y=kx\)
+\item Ters orantı: \(x\cdot y=k\)
+\item İşçi, hız, musluk
+\item Ters orantılı paylaştırma
+\item Bileşik orantı
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{10}
+\item Aritmetik ortalama
+\item Sayı ekleme / çıkarma
+\item Ağırlıklı ortalama
+\item Geometrik, harmonik ort.
+\item Ardışık sayılar
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Oran ve Orantı}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Oran, Orantı, Orantı Sabiti, Paylaştırma ve Ölçek
+\end{frame}
+
+\subsection{Oran ve orantı}
+\begin{frame}{Oran ve Orantı}
+\begin{block}{Tanım}
+\begin{itemize}
+\item \textbf{Oran:} İki çokluğun bölümü: \(\dfrac{a}{b}\) \ (\(b\neq 0\)). Aynı birimli çoklukların oranı \textbf{birimsizdir}; farklı birimlilerin oranı birimlidir (hız: km/sa).
+\item \textbf{Orantı:} İki oranın eşitliği: \(\dfrac{a}{b}=\dfrac{c}{d}\) \ (\(b,d\neq 0\)).
+\item \textbf{İçler--dışlar çarpımı:} \(\dfrac{a}{b}=\dfrac{c}{d}\ \Longleftrightarrow\ a\cdot d=b\cdot c\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Birimler farklıysa önce eşitlenir: \(2\) m ile \(50\) cm'nin oranı \(\frac{2}{50}\) değil, \(\frac{200}{50}=4\).
+\item \(\frac{a}{b}=\frac{2}{3}\), \(a=2\) ve \(b=3\) demek değildir: \(a=2k,\ b=3k\) (\(k\neq 0\)).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Oran -- Örnek 1}
+{\(2\) m uzunluğundaki bir ipin \(50\) cm uzunluğundaki bir ipe oranı kaçtır? \(45\) dakikanın \(2\) saate oranı kaçtır?}
+{Önce birimler eşitlenir:
+\[\frac{2\text{ m}}{50\text{ cm}}=\frac{200\text{ cm}}{50\text{ cm}}=4,\qquad \frac{45\text{ dk}}{2\text{ sa}}=\frac{45\text{ dk}}{120\text{ dk}}=\frac{3}{8}\]
+Sonuçlar birimsizdir.}
+
+\soru{İçler--Dışlar -- Örnek 2}
+{\(\dfrac{x-1}{x+3}=\dfrac{3}{5}\) olduğuna göre \(x\) kaçtır?}
+{İçler--dışlar çarpımı:
+\[5(x-1)=3(x+3)\ \Rightarrow\ 5x-5=3x+9\ \Rightarrow\ 2x=14\ \Rightarrow\ x=7\]
+Kontrol: \(\dfrac{6}{10}=\dfrac{3}{5}\) \checkmark}
+
+\soru{Oran -- Örnek 3}
+{\(\dfrac{a}{b}=\dfrac{3}{4}\) olduğuna göre \(\dfrac{2a+b}{b-a}\) oranı kaçtır?}
+{\(a=3k\), \(b=4k\) \ (\(k\neq 0\)) yazalım:
+\[\frac{2a+b}{b-a}=\frac{6k+4k}{4k-3k}=\frac{10k}{k}=10\]}
+
+\soru{İçler--Dışlar -- Örnek 4}
+{\(\dfrac{a+b}{a-b}=\dfrac{5}{2}\) olduğuna göre \(\dfrac{a}{b}\) oranı kaçtır?}
+{\[2(a+b)=5(a-b)\ \Rightarrow\ 2a+2b=5a-5b\ \Rightarrow\ 7b=3a\]
+\[\frac{a}{b}=\frac{7}{3}\qquad(\text{kontrol: } a=7,\ b=3:\ \tfrac{10}{4}=\tfrac{5}{2})\]}
+
+\subsection{Orantı sabiti}
+\begin{frame}{Orantı Sabiti ve Özellikleri}
+\begin{block}{\(\dfrac{a}{b}=\dfrac{c}{d}=\dfrac{e}{f}=k\) ise \ (paydalar sıfırdan farklı)}
+\begin{itemize}
+\item \(a=bk,\quad c=dk,\quad e=fk\)
+\item \(\dfrac{a+c+e}{b+d+f}=k\) \qquad (payların toplamı / paydaların toplamı)
+\item \(\dfrac{m\,a+n\,c}{m\,b+n\,d}=k\) \qquad (\(mb+nd\neq 0\))
+\end{itemize}
+\end{block}
+\begin{block}{\(\dfrac{a}{2}=\dfrac{b}{3}=\dfrac{c}{5}=k\) yaklaşımı}
+\(a=2k,\ b=3k,\ c=5k\) yazılır; verilen koşuldan \(k\) bulunur. Bu, \(a:b:c=2:3:5\) demektir.
+\end{block}
+\end{frame}
+
+\soru{Orantı Sabiti -- Örnek 5}
+{\(\dfrac{a}{2}=\dfrac{b}{3}=\dfrac{c}{5}\) ve \(a+b+c=40\) olduğuna göre \(a\), \(b\), \(c\) kaçtır?}
+{Ortak değere \(k\) diyelim: \(a=2k,\ b=3k,\ c=5k\).
+\[2k+3k+5k=10k=40\ \Rightarrow\ k=4\]
+\[a=8,\qquad b=12,\qquad c=20\]}
+
+\soru{Orantı Sabiti -- Örnek 6}
+{\(\dfrac{x}{2}=\dfrac{y}{3}=\dfrac{z}{5}\) ve \(2x+y-z=10\) olduğuna göre \(x\) kaçtır?}
+{\(x=2k,\ y=3k,\ z=5k\):
+\[2(2k)+3k-5k=10\ \Rightarrow\ 2k=10\ \Rightarrow\ k=5\]
+\[x=2\cdot 5=10\]}
+
+\soru{Orantı Sabiti -- Örnek 7}
+{\(\dfrac{a}{b}=\dfrac{c}{d}=\dfrac{e}{f}=\dfrac{3}{4}\) ve \(b+d+f=20\) ise \(a+c+e\) kaçtır? \ \(\dfrac{2a+5c}{2b+5d}\) kaçtır?}
+{\[\frac{a+c+e}{b+d+f}=\frac{3}{4}\ \Rightarrow\ \frac{a+c+e}{20}=\frac{3}{4}\ \Rightarrow\ a+c+e=15\]
+\(a=\tfrac34 b\), \(c=\tfrac34 d\) \(\Rightarrow\) \(2a+5c=\tfrac34(2b+5d)\) \(\Rightarrow\) \(\dfrac{2a+5c}{2b+5d}=\dfrac{3}{4}\).}
+
+\soru{Oran Bulma -- Örnek 8}
+{\(3a=4b=6c\) olduğuna göre \(a:b:c\) kaçtır? \ \(a+b+c=36\) ise \(a\) kaçtır?}
+{Ortak değeri \(3,4,6\)'nın EKOK'u ile seçelim: \(3a=4b=6c=12k\).
+\[a=4k,\quad b=3k,\quad c=2k\ \Rightarrow\ a:b:c=4:3:2\]
+\(9k=36\Rightarrow k=4\Rightarrow a=16\).}
+
+\soru{Oran Birleştirme -- Örnek 9}
+{\(a:b=2:3\) ve \(b:c=4:5\) olduğuna göre \(a:b:c\) kaçtır? \ \(a+b+c=70\) ise \(c\) kaçtır?}
+{Ortak terim \(b\) eşitlenir: \(\mathrm{EKOK}(3,4)=12\).
+\[a:b=8:12,\qquad b:c=12:15\ \Rightarrow\ a:b:c=8:12:15\]
+\(35k=70\Rightarrow k=2\Rightarrow c=15\cdot 2=30\).}
+
+\subsection{Paylaştırma}
+\soru{Paylaştırma -- Örnek 10}
+{\(600\) TL, üç kişi arasında \(2\), \(3\) ve \(5\) sayıları ile orantılı olarak paylaştırılıyor. En çok ve en az alan kişi kaçar TL alır?}
+{Paylar: \(2k,\ 3k,\ 5k\).
+\[2k+3k+5k=10k=600\ \Rightarrow\ k=60\]
+En çok: \(5\cdot 60=300\) TL; \quad en az: \(2\cdot 60=120\) TL.}
+
+\subsection{Ölçek}
+\begin{frame}{Harita Ölçeği}
+\begin{block}{Tanım}
+\[\text{Ölçek}=\frac{\text{Haritadaki uzunluk}}{\text{Gerçek uzunluk}}\qquad(\text{aynı birimle})\]
+\(1:500\,000\) ölçeği: haritada \(1\) cm, gerçekte \(500\,000\) cm \(=5\) km'dir.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(1\) km \(=1000\) m \(=100\,000\) cm. Birim dönüşümünü unutmayın.
+\item Ölçek bir oran olduğundan birimsizdir: \(1:500\,000\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Ölçek -- Örnek 11}
+{\(1:500\,000\) ölçekli bir haritada iki şehir arası \(6\) cm'dir. Gerçek uzaklık kaç km'dir?}
+{\[\text{Gerçek}=6\cdot 500\,000=3\,000\,000\text{ cm}\]
+\(1\) km \(=100\,000\) cm \(\Rightarrow\) \(3\,000\,000\div 100\,000=30\) km.}
+
+\soru{Ölçek -- Örnek 12}
+{Gerçekte \(45\) km olan bir uzaklık haritada \(3\) cm ile gösteriliyor. Haritanın ölçeği nedir?}
+{\(45\) km \(=45\cdot 100\,000=4\,500\,000\) cm.
+\[\text{Ölçek}=\frac{3}{4\,500\,000}=\frac{1}{1\,500\,000}\ \Rightarrow\ 1:1\,500\,000\]}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\dfrac{2x+1}{x+4}=\dfrac{5}{3}\) ise \(x=?\) \(\star\)
+\item \(\dfrac{a}{3}=\dfrac{b}{4}=\dfrac{c}{6}\), \ \(a+b+c=52\) ise \(b=?\)
+\item Bir üçgenin iç açıları \(2,3,4\) ile orantılı. En büyük açı kaç derece? \(\star\)
+\item \(\dfrac{a}{b}=\dfrac{2}{5}\) ise \(\dfrac{3a+b}{b-a}=?\)
+\item \(1:200\,000\) ölçekli haritada \(7{,}5\) cm kaç km'dir? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(17\)
+\item \(16\)
+\item \(80^\circ\)
+\item \(\dfrac{11}{3}\)
+\item \(15\) km
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 1)}
+{\(\dfrac{2x+1}{x+4}=\dfrac{5}{3}\) olduğuna göre \(x\) kaçtır?}
+{İçler--dışlar çarpımı:
+\[3(2x+1)=5(x+4)\ \Rightarrow\ 6x+3=5x+20\ \Rightarrow\ x=17\]
+Kontrol: \(\dfrac{35}{21}=\dfrac{5}{3}\) \checkmark}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{Bir üçgenin iç açıları \(2\), \(3\) ve \(4\) sayıları ile orantılıdır. En büyük açı kaç derecedir?}
+{Açılar: \(2k,\ 3k,\ 4k\). Üçgenin iç açıları toplamı \(180^\circ\):
+\[2k+3k+4k=9k=180^\circ\ \Rightarrow\ k=20^\circ\]
+En büyük açı: \(4\cdot 20^\circ=80^\circ\) \quad (açılar: \(40^\circ,\ 60^\circ,\ 80^\circ\)).}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(1:200\,000\) ölçekli bir haritada \(7{,}5\) cm ile gösterilen uzaklık gerçekte kaç km'dir?}
+{Haritada \(1\) cm \(\rightarrow\) gerçekte \(200\,000\) cm \(=2\) km.
+\[7{,}5\cdot 200\,000=1\,500\,000\text{ cm}=15\text{ km}\]
+(Kısa yol: \(7{,}5\cdot 2=15\) km.)}
+
+
+% =====================================================
+\section{Ders 2: Doğru, Ters ve Bileşik Orantı}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Doğru Orantı, Ters Orantı ve Bileşik Orantı
+\end{frame}
+
+\subsection{Doğru orantı}
+\begin{frame}{Doğru Orantı}
+\begin{block}{Tanım}
+\(x\) ve \(y\) pozitif çokluklar olmak üzere
+\[\frac{y}{x}=k\quad\text{yani}\quad y=k\cdot x\qquad(k>0 \text{ sabit})\]
+ise \(y\), \(x\) ile \textbf{doğru orantılıdır}: \(x\) kaç katına çıkarsa \(y\) de aynı kata çıkar.\\[2pt]
+Örnek: alınan ürün miktarı -- ödenen para; harcanan benzin -- gidilen yol.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+``Biri artarken diğeri de artıyor'' yetmez; \textbf{oran sabit} olmalı.
+\(y=x+3\) artandır ama doğru orantı değildir (\(\frac{4}{1}\neq\frac{5}{2}\)).
+\end{alertblock}
+\end{frame}
+
+\soru{Doğru Orantı -- Örnek 13}
+{\(y\), \(x\) ile doğru orantılıdır. \(x=4\) iken \(y=10\)'dur. \(x=10\) iken \(y\) kaçtır?}
+{\[k=\frac{y}{x}=\frac{10}{4}=\frac{5}{2}\]
+\[y=\frac{5}{2}\cdot 10=25\]
+(Ya da: \(\dfrac{10}{4}=\dfrac{y}{10}\Rightarrow 4y=100\Rightarrow y=25\).)}
+
+\soru{Doğru Orantı -- Örnek 14}
+{\(x+2\) ile \(y-1\) doğru orantılıdır. \(x=4\) iken \(y=4\) oluyor. \(x=10\) iken \(y\) kaçtır?}
+{Oran sabit: \(\dfrac{y-1}{x+2}=\dfrac{4-1}{4+2}=\dfrac{3}{6}=\dfrac{1}{2}\).\\[3pt]
+\(x=10\): \ \(\dfrac{y-1}{12}=\dfrac{1}{2}\ \Rightarrow\ y-1=6\ \Rightarrow\ y=7\).}
+
+\subsection{Ters orantı}
+\begin{frame}{Ters Orantı}
+\begin{block}{Tanım}
+\(x\) ve \(y\) pozitif çokluklar olmak üzere
+\[x\cdot y=k\qquad(k>0 \text{ sabit})\]
+ise \(x\) ile \(y\) \textbf{ters orantılıdır}: \(x\) kaç katına çıkarsa \(y\) o kadar kata bölünür.\\[2pt]
+Aynı iş için: işçi sayısı -- gün; hız -- zaman (aynı yol); musluk sayısı -- dolma süresi; dişli çarkta diş sayısı -- tur sayısı.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Ters orantıda \textbf{çarpım} sabittir; oranı eşitlemeyin: \(x_1\cdot y_1=x_2\cdot y_2\).
+\end{alertblock}
+\end{frame}
+
+\soru{Ters Orantı -- Örnek 15}
+{\(x\) ile \(y\) ters orantılıdır. \(x=6\) iken \(y=8\)'dir. \(x=4\) iken \(y\) kaçtır?}
+{\[x\cdot y=6\cdot 8=48\ \text{(sabit)}\]
+\[4\cdot y=48\ \Rightarrow\ y=12\]
+\(x\) azaldı, \(y\) arttı \checkmark}
+
+\soru{İşçi -- Gün -- Örnek 16}
+{\(4\) işçi bir duvarı \(15\) günde örüyor. Aynı nitelikteki \(10\) işçi aynı duvarı kaç günde örer?}
+{İşçi sayısı artınca gün azalır \(\Rightarrow\) ters orantı.
+\[4\cdot 15=10\cdot x\ \Rightarrow\ 60=10x\ \Rightarrow\ x=6\text{ gün}\]}
+
+\soru{Dişli Çark -- Örnek 17}
+{Birbirini çeviren iki dişli çarktan birinde \(20\), diğerinde \(30\) diş vardır. Küçük çark \(6\) tur attığında büyük çark kaç tur atar?}
+{Diş sayısı \(\times\) tur sayısı sabittir (temas eden diş sayısı eşit):
+\[20\cdot 6=30\cdot x\ \Rightarrow\ 120=30x\ \Rightarrow\ x=4\text{ tur}\]}
+
+\soru{Hız -- Zaman -- Örnek 18}
+{Bir araç bir yolu saatte \(60\) km hızla \(5\) saatte alıyor. Aynı yolu saatte \(75\) km hızla kaç saatte alır?}
+{Aynı yol için hız \(\times\) zaman \(=\) yol sabit:
+\[60\cdot 5=300\text{ km},\qquad 75\cdot t=300\ \Rightarrow\ t=4\text{ saat}\]}
+
+\soru{Musluk -- Örnek 19}
+{Eşit kapasiteli \(6\) musluk boş bir havuzu \(20\) saatte dolduruyor. Aynı türden \(8\) musluk havuzu kaç saatte doldurur?}
+{Musluk sayısı \(\times\) süre sabit (havuz aynı):
+\[6\cdot 20=8\cdot t\ \Rightarrow\ 120=8t\ \Rightarrow\ t=15\text{ saat}\]}
+
+\soru{Ters Orantılı Paylaştırma -- Örnek 20}
+{\(300\) TL, \(2\), \(3\) ve \(6\) sayıları ile \textbf{ters orantılı} olarak paylaştırılıyor. Her pay kaç TL'dir?}
+{Paylar \(\dfrac{1}{2},\ \dfrac{1}{3},\ \dfrac{1}{6}\) ile doğru orantılı. Paydaların EKOK'u \(6\) ile çarpalım:
+\[\tfrac{1}{2}:\tfrac{1}{3}:\tfrac{1}{6}=3:2:1\ \Rightarrow\ 6k=300\ \Rightarrow\ k=50\]
+Paylar: \(150\), \(100\), \(50\) TL (en büyük sayıya en az pay).}
+
+\subsection{Bileşik orantı}
+\begin{frame}{Bileşik Orantı}
+\begin{block}{Kural}
+\(a\); \(b\) ile doğru, \(c\) ile ters orantılı ise
+\[a=k\cdot\frac{b}{c}\qquad\text{yani}\qquad \frac{a\cdot c}{b}=k\ \text{(sabit)}\]
+\end{block}
+\begin{block}{İş problemleri (aynı verimle çalışanlar)}
+\[\frac{\text{İş miktarı}}{\text{İşçi sayısı}\cdot\text{Günlük saat}\cdot\text{Gün}}=\text{sabit}\]
+\[\frac{\text{İş}_1}{n_1\cdot s_1\cdot g_1}=\frac{\text{İş}_2}{n_2\cdot s_2\cdot g_2}\]
+\end{block}
+\end{frame}
+
+\soru{Bileşik Orantı -- Örnek 21}
+{\(x\) sayısı \(y\) ile doğru, \(z\) ile ters orantılıdır. \(x=4\), \(y=2\) iken \(z=6\)'dır. \(x=8\), \(y=6\) iken \(z\) kaçtır?}
+{\(x=k\cdot\dfrac{y}{z}\ \Rightarrow\ k=\dfrac{x\cdot z}{y}=\dfrac{4\cdot 6}{2}=12\).
+\[8=12\cdot\frac{6}{z}\ \Rightarrow\ 8z=72\ \Rightarrow\ z=9\]}
+
+\soru{Bileşik Orantı -- Örnek 22}
+{\(a\) sayısı \(b\) ile ters, \(c\) ile doğru orantılıdır. \(b=2\), \(c=3\) iken \(a=6\)'dır. \(b=4\), \(c=10\) iken \(a\) kaçtır?}
+{\(a=k\cdot\dfrac{c}{b}\ \Rightarrow\ k=\dfrac{a\cdot b}{c}=\dfrac{6\cdot 2}{3}=4\).
+\[a=4\cdot\frac{10}{4}=10\]}
+
+\soru{İş Problemi -- Örnek 23}
+{\(6\) işçi günde \(8\) saat çalışarak \(24\) m\(^2\) halıyı \(5\) günde dokuyor. \(10\) işçi günde \(12\) saat çalışarak \(36\) m\(^2\) halıyı kaç günde dokur?}
+{\[\frac{24}{6\cdot 8\cdot 5}=\frac{36}{10\cdot 12\cdot x}\ \Rightarrow\ \frac{24}{240}=\frac{36}{120x}\]
+\[\frac{1}{10}=\frac{36}{120x}\ \Rightarrow\ 120x=360\ \Rightarrow\ x=3\text{ gün}\]}
+
+\soru{İş Problemi -- Örnek 24}
+{\(4\) usta günde \(6\) saat çalışarak \(10\) günde \(40\) çift ayakkabı yapıyor. \(6\) usta günde \(8\) saat çalışarak \(5\) günde kaç çift ayakkabı yapar?}
+{\[\frac{40}{4\cdot 6\cdot 10}=\frac{x}{6\cdot 8\cdot 5}\ \Rightarrow\ \frac{40}{240}=\frac{x}{240}\]
+\[x=40\text{ çift}\]}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(3\) kg elma \(45\) TL ise \(7\) kg elma kaç TL?
+\item \(8\) işçi bir işi \(12\) günde bitiriyor. Aynı işi \(6\) günde bitirmek için kaç işçi gerekir? \(\star\)
+\item Eşit \(5\) musluk bir havuzu \(12\) saatte dolduruyor. \(3\) musluk kaç saatte doldurur?
+\item \(x\); \(y\) ile doğru, \(z\) ile ters orantılı. \(x=6,\ y=4,\ z=2\). \ \(y=10,\ z=5\) iken \(x=?\) \(\star\)
+\item \(5\) işçi günde \(8\) saatte \(10\) günde \(200\) m yol yapıyor. \(4\) işçi günde \(10\) saatte \(12\) günde kaç m yapar? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(105\) TL
+\item \(16\) işçi
+\item \(20\) saat
+\item \(6\)
+\item \(240\) m
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(8\) işçi bir işi \(12\) günde bitiriyor. Aynı işi \(6\) günde bitirmek için aynı nitelikte kaç işçi gerekir?}
+{Aynı iş için işçi sayısı ile gün ters orantılıdır:
+\[8\cdot 12=n\cdot 6\ \Rightarrow\ 96=6n\ \Rightarrow\ n=16\text{ işçi}\]
+Gün yarıya indi \(\Rightarrow\) işçi \(2\) katına çıktı \checkmark}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{\(x\); \(y\) ile doğru, \(z\) ile ters orantılıdır. \(x=6\), \(y=4\), \(z=2\) iken; \(y=10\), \(z=5\) olduğunda \(x\) kaçtır?}
+{\(x=k\cdot\dfrac{y}{z}\ \Rightarrow\ k=\dfrac{x\cdot z}{y}=\dfrac{6\cdot 2}{4}=3\).
+\[x=3\cdot\frac{10}{5}=6\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(5\) işçi günde \(8\) saat çalışarak \(10\) günde \(200\) m yol yapıyor. \(4\) işçi günde \(10\) saat çalışarak \(12\) günde kaç m yol yapar?}
+{\[\frac{200}{5\cdot 8\cdot 10}=\frac{x}{4\cdot 10\cdot 12}\ \Rightarrow\ \frac{200}{400}=\frac{x}{480}\]
+\[\frac{1}{2}=\frac{x}{480}\ \Rightarrow\ x=240\text{ m}\]}
+
+
+% =====================================================
+\section{Ders 3: Ortalamalar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Aritmetik, Ağırlıklı, Geometrik ve Harmonik Ortalama
+\end{frame}
+
+\subsection{Aritmetik ortalama}
+\begin{frame}{Aritmetik Ortalama}
+\begin{block}{Tanım}
+\[\text{AO}=\frac{x_1+x_2+\cdots+x_n}{n}\qquad\Longrightarrow\qquad \text{Toplam}=n\cdot\text{AO}\]
+Sayı eklenir/çıkarılırsa: \ yeni ortalama \(=\dfrac{\text{eski toplam}\pm\text{sayı}}{\text{yeni sayı adedi}}\)
+\end{block}
+\begin{block}{Ağırlıklı ortalama}
+\(n_1\) kişilik grubun ortalaması \(o_1\), \(n_2\) kişilik grubunki \(o_2\) ise: \ \(\text{Ortalama}=\dfrac{n_1\,o_1+n_2\,o_2}{n_1+n_2}\)
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Farklı büyüklükteki grupların ortalaması \(\frac{o_1+o_2}{2}\) \textbf{değildir}; toplamlar üzerinden hesaplayın.
+\end{alertblock}
+\end{frame}
+
+\soru{Aritmetik Ortalama -- Örnek 25}
+{\(7\), \(12\), \(15\), \(26\) sayılarının aritmetik ortalaması kaçtır?}
+{\[\text{AO}=\frac{7+12+15+26}{4}=\frac{60}{4}=15\]}
+
+\soru{Aritmetik Ortalama -- Örnek 26}
+{Bir öğrencinin ilk iki sınav notu \(60\) ve \(70\)'tir. Üç sınavın ortalamasının \(75\) olması için üçüncü sınavdan kaç alması gerekir?}
+{Hedef toplam: \(3\cdot 75=225\). \quad Mevcut toplam: \(60+70=130\).
+\[\text{Gereken not}=225-130=95\]}
+
+\soru{Sayı Çıkarma -- Örnek 27}
+{Aritmetik ortalaması \(15\) olan \(10\) sayıdan, toplamları \(30\) olan \(4\) sayı çıkarılıyor. Kalan sayıların aritmetik ortalaması kaçtır?}
+{Toplam: \(10\cdot 15=150\). \quad Kalan toplam: \(150-30=120\).
+\[\text{Kalan sayı adedi}=6,\qquad \text{AO}=\frac{120}{6}=20\]}
+
+\soru{Sayı Ekleme -- Örnek 28}
+{Yaş ortalaması \(24\) olan \(5\) kişilik bir gruba \(30\) yaşında bir kişi katılıyor. Grubun yeni yaş ortalaması kaçtır?}
+{Eski toplam: \(5\cdot 24=120\). \quad Yeni toplam: \(120+30=150\).
+\[\text{Yeni ortalama}=\frac{150}{6}=25\]}
+
+\soru{Ağırlıklı Ortalama -- Örnek 29}
+{\(20\) kişilik bir şubenin sınav ortalaması \(60\), \(30\) kişilik diğer şubenin ortalaması \(70\)'tir. İki şubenin birlikte ortalaması kaçtır?}
+{\[\frac{20\cdot 60+30\cdot 70}{20+30}=\frac{1200+2100}{50}=\frac{3300}{50}=66\]
+Dikkat: \(\frac{60+70}{2}=65\) yanlış; kalabalık şubeye daha yakın.}
+
+\soru{Ağırlıklı Ortalama -- Örnek 30}
+{Bir derste vize notunun ağırlığı \(2\), final notunun ağırlığı \(3\)'tür. Vizeden \(50\), finalden \(80\) alan öğrencinin ağırlıklı ortalaması kaçtır?}
+{\[\frac{2\cdot 50+3\cdot 80}{2+3}=\frac{100+240}{5}=\frac{340}{5}=68\]}
+
+\soru{Karışık Sınıf -- Örnek 31}
+{Bir sınıfta kızların not ortalaması \(70\), erkeklerin \(60\), sınıfın ortalaması \(64\)'tür. Kız sayısının erkek sayısına oranı kaçtır?}
+{Kız sayısı \(k\), erkek sayısı \(e\):
+\[70k+60e=64(k+e)\ \Rightarrow\ 6k=4e\ \Rightarrow\ \frac{k}{e}=\frac{4}{6}=\frac{2}{3}\]
+Kontrol: \(k=2,\ e=3\): \(\frac{140+180}{5}=64\) \checkmark}
+
+\subsection{Geometrik ve harmonik ortalama}
+\begin{frame}{Geometrik ve Harmonik Ortalama}
+\begin{block}{İki pozitif sayı \(a\) ve \(b\) için}
+\[\text{AO}=\frac{a+b}{2},\qquad \text{GO}=\sqrt{a\cdot b},\qquad \text{HO}=\frac{2ab}{a+b}\]
+\[\text{AO}\ \ge\ \text{GO}\ \ge\ \text{HO}\qquad(\text{eşitlik yalnızca } a=b \text{ iken})\]
+\end{block}
+\begin{block}{Ortalama hız}
+\[\text{Ortalama hız}=\frac{\text{Toplam yol}}{\text{Toplam zaman}}\]
+Aynı yol \(v_1\) hızıyla gidilip \(v_2\) hızıyla dönülürse: \ \(\dfrac{2v_1v_2}{v_1+v_2}\) \ (harmonik ortalama).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Gidiş--dönüşte ortalama hız \(\frac{v_1+v_2}{2}\) \textbf{değildir}.
+\end{alertblock}
+\end{frame}
+
+\soru{Üç Ortalama -- Örnek 32}
+{\(4\) ve \(9\) sayılarının aritmetik, geometrik ve harmonik ortalamalarını bulup sıralayınız.}
+{\[\text{AO}=\frac{4+9}{2}=6{,}5,\qquad \text{GO}=\sqrt{36}=6,\qquad \text{HO}=\frac{2\cdot 36}{13}=\frac{72}{13}\approx 5{,}54\]
+\[6{,}5>6>5{,}54\quad(\text{AO}>\text{GO}>\text{HO})\]}
+
+\soru{Geometrik Ortalama -- Örnek 33}
+{\(a\) ile \(b\)'nin geometrik ortalaması \(4\), aritmetik ortalaması \(5\)'tir. \(a^2+b^2\) kaçtır?}
+{\(\sqrt{ab}=4\Rightarrow ab=16\); \quad \(\dfrac{a+b}{2}=5\Rightarrow a+b=10\).
+\[a^2+b^2=(a+b)^2-2ab=100-32=68\]
+(Sayılar: \(2\) ve \(8\); \ \(4+64=68\) \checkmark)}
+
+\soru{Ortalama Hız -- Örnek 34}
+{Bir araç A'dan B'ye saatte \(60\) km hızla gidip aynı yoldan saatte \(40\) km hızla dönüyor. Bütün yolculuktaki ortalama hızı kaç km/sa'tir?}
+{\[\frac{2\cdot 60\cdot 40}{60+40}=\frac{4800}{100}=48\text{ km/sa}\]
+Kontrol: yol \(120\) km olsun: \(2\) sa \(+\ 3\) sa \(=5\) sa; \ \(\dfrac{240}{5}=48\). \ (\(50\) değil!)}
+
+\subsection{Ardışık sayılar}
+\begin{frame}{Ardışık Sayıların Ortalaması}
+\begin{block}{Kural}
+Ardışık (eşit aralıklı) sayılarda
+\[\text{Ortalama}=\frac{\text{ilk terim}+\text{son terim}}{2}\]
+Terim sayısı tek ise bu, \textbf{ortanca} (tam ortadaki) terimdir.\\[2pt]
+Toplam \(=\) terim sayısı \(\times\) ortalama.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Terim sayısı: \(\dfrac{\text{son}-\text{ilk}}{\text{artış}}+1\) \quad (\(+1\)'i unutmayın).
+\end{alertblock}
+\end{frame}
+
+\soru{Ardışık Sayılar -- Örnek 35}
+{Ardışık \(5\) tek sayının toplamı \(85\)'tir. En büyüğü kaçtır? \ \(13\)'ten \(47\)'ye kadar (dahil) tek sayıların ortalaması ve toplamı kaçtır?}
+{Ortanca terim \(=\dfrac{85}{5}=17\): \ \(13,15,\mathbf{17},19,21\) \(\Rightarrow\) en büyük \(21\).\\[3pt]
+Ortalama \(=\dfrac{13+47}{2}=30\); \ terim sayısı \(=\dfrac{47-13}{2}+1=18\); \ toplam \(=18\cdot 30=540\).}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(8\) sayının ortalaması \(12\). Bu sayılara \(21\) eklenirse yeni ortalama? \(\star\)
+\item \(3\) ve \(27\)'nin geometrik ortalaması?
+\item Gidiş \(30\) km/sa, dönüş \(60\) km/sa (aynı yol). Ortalama hız? \(\star\)
+\item \(15\) kişilik grubun ortalaması \(40\), \(10\) kişilik grubunki \(50\). Birlikte? \(\star\)
+\item Ardışık \(7\) çift sayının toplamı \(98\). En küçüğü?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(13\)
+\item \(9\)
+\item \(40\) km/sa
+\item \(44\)
+\item \(8\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 1)}
+{\(8\) sayının aritmetik ortalaması \(12\)'dir. Bu sayılara \(21\) eklenirse yeni ortalama kaç olur?}
+{Eski toplam: \(8\cdot 12=96\). \quad Yeni toplam: \(96+21=117\), \ sayı adedi \(9\).
+\[\text{Yeni ortalama}=\frac{117}{9}=13\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{Bir araç bir yolu saatte \(30\) km hızla gidip aynı yolu saatte \(60\) km hızla dönüyor. Ortalama hızı kaç km/sa'tir?}
+{\[\frac{2\cdot 30\cdot 60}{30+60}=\frac{3600}{90}=40\text{ km/sa}\]
+Kontrol: yol \(60\) km: \(2\) sa \(+\ 1\) sa \(=3\) sa; \ \(\dfrac{120}{3}=40\) \checkmark \ (\(45\) değil).}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{\(15\) kişilik bir grubun ortalaması \(40\), \(10\) kişilik bir grubun ortalaması \(50\)'dir. İki grubun birlikte ortalaması kaçtır?}
+{Toplamlar: \(15\cdot 40=600\), \ \(10\cdot 50=500\).
+\[\frac{600+500}{15+10}=\frac{1100}{25}=44\]
+(\(\frac{40+50}{2}=45\) yanlış; kalabalık grup ortalamayı kendine çeker.)}
+
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item Oran birimsiz; birimler eşitlenir
+\item \(\frac{a}{b}=\frac{c}{d}\Leftrightarrow ad=bc\)
+\item \(\frac{a}{2}=\frac{b}{3}=\frac{c}{5}=k\): \(a=2k,\dots\)
+\item Ölçek: harita / gerçek
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Doğru: \(\frac{y}{x}=k\)
+\item Ters: \(x\cdot y=k\)
+\item Bileşik: \(a=k\frac{b}{c}\)
+\item \(\frac{\text{İş}}{n\cdot s\cdot g}\) sabit
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item Toplam \(=n\cdot\)AO
+\item Ağırlıklı: \(\frac{n_1o_1+n_2o_2}{n_1+n_2}\)
+\item AO \(\ge\) GO \(\ge\) HO
+\item Gidiş--dönüş: \(\frac{2v_1v_2}{v_1+v_2}\)
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Sayı, kesir ve yaş problemleri
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

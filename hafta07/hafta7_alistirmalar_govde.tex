@@ -1,0 +1,200 @@
+% Hafta 7 -- alıştırma gövdesi (ders notu ve ayrı alıştırma kağıdı tarafından \input edilir)
+% Sayı doğrusu makroları (\sd, \cizgi, \isin, \acik, \kapali) her iki belgenin preamble'ında tanımlıdır.
+\section{Çözümlü Alıştırmalar}
+Her soruyu önce kendiniz deneyin, sonra çözümü okuyun.
+
+\begin{alistirma}
+\(\dfrac{x+1}{2}-\dfrac{x-3}{5}<2\) eşitsizliğini sağlayan en büyük tam sayı kaçtır?
+\end{alistirma}
+\begin{cozum}
+Paydaların EKOK'u \(10\); her terimi \(10\) ile çarpalım (\(10>0\), yön korunur):
+\[5(x+1)-2(x-3)<20\ \Rightarrow\ 5x+5-2x+6<20\ \Rightarrow\ 3x+11<20\ \Rightarrow\ 3x<9\ \Rightarrow\ x<3\]
+\(3\) dahil değil \(\Rightarrow\) en büyük tam sayı \(2\).
+\end{cozum}
+
+\begin{alistirma}
+\(4-x\ge 2x-11\) ve \(x>-3\) eşitsizliklerini birlikte sağlayan kaç tam sayı vardır?
+\end{alistirma}
+\begin{cozum}
+\(4+11\ge 2x+x\Rightarrow 15\ge 3x\Rightarrow x\le 5\). \ İkinci koşul \(x>-3\). Ortak çözüm: \(-3<x\le 5\), yani \((-3,5]\).\\
+\sd{-4}{6}{\cizgi{-3}{5}\acik{-3}\kapali{5}}\\
+Tam sayılar: \(-2,-1,0,1,2,3,4,5\) \(\Rightarrow\) \(5-(-3)=8\) tane.
+\end{cozum}
+
+\begin{alistirma}
+\(3<x<7\) ve \(-2<y<4\) ise \(x+y\) ve \(x-y\) hangi aralıklardadır?
+\end{alistirma}
+\begin{cozum}
+\(x+y\): aralıklar taraf tarafa toplanır: \(3+(-2)<x+y<7+4\Rightarrow 1<x+y<11\).\\
+\(x-y\): önce \(y\)'nin aralığını \(-1\) ile çarpalım (yön değişir): \(-4<-y<2\). Sonra \(x\) ile toplayalım:
+\[3+(-4)<x-y<7+2\ \Rightarrow\ -1<x-y<9\]
+\end{cozum}
+
+\begin{alistirma}
+\(-3<x<2\), \ \(-1<y<5\) ve \(x,y\) tam sayılardır. \(x\cdot y\)'nin en küçük ve en büyük değeri kaçtır?
+\end{alistirma}
+\begin{cozum}
+\(x\in\{-2,-1,0,1\}\), \quad \(y\in\{0,1,2,3,4\}\) (\(y\) hiç negatif değil).\\
+En küçük: çarpımın negatif olması için \(x\) negatif olmalı; \(|x|\) ve \(y\) en büyük seçilir: \(x=-2\), \(y=4\) \(\Rightarrow\) \(-8\).\\
+En büyük: çarpım pozitif olmalı; bunun için \(x=1\) (tek pozitif değer) ve \(y=4\): \(1\cdot 4=4\).
+\end{cozum}
+
+\begin{alistirma}
+\(a<0<b\) olduğuna göre \(|a-b|-|b|-|2a|\) ifadesinin eşiti nedir?
+\end{alistirma}
+\begin{cozum}
+\(a-b<0\Rightarrow |a-b|=b-a\); \quad \(b>0\Rightarrow |b|=b\); \quad \(2a<0\Rightarrow |2a|=-2a\).
+\[(b-a)-b-(-2a)=b-a-b+2a=a\]
+Kontrol: \(a=-1,\ b=2\): \(|-3|-|2|-|-2|=3-2-2=-1=a\) \checkmark
+\end{cozum}
+
+\begin{alistirma}
+\(|x+2|=|x-6|\) denkleminin çözüm kümesi nedir?
+\end{alistirma}
+\begin{cozum}
+\(x+2=x-6\Rightarrow 2=-6\): olanaksız, bu durumdan kök gelmez.\\
+\(x+2=-(x-6)\Rightarrow x+2=-x+6\Rightarrow 2x=4\Rightarrow x=2\). \quad Kontrol: \(|4|=|-4|\) \checkmark \quad \(\text{ÇK}=\{2\}\).\\
+Uzaklık yorumu: \(x\)'in \(-2\)'ye ve \(6\)'ya uzaklıkları eşit \(\Rightarrow\) \(x\) orta noktadır: \(\dfrac{-2+6}{2}=2\).
+\end{cozum}
+
+\begin{alistirma}
+\(-5\le x\le 5\) olan tam sayılardan kaç tanesi \(|3x-1|\ge 8\) eşitsizliğini sağlar?
+\end{alistirma}
+\begin{cozum}
+\(3x-1\ge 8\Rightarrow 3x\ge 9\Rightarrow x\ge 3\) \quad veya \quad \(3x-1\le -8\Rightarrow 3x\le -7\Rightarrow x\le -\dfrac73\approx-2{,}33\).\\
+\([-5,5]\)'teki tam sayılardan: \(x\ge 3\) için \(3,4,5\); \ \(x\le -\frac73\) için \(-5,-4,-3\) (\(-2\) sağlamaz: \(|-7|=7<8\)).\\
+Toplam \(6\) tane.
+\end{cozum}
+
+\begin{alistirma}
+\(2\le|x-3|\le 5\) eşitsizliğini sağlayan tam sayıların sayısı ve toplamı kaçtır?
+\end{alistirma}
+\begin{cozum}
+\(|x-3|\le 5\Rightarrow -5\le x-3\le 5\Rightarrow -2\le x\le 8\).\\
+\(|x-3|\ge 2\Rightarrow x-3\ge 2\) veya \(x-3\le -2\) \(\Rightarrow\) \(x\ge 5\) veya \(x\le 1\).\\
+Ortak kısım: \([-2,1]\cup[5,8]\) \qquad \sd{-3}{9}{\cizgi{-2}{1}\cizgi{5}{8}\kapali{-2}\kapali{1}\kapali{5}\kapali{8}}\\
+Tam sayılar: \(-2,-1,0,1,5,6,7,8\) \(\Rightarrow\) \(8\) tane; \ toplam \((-2)+26=24\).
+\end{cozum}
+
+\kendinizoncesi
+\section{Alıştırmalar (Kendiniz Çözün)}
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=4pt]
+\item \(\{x\in\mathbb{R}\,:\,-3\le x<5\}\) kümesini aralık gösterimiyle yazınız. \((-\infty,2]\) aralığını eşitsizlikle ifade ediniz.
+\item \(5x-3\le 2x+9\) eşitsizliğinin çözüm kümesi nedir?
+\item \(7-2x>3(x-1)\) eşitsizliğinin çözüm kümesi nedir?
+\item \(-2x+7\ge 1\) eşitsizliğini sağlayan kaç tane doğal sayı vardır? \ (\(\mathbb{N}=\{0,1,2,\dots\}\))
+\item \(-5<2x+3\le 11\) eşitsizliğini sağlayan kaç tam sayı vardır? Bunların toplamı kaçtır?
+\item \(-1<a<3\) ise \(5-2a\) hangi aralıktadır?
+\item \(-4<x<3\) ise \(x^2\) hangi aralıktadır?
+\item \(|-6|-|4-9|+|-2|\cdot|3|\) işleminin sonucu kaçtır?
+\item \(x<-1\) olduğuna göre \(|x+1|+|x-3|\) ifadesinin eşiti nedir?
+\item \(|4x-2|=10\) denkleminin çözüm kümesi nedir?
+\item \(|x-5|<3\) eşitsizliğini sağlayan tam sayıların sayısı ve toplamı kaçtır?
+\item \(|x-a|\le b\) eşitsizliğinin çözüm kümesi \([-1,7]\) ise \(a\cdot b\) kaçtır?
+\end{enumerate}
+
+\subsection*{Cevap Anahtarı}
+{\small
+\begin{multicols}{2}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=1pt]
+\item \([-3,5)\); \quad \(x\le 2\).
+\item \(3x\le 12\Rightarrow x\le 4\); \ \((-\infty,4]\).
+\item \(10>5x\Rightarrow x<2\); \ \((-\infty,2)\).
+\item \(-2x\ge -6\Rightarrow x\le 3\): \(0,1,2,3\) \(\Rightarrow\) \(4\) tane.
+\item \(-4<x\le 4\): \(-3,\dots,4\); \(8\) tane, toplam \(4\).
+\item \(-6<-2a<2\Rightarrow -1<5-2a<7\); \ \((-1,7)\).
+\item \(0\) aralıkta, en uzak uç \(-4\): \([0,16)\).
+\item \(6-5+2\cdot 3=7\).
+\item \(-(x+1)+(3-x)=2-2x\).
+\item \(4x-2=\pm10\Rightarrow x=3\) veya \(x=-2\); \ \(\{-2,3\}\).
+\item \(2<x<8\): \(3,\dots,7\); \(5\) tane, toplam \(25\).
+\item \(a-b=-1\), \(a+b=7\Rightarrow a=3,\ b=4\); \ \(a\cdot b=12\).
+\end{enumerate}
+\end{multicols}}
+
+% =====================================================
+\newcounter{karma}
+\newenvironment{karma}[1]{\refstepcounter{karma}\par\vspace{2pt}\needspace{7\baselineskip}\noindent\textbf{\color{anamavi}K\thekarma.}\ \textit{(Hafta #1)}\ }{\par}
+
+\needspace{15\baselineskip}
+\section{Ara Sınava Hazırlık: Karma Tekrar (Hafta 1--7)}
+K5, K6, K8 ve K12'nin çözümü sorunun altında, diğerlerinin cevabı bölüm sonundadır.
+
+\begin{karma}{1}
+\(5-2\cdot(3-7)+(-2)^3\div 4\) işleminin sonucu kaçtır?
+\end{karma}
+
+\begin{karma}{1}
+\(\tfrac{8!}{6!\cdot 2!}+0!\) işleminin sonucu kaçtır?
+\end{karma}
+
+\begin{karma}{2}
+\(360\) sayısının kaç tane pozitif tam böleni vardır?
+\end{karma}
+
+\begin{karma}{2}
+Bir doğal sayı \(7\)'ye bölündüğünde bölüm \(12\)'dir. Kalan alabileceği en büyük değeri aldığında bölünen sayı kaçtır?
+\end{karma}
+
+\begin{karma}{3}
+Dört basamaklı \(\ab{3a5b}\) sayısı \(45\) ile tam bölünmektedir. \(a\)'nın alabileceği değerlerin toplamı kaçtır?
+\end{karma}
+\begin{cozum}
+\(45=5\cdot 9\): \(5\)'e bölünme \(\Rightarrow b\in\{0,5\}\); \ \(9\)'a bölünme \(\Rightarrow 8+a+b\) dokuzun katı.\\
+\(b=0\): \(8+a\in\{9,18\}\Rightarrow a=1\) (\(a=10\) rakam değil); \ \(b=5\): \(13+a=18\Rightarrow a=5\) \ (\(3150\), \(3555\)).\\
+\(a\) değerlerinin toplamı: \(1+5=6\).
+\end{cozum}
+
+\begin{karma}{3}
+\(18\) ile de \(24\) ile de bölündüğünde \(5\) kalanını veren en küçük iki basamaklı doğal sayı kaçtır?
+\end{karma}
+\begin{cozum}
+\(N-5\), \(18=2\cdot 3^2\) ve \(24=2^3\cdot 3\)'ün ortak katı: \(\text{EKOK}=2^3\cdot 3^2=72\), \ \(N=72k+5\).\\
+\(k=0\Rightarrow N=5\) (tek basamaklı); \ \(k=1\Rightarrow N=77\). \quad Kontrol: \(77=18\cdot 4+5=24\cdot 3+5\) \checkmark
+\end{cozum}
+
+\begin{karma}{4}
+\(\dfrac{0{,}6+\frac25}{1{,}25-\frac34}\) işleminin sonucu kaçtır?
+\end{karma}
+
+\begin{karma}{4}
+\(a=\dfrac34\), \(b=\dfrac57\), \(c=\dfrac79\) sayılarını küçükten büyüğe sıralayınız.
+\end{karma}
+\begin{cozum}
+\(1\)'e uzaklıklar: \(1-a=\frac14=\frac28\), \ \(1-b=\frac27\), \ \(1-c=\frac29\). Paylar eşitken paydası büyük olan küçüktür: \(\frac29<\frac28<\frac27\).\\
+\(1\)'e en yakın olan en büyüktür \(\Rightarrow\) \(b<a<c\). \ (Kontrol: \(a=\frac{189}{252}\), \(b=\frac{180}{252}\), \(c=\frac{196}{252}\).)
+\end{cozum}
+
+\begin{karma}{5}
+\(\dfrac{x-2}{3}+\dfrac{x+1}{2}=4\) denkleminin çözümü nedir?
+\end{karma}
+
+\begin{karma}{6}
+\(2x+y=11\) ve \(x-y=1\) ise \(x\cdot y\) kaçtır?
+\end{karma}
+
+\begin{karma}{7}
+\(-3<2x-5\le 7\) eşitsizliğini sağlayan kaç tam sayı vardır?
+\end{karma}
+
+\begin{karma}{7}
+\(|2x-3|\le 5\) eşitsizliğini sağlayan tam sayıların toplamı kaçtır?
+\end{karma}
+\begin{cozum}
+\(-5\le 2x-3\le 5\). Üç tarafa \(3\) ekleyelim: \(-2\le 2x\le 8\); \(2\)'ye bölelim: \(-1\le x\le 4\).\\
+Tam sayılar: \(-1,0,1,2,3,4\). \quad Toplam: \(-1+0+1+2+3+4=9\).
+\end{cozum}
+
+\subsection*{Karma Tekrar Cevapları (çözümü verilmeyenler)}
+{\small
+\begin{multicols}{2}
+\textbf{K1.} \(5-2\cdot(-4)+(-8)\div 4=5+8-2=11\).\par
+\textbf{K2.} \(\tfrac{8\cdot 7}{2}+1=28+1=29\).\par
+\textbf{K3.} \(360=2^3\cdot 3^2\cdot 5\): \((3+1)(2+1)(1+1)=24\).\par
+\textbf{K4.} En büyük kalan \(6\): \(7\cdot 12+6=90\).\par
+\textbf{K7.} \((0{,}6+0{,}4)\div(1{,}25-0{,}75)=1\div 0{,}5=2\).\par
+\textbf{K9.} \(6\) ile çarp: \(2x-4+3x+3=24\Rightarrow x=5\).\par
+\textbf{K10.} Topla: \(3x=12\Rightarrow x=4\), \(y=3\); \(x\cdot y=12\).\par
+\textbf{K11.} \(2<2x\le 12\Rightarrow 1<x\le 6\): \(5\) tane.\par
+\end{multicols}}

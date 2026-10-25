@@ -1,0 +1,648 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt,handout]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+\title[MMAT105 -- Hafta 13]{MMAT105 Genel Matematik}
+\subtitle{Hafta 13: Sayı ve Kesir Problemleri, Yaş Problemleri}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hesaplayınız:}
+\begin{enumerate}
+\item \(\dfrac{a}{b}=\dfrac{3}{5}\) ve \(a+b=48\) ise \(a=?\)
+\item \(4,\ 7,\ 10,\ 15\) sayılarının aritmetik ortalaması?
+\item \(x\) ile \(y\) doğru orantılıdır. \(x=4\) iken \(y=10\) ise \(x=6\) iken \(y=?\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(a=3k,\ b=5k\), \(8k=48\Rightarrow a=18\)
+\item \(\dfrac{36}{4}=9\)
+\item \(\dfrac{y}{x}=\dfrac{10}{4}\Rightarrow y=15\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Sözel ifade \(\to\) denklem
+\item Toplam, fark, oran
+\item Ardışık sayılar
+\item Basamak problemleri
+\item Sıra ve madeni para
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Bütünün kesri
+\item Kalanın kesri
+\item EKOK kadar birim alma
+\item Depo doluluk oranı
+\item Kesirli denklemler
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{10}
+\item Yaş farkı değişmez
+\item Toplam \(n\cdot t\) artar
+\item Tablo yöntemi
+\item ``Ben senin yaşındayken''
+\item Yaş oranı, doğum yılı
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Sayı Problemleri}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Sözel İfadeyi Denkleme Çevirme ve Sayı Problemleri
+\end{frame}
+
+\subsection{Denklem kurma}
+\begin{frame}{Sözel İfadeden Denkleme (sayı \(=x\))}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{ll}
+\toprule
+Sözel ifade & Cebirsel ifade\\\midrule
+Bir sayının \(3\) katının \(5\) eksiği & \(3x-5\)\\
+Bir sayının \(5\) eksiğinin \(3\) katı & \(3(x-5)\)\\
+Bir sayının \(2\) katından \(7\) fazlası & \(2x+7\)\\
+Bir sayının yarısı ile üçte birinin toplamı & \(\tfrac{x}{2}+\tfrac{x}{3}\)\\
+Bir sayının \(4\) fazlasının yarısı & \(\tfrac{x+4}{2}\)\\
+\(a\), \(b\)'nin \(3\) katından \(2\) eksiktir & \(a=3b-2\)\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{alertblock}{Sık yapılan hatalar}
+``\(5\) eksiğinin \(3\) katı'' \(=3(x-5)\), \ \(3x-5\) \textbf{değildir}: önce yapılan işlem paranteze girer.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Problem Çözme Adımları}
+\begin{block}{Dört adım}
+\begin{enumerate}
+\item Bilinmeyeni seç ve adlandır (\(x\) \(=\) ``küçük sayı'', ``sıra sayısı''\dots).
+\item Diğer büyüklükleri \(x\) cinsinden yaz.
+\item Verilen eşitliği denkleme çevir ve çöz (5.--6. hafta).
+\item \textbf{Sağlama:} bulunan değeri sorunun metnine yerleştir; cevap anlamlı mı? (tam sayı, pozitif, rakam \(0\)--\(9\) arası\dots)
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Bulunan \(x\) her zaman istenen cevap değildir: soru ``büyük sayı'', ``en büyüğü'', ``sınıf mevcudu'' diye sorabilir.
+\end{alertblock}
+\end{frame}
+
+\soru{Denklem Kurma -- Örnek 1}
+{Hangi sayının \(3\) katının \(5\) eksiği, aynı sayının \(2\) katından \(7\) fazlasına eşittir?}
+{\[3x-5=2x+7\ \Rightarrow\ x=12\]
+Sağlama: \(3\cdot 12-5=31\), \quad \(2\cdot 12+7=31\) \checkmark}
+
+\soru{Denklem Kurma -- Örnek 2}
+{Bir sayının yarısı ile üçte birinin toplamı \(35\)'tir. Bu sayı kaçtır?}
+{Paydaların EKOK'u \(6\): denklemi \(6\) ile çarpalım.
+\[\frac{x}{2}+\frac{x}{3}=35\ \Rightarrow\ 3x+2x=210\ \Rightarrow\ x=42\]
+Sağlama: \(21+14=35\) \checkmark}
+
+\soru{Denklem Kurma -- Örnek 3}
+{Bir sayının \(4\) fazlasının \(3\) katı, aynı sayının \(5\) katından \(6\) eksiktir. Bu sayı kaçtır?}
+{\[3(x+4)=5x-6\ \Rightarrow\ 3x+12=5x-6\ \Rightarrow\ 2x=18\ \Rightarrow\ x=9\]
+Sağlama: \(3\cdot 13=39\), \quad \(5\cdot 9-6=39\) \checkmark}
+
+\subsection{Toplam, fark, oran}
+\soru{İki Sayı -- Örnek 4}
+{İki sayının toplamı \(64\), farkı \(18\)'dir. Bu sayıları bulunuz.}
+{\(x+y=64\) ve \(x-y=18\). Taraf tarafa toplayalım:
+\[2x=82\ \Rightarrow\ x=41,\qquad y=64-41=23\]
+Kısa yol: büyük \(=\dfrac{\text{toplam}+\text{fark}}{2}\), \ küçük \(=\dfrac{\text{toplam}-\text{fark}}{2}\).}
+
+\soru{İki Sayı -- Örnek 5}
+{İki sayının oranı \(\dfrac{3}{5}\), toplamı \(96\)'dır. Bu sayılar kaçtır?}
+{Sayılar \(3k\) ve \(5k\) (12. hafta):
+\[3k+5k=96\ \Rightarrow\ k=12\ \Rightarrow\ 36\ \text{ve}\ 60\]
+Sağlama: \(36+60=96\), \ \(\dfrac{36}{60}=\dfrac{3}{5}\) \checkmark}
+
+\soru{İki Sayı -- Örnek 6}
+{Toplamları \(70\) olan iki doğal sayıdan büyüğü küçüğüne bölündüğünde bölüm \(4\), kalan \(5\) oluyor. Büyük sayı kaçtır?}
+{Küçük \(=k\) \(\Rightarrow\) büyük \(=4k+5\) (2. hafta: \(A=B\cdot C+K\)).
+\[k+4k+5=70\ \Rightarrow\ 5k=65\ \Rightarrow\ k=13,\quad \text{büyük}=57\]
+Sağlama: \(57=13\cdot 4+5\) ve \(5<13\) \checkmark}
+
+\subsection{Ardışık sayılar}
+\begin{frame}{Ardışık Sayılar}
+\begin{block}{Kural}
+\begin{itemize}
+\item Ardışık tam sayılar: \(x,\ x+1,\ x+2,\ \dots\)
+\item Ardışık çift / tek sayılar: \(x,\ x+2,\ x+4,\ \dots\) \ (\(x\) çift / tek)
+\item Tek sayıda ardışık terim: toplam \(=\) terim sayısı \(\times\) ortanca terim
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Ardışık tek sayılar \(x,\ x+1,\ x+2\) \textbf{değildir}; ardışık tek (ve çift) sayılar arasındaki fark \(2\)'dir.
+\end{alertblock}
+\end{frame}
+
+\soru{Ardışık Sayılar -- Örnek 7}
+{Ardışık üç tam sayının toplamı \(87\)'dir. En büyüğü kaçtır?}
+{\[x+(x+1)+(x+2)=87\ \Rightarrow\ 3x+3=87\ \Rightarrow\ x=28\]
+Sayılar \(28,\ 29,\ 30\) \(\Rightarrow\) en büyüğü \(30\).\\[3pt]
+Kısa yol: ortanca \(=87\div 3=29\).}
+
+\soru{Ardışık Sayılar -- Örnek 8}
+{Ardışık dört çift sayının toplamı \(100\)'dür. En küçüğü kaçtır?}
+{\[x+(x+2)+(x+4)+(x+6)=100\ \Rightarrow\ 4x+12=100\ \Rightarrow\ x=22\]
+Sayılar \(22,\ 24,\ 26,\ 28\) \quad (toplam \(100\) \checkmark). \ En küçüğü \(22\).}
+
+\subsection{Basamak problemleri}
+\begin{frame}{Basamak Problemleri}
+\begin{block}{Kural (\(a,b\) rakam, \(a\neq 0\))}
+\[\ab{ab}=10a+b,\qquad \ab{ab}+\ab{ba}=11(a+b),\qquad \ab{ab}-\ab{ba}=9(a-b)\]
+Bir sayının sağına \(c\) rakamı yazılırsa yeni sayı \(10\cdot(\text{sayı})+c\) olur.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(\ab{ab}\neq a\cdot b\): \ \(\ab{47}=40+7\), \ \(4\cdot 7\) değil.
+\item Rakamlar \(0\)--\(9\) arasındadır; \(\ab{ba}\) iki basamaklı olacaksa \(b\neq 0\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Basamak -- Örnek 9}
+{İki basamaklı bir sayının rakamları toplamı \(11\)'dir. Rakamlarının yerleri değiştirilince sayı \(27\) artıyor. Bu sayı kaçtır?}
+{\(\ab{ba}-\ab{ab}=9(b-a)=27\ \Rightarrow\ b-a=3\).
+\[a+b=11,\ \ b-a=3\ \Rightarrow\ b=7,\ a=4\ \Rightarrow\ \ab{ab}=47\]
+Sağlama: \(74-47=27\) \checkmark}
+
+\soru{Basamak -- Örnek 10}
+{İki basamaklı kaç sayı, rakamları toplamının \(4\) katına eşittir?}
+{\[10a+b=4(a+b)\ \Rightarrow\ 6a=3b\ \Rightarrow\ b=2a\]
+\(b\le 9\) \(\Rightarrow\) \(a=1,2,3,4\): \quad \(12,\ 24,\ 36,\ 48\) \(\Rightarrow\) \(4\) tane.\\[3pt]
+Sağlama: \(36=4\cdot(3+6)\) \checkmark}
+
+\subsection{Sıra ve madeni para}
+\soru{Sıra Problemi -- Örnek 11}
+{Bir sınıftaki öğrenciler sıralara \(2\)'şerli oturursa \(5\) öğrenci ayakta kalıyor; \(3\)'erli oturursa \(2\) sıra boş kalıyor (diğer sıralar tam dolu). Sınıf mevcudu kaçtır?}
+{Sıra sayısı \(x\): \quad mevcut \(=2x+5\) \quad ve \quad mevcut \(=3(x-2)\).
+\[2x+5=3x-6\ \Rightarrow\ x=11,\qquad \text{mevcut}=2\cdot 11+5=27\]
+Sağlama: \(3\cdot 9=27\) \checkmark}
+
+\soru{İki Bilinmeyen -- Örnek 12}
+{Bir kumbarada yalnızca \(1\) TL'lik ve \(5\) TL'lik madeni paralar vardır. Toplam \(20\) madeni para ve \(68\) TL olduğuna göre kaç tane \(5\) TL'lik vardır?}
+{\(1\) TL'lik \(x\), \(5\) TL'lik \(y\) tane: \quad \(x+y=20\), \ \ \(x+5y=68\).\\[3pt]
+Çıkaralım: \(4y=48\ \Rightarrow\ y=12\), \ \(x=8\).\\[3pt]
+Sağlama: \(8+60=68\) TL \checkmark}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item Bir sayının \(5\) katının \(8\) eksiği, \(3\) katının \(12\) fazlasına eşit. Sayı? \(\star\)
+\item Ardışık üç tek sayının toplamı \(75\). En büyüğü?
+\item İki sayının toplamı \(50\), büyüğü küçüğünün \(4\) katı. Küçük sayı?
+\item \(\ab{ab}+\ab{ba}=121\) ve \(a-b=5\) ise \(\ab{ab}=?\) \(\star\)
+\item Öğrenciler \(3\)'erli oturursa \(4\) kişi ayakta kalıyor, \(4\)'erli oturursa \(3\) sıra boş kalıyor. Mevcut? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(10\)
+\item \(27\) \ (\(23,25,27\))
+\item \(10\)
+\item \(83\)
+\item \(52\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 1)}
+{Bir sayının \(5\) katının \(8\) eksiği, aynı sayının \(3\) katının \(12\) fazlasına eşittir. Sayı kaçtır?}
+{\(5\) katının \(8\) eksiği: \(5x-8\); \quad \(3\) katının \(12\) fazlası: \(3x+12\).
+\[5x-8=3x+12\ \Rightarrow\ 2x=20\ \Rightarrow\ x=10\]
+Sağlama: \(50-8=42=30+12\) \checkmark}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 4)}
+{\(\ab{ab}+\ab{ba}=121\) ve \(a-b=5\) ise \(\ab{ab}\) kaçtır?}
+{\(\ab{ab}+\ab{ba}=(10a+b)+(10b+a)=11(a+b)=121\ \Rightarrow\ a+b=11\).
+\[a+b=11,\ \ a-b=5\ \Rightarrow\ 2a=16\ \Rightarrow\ a=8,\ b=3\]
+\(\ab{ab}=83\). \quad Sağlama: \(83+38=121\) \checkmark}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{Öğrenciler sıralara \(3\)'erli oturursa \(4\) kişi ayakta kalıyor, \(4\)'erli oturursa \(3\) sıra boş kalıyor (diğerleri tam dolu). Mevcut kaçtır?}
+{Sıra sayısı \(x\). \quad \(3\)'erli: \(3x+4\); \quad \(4\)'erli: \(x-3\) sıra dolu \(\Rightarrow\) \(4(x-3)\).
+\[3x+4=4x-12\ \Rightarrow\ x=16\]
+Mevcut \(=3\cdot 16+4=52\). \quad Sağlama: \(4\cdot 13=52\) \checkmark}
+
+
+% =====================================================
+\section{Ders 2: Kesir Problemleri}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Kesir Problemleri: Bütünün Kesri, Kalanın Kesri, Depo Doluluk Oranı
+\end{frame}
+
+\subsection{Bütünün ve kalanın kesri}
+\begin{frame}{Kesir Problemleri}
+\begin{block}{Kural}
+\begin{itemize}
+\item Bir \(A\) büyüklüğünün \(\dfrac{m}{n}\)'si: \ \(\dfrac{m}{n}\cdot A\). \quad \(\dfrac{m}{n}\)'si \(B\) ise \ \(A=B\cdot\dfrac{n}{m}\).
+\item \textbf{Kalanın} kesri: önce kalanı bul, kesri kalana uygula.
+\item \textbf{Pratik yol:} bütüne \(x\) yerine paydaların EKOK'u kadar birim (\(12k\), \(15k\) \dots) ver; tüm parçalar tam sayı çıkar.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+``\(\frac{1}{5}\)'ini, sonra \(\frac{1}{3}\)'ünü'' (bütünün) ile ``\(\frac{1}{5}\)'ini, sonra \textbf{kalanın} \(\frac{1}{3}\)'ünü'' farklı sorulardır.
+\end{alertblock}
+\end{frame}
+
+\soru{Bütünün Kesri -- Örnek 13}
+{Bir sayının \(\dfrac{3}{4}\)'ü \(36\)'dır. Bu sayının \(\dfrac{5}{6}\)'sı kaçtır?}
+{\[\frac{3}{4}x=36\ \Rightarrow\ x=36\cdot\frac{4}{3}=48\]
+\[\frac{5}{6}\cdot 48=40\]}
+
+\soru{Kalanın Kesri -- Örnek 14}
+{Ali parasının \(\dfrac{2}{5}\)'ini harcadı, kalanın \(\dfrac{1}{3}\)'ünü kardeşine verdi. Geriye \(120\) TL kaldı. Ali'nin başlangıçta kaç TL'si vardı?}
+{Paydalar \(5\) ve \(3\) \(\Rightarrow\) para \(=15k\).\\[2pt]
+Harcadı: \(6k\) \(\to\) kalan \(9k\); \quad verdi: \(\frac{1}{3}\cdot 9k=3k\) \(\to\) kalan \(6k\).
+\[6k=120\ \Rightarrow\ k=20\ \Rightarrow\ 15k=300\ \text{TL}\]
+Sağlama: \(300\to 180\to 120\) \checkmark}
+
+\soru{Bütünün Kesri -- Örnek 15}
+{Bir memur maaşının \(\dfrac{1}{5}\)'ini kiraya, \(\dfrac{1}{3}\)'ünü mutfak masraflarına harcıyor. Geriye \(1400\) TL kalıyor. Maaşı kaç TL'dir?}
+{Her iki kesir de \textbf{maaşın} kesri. Maaş \(=15k\):
+\[\text{kira } 3k,\ \ \text{mutfak } 5k\ \Rightarrow\ \text{kalan } 15k-8k=7k\]
+\(7k=1400\ \Rightarrow\ k=200\ \Rightarrow\ \) maaş \(3000\) TL.\\[3pt]
+Sağlama: \(3000-600-1000=1400\) \checkmark}
+
+\soru{Kalanın Kesri -- Örnek 16}
+{Bir öğrenci kitabın birinci gün \(\dfrac{1}{4}\)'ünü, ikinci gün kalan kısmın \(\dfrac{2}{5}\)'ini okuyor. Geriye \(90\) sayfa kalıyor. Kitap kaç sayfadır?}
+{Kitap \(=20k\) \ (\(4\) ve \(5\)'in EKOK'u).\\[2pt]
+1. gün: \(5k\) \(\to\) kalan \(15k\); \quad 2. gün: \(\frac{2}{5}\cdot 15k=6k\) \(\to\) kalan \(9k\).
+\[9k=90\ \Rightarrow\ k=10\ \Rightarrow\ 200\ \text{sayfa}\]
+Sağlama: \(200\to 150\to 90\) \checkmark}
+
+\subsection{Depo doluluk oranı}
+\begin{frame}{Depo / Havuz Doluluk Oranı}
+\begin{block}{Kural}
+Deponun tamamı \(V\) litre olsun. Doluluk \(\dfrac{a}{b}\)'den \(\dfrac{c}{d}\)'ye çıkıyorsa eklenen su:
+\[\left(\frac{c}{d}-\frac{a}{b}\right)V\]
+Kesir farkı ile eklenen (veya kullanılan) litre eşitlenir.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Kesirleri değil, kesirlerin \textbf{farkını} eklenen miktara eşitleyin. Cevap ``deponun tamamı'' mı, ``içindeki su'' mu? Soruyu tekrar okuyun.
+\end{alertblock}
+\end{frame}
+
+\soru{Depo -- Örnek 17}
+{Bir deponun \(\dfrac{3}{4}\)'ü doludur. Depoya \(20\) litre su eklenince deponun \(\dfrac{5}{6}\)'sı doluyor. Deponun tamamı kaç litre su alır?}
+{\[\frac{5}{6}-\frac{3}{4}=\frac{10-9}{12}=\frac{1}{12}\ \Rightarrow\ \frac{1}{12}V=20\ \Rightarrow\ V=240\ \text{L}\]
+Sağlama: \(180+20=200=\frac{5}{6}\cdot 240\) \checkmark}
+
+\soru{Depo -- Örnek 18}
+{Bir su deposunun \(\dfrac{2}{3}\)'ü doludur. Depodan \(30\) litre su kullanılınca deponun yarısı dolu kalıyor. Deponun tamamı kaç litredir?}
+{\[\frac{2}{3}-\frac{1}{2}=\frac{1}{6}\ \Rightarrow\ \frac{1}{6}V=30\ \Rightarrow\ V=180\ \text{L}\]
+Sağlama: \(120-30=90=\frac{1}{2}\cdot 180\) \checkmark}
+
+\subsection{Kesirli denklemler}
+\soru{Kesir -- Örnek 19}
+{Bir sınıfın \(\dfrac{3}{7}\)'si kızdır. Sınıfa \(4\) kız öğrenci katılınca kızlar sınıfın yarısı oluyor. Başlangıçta sınıf mevcudu kaçtır?}
+{Mevcut \(7k\): \ kız \(3k\), erkek \(4k\). Erkek sayısı değişmez.\\[2pt]
+Yeni durumda kız \(=\) erkek: \quad \(3k+4=4k\ \Rightarrow\ k=4\) \(\Rightarrow\) mevcut \(28\).\\[3pt]
+Sağlama: \(12+4=16\), \ \(16\) kız \(+\ 16\) erkek \checkmark}
+
+\soru{Kesir -- Örnek 20}
+{Bir otobüsteki yolcuların \(\dfrac{1}{3}\)'ü ilk durakta iniyor, \(6\) yolcu biniyor. Yolcu sayısı başlangıçtakinin \(\dfrac{3}{4}\)'ü oluyor. Başlangıçta kaç yolcu vardı?}
+{Yolcu \(=12k\): \quad \(12k-4k+6=\dfrac{3}{4}\cdot 12k=9k\)
+\[8k+6=9k\ \Rightarrow\ k=6\ \Rightarrow\ 72\ \text{yolcu}\]
+Sağlama: \(72-24+6=54=\frac{3}{4}\cdot 72\) \checkmark}
+
+\soru{Kesirli Denklem -- Örnek 21}
+{Bir sayının \(\dfrac{2}{3}\)'ünün \(4\) fazlası, aynı sayının \(\dfrac{3}{4}\)'ünün \(1\) eksiğine eşittir. Bu sayı kaçtır?}
+{Paydaların EKOK'u \(12\): her terimi \(12\) ile çarpalım.
+\[\frac{2x}{3}+4=\frac{3x}{4}-1\ \Rightarrow\ 8x+48=9x-12\ \Rightarrow\ x=60\]
+Sağlama: \(40+4=44=45-1\) \checkmark}
+
+\soru{Kesirli Denklem -- Örnek 22}
+{Bir kesrin paydası payından \(5\) fazladır. Kesrin payına ve paydasına \(3\) eklenince kesir \(\dfrac{2}{3}\)'e eşit oluyor. Bu kesir nedir?}
+{Kesir \(\dfrac{p}{p+5}\):
+\[\frac{p+3}{p+8}=\frac{2}{3}\ \Rightarrow\ 3p+9=2p+16\ \Rightarrow\ p=7\]
+Kesir \(\dfrac{7}{12}\). \quad Sağlama: \(\dfrac{10}{15}=\dfrac{2}{3}\) \checkmark}
+
+\soru{Geriye Doğru -- Örnek 23}
+{Bir top, bırakıldığı yüksekliğin \(\dfrac{2}{5}\)'i kadar zıplamaktadır. Top yere ikinci vuruşundan sonra \(8\) cm yükseldiğine göre ilk bırakıldığı yükseklik kaç cm'dir?}
+{Sondan başa (ters işlem: \(\frac{2}{5}\)'i verilmişse \(\cdot\frac{5}{2}\)):
+\[8\cdot\frac{5}{2}=20\ \text{cm (1. zıplama)},\qquad 20\cdot\frac{5}{2}=50\ \text{cm}\]
+Sağlama: \(50\to 20\to 8\) \checkmark}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item Bir sayının \(\frac{2}{7}\)'si \(18\) ise \(\frac{3}{7}\)'si kaçtır?
+\item Parasının \(\frac{1}{3}\)'ünü, sonra kalanın \(\frac{1}{4}\)'ünü harcayan birine \(60\) TL kalıyor. Parası? \(\star\)
+\item Deponun \(\frac{2}{5}\)'i dolu; \(60\) L eklenince \(\frac{2}{3}\)'ü doluyor. Depo kaç L? \(\star\)
+\item Maaşın \(\frac{1}{4}\)'ü kira, \(\frac{1}{6}\)'sı fatura; \(2100\) TL kalıyor. Maaş?
+\item Bir sayının \(\frac{3}{5}\)'inin \(2\) fazlası, \(\frac{1}{2}\)'sinin \(5\) fazlasına eşit. Sayı? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(27\) \ (sayı \(63\))
+\item \(120\) TL
+\item \(225\) L
+\item \(3600\) TL
+\item \(30\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{Parasının \(\dfrac{1}{3}\)'ünü, sonra kalanın \(\dfrac{1}{4}\)'ünü harcayan birine \(60\) TL kalıyor. Başlangıçta kaç TL'si vardı?}
+{Paydalar \(3\) ve \(4\) \(\Rightarrow\) para \(=12k\).\\[2pt]
+\(\frac{1}{3}\)'ü: \(4k\) \(\to\) kalan \(8k\); \quad kalanın \(\frac{1}{4}\)'ü: \(2k\) \(\to\) kalan \(6k\).
+\[6k=60\ \Rightarrow\ k=10\ \Rightarrow\ 12k=120\ \text{TL}\]
+Sağlama: \(120\to 80\to 60\) \checkmark}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{Bir deponun \(\dfrac{2}{5}\)'i doludur. \(60\) litre su eklenince deponun \(\dfrac{2}{3}\)'ü doluyor. Deponun tamamı kaç litredir?}
+{\[\frac{2}{3}-\frac{2}{5}=\frac{10-6}{15}=\frac{4}{15}\ \Rightarrow\ \frac{4}{15}V=60\ \Rightarrow\ V=60\cdot\frac{15}{4}=225\ \text{L}\]
+Sağlama: \(\frac{2}{5}\cdot 225=90\), \ \(90+60=150=\frac{2}{3}\cdot 225\) \checkmark}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{Bir sayının \(\dfrac{3}{5}\)'inin \(2\) fazlası, aynı sayının \(\dfrac{1}{2}\)'sinin \(5\) fazlasına eşittir. Sayı kaçtır?}
+{EKOK\((5,2)=10\): her terimi \(10\) ile çarpalım.
+\[\frac{3x}{5}+2=\frac{x}{2}+5\ \Rightarrow\ 6x+20=5x+50\ \Rightarrow\ x=30\]
+Sağlama: \(18+2=20=15+5\) \checkmark}
+
+
+% =====================================================
+\section{Ders 3: Yaş Problemleri}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Yaş Problemleri: Yaş Farkı, Tablo Yöntemi, Yaş Oranı ve Ortalaması
+\end{frame}
+
+\subsection{Altın kurallar}
+\begin{frame}{Yaş Problemleri: Temel Kurallar}
+\begin{block}{Kural}
+\begin{enumerate}
+\item İki kişi arasındaki \textbf{yaş farkı hiç değişmez}.
+\item \(t\) yıl sonra herkesin yaşı \(t\) artar; \(t\) yıl önce herkesin yaşı \(t\) eksiktir.
+\item \(n\) kişinin yaşları toplamı \(t\) yıl sonra \(n\cdot t\) artar; yaş ortalaması \(t\) artar.
+\item Yaşlar arasındaki \textbf{oran} (kat) zamanla değişir.
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item ``\(6\) yıl sonra'' derken yalnızca bir kişiye \(6\) eklemek: herkese eklenir.
+\item Bulunan yaşın anlamlı olduğunu kontrol edin: geçmişteki yaşlar negatif olamaz.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Yaş Toplamı -- Örnek 24}
+{(a) Bir anne ile iki çocuğunun yaşları toplamı \(40\)'tır. \(5\) yıl sonra yaşları toplamı kaç olur?\\
+(b) Ayşe ile Fatma'nın yaşları farkı \(10\)'dur. \(5\) yıl sonra farkları kaç olur?}
+{(a) \(3\) kişi, her biri \(5\) yaş büyür: \ \(40+3\cdot 5=55\).\\[4pt]
+(b) Yaş farkı değişmez: \(10\).}
+
+\soru{Yaş -- Örnek 25}
+{Bir baba \(40\), oğlu \(12\) yaşındadır. Kaç yıl sonra babanın yaşı oğlunun yaşının \(3\) katı olur?}
+{\(t\) yıl sonra: baba \(40+t\), oğul \(12+t\).
+\[40+t=3(12+t)\ \Rightarrow\ 40+t=36+3t\ \Rightarrow\ t=2\]
+Sağlama: \(42=3\cdot 14\) \checkmark}
+
+\begin{frame}{Tablo Yöntemi}
+\begin{block}{Kural}
+Satırlara kişileri, sütunlara zamanları yazın; her hücreyi tek bilinmeyenle doldurun.
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lccc}
+\toprule
+ & \(t\) yıl önce & Şimdi & \(t\) yıl sonra\\\midrule
+Kişi 1 & \(x-t\) & \(x\) & \(x+t\)\\
+Kişi 2 & \(y-t\) & \(y\) & \(y+t\)\\\bottomrule
+\end{tabular}
+\end{center}
+Denklemi, sorunun söylediği \textbf{sütundaki} ilişkiden kurun.
+\end{block}
+\end{frame}
+
+\soru{Tablo Yöntemi -- Örnek 26}
+{Bir annenin yaşı kızının yaşının \(4\) katıdır. \(6\) yıl sonra annenin yaşı kızının yaşının \(3\) katı olacaktır. Anne bugün kaç yaşındadır?}
+{\begin{tabular}{lcc}
+ & Şimdi & \(6\) yıl sonra\\\hline
+Kız & \(x\) & \(x+6\)\\
+Anne & \(4x\) & \(4x+6\)
+\end{tabular}
+\[4x+6=3(x+6)\ \Rightarrow\ x=12\ \Rightarrow\ \text{anne } 48\]
+Sağlama: \(54=3\cdot 18\) \checkmark}
+
+\soru{Tablo Yöntemi -- Örnek 27}
+{Bir babanın yaşı oğlunun yaşının \(3\) katıdır. \(5\) yıl önce babanın yaşı oğlunun yaşının \(4\) katıydı. Baba bugün kaç yaşındadır?}
+{\begin{tabular}{lcc}
+ & \(5\) yıl önce & Şimdi\\\hline
+Oğul & \(x-5\) & \(x\)\\
+Baba & \(3x-5\) & \(3x\)
+\end{tabular}
+\[3x-5=4(x-5)\ \Rightarrow\ x=15\ \Rightarrow\ \text{baba } 45\]
+Sağlama: \(40=4\cdot 10\) \checkmark}
+
+\soru{Yaş Toplamı -- Örnek 28}
+{Bir anne ile kızının yaşları toplamı \(48\)'dir. \(4\) yıl sonra annenin yaşı kızının yaşının \(3\) katı olacaktır. Anne bugün kaç yaşındadır?}
+{Kız \(k\), anne \(48-k\). \ \(4\) yıl sonra: \(52-k\) ve \(k+4\).
+\[52-k=3(k+4)\ \Rightarrow\ 40=4k\ \Rightarrow\ k=10,\quad \text{anne}=38\]
+Sağlama: \(42=3\cdot 14\) \checkmark}
+
+\subsection{Ben senin yaşındayken}
+\begin{frame}{``Ben Senin Yaşındayken'' Tipi}
+\begin{block}{Kural}
+\(A\) büyük, \(B\) küçük olsun; yaş farkı \(d=A-B\).
+\begin{itemize}
+\item ``\(A\), \(B\)'nin yaşındayken'' \(=\) \(d\) yıl önce \(\Rightarrow\) o zaman \(B\)'nin yaşı \(B-d\).
+\item ``\(B\), \(A\)'nın yaşına geldiğinde'' \(=\) \(d\) yıl sonra \(\Rightarrow\) o zaman \(A\)'nın yaşı \(A+d\).
+\end{itemize}
+Sayı doğrusunda: \(B-d,\ \ B,\ \ A,\ \ A+d\) eşit aralıklıdır (aralık \(d\)).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+``Ben senin yaşındayken'' ifadesindeki geçen süre, iki kişinin yaş farkıdır; ayrıca bir \(t\) aramayın.
+\end{alertblock}
+\end{frame}
+
+\soru{Ben Senin Yaşındayken -- Örnek 29}
+{Ali bugün \(24\) yaşındadır. Ali, Veli'nin bugünkü yaşındayken Veli \(12\) yaşındaydı. Veli bugün kaç yaşındadır?}
+{Veli \(x\); fark \(d=24-x\). \ \(d\) yıl önce Veli \(x-d=12\):
+\[24-x=x-12\ \Rightarrow\ 2x=36\ \Rightarrow\ x=18\]
+Sağlama: \(6\) yıl önce Ali \(18\), Veli \(12\) \checkmark \quad (\(12,\ 18,\ 24\): aralık \(6\))}
+
+\soru{Ben Senin Yaşındayken -- Örnek 30}
+{Ali, Veli'nin bugünkü yaşındayken Veli \(10\) yaşındaydı. Veli, Ali'nin bugünkü yaşına geldiğinde Ali \(34\) yaşında olacaktır. İkisinin bugünkü yaşları kaçtır?}
+{Sayı doğrusu: \(10,\ V,\ A,\ 34\) eşit aralıklı \(\Rightarrow\) aralık \(d\):
+\[10+3d=34\ \Rightarrow\ d=8\ \Rightarrow\ V=18,\ A=26\]
+Sağlama: \(8\) yıl önce \(18\) ve \(10\); \(8\) yıl sonra \(26\) ve \(34\) \checkmark}
+
+\subsection{Oran, ortalama, doğum yılı}
+\soru{Yaş Oranı -- Örnek 31}
+{İki kardeşin yaşları oranı \(\dfrac{2}{3}\)'tür. \(4\) yıl sonra bu oran \(\dfrac{3}{4}\) olacaktır. Kardeşler bugün kaç yaşındadır?}
+{Yaşlar \(2k\) ve \(3k\):
+\[\frac{2k+4}{3k+4}=\frac{3}{4}\ \Rightarrow\ 8k+16=9k+12\ \Rightarrow\ k=4\]
+Kardeşler \(8\) ve \(12\) yaşında. \quad Sağlama: \(\dfrac{12}{16}=\dfrac{3}{4}\) \checkmark}
+
+\soru{Yaş Ortalaması -- Örnek 32}
+{\(4\) kişilik bir ailenin bugünkü yaş ortalaması \(22\)'dir. \(3\) yıl sonra bu ailenin yaşları toplamı kaç olur?}
+{Yol 1: toplam \(22\cdot 4=88\); \ artış \(4\cdot 3=12\) \(\Rightarrow\) \(100\).\\[4pt]
+Yol 2: ortalama \(3\) artar: \(25\) \(\Rightarrow\) toplam \(25\cdot 4=100\).}
+
+\soru{Yaş Farkı -- Örnek 33}
+{Aslı, Kerem'den \(4\) yaş büyüktür. Kerem, Aslı'nın bugünkü yaşına geldiğinde ikisinin yaşları toplamı \(48\) olacaktır. Kerem bugün kaç yaşındadır?}
+{Kerem \(k\), Aslı \(k+4\). Kerem'in Aslı'nın yaşına gelmesi \(4\) yıl sürer:
+\[(k+4)+(k+8)=48\ \Rightarrow\ 2k=36\ \Rightarrow\ k=18\]
+Sağlama: \(4\) yıl sonra \(22+26=48\) \checkmark}
+
+\soru{Doğum Yılı -- Örnek 34}
+{Elif 1998'de doğmuştur; annesi Elif doğduğunda \(27\) yaşındaydı. (a) Elif 2026'da kaç yaşına girer? (b) Annesi hangi yıl \(60\) yaşına girer? (c) Hangi yıl annenin yaşı Elif'in yaşının \(2\) katı olur?}
+{(a) \(2026-1998=28\). \quad (b) Anne 1971 doğumlu: \(1971+60=2031\).\\[3pt]
+(c) Fark \(27\) sabit: \(2e=e+27\Rightarrow e=27\) \(\Rightarrow\) \(1998+27=2025\).\\[3pt]
+{\normalsize (Yaş \(=\) yıl farkı: doğum günü geçmiş kabul edilir.)}}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item Baba \(42\), kızı \(12\) yaşında. Kaç yıl sonra babanın yaşı kızının \(2\) katı olur? \(\star\)
+\item \(5\) kişilik ailenin yaşları toplamı \(96\). \(4\) yıl sonra toplam?
+\item Can \(30\) yaşında. Can, Ece'nin bugünkü yaşındayken Ece \(14\) yaşındaydı. Ece kaç yaşında? \(\star\)
+\item İki kardeşin yaş oranı \(\frac{3}{4}\); \(5\) yıl önce \(\frac{2}{3}\) idi. Büyük kardeş kaç yaşında? \(\star\)
+\item 2009 doğumlu biri hangi yıl \(40\) yaşına girer?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(18\) yıl
+\item \(116\)
+\item \(22\)
+\item \(20\) \ (\(15\) ve \(20\))
+\item 2049
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 1)}
+{Bir baba \(42\), kızı \(12\) yaşındadır. Kaç yıl sonra babanın yaşı kızının yaşının \(2\) katı olur?}
+{\(t\) yıl sonra: baba \(42+t\), kız \(12+t\).
+\[42+t=2(12+t)\ \Rightarrow\ 42+t=24+2t\ \Rightarrow\ t=18\]
+Sağlama: baba \(60\), kız \(30\) \checkmark \quad (Kısa yol: fark \(30\) sabit; kız \(30\) olmalı.)}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{Can \(30\) yaşındadır. Can, Ece'nin bugünkü yaşındayken Ece \(14\) yaşındaydı. Ece bugün kaç yaşındadır?}
+{Ece \(x\), fark \(d=30-x\). \ \(d\) yıl önce Can \(x\) yaşındaydı, Ece \(x-d=14\).
+\[30-x=x-14\ \Rightarrow\ 2x=44\ \Rightarrow\ x=22\]
+Sağlama: \(14,\ 22,\ 30\) eşit aralıklı (\(d=8\)) \checkmark}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{İki kardeşin yaşları oranı \(\dfrac{3}{4}\)'tür. \(5\) yıl önce bu oran \(\dfrac{2}{3}\) idi. Büyük kardeş bugün kaç yaşındadır?}
+{Bugün \(3k\) ve \(4k\); \(5\) yıl önce \(3k-5\) ve \(4k-5\).
+\[\frac{3k-5}{4k-5}=\frac{2}{3}\ \Rightarrow\ 9k-15=8k-10\ \Rightarrow\ k=5\]
+Kardeşler \(15\) ve \(20\) \(\Rightarrow\) büyük \(20\). \ Sağlama: \(\dfrac{10}{15}=\dfrac{2}{3}\) \checkmark}
+
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item ``\(5\) eksiğinin \(3\) katı'' \(=3(x-5)\)
+\item Ardışık tek/çift: fark \(2\)
+\item \(\ab{ab}-\ab{ba}=9(a-b)\), \ \(\ab{ab}+\ab{ba}=11(a+b)\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item Bütün \(=\) paydaların EKOK'u kadar birim
+\item Kalanın kesri: önce kalanı bul
+\item Depo: kesir farkı \(=\) eklenen litre
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item Yaş farkı sabit
+\item \(n\) kişi, \(t\) yıl: toplam \(+\,n\cdot t\)
+\item Tablo: Önce / Şimdi / Sonra
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Yüzde, kâr--zarar, karışım ve faiz problemleri; genel tekrar
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

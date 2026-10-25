@@ -1,0 +1,676 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+
+\title[MMAT105 -- Hafta 9]{MMAT105 Genel Matematik}
+\subtitle{Hafta 9: Üslü Sayılar -- Özellikler, Dört İşlem, Denklemler}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\textbf{Hafta 7 (eşitsizlik, mutlak değer):}
+\begin{enumerate}
+\item \(3x-5\ge 7\) \ ÇK \(=?\)
+\item \(|x-3|=5\) \ ÇK \(=?\)
+\item \(|2x+1|<5\) eşitsizliğini kaç tam sayı sağlar?
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(x\ge 4\): \ \([4,\infty)\)
+\item \(\{-2,\ 8\}\)
+\item \(-3<x<2\): \ \(4\) tane
+\end{enumerate}
+\end{columns}
+\vspace{8pt}
+{\footnotesize \textbf{Ara sınav sonrası:} 8. hafta ara sınav haftasıydı; bugün yeni üniteye (üslü sayılar) başlıyoruz.}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Tanım: \(a^n\)
+\item \(a^0=1\), \ \(0^0\) tanımsız
+\item \((-a)^n\) ile \(-a^n\)
+\item Negatif üs
+\item Kesirli, ondalık tabanlar
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{5}
+\item Çarpma -- bölme kuralları
+\item Üssün üssü
+\item Tabanları eşitleme
+\item Toplama -- çıkarma
+\item Bilimsel gösterim
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{10}
+\item Üslü sayılarda sıralama
+\item \(a^x=a^y\), \ \(a^x=b^x\)
+\item Ortak çarpanlı denklemler
+\item Taban bilinmeyen: \(x^a=x^b\)
+\item Birler basamağı (hatırlatma)
+\end{enumerate}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Tanım, Sıfır ve Negatif Üs}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Üslü Sayının Tanımı, İşaret, Sıfır ve Negatif Üs
+\end{frame}
+
+\subsection{Tanım}
+\begin{frame}{Üslü Sayı}
+\begin{block}{Tanım (\(n\) pozitif tam sayı)}
+\[a^n=\underbrace{a\cdot a\cdots a}_{n\ \text{tane}}\qquad a:\ \text{taban},\quad n:\ \text{üs (kuvvet)}\]
+\begin{itemize}
+\item \(a^1=a\); \quad \(a\neq 0\) ise \(a^0=1\); \quad \(0^0\) \textbf{tanımsızdır}.
+\item \(1^n=1\); \quad \(0^n=0\) \ (\(n>0\)); \quad \((-1)^n=1\) (\(n\) çift), \ \((-1)^n=-1\) (\(n\) tek).
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(2^3\neq 2\cdot 3\): \ \(2^3=2\cdot 2\cdot 2=8\).
+\item \(5^0=1\), \(0\) değil! \quad \(0^5=0\) ama \(0^0\) tanımsız.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Tanım -- Örnek 1}
+{\(2^5\), \ \(3^4\), \ \(\left(\dfrac23\right)^3\) \ ve \ \(10^6\) sayılarını hesaplayınız.}
+{\(2^5=2\cdot2\cdot2\cdot2\cdot2=32\), \qquad \(3^4=81\)\\[4pt]
+\(\left(\dfrac23\right)^3=\dfrac{2^3}{3^3}=\dfrac{8}{27}\), \qquad \(10^6=1\,000\,000\) \ (\(1\)'in yanında \(6\) sıfır)}
+
+\subsection{İşaret}
+\begin{frame}{Negatif Tabanın Kuvvetleri}
+\begin{block}{Kural (\(a>0\))}
+\begin{itemize}
+\item Çift kuvvet: \((-a)^{\text{çift}}>0\). \quad Örnek: \((-2)^4=16\)
+\item Tek kuvvet: \((-a)^{\text{tek}}<0\). \quad Örnek: \((-2)^3=-8\)
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar: \(-a^n\) ile \((-a)^n\) farklıdır}
+\begin{itemize}
+\item \(-3^2=-(3\cdot 3)=-9\): üs yalnız \(3\)'e uygulanır.
+\item \((-3)^2=(-3)\cdot(-3)=9\): üs parantezin tamamına uygulanır.
+\item \(-5^0=-1\), \ ama \ \((-5)^0=1\).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{İşaret -- Örnek 2}
+{\((-2)^4\), \ \(-2^4\), \ \((-2)^3\) \ ve \ \(-(-2)^3\) sayılarını hesaplayınız.}
+{\((-2)^4=(-2)(-2)(-2)(-2)=16\) \qquad \(-2^4=-(2^4)=-16\)\\[4pt]
+\((-2)^3=-8\) \ (tek kuvvet, negatif) \qquad \(-(-2)^3=-(-8)=8\)}
+
+\soru{İşaret -- Örnek 3}
+{\((-1)^{2026}+(-1)^{2027}-1^{100}+0^{5}\) \ işleminin sonucu kaçtır?}
+{\(2026\) çift \(\Rightarrow (-1)^{2026}=1\); \quad \(2027\) tek \(\Rightarrow (-1)^{2027}=-1\)\\[4pt]
+\(1^{100}=1\), \quad \(0^5=0\)
+\[1+(-1)-1+0=-1\]}
+
+\subsection{Sıfırıncı kuvvet}
+\soru{Sıfırıncı Kuvvet -- Örnek 4}
+{\(7^0\), \ \((-5)^0\), \ \(-5^0\) \ ve \ \((3-3)^0\) ifadelerinin değerleri nedir?}
+{\(7^0=1\), \qquad \((-5)^0=1\) \ (taban \(-5\neq 0\))\\[4pt]
+\(-5^0=-(5^0)=-1\) \ (üs yalnız \(5\)'e ait)\\[4pt]
+\((3-3)^0=0^0\) \(\Rightarrow\) \textbf{tanımsız}.}
+
+\subsection{Negatif üs}
+\begin{frame}{Negatif Üs}
+\begin{block}{Kural (\(a\neq 0,\ b\neq 0\), \(n\) pozitif tam sayı)}
+\[a^{-n}=\frac{1}{a^n}\qquad\qquad \left(\frac{a}{b}\right)^{-n}=\left(\frac{b}{a}\right)^{n}\]
+Negatif üs: \textbf{tabanı ters çevir}, üssün işaretini değiştir. \ Ondalık taban önce kesre çevrilir: \(0{,}2=\dfrac15\), \ \(0{,}25=\dfrac14\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item Negatif üs sayıyı negatif yapmaz: \(2^{-3}=\dfrac18>0\) \ (\(-8\) değil, \(-6\) değil).
+\item \((-3)^{-2}=\dfrac{1}{(-3)^2}=\dfrac19\): tabanın işareti korunur.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Negatif Üs -- Örnek 5}
+{\(2^{-3}\), \ \(5^{-1}\), \ \((-3)^{-2}\) \ ve \ \(10^{-4}\) sayılarını hesaplayınız.}
+{\(2^{-3}=\dfrac{1}{2^3}=\dfrac18\), \qquad \(5^{-1}=\dfrac15\)\\[4pt]
+\((-3)^{-2}=\dfrac{1}{(-3)^2}=\dfrac19\), \qquad \(10^{-4}=\dfrac{1}{10\,000}=0{,}0001\)}
+
+\soru{Negatif Üs -- Örnek 6}
+{\(\left(\dfrac23\right)^{-2}\), \ \(\left(\dfrac14\right)^{-2}\) \ ve \ \(\left(-\dfrac12\right)^{-3}\) sayılarını hesaplayınız.}
+{\(\left(\dfrac23\right)^{-2}=\left(\dfrac32\right)^{2}=\dfrac94\), \qquad \(\left(\dfrac14\right)^{-2}=4^2=16\)\\[4pt]
+\(\left(-\dfrac12\right)^{-3}=(-2)^3=-8\) \ (tek kuvvet, işaret korunur)}
+
+\soru{Ondalık Taban -- Örnek 7}
+{\((0{,}2)^{-2}\), \ \((0{,}5)^{-3}\), \ \((0{,}1)^{-3}\) \ ve \ \((1{,}5)^{-2}\) sayılarını hesaplayınız.}
+{\((0{,}2)^{-2}=\left(\dfrac15\right)^{-2}=5^2=25\), \qquad \((0{,}5)^{-3}=\left(\dfrac12\right)^{-3}=2^3=8\)\\[4pt]
+\((0{,}1)^{-3}=10^3=1000\), \qquad \((1{,}5)^{-2}=\left(\dfrac32\right)^{-2}=\left(\dfrac23\right)^{2}=\dfrac49\)}
+
+\soru{Karma -- Örnek 8}
+{\(\left(\dfrac12\right)^{-3}+(-2)^2+(-3)^0-1^{2026}\) \ işleminin sonucu kaçtır?}
+{\(\left(\dfrac12\right)^{-3}=2^3=8\), \quad \((-2)^2=4\), \quad \((-3)^0=1\), \quad \(1^{2026}=1\)
+\[8+4+1-1=12\]}
+
+\soru{Karma -- Örnek 9}
+{\(-3^2+(-3)^2-(-2)^3-2^{-1}\cdot 4\) \ işleminin sonucu kaçtır?}
+{\(-3^2=-9\), \quad \((-3)^2=9\), \quad \((-2)^3=-8\), \quad \(2^{-1}\cdot 4=\dfrac12\cdot 4=2\)
+\[-9+9-(-8)-2=6\]}
+
+\soru{İşaret -- Örnek 10}
+{\(a<0\) olduğuna göre \(a^3\), \ \(a^4\), \ \(-a^2\) \ ve \ \((-a)^5\) ifadelerinin işaretleri nedir?}
+{\(a^3\): negatifin tek kuvveti \(\Rightarrow\) \textbf{negatif}\\[3pt]
+\(a^4\): çift kuvvet \(\Rightarrow\) \textbf{pozitif}\\[3pt]
+\(-a^2\): \(a^2>0\) \(\Rightarrow\) \(-a^2\) \textbf{negatif}\\[3pt]
+\((-a)^5\): \(-a>0\) \(\Rightarrow\) \textbf{pozitif} \quad (Kontrol: \(a=-1\): \(-1,\ 1,\ -1,\ 1\))}
+
+\soru{Karma -- Örnek 11}
+{\(x=-1\) olduğuna göre \(-x^2-x^3+(-x)^4\) ifadesinin değeri kaçtır?}
+{\(x^2=1\Rightarrow -x^2=-1\); \quad \(x^3=-1\Rightarrow -x^3=1\); \quad \(-x=1\Rightarrow(-x)^4=1\)
+\[-1+1+1=1\]}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \((-3)^3+(-2)^4-4^0=?\) \(\star\)
+\item \(-2^2+(-2)^2=?\)
+\item \(\left(\dfrac32\right)^{-2}+(0{,}5)^{-1}=?\) \(\star\)
+\item \((-1)^{15}-(-1)^{20}+0^9=?\)
+\item \(a=-2\) ise \(a^{-1}+a^{-2}=?\) \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(-12\)
+\item \(0\)
+\item \(\dfrac{22}{9}\)
+\item \(-2\)
+\item \(-\dfrac14\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 1)}
+{\((-3)^3+(-2)^4-4^0\) \ işleminin sonucu kaçtır?}
+{\((-3)^3=-27\) \ (tek kuvvet), \quad \((-2)^4=16\) \ (çift kuvvet), \quad \(4^0=1\)
+\[-27+16-1=-12\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(\left(\dfrac32\right)^{-2}+(0{,}5)^{-1}\) \ işleminin sonucu kaçtır?}
+{\(\left(\dfrac32\right)^{-2}=\left(\dfrac23\right)^{2}=\dfrac49\); \qquad \((0{,}5)^{-1}=\left(\dfrac12\right)^{-1}=2\)
+\[\frac49+2=\frac49+\frac{18}{9}=\frac{22}{9}\]}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(a=-2\) olduğuna göre \(a^{-1}+a^{-2}\) kaçtır?}
+{\(a^{-1}=\dfrac{1}{-2}=-\dfrac12\); \qquad \(a^{-2}=\dfrac{1}{(-2)^2}=\dfrac14\)
+\[-\frac12+\frac14=-\frac24+\frac14=-\frac14\]}
+
+
+% =====================================================
+\section{Ders 2: Özellikler ve Dört İşlem}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Üslü Sayıların Özellikleri, Toplama -- Çıkarma, Bilimsel Gösterim
+\end{frame}
+
+\subsection{Çarpma ve bölme}
+\begin{frame}{Çarpma, Bölme ve Üssün Üssü}
+\begin{block}{Kurallar (\(a,b\neq 0\); \ \(m,n\) tam sayı)}
+\begin{columns}[t]
+\column{0.48\textwidth}
+\textbf{Tabanlar aynı:}
+\[a^m\cdot a^n=a^{m+n}\qquad \frac{a^m}{a^n}=a^{m-n}\]
+\textbf{Üssün üssü:} \ \((a^m)^n=a^{m\cdot n}\)
+\column{0.48\textwidth}
+\textbf{Üsler aynı:}
+\[a^n\cdot b^n=(a\cdot b)^n\qquad \frac{a^n}{b^n}=\left(\frac{a}{b}\right)^n\]
+\end{columns}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(a^{m^n}\neq(a^m)^n\): \ \(2^{3^2}=2^{9}=512\), \ ama \ \((2^3)^2=2^6=64\).
+\item \(a^m\cdot a^n\neq a^{m\cdot n}\) \ ve \ \(a^m\cdot b^n\) tek kuvvete yazılamaz (taban da üs de farklı).
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Çarpma -- Bölme -- Örnek 12}
+{\(2^3\cdot 2^4\cdot 2^{-5}\) \ ve \ \(\dfrac{5^9}{5^7}\) \ işlemlerinin sonuçları kaçtır?}
+{\(2^3\cdot 2^4\cdot 2^{-5}=2^{3+4-5}=2^2=4\)\\[4pt]
+\(\dfrac{5^9}{5^7}=5^{9-7}=5^2=25\)}
+
+\soru{Üssün Üssü -- Örnek 13}
+{\((2^3)^2\) ile \(2^{3^2}\) eşit midir? \ \((3^{-2})^{-1}\) kaçtır?}
+{\((2^3)^2=2^{3\cdot 2}=2^6=64\); \qquad \(2^{3^2}=2^{9}=512\) \ \(\Rightarrow\) \textbf{eşit değil}.\\[4pt]
+\((3^{-2})^{-1}=3^{(-2)\cdot(-1)}=3^2=9\)}
+
+\soru{Üsler Aynı -- Örnek 14}
+{\(\dfrac{2^{12}\cdot 5^{12}}{10^{10}}\cdot (10^2)^3\) \ işleminin sonucunu \(10\)'un kuvveti olarak yazınız.}
+{\(2^{12}\cdot 5^{12}=(2\cdot 5)^{12}=10^{12}\); \qquad \((10^2)^3=10^6\)
+\[\frac{10^{12}}{10^{10}}\cdot 10^6=10^{2}\cdot 10^{6}=10^{8}\]}
+
+\soru{Üsler Aynı -- Örnek 15}
+{\(\dfrac{12^4}{4^4}\) \ ve \ \(\dfrac{6^5}{2^5\cdot 3^4}\) \ işlemlerinin sonuçları kaçtır?}
+{\(\dfrac{12^4}{4^4}=\left(\dfrac{12}{4}\right)^4=3^4=81\)\\[4pt]
+\(6^5=(2\cdot 3)^5=2^5\cdot 3^5\) \(\Rightarrow\) \(\dfrac{2^5\cdot 3^5}{2^5\cdot 3^4}=3^{5-4}=3\)}
+
+\subsection{Tabanları eşitleme}
+\begin{frame}{Tabanları Eşitleme}
+\begin{block}{Sık kullanılan kuvvetler}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lll}
+\(4=2^2,\ 8=2^3,\ 16=2^4,\ 32=2^5\) & \(9=3^2,\ 27=3^3,\ 81=3^4\) & \(25=5^2,\ 125=5^3\)\\
+\(0{,}5=2^{-1},\ 0{,}25=2^{-2},\ 0{,}125=2^{-3}\) & \(\dfrac13=3^{-1},\ \dfrac19=3^{-2}\) & \(0{,}2=5^{-1},\ 0{,}04=5^{-2}\)
+\end{tabular}
+\end{block}
+\begin{block}{Yöntem}
+Farklı tabanlar \textbf{aynı asal tabana} çevrilir, sonra üsler toplanır/çıkarılır:\quad
+\(4^x=(2^2)^x=2^{2x}\), \quad \(8^{x+1}=2^{3x+3}\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(4^x=2^{2x}\) doğru, \ \(4^x=2^{x+2}\) \textbf{yanlış}. \quad \(8^{x+1}=2^{3x+3}\) (parantez!), \ \(2^{3x+1}\) değil.
+\end{alertblock}
+\end{frame}
+
+\soru{Tabanları Eşitleme -- Örnek 16}
+{\(\dfrac{16^3\cdot 4^2}{8^5}\) \ işleminin sonucu kaçtır?}
+{Hepsini \(2\) tabanında yazalım: \ \(16^3=2^{12}\), \ \(4^2=2^4\), \ \(8^5=2^{15}\).
+\[\frac{2^{12}\cdot 2^{4}}{2^{15}}=2^{12+4-15}=2^1=2\]}
+
+\soru{Tabanları Eşitleme -- Örnek 17}
+{\((0{,}25)^{-2}\cdot 8^{-1}\) \ ve \ \(27^2\cdot 9^{-3}\cdot 3\) \ işlemlerinin sonuçları kaçtır?}
+{\((0{,}25)^{-2}\cdot 8^{-1}=(2^{-2})^{-2}\cdot (2^3)^{-1}=2^{4}\cdot 2^{-3}=2\)\\[4pt]
+\(27^2\cdot 9^{-3}\cdot 3=3^{6}\cdot 3^{-6}\cdot 3^1=3^{6-6+1}=3\)}
+
+\soru{Tabanları Eşitleme -- Örnek 18}
+{\(4^{x+1}\cdot 8^{x}\) \ ifadesini \(2\)'nin bir kuvveti olarak yazınız.}
+{\(4^{x+1}=(2^2)^{x+1}=2^{2x+2}\); \qquad \(8^{x}=(2^3)^{x}=2^{3x}\)
+\[4^{x+1}\cdot 8^{x}=2^{2x+2+3x}=2^{5x+2}\]}
+
+\soru{Yerine Koyma -- Örnek 19}
+{\(3^x=a\) olduğuna göre \(9^{x+1}\) \ ve \ \(3^{x-1}\) ifadelerini \(a\) türünden yazınız.}
+{\(9^{x+1}=9\cdot 9^{x}=9\cdot (3^2)^x=9\cdot (3^x)^2=9a^2\)\\[4pt]
+\(3^{x-1}=\dfrac{3^x}{3^1}=\dfrac{a}{3}\)}
+
+\subsection{Toplama ve çıkarma}
+\begin{frame}{Üslü Sayılarda Toplama ve Çıkarma}
+\begin{block}{Kural}
+Yalnızca \textbf{benzer terimler} (tabanı \emph{ve} üssü aynı) toplanır/çıkarılır:
+\[x\cdot a^n+y\cdot a^n-z\cdot a^n=(x+y-z)\cdot a^n\]
+Üsler farklıysa \textbf{ortak çarpan} parantezine alınır:
+\[2^{x+2}+2^{x}=2^x\cdot 2^2+2^x=2^x\,(4+1)=5\cdot 2^x\]
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\begin{itemize}
+\item \(2^3+2^4\neq 2^7\) \ (\(8+16=24\), \ \(2^7=128\)). Toplamada üsler toplanmaz!
+\item \(2^5+2^5=2\cdot 2^5=2^6\), \ \(2^{10}\) değil.
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\soru{Toplama -- Çıkarma -- Örnek 20}
+{\(3\cdot 2^5+4\cdot 2^5-2^5\) \ ve \ \(2^{10}-2^{9}\) \ işlemlerinin sonuçları kaçtır?}
+{\(3\cdot 2^5+4\cdot 2^5-1\cdot 2^5=(3+4-1)\cdot 2^5=6\cdot 32=192\)\\[4pt]
+\(2^{10}-2^{9}=2\cdot 2^{9}-1\cdot 2^{9}=(2-1)\cdot 2^{9}=2^{9}=512\)}
+
+\soru{Ortak Çarpan -- Örnek 21}
+{\(2^{x+3}-2^{x+1}+2^{x}\) \ ifadesini \(k\cdot 2^x\) biçiminde yazınız.}
+{\(2^{x+3}=8\cdot 2^x\), \quad \(2^{x+1}=2\cdot 2^x\)
+\[8\cdot 2^x-2\cdot 2^x+1\cdot 2^x=(8-2+1)\cdot 2^x=7\cdot 2^x\]}
+
+\soru{Ortak Çarpan -- Örnek 22}
+{\(\dfrac{2^{10}+2^{9}}{2^{9}-2^{8}}\) \ işleminin sonucu kaçtır?}
+{Pay: \(2^{10}+2^{9}=2^{9}(2+1)=3\cdot 2^{9}\); \quad Payda: \(2^{9}-2^{8}=2^{8}(2-1)=2^{8}\)
+\[\frac{3\cdot 2^{9}}{2^{8}}=3\cdot 2=6\]}
+
+\soru{Ortak Çarpan -- Örnek 23}
+{\(\dfrac{3^{20}+3^{19}+3^{18}}{13\cdot 3^{17}}\) \ işleminin sonucu kaçtır?}
+{En küçük kuvvet \(3^{18}\) parantezine alınır:
+\[3^{20}+3^{19}+3^{18}=3^{18}(3^2+3+1)=13\cdot 3^{18}\]
+\[\frac{13\cdot 3^{18}}{13\cdot 3^{17}}=3^{18-17}=3\]}
+
+\subsection{Bilimsel gösterim}
+\begin{frame}{Bilimsel Gösterim ile İşlemler}
+\begin{block}{Tanım (4. hafta) ve işlemler}
+\(a\cdot 10^n\), \quad \(1\le |a|<10\), \ \(n\) tam sayı.
+\begin{itemize}
+\item Çarpma/bölme: katsayılar ayrı, \(10\)'un kuvvetleri ayrı işlenir.
+\item Toplama/çıkarma: önce \(10\)'un kuvvetleri eşitlenir.
+\item Sonuçta katsayı \(1\le |a|<10\) olacak biçimde düzenlenir.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(12\cdot 10^{-3}\) bilimsel gösterim değildir: \ \(12\cdot 10^{-3}=1{,}2\cdot 10^{1}\cdot 10^{-3}=1{,}2\cdot 10^{-2}\).
+\end{alertblock}
+\end{frame}
+
+\soru{Bilimsel Gösterim -- Örnek 24}
+{\((3\cdot 10^5)\cdot(4\cdot 10^{-8})\) \ ve \ \(\dfrac{8{,}4\cdot 10^{6}}{2{,}1\cdot 10^{-2}}\) \ işlemlerinin sonuçlarını bilimsel gösterimle yazınız.}
+{\((3\cdot 4)\cdot 10^{5-8}=12\cdot 10^{-3}=1{,}2\cdot 10^{-2}\)\\[4pt]
+\(\dfrac{8{,}4}{2{,}1}\cdot 10^{6-(-2)}=4\cdot 10^{8}\)}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(\dfrac{2^7\cdot 2^{-3}}{2^2}=?\)
+\item \(\dfrac{6^4}{2^4\cdot 3^3}=?\) \(\star\)
+\item \(\dfrac{2^8+2^7}{2^6}=?\) \(\star\)
+\item \(2^x=a\) ise \(4^x+2^{x+3}\) ifadesi \(a\) türünden? \(\star\)
+\item \((4\cdot 10^{-3})\cdot(5\cdot 10^{7})\) bilimsel gösterimle?
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(4\)
+\item \(3\)
+\item \(6\)
+\item \(a^2+8a\)
+\item \(2\cdot 10^{5}\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 2)}
+{\(\dfrac{6^4}{2^4\cdot 3^3}\) \ işleminin sonucu kaçtır?}
+{\(6^4=(2\cdot 3)^4=2^4\cdot 3^4\)
+\[\frac{2^4\cdot 3^4}{2^4\cdot 3^3}=2^{4-4}\cdot 3^{4-3}=1\cdot 3=3\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(\dfrac{2^8+2^7}{2^6}\) \ işleminin sonucu kaçtır?}
+{Pay ortak çarpana alınır: \ \(2^8+2^7=2^7(2+1)=3\cdot 2^7\)
+\[\frac{3\cdot 2^7}{2^6}=3\cdot 2^{7-6}=3\cdot 2=6\]
+(Kontrol: \(\dfrac{256+128}{64}=\dfrac{384}{64}=6\))}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 4)}
+{\(2^x=a\) olduğuna göre \(4^x+2^{x+3}\) ifadesini \(a\) türünden yazınız.}
+{\(4^x=(2^2)^x=(2^x)^2=a^2\)\\[4pt]
+\(2^{x+3}=2^x\cdot 2^3=8a\)
+\[4^x+2^{x+3}=a^2+8a\]}
+
+
+% =====================================================
+\section{Ders 3: Sıralama ve Üslü Denklemler}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Üslü Sayılarda Sıralama ve Üslü Denklemler
+\end{frame}
+
+\subsection{Sıralama}
+\begin{frame}{Üslü Sayılarda Sıralama}
+\begin{block}{Kural}
+\begin{itemize}
+\item \textbf{Tabanlar eşitlenir:} \(a>1\) ise üssü büyük olan büyüktür. \quad \(2^{33}>2^{30}\)
+\item \(0<a<1\) ise üs büyüdükçe sayı \textbf{küçülür}. \quad \((0{,}5)^3<(0{,}5)^2\)
+\item \textbf{Üsler eşitlenir} (pozitif tabanlarda): tabanı büyük olan büyüktür. \quad \(9^{10}>8^{10}\)
+\end{itemize}
+Üsleri eşitlemek için üslerin \textbf{EBOB}'u kullanılır: \(2^{30}=(2^3)^{10}=8^{10}\).
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Üssü büyük olan her zaman büyük değildir: \(5^{10}<2^{30}\) \ (çünkü \(2^{30}=8^{10}\)).
+\end{alertblock}
+\end{frame}
+
+\soru{Sıralama -- Örnek 25}
+{\(a=2^{30}\), \ \(b=3^{20}\), \ \(c=5^{10}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{Üslerin EBOB'u \(10\): \ \(a=(2^3)^{10}=8^{10}\), \ \(b=(3^2)^{10}=9^{10}\), \ \(c=5^{10}\)\\[4pt]
+Üsler eşit, tabanları karşılaştır: \(5<8<9\)
+\[c<a<b\]}
+
+\soru{Sıralama -- Örnek 26}
+{\(a=4^{15}\), \ \(b=8^{11}\), \ \(c=16^{8}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{Tabanlar \(2\)'ye çevrilir: \ \(a=2^{30}\), \ \(b=2^{33}\), \ \(c=2^{32}\)\\[4pt]
+Taban \(2>1\): üssü büyük olan büyüktür.
+\[a<c<b\]}
+
+\soru{Sıralama -- Örnek 27}
+{\((0{,}5)^{2}\), \ \((0{,}5)^{3}\) \ ve \ \((0{,}5)^{-1}\) sayılarını küçükten büyüğe sıralayınız.}
+{\(0<0{,}5<1\): üs büyüdükçe sayı küçülür; üsler: \(-1<2<3\).
+\[(0{,}5)^{3}<(0{,}5)^{2}<(0{,}5)^{-1}\]
+Kontrol: \(0{,}125<0{,}25<2\).}
+
+\subsection{Üslü denklemler}
+\begin{frame}{Üslü Denklemler}
+\begin{block}{Kurallar}
+\begin{itemize}
+\item \(a\neq 0,\ a\neq 1,\ a\neq -1\) \ ise: \quad \(a^x=a^y\ \Rightarrow\ x=y\)
+\item \(a\neq 0,\ a\neq 1,\ a\neq -1\) \ ise: \quad \(a^x=1\ \Rightarrow\ x=0\)
+\item \(a>0,\ b>0,\ a\neq b\) \ ise: \quad \(a^x=b^x\ \Rightarrow\ x=0\)
+\end{itemize}
+\textbf{Yöntem:} İki tarafı aynı tabana getir, üsleri eşitle. Üsleri farklı terimler varsa önce ortak çarpan parantezine al.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(1^x=1^y\) her \(x,y\) için doğrudur; \ \((-1)^2=(-1)^4\) ama \(2\neq 4\). \ Bu yüzden \(a=0,\pm 1\) hariç tutulur.
+\end{alertblock}
+\end{frame}
+
+\soru{Denklem -- Örnek 28}
+{\(2^x=32\) \ ve \ \(3^{2x-1}=27\) \ denklemlerini çözünüz.}
+{\(2^x=2^5\ \Rightarrow\ x=5\)\\[4pt]
+\(3^{2x-1}=3^3\ \Rightarrow\ 2x-1=3\ \Rightarrow\ x=2\)}
+
+\soru{Denklem -- Örnek 29}
+{\(5^{x+4}=125^{x-2}\) \ denklemini çözünüz.}
+{\(125^{x-2}=(5^3)^{x-2}=5^{3x-6}\)
+\[5^{x+4}=5^{3x-6}\ \Rightarrow\ x+4=3x-6\ \Rightarrow\ 2x=10\ \Rightarrow\ x=5\]}
+
+\soru{Denklem -- Örnek 30}
+{\(\left(\dfrac49\right)^{x}=\left(\dfrac32\right)^{x-6}\) \ denklemini çözünüz.}
+{\(\left(\dfrac49\right)^{x}=\left(\dfrac23\right)^{2x}\); \qquad \(\left(\dfrac32\right)^{x-6}=\left(\dfrac23\right)^{-(x-6)}=\left(\dfrac23\right)^{6-x}\)
+\[2x=6-x\ \Rightarrow\ 3x=6\ \Rightarrow\ x=2\]}
+
+\soru{Denklem -- Örnek 31}
+{\(3^{x-2}=5^{x-2}\) \ ve \ \(7^{2x-6}=1\) \ denklemlerini çözünüz.}
+{Tabanlar farklı, üsler aynı: \(a^x=b^x\Rightarrow\) üs \(0\) olmalı.
+\[x-2=0\ \Rightarrow\ x=2\]
+\(7^{2x-6}=1=7^0\ \Rightarrow\ 2x-6=0\ \Rightarrow\ x=3\)}
+
+\soru{Ortak Çarpanlı Denklem -- Örnek 32}
+{\(3^{x+1}+3^{x}=36\) \ denklemini çözünüz.}
+{\(3^{x+1}=3\cdot 3^x\) \ \(\Rightarrow\) \ \(3\cdot 3^x+1\cdot 3^x=4\cdot 3^x\)
+\[4\cdot 3^x=36\ \Rightarrow\ 3^x=9=3^2\ \Rightarrow\ x=2\]
+Kontrol: \(27+9=36\).}
+
+\soru{Ortak Çarpanlı Denklem -- Örnek 33}
+{\(5^{x+1}+5^{x}+5^{x-1}=155\) \ denklemini çözünüz.}
+{En küçük kuvvet \(5^{x-1}\) parantezine alınır:
+\[5^{x-1}(5^2+5+1)=31\cdot 5^{x-1}=155\ \Rightarrow\ 5^{x-1}=5\ \Rightarrow\ x-1=1\ \Rightarrow\ x=2\]
+Kontrol: \(125+25+5=155\).}
+
+\subsection{Taban bilinmeyen}
+\begin{frame}{Taban Bilinmeyen: \(x^a=x^b\)}
+\begin{block}{Dört durum incelenir (bu derste \(x\) tam sayı)}
+\begin{enumerate}
+\item Üsler eşit: \(a=b\) \ (ifadeler tanımlı olmak şartıyla)
+\item Taban \(1\): \ \(1^a=1^b\) her zaman doğru
+\item Taban \(0\): \ yalnız iki üs de \textbf{pozitifse} (\(0^a=0^b=0\))
+\item Taban \(-1\): \ yalnız iki üs de \textbf{çift} ya da ikisi de \textbf{tek} ise
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Yalnız üsleri eşitleyip durmak: taban \(1\), \(0\), \(-1\) adaylarını unutmak. Her adayı denkleme koyup kontrol edin.
+\end{alertblock}
+\end{frame}
+
+\soru{Taban Bilinmeyen -- Örnek 34}
+{\(x\) tam sayı olmak üzere \((x-2)^{x+3}=(x-2)^{2x-1}\) \ denkleminin çözüm kümesi nedir?}
+{\normalsize
+\(\bullet\) Üsler eşit: \(x+3=2x-1\Rightarrow x=4\) \ (taban \(2\)) \checkmark\\[2pt]
+\(\bullet\) Taban \(1\): \(x-2=1\Rightarrow x=3\): \(1^6=1^5\) \checkmark\\[2pt]
+\(\bullet\) Taban \(0\): \(x=2\): \(0^5=0^3=0\) \ (üsler pozitif) \checkmark\\[2pt]
+\(\bullet\) Taban \(-1\): \(x=1\): \((-1)^4=1\neq -1=(-1)^1\) \ \(\times\)\\[4pt]
+\large Çözüm kümesi: \(\{2,\ 3,\ 4\}\)}
+
+\subsection{Birler basamağı}
+\soru{Birler Basamağı (Hatırlatma) -- Örnek 35}
+{\(7^{2027}\) sayısının birler basamağındaki rakam kaçtır?}
+{\(7\)'nin kuvvetlerinin birler basamakları: \(7,\ 9,\ 3,\ 1,\ 7,\ 9,\dots\) \ (\(4\)'lü tekrar, Hafta 2)\\[4pt]
+\(2027=4\cdot 506+3\) \(\Rightarrow\) dizinin \(3\). terimi: \ \(\mathbf{3}\)}
+
+\begin{frame}[fragile]{Bilgisayar Köşesi: Python ile üslü sayılar}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\begin{verbatim}
+>>> 2**30, 3**20, 5**10
+(1073741824, 3486784401, 9765625)
+>>> 2**-3
+0.125
+>>> pow(7, 2027, 10)
+3
+\end{verbatim}
+\column{0.46\textwidth}
+\begin{verbatim}
+>>> from fractions import Fraction
+>>> Fraction(2, 3)**-2
+Fraction(9, 4)
+>>> (2**10+2**9) // (2**9-2**8)
+6
+\end{verbatim}
+\end{columns}
+\small Python'da üs \verb|**| ile yazılır: \verb|-3**2| \(\to\) \verb|-9|, \ \verb|(-3)**2| \(\to\) \verb|9| (matematikteki kuralla aynı).
+\end{frame}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.62\textwidth}
+\begin{enumerate}
+\item \(9^{x+1}=27^{x}\) ise \(x=?\) \(\star\)
+\item \(2^{x+1}+2^{x}=24\) ise \(x=?\) \(\star\)
+\item \(a=3^{40}\), \(b=4^{30}\), \(c=5^{20}\) sıralayınız. \(\star\)
+\item \(6^{x-4}=1\) ise \(x=?\)
+\item \(\left(\dfrac12\right)^{x}=8\) ise \(x=?\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(2\)
+\item \(3\)
+\item \(c<b<a\)
+\item \(4\)
+\item \(-3\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 1)}
+{\(9^{x+1}=27^{x}\) \ denklemini çözünüz.}
+{İki tarafı \(3\) tabanında yazalım:
+\[9^{x+1}=(3^2)^{x+1}=3^{2x+2},\qquad 27^{x}=(3^3)^{x}=3^{3x}\]
+\[2x+2=3x\ \Rightarrow\ x=2\qquad(\text{Kontrol: } 9^3=729=27^2)\]}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(2^{x+1}+2^{x}=24\) \ denklemini çözünüz.}
+{\(2^{x+1}=2\cdot 2^x\) \ \(\Rightarrow\) \ \(2\cdot 2^x+1\cdot 2^x=3\cdot 2^x\)
+\[3\cdot 2^x=24\ \Rightarrow\ 2^x=8=2^3\ \Rightarrow\ x=3\]
+Kontrol: \(2^4+2^3=16+8=24\).}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 3)}
+{\(a=3^{40}\), \ \(b=4^{30}\), \ \(c=5^{20}\) \ sayılarını küçükten büyüğe sıralayınız.}
+{Üslerin EBOB'u \(10\): \ \(a=(3^4)^{10}=81^{10}\), \ \(b=(4^3)^{10}=64^{10}\), \ \(c=(5^2)^{10}=25^{10}\)\\[4pt]
+Üsler eşit; tabanlar: \(25<64<81\)
+\[c<b<a\]}
+
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{itemize}
+\item \(a^0=1\) (\(a\neq 0\)); \(0^0\) tanımsız
+\item \(-a^n\neq(-a)^n\)
+\item \(a^{-n}=\dfrac{1}{a^n}\), \ \(\left(\dfrac ab\right)^{-n}=\left(\dfrac ba\right)^{n}\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{itemize}
+\item \(a^m a^n=a^{m+n}\), \ \(\dfrac{a^m}{a^n}=a^{m-n}\)
+\item \((a^m)^n=a^{mn}\), \ \(a^nb^n=(ab)^n\)
+\item Toplamada ortak çarpan: \(2^{x+2}+2^x=5\cdot 2^x\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{itemize}
+\item Sıralama: taban ya da üs eşitle
+\item \(a^x=a^y\Rightarrow x=y\) \ (\(a\neq 0,\pm1\))
+\item \(x^a=x^b\): \(1\), \(0\), \(-1\) tabanlarını kontrol et
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Gelecek hafta}
+Köklü sayılar
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}

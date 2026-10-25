@@ -1,0 +1,111 @@
+% Hafta 6 -- alıştırma gövdesi (ders notu ve ayrı alıştırma kağıdı tarafından \input edilir)
+\section{Çözümlü Alıştırmalar}
+Her soruyu önce kendiniz deneyin, sonra çözümü okuyun.
+
+\begin{alistirma}
+\(4x+y=12\) denklemini sağlayan kaç tane \((x,y)\) doğal sayı ikilisi vardır? \ (\(\mathbb{N}=\{0,1,2,\dots\}\))
+\end{alistirma}
+\begin{cozum}
+\(y=12-4x\). \(y\) doğal sayı olmalı: \(12-4x\ge 0\Rightarrow 4x\le 12\Rightarrow x\le 3\).\\
+\(x=0,1,2,3\ \Rightarrow\ y=12,8,4,0\). \quad İkililer: \((0,12),(1,8),(2,4),(3,0)\) \(\Rightarrow\) \(4\) tane.
+\end{cozum}
+
+\begin{alistirma}
+\(\begin{cases}3x+2y=7\\ 5x-3y=-1\end{cases}\) sisteminin çözümü nedir?
+\end{alistirma}
+\begin{cozum}
+\(y\)'yi yok edelim: 1. denklem \(\times 3\), 2. denklem \(\times 2\):
+\[9x+6y=21,\qquad 10x-6y=-2\]
+Taraf tarafa toplayalım: \(19x=19\Rightarrow x=1\). \quad 1. denklemde: \(3+2y=7\Rightarrow 2y=4\Rightarrow y=2\).\\
+Çözüm: \((1,2)\). \quad Kontrol: \(5\cdot 1-3\cdot 2=-1\) \checkmark
+\end{cozum}
+
+\begin{alistirma}
+\(\begin{cases}\dfrac{x}{3}-\dfrac{y}{2}=0\\[6pt] \dfrac{x}{2}+\dfrac{y}{4}=4\end{cases}\) sisteminin çözümü nedir?
+\end{alistirma}
+\begin{cozum}
+Paydaları temizleyelim: 1. denklem \(\times 6\): \(2x-3y=0\); \quad 2. denklem \(\times 4\): \(2x+y=16\).\\
+\(x\)'lerin katsayıları eşit; çıkaralım: \((2x+y)-(2x-3y)=16-0\Rightarrow 4y=16\Rightarrow y=4\).\\
+\(2x+4=16\Rightarrow x=6\). \quad Çözüm: \((6,4)\). \quad Kontrol: \(\dfrac63-\dfrac42=0\) \checkmark, \ \(\dfrac62+\dfrac44=4\) \checkmark
+\end{cozum}
+
+\begin{alistirma}
+\(4x+3y=18\) ve \(3x+4y=17\) olduğuna göre \(x+y\) ve \(x\cdot y\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+Simetrik sistem. Toplayalım: \(7x+7y=35\Rightarrow x+y=5\).\\
+Çıkaralım: \(x-y=18-17=1\).\\
+\(x+y=5\) ve \(x-y=1\) \(\Rightarrow\) \(2x=6\Rightarrow x=3\), \(y=2\). \quad \(x\cdot y=6\).
+\end{cozum}
+
+\begin{alistirma}
+\(\begin{cases}2x+ay=3\\ 6x+9y=b\end{cases}\) sisteminin sonsuz çözümü varsa \(a+b\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+Sonsuz çözüm \(\Rightarrow\) \(\dfrac{2}{6}=\dfrac{a}{9}=\dfrac{3}{b}\). \ İlk oran \(\dfrac13\) olduğundan:
+\[\frac{a}{9}=\frac13\Rightarrow a=3,\qquad \frac{3}{b}=\frac13\Rightarrow b=9,\qquad a+b=12\]
+Kontrol: 1. denklemin \(3\) katı \(6x+9y=9\), yani 2. denklemin kendisi \checkmark
+\end{cozum}
+
+\begin{alistirma}
+\(\begin{cases}mx-y=4\\ 2x+3y=5\end{cases}\) sisteminin tek çözümü \textbf{yoksa} \(m\) kaçtır? Bu durumda sistemin kaç çözümü vardır?
+\end{alistirma}
+\begin{cozum}
+Tek çözüm yok \(\Rightarrow\) \(\dfrac{m}{2}=\dfrac{-1}{3}\Rightarrow m=-\dfrac23\).\\
+Sabitlerin oranı \(\dfrac45\neq-\dfrac13\) olduğundan sistemin çözümü \textbf{yoktur} (\(0\) çözüm).\\
+Gerçekten: \(m=-\dfrac23\) için 1. denklem \(\times(-3)\): \(2x+3y=-12\); oysa 2. denklem \(2x+3y=5\): çelişki.
+\end{cozum}
+
+\begin{alistirma}
+Bir konserde öğrenci bileti \(150\) TL, tam bilet \(250\) TL'dir. Satılan toplam \(40\) biletten \(7400\) TL elde edilmiştir. Kaç öğrenci bileti satılmıştır?
+\end{alistirma}
+\begin{cozum}
+\(x\): öğrenci bileti, \(y\): tam bilet sayısı. \quad \(x+y=40\), \ \(150x+250y=7400\Rightarrow 3x+5y=148\) (\(50\)'ye böldük).\\
+\(x=40-y\) yerine koyalım: \(3(40-y)+5y=148\Rightarrow 120+2y=148\Rightarrow y=14\), \ \(x=26\).\\
+Kontrol: \(150\cdot 26+250\cdot 14=3900+3500=7400\) \checkmark \quad Cevap: \(26\) öğrenci bileti.
+\end{cozum}
+
+\begin{alistirma}
+İki basamaklı \(\ab{ab}\) sayısının rakamları toplamı \(12\)'dir ve \(\ab{ab}-\ab{ba}=36\)'dır. \(\ab{ab}\) kaçtır?
+\end{alistirma}
+\begin{cozum}
+\(\ab{ab}-\ab{ba}=(10a+b)-(10b+a)=9(a-b)=36\Rightarrow a-b=4\).\\
+\(a+b=12\) ile toplayalım: \(2a=16\Rightarrow a=8\), \ \(b=4\). \quad \(\ab{ab}=84\). \quad Kontrol: \(84-48=36\) \checkmark
+\end{cozum}
+
+\kendinizoncesi
+\section{Alıştırmalar (Kendiniz Çözün)}
+
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=6pt]
+\item \((3,k)\) ikilisi \(2x-y=4\) denklemini sağlıyorsa \(k\) kaçtır?
+\item \((-2,1)\), \((2,1)\), \((1,0)\), \((4,-1)\) ikililerinden hangileri \(x+3y=1\) denklemini sağlar?
+\item \(x+y=15\) ve \(x-y=7\) ise \(x\) ve \(y\) kaçtır?
+\item \(\begin{cases}2x+3y=8\\ 4x-3y=-2\end{cases}\) sisteminin çözümü nedir?
+\item \(y=3x-5\) ve \(2x+y=10\) ise \(x\cdot y\) kaçtır?
+\item \(\begin{cases}0{,}3x+0{,}2y=1{,}3\\ 0{,}1x-0{,}4y=-0{,}5\end{cases}\) sisteminin çözümü nedir?
+\item \(x+y=10\) ve \(x-y=4\) ise \(x\cdot y\) kaçtır?
+\item \(\begin{cases}(k+1)x+2y=5\\ 6x+4y=7\end{cases}\) sisteminin çözümü yoksa \(k\) kaçtır?
+\item İki sayının toplamı \(63\)'tür. Sayılardan biri diğerinin \(2\) katıdır. Sayıların farkı kaçtır?
+\item Bir kasada yalnızca \(10\) TL'lik ve \(20\) TL'lik banknotlardan toplam \(15\) banknot ve \(210\) TL vardır. Kaç tane \(20\) TL'lik banknot vardır?
+\item Bir çiftlikteki tavuk ve tavşanların toplam \(26\) başı ve \(76\) bacağı vardır. Kaç tavuk vardır?
+\item \(30\) soruluk bir testte doğru cevap \(+4\), yanlış cevap \(-1\) puandır. Bütün soruları cevaplayan bir öğrenci \(80\) puan almıştır. Kaç soruyu doğru cevaplamıştır?
+\end{enumerate}
+
+\subsection*{Cevap Anahtarı}
+{\small
+\begin{multicols}{2}
+\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=*,itemsep=1pt]
+\item \(6-k=4\Rightarrow k=2\).
+\item \((-2,1)\), \((1,0)\), \((4,-1)\) sağlar; \((2,1)\): \(5\neq 1\).
+\item Topla: \(2x=22\Rightarrow x=11\), \ \(y=4\).
+\item Topla: \(6x=6\Rightarrow x=1\); \ \(y=2\). \ \((1,2)\).
+\item \(2x+3x-5=10\Rightarrow x=3\), \(y=4\); \ \(x\cdot y=12\).
+\item \(\times 10\): \(3x+2y=13\), \(x=4y-5\) \(\Rightarrow\) \(14y=28\), \(y=2\), \(x=3\). \ \((3,2)\).
+\item \(x=7\), \(y=3\) \(\Rightarrow\) \(x\cdot y=21\).
+\item \(\dfrac{k+1}{6}=\dfrac24\Rightarrow k=2\); \ \(\dfrac57\neq\dfrac12\) \checkmark
+\item \(x=2y\), \(3y=63\Rightarrow y=21\), \(x=42\); fark \(21\).
+\item \(x+2y=21\), \(x+y=15\) \(\Rightarrow\) \(y=6\).
+\item \(t+2r=38\), \(t+r=26\) \(\Rightarrow\) \(r=12\), \(t=14\).
+\item \(d+y=30\), \(4d-y=80\) \(\Rightarrow\) \(5d=110\), \(d=22\).
+\end{enumerate}
+\end{multicols}}

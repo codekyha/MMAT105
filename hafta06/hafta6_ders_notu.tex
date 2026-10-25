@@ -1,0 +1,351 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 6 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 6 Ders Notu: Birinci Dereceden\\ İki Bilinmeyenli Denklemler ve Denklem Sistemleri}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır.
+
+\textbf{Altın kural.} Bulduğunuz \((x,y)\) ikilisini her zaman \textbf{iki denklemde de} kontrol edin.
+
+% =====================================================
+\section{İki Bilinmeyenli Denklem}
+
+\begin{kural}[Tanım]
+\(a,b,c\) gerçek sayılar, \(a\neq 0\) ve \(b\neq 0\) olmak üzere \(ax+by+c=0\) biçimindeki denkleme \textbf{birinci dereceden iki bilinmeyenli denklem} denir.
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Denklemi sağlayan her \((x,y)\) sıralı ikilisi bir \textbf{çözümdür}. \((x,y)\) sıralıdır: \((2,5)\neq(5,2)\).
+\item Tek bir denklemin sonsuz sayıda çözümü vardır: \(x\)'e istenen değer verilir, \(y\) hesaplanır.
+\item Bir ikilinin çözüm olup olmadığı, değerler yerine konup eşitliğin sağlanıp sağlanmadığına bakılarak anlaşılır.
+\end{itemize}
+\end{kural}
+
+\begin{ornek}
+\(3x-2y=6\) denkleminde \(x=4\) ise \(y\) kaçtır? \(y=0\) ise \(x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(x=4\): \ \(12-2y=6\Rightarrow 2y=6\Rightarrow y=3\). \qquad \(y=0\): \ \(3x=6\Rightarrow x=2\).\\
+Böylece \((4,3)\) ve \((2,0)\) bu denklemin iki çözümüdür.
+\end{cozum}
+
+\begin{ornek}
+\((m+1,\ 2m)\) ikilisi \(x+2y=11\) denklemini sağlıyorsa \(m\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\[(m+1)+2\cdot 2m=11\ \Rightarrow\ 5m+1=11\ \Rightarrow\ m=2\]
+İkili: \((3,4)\). Kontrol: \(3+8=11\).
+\end{cozum}
+
+\begin{ornek}
+\(3x+5y=30\) denklemini sağlayan kaç tane \((x,y)\) doğal sayı ikilisi vardır? \ (\(\mathbb{N}=\{0,1,2,\dots\}\))
+\end{ornek}
+\begin{cozum}
+\(3x=30-5y\) ifadesi \(3\)'e bölünmeli; \(30\) \(3\)'e bölündüğünden \(5y\), dolayısıyla \(y\) \(3\)'ün katı olmalı. \(5y\le 30\Rightarrow y\le 6\).\\
+\(y=0,3,6\ \Rightarrow\ x=10,5,0\). \quad İkililer: \((10,0),(5,3),(0,6)\) \(\Rightarrow\) \(3\) tane.
+\end{cozum}
+
+% =====================================================
+\section{Denklem Sistemi ve Yok Etme Yöntemi}
+
+\begin{kural}[Yok etme yöntemi]
+\(\begin{cases}a_1x+b_1y=c_1\\ a_2x+b_2y=c_2\end{cases}\) sisteminin çözümü, \textbf{iki denklemi birlikte} sağlayan \((x,y)\) ikilisidir.
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item Bir bilinmeyenin katsayılarını, denklemleri uygun sayılarla çarparak eşit ya da zıt yap.
+\item Katsayılar zıt ise taraf tarafa \textbf{topla}, eşit ise taraf tarafa \textbf{çıkar}: bir bilinmeyen yok olur.
+\item Bulunan değeri denklemlerden birinde yerine koy; ikiliyi iki denklemde de kontrol et.
+\end{enumerate}
+\end{kural}
+
+\begin{dikkat}[Sık yapılan hatalar]
+Denklemi çarparken sağ tarafı da çarpın. Taraf tarafa çıkarırken ikinci denklemin \textbf{her terimi} işaret değiştirir: \((2x+3y)-(2x-y)=4y\).
+\end{dikkat}
+
+\begin{ornek}
+\(\begin{cases}2x+y=10\\ x-y=2\end{cases}\) sisteminin çözümü nedir?
+\end{ornek}
+\begin{cozum}
+\(y\)'lerin katsayıları zıt; topla: \(3x=12\Rightarrow x=4\). \quad \(4-y=2\Rightarrow y=2\). \quad Çözüm: \((4,2)\).\\
+Kontrol: \(8+2=10\) \checkmark, \ \(4-2=2\) \checkmark
+\end{cozum}
+
+\begin{ornek}
+\(\begin{cases}3x-5y=-1\\ 2x+3y=12\end{cases}\) sisteminin çözümü nedir?
+\end{ornek}
+\begin{cozum}
+\(x\)'i yok edelim: 1. denklem \(\times 2\), 2. denklem \(\times 3\):
+\[6x-10y=-2,\qquad 6x+9y=36\]
+Çıkar (2. \(-\) 1.): \(19y=38\Rightarrow y=2\). \quad \(2x+6=12\Rightarrow x=3\). \quad Çözüm: \((3,2)\).
+\end{cozum}
+
+\begin{ornek}
+\(\begin{cases}4x+3y=2\\ 5x-2y=14\end{cases}\) ise \(x-y\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(y\)'yi yok edelim: 1. denklem \(\times 2\), 2. denklem \(\times 3\):
+\[8x+6y=4,\qquad 15x-6y=42\ \Rightarrow\ 23x=46\ \Rightarrow\ x=2\]
+\(8+3y=2\Rightarrow y=-2\). \quad \(x-y=2-(-2)=4\).
+\end{cozum}
+
+% =====================================================
+\section{Yerine Koyma Yöntemi; Kesirli ve Ondalıklı Katsayılar}
+
+\begin{kural}[Yerine koyma]
+Bir denklemde bir bilinmeyeni yalnız bırak (\(y=\dots\) ya da \(x=\dots\)), bu ifadeyi \textbf{parantez içinde} diğer denklemde yerine koy, tek bilinmeyenli denklemi çöz, sonra geri dön.\\
+\textbf{Kesirli katsayılar:} Her denklemi kendi paydalarının EKOK'u ile çarp. \ \textbf{Ondalıklı katsayılar:} \(10\), \(100\), \dots\ ile çarp.
+\end{kural}
+
+\needspace{8\baselineskip}
+\begin{ornek}
+\(\begin{cases}2x+y=7\\ 3x-2y=0\end{cases}\) sistemini yerine koyma yöntemiyle çözünüz.
+\end{ornek}
+\begin{cozum}
+1. denklemden \(y=7-2x\). \ 2. denklemde yerine koyalım:
+\[3x-2(7-2x)=0\ \Rightarrow\ 3x-14+4x=0\ \Rightarrow\ 7x=14\ \Rightarrow\ x=2\]
+\(y=7-4=3\). \quad Çözüm: \((2,3)\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{x+1}{3}=\dfrac{y-1}{2}\) \ ve \ \(x+y=15\) olduğuna göre \(x\) ve \(y\) kaçtır?
+\end{ornek}
+\begin{cozum}
+İçler--dışlar çarpımı: \(2(x+1)=3(y-1)\Rightarrow 2x-3y=-5\). \ İkinci denklemden \(x=15-y\):
+\[2(15-y)-3y=-5\ \Rightarrow\ 30-5y=-5\ \Rightarrow\ y=7,\quad x=8\]
+Kontrol: \(\dfrac{9}{3}=3=\dfrac{6}{2}\) \checkmark
+\end{cozum}
+
+\begin{ornek}
+\(\begin{cases}0{,}5x+0{,}2y=2{,}6\\ x-0{,}4y=2{,}8\end{cases}\) sisteminin çözümü nedir?
+\end{ornek}
+\begin{cozum}
+1. denklem \(\times 10\): \(5x+2y=26\). \ 2. denklem \(\times 5\): \(5x-2y=14\).
+\[\text{Topla: } 10x=40\Rightarrow x=4,\qquad 20+2y=26\Rightarrow y=3\]
+Çözüm: \((4,3)\).
+\end{cozum}
+
+% =====================================================
+\section{Kısa Yollar: Simetrik Sistemler ve İstenen İfadeler}
+
+\begin{kural}[Simetrik sistem]
+\(\begin{cases}ax+by=m\\ bx+ay=n\end{cases}\) \((a\neq b,\ a+b\neq 0)\) biçimindeki sistemlerde:
+\[\text{topla: } x+y=\frac{m+n}{a+b},\qquad \text{çıkar: } x-y=\frac{m-n}{a-b}\]
+Soru \(x+y\), \(x-y\) veya \(x\cdot y\) istiyorsa önce denklemleri toplamayı ya da çıkarmayı deneyin.
+\end{kural}
+
+\begin{ornek}
+\(\begin{cases}6x+5y=39\\ 5x+6y=38\end{cases}\) olduğuna göre \(x\cdot y\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Topla: \(11(x+y)=77\Rightarrow x+y=7\). \quad Çıkar: \(x-y=1\).\\
+\(2x=8\Rightarrow x=4\), \ \(y=3\). \quad \(x\cdot y=12\).
+\end{cozum}
+
+\begin{ornek}
+\textbf{(İleri örnek: üç bilinmeyen.)} \(x+y=7\), \ \(y+z=9\), \ \(x+z=10\) ise \(x\), \(y\), \(z\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Üç denklemi toplayalım: \(2(x+y+z)=26\Rightarrow x+y+z=13\).\\
+\(z=13-(x+y)=13-7=6\), \quad \(x=13-9=4\), \quad \(y=13-10=3\).
+\end{cozum}
+
+% =====================================================
+\section{Özel Durumlar ve Grafik Yorumu}
+
+\begin{kural}[Çözüm sayısı]
+\(a_1x+b_1y=c_1\) ve \(a_2x+b_2y=c_2\) sisteminde (oranlar tanımlı olmak üzere):
+\begin{center}
+\(\renewcommand{\arraystretch}{1.2}
+\begin{array}{lll}
+\text{Koşul} & \text{Çözüm} & \text{Grafik}\\\hline
+\dfrac{a_1}{a_2}\neq\dfrac{b_1}{b_2} & \text{tek çözüm} & \text{kesişen iki doğru}\\[10pt]
+\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}\neq\dfrac{c_1}{c_2} & \text{çözüm yok} & \text{paralel iki doğru}\\[10pt]
+\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}=\dfrac{c_1}{c_2} & \text{sonsuz çözüm} & \text{çakışık (aynı) doğru}
+\end{array}\)
+\end{center}
+Paydalardan biri \(0\) ise oran yerine içler--dışlar çarpımı kullanılır: tek çözüm \(\iff a_1b_2-a_2b_1\neq 0\).
+\end{kural}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+\begin{scope}
+\draw[->,gray] (-0.5,0)--(5,0) node[below]{\scriptsize \(x\)};
+\draw[->,gray] (0,-1.5)--(0,5) node[left]{\scriptsize \(y\)};
+\draw[thick,anamavi] (-0.5,4.5)--(4.5,-0.5);
+\draw[thick,uyarikirmizi] (1,-1)--(5,3);
+\fill (3,1) circle (3pt); \node[above right] at (3,1) {\scriptsize \((3,1)\)};
+\node[align=center] at (2.3,-2.8) {\small kesişen (tek çözüm)\\ \small \(x+y=4,\ x-y=2\)};
+\end{scope}
+\begin{scope}[xshift=10cm]
+\draw[->,gray] (-0.5,0)--(5,0) node[below]{\scriptsize \(x\)};
+\draw[->,gray] (0,-1.5)--(0,5) node[left]{\scriptsize \(y\)};
+\draw[thick,anamavi] (-0.5,4.5)--(4.5,-0.5);
+\draw[thick,uyarikirmizi] (-0.5,1.5)--(2.5,-1.5);
+\node[align=center] at (2.3,-2.8) {\small paralel (çözüm yok)\\ \small \(x+y=4,\ x+y=1\)};
+\end{scope}
+\begin{scope}[xshift=20cm]
+\draw[->,gray] (-0.5,0)--(5,0) node[below]{\scriptsize \(x\)};
+\draw[->,gray] (0,-1.5)--(0,5) node[left]{\scriptsize \(y\)};
+\draw[line width=3pt,uyarikirmizi!50] (-0.5,4.5)--(4.5,-0.5);
+\draw[thick,anamavi] (-0.5,4.5)--(4.5,-0.5);
+\node[align=center] at (2.3,-2.8) {\small çakışık (sonsuz çözüm)\\ \small \(x+y=4,\ 2x+2y=8\)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{ornek}
+\(\begin{cases}3x-y=2\\ 9x+ay=6\end{cases}\) sisteminin sonsuz çözümü varsa \(a\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{3}{9}=\dfrac{-1}{a}=\dfrac{2}{6}=\dfrac13\ \Rightarrow\ a=-3\). \ (2. denklem, 1. denklemin \(3\) katıdır.)
+\end{cozum}
+
+\begin{ornek}
+\(\begin{cases}ax+2y=5\\ 3x-y=4\end{cases}\) sisteminin çözümü yoksa \(a\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{a}{3}=\dfrac{2}{-1}\Rightarrow a=-6\). \ Kontrol: \(\dfrac{c_1}{c_2}=\dfrac54\neq -2\) \checkmark \ (\(a=-6\) için \(-6x+2y=5\) ile \(-6x+2y=-8\) çelişir.)
+\end{cozum}
+
+\begin{ornek}
+\(\begin{cases}2x+3y=5\\ 4x+6y=k\end{cases}\) sistemi için: sonsuz çözüm varsa \(k\) kaçtır? Çözüm yoksa \(k\) için ne söylenebilir?
+\end{ornek}
+\begin{cozum}
+\(\dfrac24=\dfrac36=\dfrac12\) olduğundan sistem hiçbir \(k\) için tek çözümlü değildir.\\
+Sonsuz çözüm: \(\dfrac{5}{k}=\dfrac12\Rightarrow k=10\). \quad Çözüm yok: \(k\neq 10\).
+\end{cozum}
+
+% =====================================================
+\section{Sözel Problemler}
+
+\begin{kural}[Sistem kurma]
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+\item İki bilinmeyene harf verin ve ne olduklarını yazın.
+\item Metindeki iki bağımsız bilgiyi iki denkleme çevirin (ör. adet: \(x+y=\dots\); \ tutar: \(px+qy=\dots\)).
+\item Sistemi çözün; \textbf{sorulan} büyüklüğü verin ve sonucu metinde kontrol edin.
+\end{enumerate}
+İki basamaklı sayılar: \(\ab{ab}=10a+b\) \((a\neq 0)\), \ \(\ab{ab}+\ab{ba}=11(a+b)\), \ \(\ab{ab}-\ab{ba}=9(a-b)\).
+\end{kural}
+
+\begin{ornek}
+İki sayının farkı \(12\)'dir. Büyük sayının yarısı, küçük sayıdan \(1\) fazladır. Bu sayılar nedir?
+\end{ornek}
+\begin{cozum}
+Büyük \(x\), küçük \(y\): \ \(x-y=12\), \ \(\dfrac{x}{2}=y+1\Rightarrow x=2y+2\).
+\[(2y+2)-y=12\Rightarrow y=10,\quad x=22\qquad(\text{kontrol: } 11=10+1)\]
+\end{cozum}
+
+\begin{ornek}
+Bir kumbarada yalnızca \(1\) TL'lik ve \(50\) kuruşluk madeni paralardan toplam \(40\) tane ve \(29\) TL vardır. Kaç tane \(50\) kuruşluk vardır?
+\end{ornek}
+\begin{cozum}
+\(x\): 1 TL'lik, \(y\): 50 kuruşluk. \ \(x+y=40\), \ \(x+0{,}5y=29\).\\
+Çıkar: \(0{,}5y=11\Rightarrow y=22\), \ \(x=18\). \quad Kontrol: \(18+11=29\) \checkmark
+\end{cozum}
+
+\begin{ornek}
+Bir sinemada yetişkin bileti \(120\) TL, çocuk bileti \(80\) TL'dir. Bir grup \(14\) bilet için \(1440\) TL ödemiştir. Grupta kaç yetişkin vardır?
+\end{ornek}
+\begin{cozum}
+\(x+y=14\), \ \(120x+80y=1440\Rightarrow 3x+2y=36\). \ \(3x+2(14-x)=36\Rightarrow x=8\), \ \(y=6\).\\
+Kontrol: \(960+480=1440\) \checkmark \quad Cevap: \(8\) yetişkin.
+\end{cozum}
+
+\begin{ornek}
+\(\ab{ab}\) iki basamaklı bir sayıdır. \(\ab{ab}+\ab{ba}=110\) ve \(a-b=4\) ise \(\ab{ab}\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(11(a+b)=110\Rightarrow a+b=10\); \ \(a-b=4\). \ Topla: \(2a=14\Rightarrow a=7\), \ \(b=3\). \quad \(\ab{ab}=73\) \ (kontrol: \(73+37=110\)).
+\end{cozum}
+
+\begin{ornek}
+Bir çiftlikteki ördek ve ineklerin toplam \(35\) başı ve \(94\) ayağı vardır. Kaç inek vardır?
+\end{ornek}
+\begin{cozum}
+\(o+i=35\), \ \(2o+4i=94\Rightarrow o+2i=47\). \ Çıkar: \(i=12\), \ \(o=23\).\\
+Kontrol: \(46+48=94\) \checkmark
+\end{cozum}
+
+\begin{ornek}
+Bir anne ile kızının bugünkü yaşları toplamı \(48\)'dir. Annenin yaşı kızının yaşının \(3\) katıdır. Yaşları arasındaki fark kaçtır?
+\end{ornek}
+\begin{cozum}
+\(a+k=48\), \ \(a=3k\Rightarrow 4k=48\Rightarrow k=12\), \ \(a=36\). \quad Fark: \(24\). \ (Yaş problemleri 13. haftada ayrıntılı işlenecektir.)
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}lp{0.68\textwidth}@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+İki bilinmeyenli denklem & \(ax+by+c=0\) \((a,b\neq 0)\); çözüm sıralı ikili \((x,y)\); sonsuz çözüm\\
+Yok etme & katsayıları eşitle/zıtla; eşitse çıkar, zıtsa topla\\
+Yerine koyma & \(y=\dots\) yaz, diğer denklemde \textbf{parantezle} yerine koy\\
+Kesir / ondalık & paydaların EKOK'u ile ya da \(10,100,\dots\) ile çarp\\
+Simetrik sistem & topla \(\Rightarrow x+y\), \ çıkar \(\Rightarrow x-y\)\\
+Tek çözüm & \(\dfrac{a_1}{a_2}\neq\dfrac{b_1}{b_2}\) \ (kesişen doğrular)\\
+Çözüm yok & \(\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}\neq\dfrac{c_1}{c_2}\) \ (paralel doğrular)\\
+Sonsuz çözüm & \(\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}=\dfrac{c_1}{c_2}\) \ (çakışık doğrular)\\
+İki basamaklı sayı & \(\ab{ab}=10a+b\); \ \(\ab{ab}+\ab{ba}=11(a+b)\), \ \(\ab{ab}-\ab{ba}=9(a-b)\)\\
+Adet -- tutar & \(x+y=\text{adet}\), \ \(px+qy=\text{toplam tutar}\)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\needspace{15\baselineskip}
+\input{hafta6_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Basit eşitsizlikler ve mutlak değer.}
+
+\end{document}

@@ -1,0 +1,299 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 12 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\needspace{7\baselineskip}\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 12 Ders Notu: Oran ve Orantı (Doğru, Ters,\\ Bileşik Orantı) ve Ortalamalar}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları yer alır.
+
+% =====================================================
+\section{Oran ve Orantı}
+
+\begin{kural}[Tanımlar]
+\textbf{Oran:} İki çokluğun bölümüdür: \(\dfrac{a}{b}\) \ (\(b\neq 0\)). Aynı birimli çoklukların oranı birimsizdir; farklı birimli çoklukların oranı birimlidir (ör. hız, km/sa).\\
+\textbf{Orantı:} İki oranın eşitliğidir. \(b,d\neq 0\) için
+\[\frac{a}{b}=\frac{c}{d}\ \Longleftrightarrow\ a\cdot d=b\cdot c\qquad(\text{içler--dışlar çarpımı})\]
+\end{kural}
+
+\begin{dikkat}
+Farklı birimli çokluklar önce aynı birime çevrilir (\(1\) saat \(=60\) dakika, \(1\) m \(=100\) cm). \(\dfrac{a}{b}=\dfrac{2}{3}\) ise \(a=2\), \(b=3\) olmak zorunda değildir; \(a=2k\), \(b=3k\) (\(k\neq 0\)) yazılır.
+\end{dikkat}
+
+\begin{ornek}
+\(\dfrac{3x-2}{x+1}=\dfrac{4}{3}\) olduğuna göre \(x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(3(3x-2)=4(x+1)\ \Rightarrow\ 9x-6=4x+4\ \Rightarrow\ 5x=10\ \Rightarrow\ x=2\). \quad Kontrol: \(\dfrac{4}{3}=\dfrac{4}{3}\) \checkmark
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{a}{b}=\dfrac{5}{2}\) olduğuna göre \(\dfrac{a+2b}{a-b}\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(a=5k,\ b=2k\): \quad \(\dfrac{5k+4k}{5k-2k}=\dfrac{9k}{3k}=3\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{2a-b}{a+b}=\dfrac{1}{4}\) olduğuna göre \(\dfrac{a}{b}\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(4(2a-b)=a+b\ \Rightarrow\ 8a-4b=a+b\ \Rightarrow\ 7a=5b\ \Rightarrow\ \dfrac{a}{b}=\dfrac{5}{7}\).\\
+Kontrol: \(a=5,\ b=7\): \(\dfrac{10-7}{12}=\dfrac{3}{12}=\dfrac{1}{4}\) \checkmark
+\end{cozum}
+
+% =====================================================
+\section{Orantı Sabiti ve Paylaştırma}
+
+\begin{kural}[Orantı sabiti]
+\(\dfrac{a}{b}=\dfrac{c}{d}=\dfrac{e}{f}=k\) (paydalar sıfırdan farklı) ise \(a=bk,\ c=dk,\ e=fk\) ve
+\[\frac{a+c+e}{b+d+f}=k,\qquad \frac{m\,a+n\,c}{m\,b+n\,d}=k\quad(mb+nd\neq 0).\]
+\(\dfrac{a}{2}=\dfrac{b}{3}=\dfrac{c}{5}=k\) ise \(a=2k,\ b=3k,\ c=5k\); bu, \(a:b:c=2:3:5\) demektir.\\
+\textbf{Paylaştırma:} Bir miktar \(2,3,5\) ile (doğru) orantılı paylaştırılırsa paylar \(2k,3k,5k\) olur ve \(2k+3k+5k=\) miktar. \(2,3,4\) ile \textbf{ters orantılı} paylaştırılırsa paylar \(\frac12,\frac13,\frac14\) ile doğru orantılıdır; paydaların EKOK'u ile çarpılarak \(6:4:3\) elde edilir.
+\end{kural}
+
+\begin{ornek}
+\(\dfrac{a}{3}=\dfrac{b}{5}=\dfrac{c}{7}\) ve \(2a+b-c=16\) olduğuna göre \(a+b+c\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(a=3k,\ b=5k,\ c=7k\): \ \(6k+5k-7k=4k=16\Rightarrow k=4\). \quad \(a+b+c=15k=60\) \ (\(a=12,\ b=20,\ c=28\)).
+\end{cozum}
+
+\begin{ornek}
+\(a:b=3:4\) ve \(b:c=6:5\) olduğuna göre \(a:b:c\) kaçtır? \(a+b+c=62\) ise \(c\) kaçtır?
+\end{ornek}
+\begin{cozum}
+Ortak terim \(b\): \(\mathrm{EKOK}(4,6)=12\). \ \(a:b=9:12\), \ \(b:c=12:10\) \(\Rightarrow\) \(a:b:c=9:12:10\).\\
+\(31k=62\Rightarrow k=2\) \(\Rightarrow\) \(c=20\) \ (\(a=18,\ b=24\)).
+\end{cozum}
+
+\begin{ornek}
+\(360\) TL, \(3\), \(4\) ve \(5\) ile doğru orantılı paylaştırılıyor. Ayrıca \(390\) TL, \(2\), \(3\) ve \(4\) ile ters orantılı paylaştırılıyor. Her iki paylaştırmada payları bulunuz.
+\end{ornek}
+\begin{cozum}
+Doğru orantı: \(3k+4k+5k=12k=360\Rightarrow k=30\) \(\Rightarrow\) \(90,\ 120,\ 150\) TL.\\
+Ters orantı: \(\tfrac12:\tfrac13:\tfrac14=6:4:3\) (EKOK \(12\) ile çarpıldı). \(13k=390\Rightarrow k=30\) \(\Rightarrow\) \(180,\ 120,\ 90\) TL.\\
+Dikkat: ters orantıda en büyük sayıya (\(4\)) en küçük pay (\(90\) TL) düşer.
+\end{cozum}
+
+% =====================================================
+\section{Harita Ölçeği}
+
+\begin{kural}[Ölçek]
+\[\text{Ölçek}=\frac{\text{Haritadaki uzunluk}}{\text{Gerçek uzunluk}}\quad(\text{aynı birimle}).\qquad 1\text{ km}=1000\text{ m}=100\,000\text{ cm}.\]
+\(1:2\,500\,000\) ölçeğinde haritadaki \(1\) cm, gerçekte \(2\,500\,000\) cm \(=25\) km'dir.
+\end{kural}
+
+\begin{ornek}
+\(1:2\,500\,000\) ölçekli bir haritada iki şehir arası \(4{,}8\) cm'dir. Gerçek uzaklık kaç km'dir? \(1:200\) ölçekli bir planda bir odanın kenarları \(5\) cm ve \(3{,}5\) cm'dir. Odanın gerçek kenar uzunlukları kaç m'dir?
+\end{ornek}
+\begin{cozum}
+\(4{,}8\cdot 2\,500\,000=12\,000\,000\) cm \(=120\) km.\\
+\(5\cdot 200=1000\) cm \(=10\) m; \quad \(3{,}5\cdot 200=700\) cm \(=7\) m.
+\end{cozum}
+
+% =====================================================
+\section{Doğru ve Ters Orantı}
+
+\begin{kural}[Doğru ve ters orantı]
+\(x\) ve \(y\) pozitif çokluklar, \(k>0\) bir sabit olsun.\\
+\textbf{Doğru orantı:} \(\dfrac{y}{x}=k\), yani \(y=kx\). \(x\) kaç katına çıkarsa \(y\) de o kata çıkar. \ \(\dfrac{y_1}{x_1}=\dfrac{y_2}{x_2}\).\\
+\textbf{Ters orantı:} \(x\cdot y=k\). \(x\) kaç katına çıkarsa \(y\) o kadar kata bölünür. \ \(x_1y_1=x_2y_2\).\\
+Tipik ters orantılar (aynı iş / aynı yol / aynı havuz): işçi sayısı -- gün, hız -- zaman, musluk sayısı -- süre, dişli çarkta diş sayısı -- tur sayısı.
+\end{kural}
+
+\begin{dikkat}
+``Biri artarken diğeri de artıyor'' doğru orantı için yeterli değildir; \textbf{oranın sabit} olması gerekir. Örneğin \(y=2x+1\) artandır ama \(\frac{y}{x}\) sabit olmadığından doğru orantı değildir.
+\end{dikkat}
+
+\begin{ornek}
+\(y\), \(x\) ile ters orantılıdır. \(x=3\) iken \(y=20\)'dir. \(y=12\) iken \(x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(x\cdot y=3\cdot 20=60\) sabit. \quad \(x\cdot 12=60\Rightarrow x=5\).
+\end{cozum}
+
+\begin{ornek}
+Bir çiftlikteki \(40\) ineğe \(30\) gün yetecek kadar yem vardır. \(10\) gün sonra \(20\) inek satılıyor. Kalan yem, kalan ineklere kaç gün yeter?
+\end{ornek}
+\begin{cozum}
+\(10\) gün sonra kalan yem \(40\) ineğe \(30-10=20\) gün yeterdi. Kalan inek: \(40-20=20\).\\
+İnek sayısı ile gün ters orantılı: \(40\cdot 20=20\cdot x\Rightarrow x=40\) gün.
+\end{cozum}
+
+\begin{ornek}
+Bir izci grubuna \(20\) gün yetecek kadar yiyecek vardır. \(5\) gün sonra gruba \(10\) izci daha katılıyor ve kalan yiyecek tüm gruba \(10\) gün yetiyor. Başlangıçta grupta kaç izci vardı?
+\end{ornek}
+\begin{cozum}
+Başlangıçta \(n\) izci. \(5\) gün sonra kalan yiyecek \(n\) izciye \(15\) gün yeterdi. Kişi sayısı ile gün ters orantılı:
+\[n\cdot 15=(n+10)\cdot 10\ \Rightarrow\ 15n=10n+100\ \Rightarrow\ n=20\]
+\end{cozum}
+
+% =====================================================
+\section{Bileşik Orantı}
+
+\begin{kural}[Bileşik orantı]
+\(a\); \(b\) ile doğru, \(c\) ile ters orantılı ise \(a=k\cdot\dfrac{b}{c}\), yani \(\dfrac{a\cdot c}{b}=k\) sabittir.\\
+Aynı verimle çalışanlar için:
+\[\frac{\text{İş miktarı}}{\text{İşçi sayısı}\cdot\text{Günlük saat}\cdot\text{Gün sayısı}}=\text{sabit}\]
+\end{kural}
+
+\begin{ornek}
+\(x\) sayısı \(y\) ile ters, \(z\) ile doğru orantılıdır. \(y=4\), \(z=6\) iken \(x=9\)'dur. \(y=6\), \(z=10\) iken \(x\) kaçtır?
+\end{ornek}
+\begin{cozum}
+\(x=k\cdot\dfrac{z}{y}\Rightarrow k=\dfrac{x\cdot y}{z}=\dfrac{9\cdot 4}{6}=6\). \quad \(x=6\cdot\dfrac{10}{6}=10\).
+\end{cozum}
+
+\begin{ornek}
+\(12\) işçi günde \(8\) saat çalışarak bir işi \(15\) günde bitiriyor. Aynı nitelikteki \(9\) işçi günde \(10\) saat çalışarak aynı işi kaç günde bitirir?
+\end{ornek}
+\begin{cozum}
+İş aynı olduğundan işçi \(\cdot\) saat \(\cdot\) gün sabittir:
+\[12\cdot 8\cdot 15=9\cdot 10\cdot x\ \Rightarrow\ 1440=90x\ \Rightarrow\ x=16\text{ gün}\]
+\end{cozum}
+
+% =====================================================
+\section{Ortalamalar}
+
+\begin{kural}[Aritmetik ve ağırlıklı ortalama]
+\(\text{AO}=\dfrac{x_1+x_2+\cdots+x_n}{n}\), \quad Toplam \(=n\cdot\text{AO}\).\\
+Bir sayı eklenir veya çıkarılırsa: yeni ortalama \(=\dfrac{\text{eski toplam}\pm\text{sayı}}{\text{yeni sayı adedi}}\).\\
+\textbf{Ağırlıklı ortalama:} \(\dfrac{n_1\,o_1+n_2\,o_2}{n_1+n_2}\) (\(n_i\): grup büyüklüğü ya da notun ağırlığı).
+\end{kural}
+
+\begin{kural}[{Geometrik ve harmonik ortalama; ardışık sayılar}]
+İki pozitif sayı \(a,b\) için: \ \(\text{GO}=\sqrt{ab}\), \ \(\text{HO}=\dfrac{2ab}{a+b}\), \ \(\text{AO}\ge\text{GO}\ge\text{HO}\) (eşitlik yalnızca \(a=b\) iken).\\
+Ortalama hız \(=\dfrac{\text{toplam yol}}{\text{toplam zaman}}\); aynı yol \(v_1\) ile gidilip \(v_2\) ile dönülürse \(\dfrac{2v_1v_2}{v_1+v_2}\).\\
+Ardışık (eşit aralıklı) sayıların ortalaması \(=\dfrac{\text{ilk}+\text{son}}{2}\); terim sayısı tek ise ortanca terim.
+\end{kural}
+
+\begin{dikkat}
+Farklı büyüklükteki grupların ortak ortalaması, ortalamaların ortalaması değildir. Gidiş--dönüşte ortalama hız \(\frac{v_1+v_2}{2}\) değildir.
+\end{dikkat}
+
+\begin{ornek}
+Aritmetik ortalaması \(20\) olan \(6\) sayıdan biri çıkarılınca kalan sayıların ortalaması \(18\) oluyor. Çıkarılan sayı kaçtır?
+\end{ornek}
+\begin{cozum}
+Eski toplam: \(6\cdot 20=120\); \ yeni toplam: \(5\cdot 18=90\). \quad Çıkarılan sayı: \(120-90=30\).
+\end{cozum}
+
+\begin{ornek}
+Bir derste vize notunun ağırlığı \(1\), final notunun ağırlığı \(2\)'dir. Vizeden \(48\) alan bir öğrencinin ağırlıklı ortalamasının \(60\) olması için finalden kaç alması gerekir?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{1\cdot 48+2\cdot f}{1+2}=60\Rightarrow 48+2f=180\Rightarrow 2f=132\Rightarrow f=66\).
+\end{cozum}
+
+\begin{ornek}
+\(30\) kişilik bir sınıfın not ortalaması \(62\)'dir. Sınıftaki \(12\) kızın ortalaması \(68\) ise erkeklerin ortalaması kaçtır?
+\end{ornek}
+\begin{cozum}
+Sınıf toplamı: \(30\cdot 62=1860\); \ kızların toplamı: \(12\cdot 68=816\).\\
+Erkek sayısı \(18\), toplamları \(1860-816=1044\). \quad Ortalama: \(\dfrac{1044}{18}=58\).
+\end{cozum}
+
+\begin{ornek}
+\(2\) ve \(8\) sayılarının aritmetik, geometrik ve harmonik ortalamalarını bulunuz. \(\text{AO}\cdot\text{HO}\) çarpımını \(\text{GO}^2\) ile karşılaştırınız.
+\end{ornek}
+\begin{cozum}
+\(\text{AO}=5\), \ \(\text{GO}=\sqrt{16}=4\), \ \(\text{HO}=\dfrac{2\cdot 16}{10}=3{,}2\). \ \(5>4>3{,}2\).\\
+\(\text{AO}\cdot\text{HO}=5\cdot 3{,}2=16=\text{GO}^2\). (İki pozitif sayı için her zaman \(\frac{a+b}{2}\cdot\frac{2ab}{a+b}=ab\).)
+\end{cozum}
+
+\begin{ornek}
+Bir araç A'dan B'ye saatte \(45\) km hızla gidip aynı yoldan saatte \(90\) km hızla dönüyor. Ortalama hızı kaç km/sa'tir?
+\end{ornek}
+\begin{cozum}
+\(\dfrac{2\cdot 45\cdot 90}{45+90}=\dfrac{8100}{135}=60\) km/sa.\\
+Kontrol: yol \(90\) km olsun: gidiş \(2\) sa, dönüş \(1\) sa; \ \(\dfrac{180}{3}=60\). (\(67{,}5\) değil.)
+\end{cozum}
+
+\begin{ornek}
+Ardışık \(9\) tam sayının ortalaması \(23\)'tür. En küçüğü ve en büyüğü kaçtır? \(20\)'den \(60\)'a kadar (dahil) çift sayıların toplamı kaçtır?
+\end{ornek}
+\begin{cozum}
+Ortanca (5. terim) \(23\) \(\Rightarrow\) en küçük \(23-4=19\), en büyük \(23+4=27\).\\
+Çift sayılar: terim sayısı \(\dfrac{60-20}{2}+1=21\), ortalama \(\dfrac{20+60}{2}=40\), toplam \(21\cdot 40=840\).
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Oran & \(\frac{a}{b}\), aynı birimle; birimsiz\\
+Orantı & \(\frac{a}{b}=\frac{c}{d}\Leftrightarrow ad=bc\)\\
+Orantı sabiti & \(\frac{a}{b}=\frac{c}{d}=\frac{e}{f}=k\Rightarrow \frac{a+c+e}{b+d+f}=k,\ \ \frac{ma+nc}{mb+nd}=k\)\\
+Paylaştırma & \(2,3,5\) ile orantılı: \(2k,3k,5k\); \ ters orantılı: \(\frac12,\frac13,\frac15\) ile orantılı\\
+Ölçek & haritadaki uzunluk / gerçek uzunluk; \ \(1\) km \(=100\,000\) cm\\
+Doğru orantı & \(\frac{y}{x}=k\), \ \(\frac{y_1}{x_1}=\frac{y_2}{x_2}\)\\
+Ters orantı & \(xy=k\), \ \(x_1y_1=x_2y_2\) \ (işçi--gün, hız--zaman, musluk--süre)\\
+Bileşik orantı & \(a\); \(b\) ile doğru, \(c\) ile ters \(\Rightarrow a=k\frac{b}{c}\); \ \(\frac{\text{İş}}{n\cdot s\cdot g}\) sabit\\
+Aritmetik ort. & \(\text{AO}=\frac{\text{toplam}}{n}\), \ toplam \(=n\cdot\text{AO}\)\\
+Ağırlıklı ort. & \(\frac{n_1o_1+n_2o_2}{n_1+n_2}\)\\
+GO, HO & \(\sqrt{ab}\), \ \(\frac{2ab}{a+b}\); \ \(\text{AO}\ge\text{GO}\ge\text{HO}\)\\
+Ortalama hız & toplam yol / toplam zaman; gidiş--dönüş: \(\frac{2v_1v_2}{v_1+v_2}\)\\
+Ardışık sayılar & ortalama \(=\frac{\text{ilk}+\text{son}}{2}\); terim sayısı \(\frac{\text{son}-\text{ilk}}{\text{artış}}+1\)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta12_alistirmalar_govde}
+
+\vspace{2pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: Sayı, kesir ve yaş problemleri.}
+
+\end{document}

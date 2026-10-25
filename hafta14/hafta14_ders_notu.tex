@@ -1,0 +1,321 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm,top=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+
+\titleformat{\section}{\large\bfseries\color{anamavi}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{anamavi}}{\thesubsection}{0.5em}{}
+
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small MMAT105 Genel Matematik}
+\rhead{\small Hafta 14 -- Ders Notu}
+\cfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{kural}[1][Kural]{colback=anamavi!5,colframe=anamavi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newtcolorbox{dikkat}[1][Dikkat]{colback=uyarikirmizi!5,colframe=uyarikirmizi,title=#1,fonttitle=\bfseries,breakable,left=4pt,right=4pt,top=2pt,bottom=2pt}
+\newcounter{ornek}
+\newenvironment{ornek}{\refstepcounter{ornek}\par\medskip\noindent\textbf{\color{anamavi}Örnek \theornek.}\ }{\par}
+\newenvironment{cozum}{\begin{tcolorbox}[colback=cozumyesil!6,colframe=cozumyesil,boxrule=0.5pt,left=4pt,right=4pt,top=2pt,bottom=2pt,breakable]\textbf{\color{cozumyesil}Çözüm.}\ }{\end{tcolorbox}}
+\newcounter{alis}
+\newenvironment{alistirma}{\refstepcounter{alis}\par\medskip\needspace{9\baselineskip}\noindent\textbf{\color{anamavi}Alıştırma \thealis.}\ }{\par}
+\newcommand{\kendinizoncesi}{\needspace{12\baselineskip}}
+\newcommand{\ab}[1]{\overline{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+\begin{document}
+
+% ---------------- Başlık ----------------
+\begin{minipage}[c]{\textwidth}
+{\LARGE\bfseries\color{anamavi} MMAT105 Genel Matematik}\\[4pt]
+{\large Hafta 14 Ders Notu: Yüzde, Kâr-Zarar, Karışım ve\\ Faiz Problemleri, Genel Tekrar}\\[6pt]
+{\small 2026--2027 Güz}
+\end{minipage}
+
+\vspace{4pt}\noindent\textcolor{anamavi}{\rule{\textwidth}{1pt}}
+
+\textbf{Bu notun kullanımı.} Her bölümde önce kısa bir kural kutusu, ardından çözümlü örnekler yer alır. Örnekleri çözümüne bakmadan önce kendiniz deneyin. Notun sonunda önce çözümlü alıştırmalar, ardından cevap anahtarlı ``Kendiniz Çözün'' alıştırmaları ve son olarak finale hazırlık amacıyla, Hafta 1--14 konularını kapsayan karma bir tekrar bölümü yer alır. Bu notta para birimi TL'dir ve ondalık sayılar virgülle yazılır (\(12{,}5\)).
+
+% =====================================================
+\section{Yüzde}
+
+\begin{kural}[Yüzde kavramı ve yüzde değişim]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \(\%a=\dfrac{a}{100}\); \quad bir \(x\) sayısının \(\%a\)'sı \(x\cdot\dfrac{a}{100}\)'dür.
+\item \(A\) sayısı \(B\)'nin \(\dfrac{A}{B}\cdot 100\) yüzdesidir (\(B\neq 0\)).
+\item \(x\)'in \(\%a\) fazlası: \(x\left(1+\dfrac{a}{100}\right)\); \quad \(\%a\) eksiği: \(x\left(1-\dfrac{a}{100}\right)\).
+\item Ardışık yüzde değişimlerde çarpanlar \textbf{çarpılır}: önce \(\%a\) artış, sonra \(\%b\) azalış \(\Rightarrow\) \(x\left(1+\dfrac{a}{100}\right)\left(1-\dfrac{b}{100}\right)\).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+Yüzdeler toplanıp çıkarılmaz: \(\%20\) artıp \(\%20\) azalan fiyat \(\%4\) azalır (\(1{,}2\cdot 0{,}8=0{,}96\)). İkinci değişim, ilk değişimden sonra oluşan \textbf{yeni} değer üzerinden hesaplanır. Sayı verilmemiş sorularda başlangıç değerine \(100\) (veya \(100x\)) demek işlemi kolaylaştırır.
+\end{dikkat}
+
+\begin{ornek}
+\(450\) sayısının \(\%18\)'i kaçtır? Bulduğunuz sayı hangi sayının \(\%15\)'idir?
+\end{ornek}
+\begin{cozum}
+\(450\cdot\dfrac{18}{100}=81\). \quad \(x\cdot\dfrac{15}{100}=81\Rightarrow x=\dfrac{8100}{15}=540\).
+\end{cozum}
+
+\begin{ornek}
+\(\dfrac{a}{b}=\dfrac{3}{5}\) olduğuna göre \(a\), \(b\)'nin yüzde kaçıdır? \(a\), \(a+b\) toplamının yüzde kaçıdır?
+\end{ornek}
+\begin{cozum}
+\(a=3k,\ b=5k\) (\(k\neq 0\)). \quad \(\dfrac{a}{b}\cdot 100=\dfrac{3}{5}\cdot 100=60\Rightarrow\%60\). \quad \(\dfrac{a}{a+b}\cdot 100=\dfrac{3}{8}\cdot 100=37{,}5\Rightarrow\%37{,}5\).
+\end{cozum}
+
+\begin{ornek}
+Bir ürün önce \(\%40\) zamlanıyor, sonra yeni fiyat üzerinden \(\%25\) indirim yapılıyor. Son fiyat, ilk fiyata göre yüzde kaç değişmiştir?
+\end{ornek}
+\begin{cozum}
+\(100\xrightarrow{+\%40}140\xrightarrow{-\%25\ (35)}105\). \ Son fiyat ilk fiyattan \(\%5\) \textbf{fazladır}. \ (Çarpanlar: \(1{,}4\cdot 0{,}75=1{,}05\).)
+\end{cozum}
+
+\begin{ornek}
+Bir mağazada bir ürüne önce \(\%20\), ardından indirimli fiyat üzerinden \(\%25\) indirim yapılıyor. Bu iki indirim tek seferde yüzde kaçlık bir indirime eşittir?
+\end{ornek}
+\begin{cozum}
+\(0{,}80\cdot 0{,}75=0{,}60\): son fiyat ilk fiyatın \(\%60\)'ı \(\Rightarrow\) toplam indirim \(\%40\) (\(\%45\) değil!).
+\end{cozum}
+
+\begin{ornek}
+Bir sayının \(\%15\) fazlası ile \(\%20\) eksiği arasındaki fark \(56\)'dır. Bu sayı kaçtır?
+\end{ornek}
+\begin{cozum}
+\(1{,}15x-0{,}80x=0{,}35x=56\Rightarrow x=160\). \ Kontrol: \(184-128=56\).
+\end{cozum}
+
+\begin{ornek}
+Enflasyonun \(\%60\) olduğu bir yılda bir çalışanın maaşına \(\%20\) zam yapılıyor. Çalışanın alım gücü yüzde kaç azalmıştır?
+\end{ornek}
+\begin{cozum}
+Başlangıçta maaş \(100\) TL, bir sepet ürün \(100\) TL olsun (maaş \(1\) sepet alıyor). Yıl sonunda maaş \(120\) TL, sepet \(160\) TL.
+\[\frac{120}{160}=\frac{3}{4}=\%75\ \text{sepet}\ \Rightarrow\ \text{alım gücü } \%25\ \text{azalmıştır.}\]
+\end{cozum}
+
+\begin{ornek}
+Bir dikdörtgenin uzun kenarı \(\%20\) artırılıp kısa kenarı \(\%20\) azaltılırsa alanı yüzde kaç değişir?
+\end{ornek}
+\begin{cozum}
+Alan \(=a\cdot b\). Yeni alan: \(1{,}2a\cdot 0{,}8b=0{,}96\,ab\) \(\Rightarrow\) alan \(\%4\) \textbf{azalır}.
+\end{cozum}
+
+% =====================================================
+\section{Kâr -- Zarar ve İndirim}
+
+\begin{kural}[Kâr -- zarar]
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Satış fiyatı \(=\) Maliyet \(+\) Kâr \quad veya \quad Satış fiyatı \(=\) Maliyet \(-\) Zarar.
+\item Kâr (zarar) yüzdesi, aksi söylenmedikçe \textbf{maliyet üzerinden} hesaplanır: \(\dfrac{\text{Kâr}}{\text{Maliyet}}\cdot 100\).
+\item Maliyet \(M\) ise \(\%a\) kârla satış \(M\left(1+\dfrac{a}{100}\right)\), \(\%a\) zararla satış \(M\left(1-\dfrac{a}{100}\right)\).
+\item İndirim yüzdesi \textbf{etiket fiyatı üzerinden} hesaplanır: \(\%d\) indirimli fiyat \(=\) Etiket \(\cdot\left(1-\dfrac{d}{100}\right)\).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+Kâr yüzdesini satış fiyatına veya etiket fiyatına bölmeyin. ``İndirimden sonra kâr edilir'' türü sorularda önce indirimli satış fiyatını bulun, sonra maliyetle karşılaştırın.
+\end{dikkat}
+
+\begin{ornek}
+Bir mal, maliyetinin \(\%10\) fazlasına \(330\) TL'ye satılıyor. Maliyet kaç TL'dir?
+\end{ornek}
+\begin{cozum}
+Maliyet \(100x\) \(\Rightarrow\) satış \(110x=330\Rightarrow x=3\). \ Maliyet \(=300\) TL.
+\end{cozum}
+
+\begin{ornek}
+Bir satıcı, eşit maliyetli iki üründen birini \(\%20\) kârla, diğerini \(\%10\) zararla satıyor. Satıcı toplamda yüzde kaç kâr veya zarar etmiştir?
+\end{ornek}
+\begin{cozum}
+Her birinin maliyeti \(100\) TL olsun. Satışlar: \(120\) ve \(90\) TL; toplam satış \(210\), toplam maliyet \(200\).
+\[\frac{210-200}{200}\cdot 100=\%5\ \text{kâr}\]
+\end{cozum}
+
+\begin{ornek}
+Bir ürün \(\%20\) kârla satılsaydı, \(\%10\) zararla satıldığı duruma göre \(120\) TL daha fazla para elde edilirdi. Ürünün maliyeti kaç TL'dir?
+\end{ornek}
+\begin{cozum}
+\(1{,}2M-0{,}9M=0{,}3M=120\Rightarrow M=400\) TL. \ Kontrol: \(480-360=120\).
+\end{cozum}
+
+\begin{ornek}
+Bir ürünün etiket fiyatı, maliyetinin \(\%60\) fazlasıdır. Ürün etiket fiyatı üzerinden \(\%25\) indirimle satılırsa maliyet üzerinden yüzde kaç kâr edilir?
+\end{ornek}
+\begin{cozum}
+Maliyet \(100\) \(\Rightarrow\) etiket \(160\) \(\Rightarrow\) indirimli satış \(160\cdot 0{,}75=120\) \(\Rightarrow\) \(\%20\) kâr.
+\end{cozum}
+
+\begin{ornek}
+Kilosu \(10\) TL'ye alınan yaş üzüm kuruyunca ağırlığının \(\%20\)'sini kaybediyor. Kuru üzümün kilosunun maliyeti kaç TL olur?
+\end{ornek}
+\begin{cozum}
+\(100\) kg yaş üzüm \(1000\) TL'ye alınır. Kuruyunca \(80\) kg kalır; maliyet değişmez.
+\[\frac{1000}{80}=12{,}5\ \text{TL/kg}\]
+\end{cozum}
+
+% =====================================================
+\section{Karışım Problemleri}
+
+\begin{kural}[Karışım ve tablo yöntemi]
+\[\text{Oran}=\frac{\text{Madde miktarı}}{\text{Karışım miktarı}},\qquad \text{Madde miktarı}=\text{Karışım miktarı}\cdot\text{Oran}\]
+Her kap için bir satır yazılır: \textit{karışım miktarı} \(\mid\) \textit{oran} \(\mid\) \textit{madde miktarı}. Kaplar birleştirilince karışım miktarları ve madde miktarları ayrı ayrı toplanır; yeni oran \(=\) toplam madde / toplam karışım (ağırlıklı ortalama).
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item Saf su ekleme: madde sabit, karışım artar (suyun oranı \(\%0\)).
+\item Su buharlaştırma: madde sabit, karışım azalır.
+\item Saf madde ekleme: madde de karışım da artar (saf maddenin oranı \(\%100\)).
+\end{itemize}
+\end{kural}
+
+\begin{dikkat}
+Homojen bir karışımdan bir miktar \textbf{alınırsa (dökülürse) oran değişmez}; yalnız madde ve karışım miktarları aynı oranda azalır. Bu yüzden ``karışımdan kaç kg alınırsa oran değişir'' türü bir soru kendi başına anlamsızdır.
+\end{dikkat}
+
+\begin{ornek}
+Tuz oranı \(\%25\) olan \(80\) kg tuzlu suya \(20\) kg saf su ekleniyor. Yeni tuz oranı yüzde kaçtır?
+\end{ornek}
+\begin{cozum}
+Tuz: \(80\cdot 0{,}25=20\) kg. \ Yeni karışım \(100\) kg. \ \(\dfrac{20}{100}=\%20\).
+\end{cozum}
+
+\begin{ornek}
+Şeker oranı \(\%15\) olan \(40\) kg şekerli sudan \(10\) kg su buharlaştırılıyor. Yeni şeker oranı yüzde kaçtır?
+\end{ornek}
+\begin{cozum}
+Şeker: \(40\cdot 0{,}15=6\) kg (değişmez). Karışım \(30\) kg. \ \(\dfrac{6}{30}=\dfrac{20}{100}=\%20\).
+\end{cozum}
+
+\needspace{16\baselineskip}
+\begin{ornek}
+Tuz oranı \(\%20\) ve \(\%50\) olan iki tuzlu sudan, tuz oranı \(\%30\) olan \(90\) kg karışım hazırlanacaktır. Her birinden kaç kg kullanılmalıdır?
+\end{ornek}
+\begin{cozum}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+ & Karışım (kg) & Oran & Tuz (kg)\\\midrule
+1. kap & \(x\) & \(\%20\) & \(0{,}2x\)\\
+2. kap & \(y\) & \(\%50\) & \(0{,}5y\)\\
+Karışım & \(90\) & \(\%30\) & \(27\)\\\bottomrule
+\end{tabular}
+\end{center}
+\(x+y=90\) ve \(0{,}2x+0{,}5y=27\). \ \(0{,}2(90-y)+0{,}5y=27\Rightarrow 18+0{,}3y=27\Rightarrow y=30\), \ \(x=60\) kg.
+\end{cozum}
+
+\begin{ornek}
+Şeker oranı \(\%10\) olan \(50\) kg şekerli sudan \(10\) kg alınıyor; kalan karışıma \(10\) kg şeker ekleniyor. Son şeker oranı yüzde kaçtır?
+\end{ornek}
+\begin{cozum}
+\(10\) kg alınınca oran değişmez: \(40\) kg karışımda \(4\) kg şeker. \(10\) kg şeker eklenince: \(\dfrac{4+10}{40+10}=\dfrac{14}{50}=\%28\).
+\end{cozum}
+
+\begin{kural}[Alaşım: altın ayarı]
+Saf altın \(24\) ayardır. \(k\) ayar altında saf altın oranı \(\dfrac{k}{24}\)'tür: \quad saf altın \(=\) kütle \(\cdot\dfrac{k}{24}\). Alaşımlar karıştırılınca saf altın miktarları toplanır; yeni ayar \(=\dfrac{\text{toplam saf altın}}{\text{toplam kütle}}\cdot 24\).
+\end{kural}
+
+\begin{ornek}
+\(14\) ayar \(30\) g altın ile \(22\) ayar \(18\) g altın eritilerek karıştırılıyor. Elde edilen altın kaç ayardır?
+\end{ornek}
+\begin{cozum}
+Saf altın: \(30\cdot\dfrac{14}{24}=17{,}5\) g ve \(18\cdot\dfrac{22}{24}=16{,}5\) g; toplam \(34\) g. Toplam kütle \(48\) g.
+\[\text{Ayar}=\frac{34}{48}\cdot 24=17\]
+\end{cozum}
+
+% =====================================================
+\section{Faiz Problemleri}
+
+\begin{kural}[Basit faiz]
+\(A\): anapara, \(n\): \textbf{yıllık} faiz oranı (yüzde), \(F\): faiz.
+\[F=\frac{A\cdot n\cdot t}{100}\ (t\ \text{yıl}),\qquad F=\frac{A\cdot n\cdot t}{1200}\ (t\ \text{ay}),\qquad F=\frac{A\cdot n\cdot t}{36000}\ (t\ \text{gün})\]
+Gün hesabında \textbf{\(1\) yıl \(=360\) gün} kabul edilir (\(36000=100\cdot 360\)). Dönem sonunda çekilen toplam para \(A+F\)'dir.
+\end{kural}
+
+\begin{kural}[Bileşik faiz (kısa bilgi)]
+Her yıl sonunda faiz anaparaya eklenir; sonraki yılın faizi bu toplam üzerinden hesaplanır. \(t\) yıl sonunda toplam para:
+\(\ A\cdot\left(1+\dfrac{n}{100}\right)^t\). \ Soruda ``bileşik'' denmedikçe faiz basit faizdir.
+\end{kural}
+
+\begin{ornek}
+\(15000\) TL yıllık \(\%32\) basit faizle \(9\) ay bankada kalırsa kaç TL faiz getirir? Dönem sonunda toplam kaç TL çekilir?
+\end{ornek}
+\begin{cozum}
+\(F=\dfrac{15000\cdot 32\cdot 9}{1200}=3600\) TL. \quad Toplam: \(15000+3600=18600\) TL.
+\end{cozum}
+
+\begin{ornek}
+\(7200\) TL yıllık \(\%30\) basit faizle \(75\) günde kaç TL faiz getirir? (\(1\) yıl \(=360\) gün)
+\end{ornek}
+\begin{cozum}
+\(F=\dfrac{7200\cdot 30\cdot 75}{36000}=450\) TL.
+\end{cozum}
+
+\begin{ornek}
+Yıllık \(\%25\) basit faizle bankaya yatırılan bir para kaç yıl sonra iki katına çıkar?
+\end{ornek}
+\begin{cozum}
+İki katına çıkması için faiz anaparaya eşit olmalı: \(A=\dfrac{A\cdot 25\cdot t}{100}\Rightarrow 25t=100\Rightarrow t=4\) yıl.
+\end{cozum}
+
+\begin{ornek}
+Basit faizle bankaya yatırılan bir para \(2\) yıl sonunda \(13000\) TL, \(5\) yıl sonunda \(17500\) TL olmaktadır. Anapara ve yıllık faiz oranı nedir?
+\end{ornek}
+\begin{cozum}
+\(3\) yıllık faiz: \(17500-13000=4500\) TL \(\Rightarrow\) yıllık faiz \(1500\) TL. \ Anapara: \(13000-2\cdot 1500=10000\) TL.\\
+\(\dfrac{10000\cdot n\cdot 1}{100}=1500\Rightarrow n=15\) \(\Rightarrow\) yıllık \(\%15\).
+\end{cozum}
+
+\begin{ornek}
+\(20000\) TL yıllık \(\%10\) bileşik faizle \(3\) yıl bankada kalırsa toplam kaç TL olur? Basit faizle olsaydı ne kadar olurdu?
+\end{ornek}
+\begin{cozum}
+\(20000\to 22000\to 24200\to 26620\) TL \ (\(20000\cdot 1{,}1^3=26620\)).\\
+Basit faiz: \(F=\dfrac{20000\cdot 10\cdot 3}{100}=6000\) \(\Rightarrow\) \(26000\) TL. Fark: \(620\) TL.
+\end{cozum}
+
+% =====================================================
+\section{Özet: Formül Kartı}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Konu & Formül / Kural\\\midrule
+Yüzde & \(x\)'in \(\%a\)'sı \(=x\cdot\frac{a}{100}\); \ \(A\), \(B\)'nin \(\frac{A}{B}\cdot 100\) yüzdesi\\
+Artış / azalış & \(x\left(1+\frac{a}{100}\right)\) \ / \ \(x\left(1-\frac{a}{100}\right)\); ardışık değişimde çarpanlar çarpılır\\
+Kâr -- zarar & Satış \(=\) Maliyet \(\pm\) Kâr/Zarar; \ yüzde \textbf{maliyet} üzerinden\\
+İndirim & İndirimli fiyat \(=\) Etiket \(\cdot\left(1-\frac{d}{100}\right)\); \ yüzde \textbf{etiket} üzerinden\\
+Karışım & Madde \(=\) Karışım \(\cdot\) Oran; \ yeni oran \(=\) toplam madde / toplam karışım\\
+Su / buhar / saf madde & su ve buharda madde sabit; saf maddenin oranı \(\%100\)\\
+Altın ayarı & saf altın \(=\) kütle \(\cdot\frac{\text{ayar}}{24}\)\\
+Basit faiz & \(F=\frac{A\,n\,t}{100}\) (yıl), \(\frac{A\,n\,t}{1200}\) (ay), \(\frac{A\,n\,t}{36000}\) (gün; yıl \(=360\) gün)\\
+Bileşik faiz & Toplam \(=A\left(1+\frac{n}{100}\right)^t\)\\\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================
+\newpage
+\input{hafta14_alistirmalar_govde}
+
+\vspace{6pt}
+\noindent\textcolor{anamavi}{\rule{\textwidth}{0.5pt}}\\
+{\small Gelecek hafta: FİNAL SINAVI (Hafta 1--14 konuları).}
+
+\end{document}

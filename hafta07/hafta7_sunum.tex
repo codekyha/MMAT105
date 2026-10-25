@@ -1,0 +1,686 @@
+% !TEX program = xelatex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{Madrid}
+\usepackage{fontspec}
+\setsansfont{DejaVu Sans}
+\setmainfont{DejaVu Serif}
+\usepackage{polyglossia}
+\setdefaultlanguage{turkish}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% ---------- Renkler ----------
+\definecolor{anamavi}{RGB}{0,45,98}
+\definecolor{cozumyesil}{RGB}{0,110,50}
+\definecolor{uyarikirmizi}{RGB}{180,20,20}
+\setbeamercolor{structure}{fg=anamavi}
+\setbeamercolor{frametitle}{bg=anamavi,fg=white}
+\setbeamercolor{title}{bg=anamavi,fg=white}
+\setbeamercolor{palette primary}{bg=anamavi,fg=white}
+\setbeamercolor{palette secondary}{bg=anamavi!85!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=anamavi!70!black,fg=white}
+\setbeamercolor{block title}{bg=anamavi,fg=white}
+\setbeamercolor{block body}{bg=anamavi!7}
+\setbeamercolor{block title example}{bg=cozumyesil,fg=white}
+\setbeamercolor{block body example}{bg=cozumyesil!8}
+\setbeamercolor{block title alerted}{bg=uyarikirmizi,fg=white}
+\setbeamercolor{block body alerted}{bg=uyarikirmizi!7}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+
+% ---------- Soru / Çözüm kalıbı ----------
+% \soru{başlık}{soru metni}{çözüm metni}: önce soru, bir tıklamayla çözüm
+\newcommand{\soru}[3]{%
+\begin{frame}{#1}
+  \begin{block}{Soru}\large #2\end{block}
+  \pause
+  \begin{exampleblock}{Çözüm}\large #3\end{exampleblock}
+\end{frame}}
+\newcommand{\ab}[1]{\overline{#1}}
+
+% ---------- Sayı doğrusu ----------
+% \sd{en küçük}{en büyük}{çizim komutları}
+\newcommand{\sd}[3]{\begin{tikzpicture}[scale=0.7,baseline=(current bounding box.center)]
+\draw[->,thin] (#1-0.7,0)--(#2+0.7,0);
+\foreach \t in {#1,...,#2}{\draw (\t,0.12)--(\t,-0.12) node[below=-1pt]{\scriptsize$\t$};}
+#3\end{tikzpicture}}
+\newcommand{\cizgi}[2]{\draw[anamavi,line width=2.5pt] (#1,0)--(#2,0);}
+\newcommand{\isin}[2]{\draw[anamavi,line width=2.5pt,-stealth] (#1,0)--(#2,0);}
+\newcommand{\acik}[1]{\draw[anamavi,thick,fill=white] (#1,0) circle (4pt);}
+\newcommand{\kapali}[1]{\fill[anamavi] (#1,0) circle (4pt);}
+
+\title[MMAT105 -- Hafta 7]{MMAT105 Genel Matematik}
+\subtitle{Hafta 7: Basit Eşitsizlikler ve Mutlak Değer}
+\author{}
+\date{2026--2027 Güz Dönemi}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% (iletişim çerçevesi kaldırıldı)
+
+\begin{frame}{Geçen Hafta Hatırlatma: İki Bilinmeyenli Denklemler}
+\begin{columns}[t]
+\column{0.55\textwidth}
+\textbf{Çözünüz:}
+\begin{enumerate}
+\item \(x+y=10,\quad x-y=4\) \ \(\Rightarrow\ (x,y)=?\)
+\item \(2x+3y=12,\quad x-y=1\) \ \(\Rightarrow\ (x,y)=?\)
+\item \(3x+2y=16,\quad x+2y=8\) \ \(\Rightarrow\ x\cdot y=?\)
+\end{enumerate}
+\column{0.4\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item Taraf tarafa toplama: \(2x=14\); \ \((7,3)\)
+\item \(x=y+1\) yerine koyma: \(5y+2=12\); \ \((3,2)\)
+\item Çıkarma: \(2x=8\Rightarrow x=4,\ y=2\); \ \(x\cdot y=8\)
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bugün}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\begin{enumerate}
+\item Eşitsizlik sembolleri, aralık gösterimi
+\item Eşitsizliğin özellikleri
+\item \(ax+b<0\) ve çift eşitsizlikler
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\begin{enumerate}\setcounter{enumi}{3}
+\item Tam sayı değerleri sayma
+\item Bir ifadenin değer aralığı
+\item \(x\pm y\), \(x\cdot y\), \(x^2\) aralıkları
+\end{enumerate}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\begin{enumerate}\setcounter{enumi}{6}
+\item Mutlak değer: tanım, uzaklık
+\item Mutlak değerli denklemler
+\item Mutlak değerli eşitsizlikler
+\end{enumerate}
+\end{block}
+\end{columns}
+\vspace{6pt}
+\begin{alertblock}{Hatırlatma}
+Bu hafta ara sınav öncesi son derstir. Gelecek hafta: \textbf{ARA SINAV (Hafta 1--7 konuları)}.
+\end{alertblock}
+\end{frame}
+
+% =====================================================
+\section{Ders 1: Eşitsizlikler ve Aralıklar}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 1}\\[6pt]\normalsize Eşitsizlik Sembolleri, Aralık Gösterimi, Birinci Dereceden Eşitsizlikler
+\end{frame}
+
+\subsection{Aralık gösterimi}
+\begin{frame}{Eşitsizlik Sembolleri ve Aralık Gösterimi}
+\begin{columns}[t]
+\column{0.44\textwidth}
+\begin{block}{Semboller}
+\(<\) küçük, \quad \(>\) büyük\\
+\(\le\) küçük veya eşit, \quad \(\ge\) büyük veya eşit\\[3pt]
+\(x\) burada bir \textbf{reel sayıdır} (aksi söylenmedikçe).
+\end{block}
+\begin{alertblock}{Dikkat}
+\(\infty\) bir sayı değildir; \(-\infty\) ve \(\infty\) yanında parantez \textbf{daima açık}tır.
+\end{alertblock}
+\column{0.53\textwidth}
+\begin{block}{Aralıklar (\(a<b\))}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}ll@{}}
+\(a<x<b\) & \((a,b)\) \ açık aralık\\
+\(a\le x\le b\) & \([a,b]\) \ kapalı aralık\\
+\(a\le x<b\) & \([a,b)\) \ yarı açık\\
+\(a<x\le b\) & \((a,b]\) \ yarı açık\\
+\(x\le a\) & \((-\infty,a]\)\\
+\(x>a\) & \((a,\infty)\)
+\end{tabular}\\[3pt]
+Sayı doğrusunda: dahil uç \(\bullet\) (dolu), dahil olmayan uç \(\circ\) (boş).
+\end{block}
+\end{columns}
+\end{frame}
+
+\soru{Aralık Gösterimi -- Örnek 1}
+{Aşağıdakileri aralık gösterimiyle yazınız:\\
+(a) \(-2<x\le 5\) \qquad (b) \(x\ge 3\) \qquad (c) \(x<-1\) \qquad (d) \(0\le x<4\)}
+{(a) \((-2,5]\) \qquad (b) \([3,\infty)\) \qquad (c) \((-\infty,-1)\) \qquad (d) \([0,4)\)\\[4pt]
+Tersine: \([-1,4)\) aralığı \(\ -1\le x<4\ \) demektir; \(-1\) dahil, \(4\) dahil değil.}
+
+\soru{Sayı Doğrusunda Gösterim -- Örnek 2}
+{\((-2,3]\) aralığını ve \(x<1\) eşitsizliğini sayı doğrusunda gösteriniz.}
+{\((-2,3]\): \(-2\) boş yuvarlak, \(3\) dolu yuvarlak:\quad
+\sd{-3}{4}{\cizgi{-2}{3}\acik{-2}\kapali{3}}\\[6pt]
+\(x<1\), yani \((-\infty,1)\):\quad
+\sd{-3}{4}{\isin{1}{-3.7}\acik{1}}}
+
+\subsection{Özellikler}
+\begin{frame}{Eşitsizliğin Özellikleri}
+\begin{block}{Kurallar (\(a<b\) olsun)}
+\begin{enumerate}
+\item Her iki tarafa aynı sayı eklenir/çıkarılır: \ \(a+c<b+c\)
+\item \(c>0\) ile çarpma/bölme: yön \textbf{korunur}: \ \(ac<bc\)
+\item \(c<0\) ile çarpma/bölme: yön \textbf{değişir}: \ \(ac>bc\)
+\item Aynı yönlü eşitsizlikler taraf tarafa \textbf{toplanır}: \ \(a<b,\ c<d\Rightarrow a+c<b+d\)
+\item \(0<a<b\ \Rightarrow\ \dfrac1a>\dfrac1b\) \quad (\(a<b<0\) için de \(\dfrac1a>\dfrac1b\))
+\end{enumerate}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Negatifle çarpıp yönü çevirmeyi unutmak. \ Eşitsizlikleri taraf tarafa \textbf{çıkarmak} veya \textbf{bölmek} (yanlış!).
+\end{alertblock}
+\end{frame}
+
+\soru{Özellikler -- Örnek 3}
+{\(a<b\) olduğuna göre hangileri \textbf{kesinlikle} doğrudur?\\
+(I) \(a-5<b-5\) \quad (II) \(-2a<-2b\) \quad (III) \(\dfrac a3<\dfrac b3\) \quad (IV) \(4-a>4-b\)}
+{(I) Doğru: iki taraftan \(5\) çıkarıldı.\\
+(II) Yanlış: \(-2\) ile çarpınca yön döner: \(-2a>-2b\).\\
+(III) Doğru: pozitif sayıya bölme.\\
+(IV) Doğru: \(-a>-b\), sonra \(4\) eklendi.}
+
+\soru{Özellikler -- Örnek 4 (Tuzak)}
+{\(5<6\) ve \(1<4\) doğrudur. Bu iki eşitsizlik taraf tarafa toplanabilir mi, çıkarılabilir mi?}
+{Toplama: \(5+1<6+4\), yani \(6<10\) \ \checkmark\\[3pt]
+Çıkarma: \(5-1<6-4\), yani \(4<2\) \ \(\times\) \ \textbf{yanlış!}\\[3pt]
+Aynı yönlü eşitsizlikler taraf tarafa \textbf{yalnızca toplanır}. Fark için Ders 2'deki yöntem (\(-1\) ile çarpıp toplama) kullanılır.}
+
+\soru{Özellikler -- Örnek 5}
+{\(2<x<5\) ise \(\dfrac1x\) hangi aralıktadır? \ \(-4<y<-2\) ise \(\dfrac1y\)?}
+{Uçlar aynı işaretli: ters alınınca yön döner.
+\[2<x<5\ \Rightarrow\ \frac15<\frac1x<\frac12\]
+\[-4<y<-2\ \Rightarrow\ -\frac12<\frac1y<-\frac14\]
+(Kontrol: \(y=-3\Rightarrow \frac1y=-\frac13\approx-0{,}33\).)}
+
+\subsection{Birinci dereceden eşitsizlikler}
+\begin{frame}{Birinci Dereceden Eşitsizlik Çözme}
+\begin{block}{Yöntem}
+Denklem gibi çözülür: bilinmeyenler bir tarafa, sayılar diğer tarafa.\\
+Tek fark: \textbf{negatif} bir sayıyla çarpılır/bölünürse eşitsizliğin yönü değişir.\\[3pt]
+Sonuç, çözüm kümesi (ÇK) olarak aralık gösterimiyle yazılır.
+\end{block}
+\begin{block}{Çift (iki taraflı) eşitsizlik}
+\(m<ax+b\le n\): İşlem \textbf{üç tarafa birden} uygulanır; ortada yalnız \(x\) bırakılır.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(-3x<12\Rightarrow x<-4\) \ \textbf{yanlış}; \ doğrusu \(x>-4\). \quad Paydaları yok ederken her terimi çarpmayı unutmak.
+\end{alertblock}
+\end{frame}
+
+\soru{Eşitsizlik Çözme -- Örnek 6}
+{\(3x-5<7\) eşitsizliğinin çözüm kümesi nedir?}
+{\[3x<12\ \Rightarrow\ x<4\]
+\(\text{ÇK}=(-\infty,4)\)\qquad \sd{0}{6}{\isin{4}{-0.7}\acik{4}}}
+
+\soru{Eşitsizlik Çözme -- Örnek 7}
+{\(-2x+3\ge 11\) eşitsizliğinin çözüm kümesi nedir?}
+{\[-2x\ge 8\]
+\(-2\) ile bölünce yön değişir:
+\[x\le -4\qquad \text{ÇK}=(-\infty,-4]\]}
+
+\soru{Eşitsizlik Çözme -- Örnek 8}
+{\(5-3x>2x-10\) eşitsizliğini sağlayan en büyük tam sayı kaçtır?}
+{\[5+10>2x+3x\ \Rightarrow\ 15>5x\ \Rightarrow\ x<3\]
+\(3\) dahil değil \(\Rightarrow\) en büyük tam sayı \(2\).}
+
+\soru{Eşitsizlik Çözme -- Örnek 9}
+{\(\dfrac{x-1}{2}-\dfrac{x+2}{3}\le 1\) eşitsizliğinin çözüm kümesi nedir?}
+{Paydaları eşitlemek için her terimi \(6\) ile çarpalım (\(6>0\), yön korunur):
+\[3(x-1)-2(x+2)\le 6\ \Rightarrow\ 3x-3-2x-4\le 6\ \Rightarrow\ x\le 13\]
+\(\text{ÇK}=(-\infty,13]\)}
+
+\soru{Çift Eşitsizlik -- Örnek 10}
+{\(-3<2x+1\le 7\) eşitsizliğinin çözüm kümesi nedir?}
+{Üç taraftan \(1\) çıkar, sonra \(2\)'ye böl:
+\[-4<2x\le 6\ \Rightarrow\ -2<x\le 3\]
+\(\text{ÇK}=(-2,3]\)\qquad \sd{-3}{4}{\cizgi{-2}{3}\acik{-2}\kapali{3}}}
+
+\soru{Çift Eşitsizlik -- Örnek 11}
+{\(-1\le \dfrac{5-x}{2}<3\) eşitsizliğinin çözüm kümesi nedir?}
+{\[-2\le 5-x<6\ \Rightarrow\ -7\le -x<1\]
+\(-1\) ile çarp, \textbf{iki yön de} değişir:
+\[-1<x\le 7\qquad \text{ÇK}=(-1,7]\]}
+
+\soru{Özel Durumlar -- Örnek 12 (Tuzak)}
+{(a) \(3x-2<3x+1\) \qquad (b) \(2x+5<2(x+1)\)\\ eşitsizliklerinin çözüm kümeleri nedir?}
+{(a) \(x\)'ler sadeleşir: \(-2<1\) \ her zaman doğru \(\Rightarrow\) \(\text{ÇK}=\mathbb{R}\)\\[4pt]
+(b) \(2x+5<2x+2\ \Rightarrow\ 5<2\) \ hiçbir zaman doğru değil \(\Rightarrow\) \(\text{ÇK}=\varnothing\)}
+
+\begin{frame}{Ders 1 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \(4x-7\ge 9\) \ ÇK \(=?\)
+\item \(2-5x<17\) \ ÇK \(=?\) \(\star\)
+\item \(1<3x-2\le 10\) \ ÇK \(=?\) \(\star\)
+\item \(-3\le x<2\) aralık gösterimiyle?
+\item \(3<x<6\) ise \(\dfrac1x\) hangi aralıkta? \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \([4,\infty)\)
+\item \((-3,\infty)\)
+\item \((1,4]\)
+\item \([-3,2)\)
+\item \(\left(\dfrac16,\dfrac13\right)\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 1 alıştırma çözümleri ----
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 2)}
+{\(2-5x<17\) eşitsizliğinin çözüm kümesi nedir?}
+{İki taraftan \(2\) çıkar: \ \(-5x<15\).\\[3pt]
+\(-5\) ile bölünce yön \textbf{değişir}:
+\[x>-3\qquad \text{ÇK}=(-3,\infty)\]
+\sd{-5}{2}{\isin{-3}{2.7}\acik{-3}}}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 3)}
+{\(1<3x-2\le 10\) eşitsizliğinin çözüm kümesi nedir?}
+{Üç tarafa \(2\) ekle, sonra \(3\)'e böl (\(3>0\), yön korunur):
+\[3<3x\le 12\ \Rightarrow\ 1<x\le 4\]
+\(\text{ÇK}=(1,4]\)\qquad \sd{0}{5}{\cizgi{1}{4}\acik{1}\kapali{4}}}
+
+\soru{Ders 1 -- Alıştırma Çözümü (Soru 5)}
+{\(3<x<6\) ise \(\dfrac1x\) hangi aralıktadır?}
+{Uçlar aynı işaretli (ikisi de pozitif): ters alınınca yön döner.
+\[3<x<6\ \Rightarrow\ \frac13>\frac1x>\frac16\ \Rightarrow\ \frac16<\frac1x<\frac13\]
+Kontrol: \(x=4\Rightarrow \frac14\), ve \(\frac16<\frac14<\frac13\) \checkmark}
+
+% =====================================================
+\section{Ders 2: Tam Sayı Değerleri ve Değer Aralığı}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 2}\\[6pt]\normalsize Tam Sayı Değerleri, Bir İfadenin Değer Aralığı, İki Değişkenli Sınırlar
+\end{frame}
+
+\subsection{Tam sayı değerleri}
+\begin{frame}{Tam Sayı Değerlerini Sayma}
+\begin{block}{Kural (\(a<b\) tam sayılar)}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}ll@{}}
+\([a,b]\) aralığındaki tam sayı sayısı: & \(b-a+1\)\\
+\((a,b)\) aralığındaki tam sayı sayısı: & \(b-a-1\)\\
+\([a,b)\) veya \((a,b]\) aralığındaki tam sayı sayısı: & \(b-a\)
+\end{tabular}\\[3pt]
+Önce eşitsizliği çöz, sonra uçların dahil olup olmadığına bak.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+Uç tam sayı değilse (ör. \(x<4{,}5\)) en büyük tam sayı \(4\)'tür. \quad
+\(x<3\) ise en büyük tam sayı \(3\) \textbf{değil}, \(2\)'dir.
+\end{alertblock}
+\end{frame}
+
+\soru{Tam Sayı Değerleri -- Örnek 13}
+{\(2x-3<11\) eşitsizliğini sağlayan en büyük tam sayı kaçtır? En küçük doğal sayı kaçtır?}
+{\[2x<14\ \Rightarrow\ x<7\]
+En büyük tam sayı: \(6\).\\[3pt]
+\(x<7\) koşulunu \(0\) sağlar \(\Rightarrow\) en küçük doğal sayı: \(0\).}
+
+\soru{Tam Sayı Değerleri -- Örnek 14}
+{\(-5\le 3x+1<13\) eşitsizliğini sağlayan kaç tam sayı vardır? Bunların toplamı kaçtır?}
+{\[-6\le 3x<12\ \Rightarrow\ -2\le x<4\]
+Tam sayılar: \(-2,-1,0,1,2,3\) \(\Rightarrow\) \(6\) tane.\\[3pt]
+Toplam: \((-2)+(-1)+0+1+2+3=3\)}
+
+\soru{Tam Sayı Değerleri -- Örnek 15}
+{\(-7<2x-1<8\) eşitsizliğini sağlayan tam sayıların en küçüğü, en büyüğü ve toplamı nedir?}
+{\[-6<2x<9\ \Rightarrow\ -3<x<4{,}5\]
+Tam sayılar: \(-2,-1,0,1,2,3,4\) \ (\(7\) tane)\\[3pt]
+En küçük \(-2\), en büyük \(4\); \ toplam: \(-2-1+0+1+2+3+4=7\)}
+
+\soru{Tam Sayı Değerleri -- Örnek 16}
+{\(\dfrac x3+2>x-4\) eşitsizliğini sağlayan kaç tane pozitif tam sayı vardır?}
+{\(3\) ile çarp: \ \(x+6>3x-12\ \Rightarrow\ 18>2x\ \Rightarrow\ x<9\)\\[4pt]
+Pozitif tam sayılar: \(1,2,\dots,8\) \(\Rightarrow\) \(8\) tane.}
+
+\subsection{Değer aralığı}
+\begin{frame}{Bir İfadenin Değer Aralığı}
+\begin{block}{Tek değişken}
+\(x\)'in aralığı biliniyorsa ifade adım adım kurulur: çarp (negatifse yön değişir), sonra ekle.
+\end{block}
+\begin{block}{İki değişken}
+\begin{itemize}
+\item \(x+y\): aralıklar taraf tarafa \textbf{toplanır}.
+\item \(x-y\): önce \(y\)'nin aralığı \(-1\) ile çarpılır (\(-y\)), sonra \(x\) ile toplanır.
+\item \(x\cdot y\): uç değerlerin \textbf{dört çarpımı} hesaplanır; en küçüğü ve en büyüğü alınır.
+\item \(x^2\): aralık \(0\)'ı içeriyorsa en küçük değer \(0\)'dır.
+\end{itemize}
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(-3<x<2\Rightarrow 9>x^2>4\) \ \textbf{yanlış}; doğrusu \(0\le x^2<9\).
+\end{alertblock}
+\end{frame}
+
+\soru{Değer Aralığı -- Örnek 17}
+{\(-2<a<5\) ise \(3a-1\) hangi aralıktadır? \(3a-1\) kaç farklı tam sayı değeri alabilir?}
+{\[-6<3a<15\ \Rightarrow\ -7<3a-1<14\]
+Tam sayı değerleri: \(-6,-5,\dots,13\) \(\Rightarrow\) \(13-(-6)+1=20\) tane.}
+
+\soru{Değer Aralığı -- Örnek 18}
+{\(-3<x\le 2\) ise \(5-2x\) hangi aralıktadır?}
+{\(-2\) ile çarp (yön değişir):
+\[6>-2x\ge -4\ \Rightarrow\ -4\le -2x<6\]
+\(5\) ekle: \quad \(1\le 5-2x<11\), \ yani \([1,11)\).}
+
+\soru{İki Değişken: \(x+y\), \(x-y\) -- Örnek 19}
+{\(2<x<6\) ve \(-3<y<1\) ise \(x+y\) ve \(x-y\) hangi aralıktadır?}
+{Toplama: \(\ -1<x+y<7\)\\[4pt]
+Fark: \(-1<-y<3\) \ (\(y\)'nin aralığı \(-1\) ile çarpıldı)
+\[2<x<6\ \text{ ile toplanırsa: }\ 1<x-y<9\]}
+
+\soru{İki Değişken: Tam Sayılar -- Örnek 20}
+{\(2<x<6\), \ \(-3<y<1\) ve \(x,y\) tam sayılardır. \(x-y\)'nin en büyük değeri ve \(x+y\)'nin en küçük değeri kaçtır?}
+{\(x\in\{3,4,5\}\), \quad \(y\in\{-2,-1,0\}\)\\[4pt]
+\(x-y\) en büyük: \(x=5,\ y=-2\ \Rightarrow\ 7\)\\
+\(x+y\) en küçük: \(x=3,\ y=-2\ \Rightarrow\ 1\)}
+
+\soru{İki Değişken: \(x\cdot y\) -- Örnek 21}
+{\(2<x<6\) ve \(-3<y<1\) ise \(x\cdot y\) hangi aralıktadır?}
+{Uç değerlerin çarpımları:
+\[2\cdot(-3)=-6,\quad 2\cdot 1=2,\quad 6\cdot(-3)=-18,\quad 6\cdot 1=6\]
+En küçük \(-18\), en büyük \(6\) (uçlar dahil değil): \quad \(-18<x\cdot y<6\)}
+
+\soru{Kare Aralığı -- Örnek 22}
+{(a) \(-3<x<2\) \qquad (b) \(-1<x<4\)\\ ise \(x^2\) hangi aralıktadır?}
+{Aralık \(0\)'ı içeriyor \(\Rightarrow\) \(x=0\) için \(x^2=0\) en küçük değer.\\[3pt]
+(a) En büyük: \((-3)^2=9\) (dahil değil) \(\Rightarrow\ 0\le x^2<9\)\\
+(b) En büyük: \(4^2=16\) (dahil değil) \(\Rightarrow\ 0\le x^2<16\)}
+
+\soru{Karma -- Örnek 23}
+{\(-4<x<3\), \ \(-2<y<5\) ve \(x,y\) tam sayılardır. \(x^2-y\) ifadesinin en büyük ve en küçük değeri kaçtır?}
+{\(x\in\{-3,\dots,2\}\Rightarrow x^2\in\{0,1,4,9\}\); \quad \(y\in\{-1,\dots,4\}\)\\[4pt]
+En büyük: \(x^2=9,\ y=-1\ \Rightarrow\ 9-(-1)=10\)\\
+En küçük: \(x^2=0,\ y=4\ \Rightarrow\ 0-4=-4\)}
+
+\begin{frame}{Ders 2 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.6\textwidth}
+\begin{enumerate}
+\item \(-4\le 2x+2<9\) kaç tam sayı sağlar? \(\star\)
+\item \(-1<a<4\) ise \(2-3a\) hangi aralıkta?
+\item \(1<x<5\), \(-2<y<3\) ise \(x-y\) aralığı? \(\star\)
+\item \(-5<x<2\) ise \(x^2\) aralığı?
+\item \(-2<x<4\), \(1<y<6\), \(x,y\in\mathbb{Z}\): \ \(x\cdot y\) en küçük? \(\star\)
+\end{enumerate}
+\column{0.34\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(7\) \ (\(-3\le x<3{,}5\))
+\item \((-10,5)\)
+\item \((-2,7)\)
+\item \([0,25)\)
+\item \(-5\) \ (\(x=-1,\ y=5\))
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 2 alıştırma çözümleri ----
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 1)}
+{\(-4\le 2x+2<9\) eşitsizliğini kaç tam sayı sağlar?}
+{Üç taraftan \(2\) çıkar, sonra \(2\)'ye böl:
+\[-6\le 2x<7\ \Rightarrow\ -3\le x<3{,}5\]
+Tam sayılar: \(-3,-2,-1,0,1,2,3\) \(\Rightarrow\) \(7\) tane.}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 3)}
+{\(1<x<5\) ve \(-2<y<3\) ise \(x-y\) hangi aralıktadır?}
+{Önce \(-y\): \(y\)'nin aralığını \(-1\) ile çarp (yön değişir):
+\[-3<-y<2\]
+\(1<x<5\) ile taraf tarafa topla:
+\[1+(-3)<x-y<5+2\ \Rightarrow\ -2<x-y<7\]}
+
+\soru{Ders 2 -- Alıştırma Çözümü (Soru 5)}
+{\(-2<x<4\), \ \(1<y<6\) ve \(x,y\) tam sayılardır. \(x\cdot y\)'nin en küçük değeri kaçtır?}
+{\(x\in\{-1,0,1,2,3\}\), \quad \(y\in\{2,3,4,5\}\)\\[3pt]
+Çarpımın negatif olması için \(x\) negatif olmalı: tek seçenek \(x=-1\).\\[3pt]
+En küçük çarpım için \(y\) en büyük: \(y=5\) \(\Rightarrow\) \(x\cdot y=-5\).}
+
+% =====================================================
+\section{Ders 3: Mutlak Değer}
+\begin{frame}
+\centering\Large\color{anamavi}\textbf{Ders 3}\\[6pt]\normalsize Mutlak Değer, Mutlak Değerli Denklemler ve Eşitsizlikler
+\end{frame}
+
+\subsection{Tanım ve özellikler}
+\begin{frame}{Mutlak Değer: Tanım ve Özellikler}
+\begin{columns}[t]
+\column{0.48\textwidth}
+\begin{block}{Tanım}
+\[|x|=\begin{cases}x, & x\ge 0\\ -x, & x<0\end{cases}\]
+\(|x|\): \(x\)'in \(0\)'a uzaklığı.\\
+\(|x-a|\): \(x\) ile \(a\) arasındaki uzaklık.
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Özellikler}
+\(|x|\ge 0\), \quad \(|-x|=|x|\), \quad \(|x-y|=|y-x|\)\\[2pt]
+\(|x\cdot y|=|x|\cdot|y|\), \quad \(\left|\dfrac xy\right|=\dfrac{|x|}{|y|}\ (y\neq0)\)\\[2pt]
+Üçgen eşitsizliği: \(|x+y|\le|x|+|y|\).
+\end{block}
+\end{columns}
+\begin{alertblock}{Sık yapılan hatalar}
+\(|-x|\) her zaman \(x\) değildir: \(x<0\) ise \(|-x|=-x\). \quad Genelde \(|x+y|\neq|x|+|y|\): \(|3+(-5)|=2\), ama \(|3|+|-5|=8\).
+\end{alertblock}
+\end{frame}
+
+\soru{Mutlak Değer -- Örnek 24}
+{\(|-7|+|3|-|-2-4|\) \ ve \ \(|5-8|-|8-5|\) \ işlemlerinin sonuçları nedir?}
+{\[|-7|+|3|-|-6|=7+3-6=4\]
+\[|5-8|-|8-5|=3-3=0\qquad(|x-y|=|y-x|)\]}
+
+\soru{Uzaklık Yorumu -- Örnek 25}
+{Sayı doğrusunda \(3\)'e uzaklığı \(4\) birim olan sayılar hangileridir? Bunu mutlak değerle yazınız.}
+{\(|x-3|=4\):
+\sd{-2}{8}{\draw[<->,cozumyesil,thick] (-1,0.45)--(3,0.45);\draw[<->,cozumyesil,thick] (3,0.45)--(7,0.45);\kapali{-1}\kapali{7}\fill[uyarikirmizi] (3,0) circle (3pt);}\\[3pt]
+\(x=3-4=-1\) \ veya \ \(x=3+4=7\).\\
+Not: \(|x+2|=|x-(-2)|\): \(x\)'in \(-2\)'ye uzaklığıdır.}
+
+\subsection{İşareti bilinen ifadeler}
+\begin{frame}{İşareti Bilinen İfadeyi Mutlak Değerden Çıkarma}
+\begin{block}{Kural}
+\begin{itemize}
+\item İçerisi \(\ge 0\) ise: \ \(|A|=A\) \quad (olduğu gibi çıkar)
+\item İçerisi \(<0\) ise: \ \(|A|=-A\) \quad (işaretini değiştirerek çıkar)
+\end{itemize}
+Önce her mutlak değerin \textbf{içinin işaretine} karar ver, sonra sadeleştir.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(-A\) yazarken parantezi unutmak: \ \(|3-x|\) içerisi negatifse \(-(3-x)=x-3\) olur.
+\end{alertblock}
+\end{frame}
+
+\soru{İşaret -- Örnek 26}
+{\(a<0<b\) olduğuna göre \(|a-b|+|b|-|a|\) ifadesinin eşiti nedir?}
+{\(a-b<0\Rightarrow |a-b|=b-a\); \quad \(|b|=b\); \quad \(|a|=-a\)
+\[(b-a)+b-(-a)=2b\]
+Kontrol: \(a=-1,\ b=2\): \ \(3+2-1=4=2\cdot 2\) \ \checkmark}
+
+\soru{İşaret -- Örnek 27}
+{\(x<-2\) olduğuna göre \(|x+2|-|3-x|\) ifadesinin eşiti nedir?}
+{\(x+2<0\Rightarrow |x+2|=-x-2\); \quad \(3-x>0\Rightarrow |3-x|=3-x\)
+\[(-x-2)-(3-x)=-5\]
+Kontrol: \(x=-5\): \ \(3-8=-5\) \ \checkmark}
+
+\soru{İşaret -- Örnek 28}
+{\(1<x<4\) olduğuna göre \(|x-1|+|x-4|\) ifadesinin eşiti nedir?}
+{\(x-1>0\), \quad \(x-4<0\):
+\[(x-1)+(4-x)=3\]
+Uzaklık yorumu: \(x\), \(1\) ile \(4\) arasındaysa uzaklıkları toplamı \(4-1=3\).}
+
+\subsection{Mutlak değerli denklemler}
+\begin{frame}{Mutlak Değerli Denklemler}
+\begin{block}{\(|ax+b|=c\)}
+\begin{itemize}
+\item \(c>0\): \ \(ax+b=c\) \ veya \ \(ax+b=-c\) \quad (iki kök)
+\item \(c=0\): \ \(ax+b=0\) \quad (tek kök)
+\item \(c<0\): \ \(\text{ÇK}=\varnothing\) \quad (mutlak değer negatif olamaz)
+\end{itemize}
+\end{block}
+\begin{block}{\(|f(x)|=|g(x)|\)}
+\(f(x)=g(x)\) \ veya \ \(f(x)=-g(x)\)
+\end{block}
+\end{frame}
+
+\soru{Denklem -- Örnek 29}
+{\(|2x-3|=7\) denkleminin çözüm kümesi nedir? Kökler toplamı kaçtır?}
+{\[2x-3=7\Rightarrow x=5\qquad\text{veya}\qquad 2x-3=-7\Rightarrow x=-2\]
+\(\text{ÇK}=\{-2,5\}\); \quad kökler toplamı \(3\).}
+
+\soru{Denklem -- Örnek 30 (Tuzak)}
+{(a) \(|x+1|=-3\) \qquad (b) \(|3x-6|=0\) \qquad (c) \(|x-2|+5=3\)}
+{(a) Mutlak değer negatif olamaz: \(\text{ÇK}=\varnothing\)\\[3pt]
+(b) \(3x-6=0\Rightarrow x=2\): \(\text{ÇK}=\{2\}\)\\[3pt]
+(c) \(|x-2|=-2\) \(\Rightarrow\) \(\text{ÇK}=\varnothing\)}
+
+\soru{Denklem -- Örnek 31}
+{\(|x-1|=|2x+4|\) denkleminin çözüm kümesi nedir?}
+{\(x-1=2x+4\Rightarrow x=-5\)\\[2pt]
+\(x-1=-(2x+4)\Rightarrow 3x=-3\Rightarrow x=-1\)\\[3pt]
+\(\text{ÇK}=\{-5,-1\}\). \ Kontrol: \(|-6|=|-6|\), \ \(|-2|=|2|\) \ \checkmark}
+
+\subsection{Mutlak değerli eşitsizlikler}
+\begin{frame}{Mutlak Değerli Eşitsizlikler (\(b>0\))}
+\begin{block}{Kurallar}
+\begin{itemize}
+\item \(|x-a|<b\ \Rightarrow\ a-b<x<a+b\) \quad (\(a\)'ya uzaklığı \(b\)'den az)
+\item \(|x-a|>b\ \Rightarrow\ x<a-b\ \) veya \(\ x>a+b\)
+\item \(|ax+c|<b\ \Rightarrow\ -b<ax+c<b\)
+\end{itemize}
+\(\le\), \(\ge\) için uçlar dahil edilir.
+\end{block}
+\begin{alertblock}{Sık yapılan hatalar}
+\(|f(x)|<\) negatif sayı \(\Rightarrow\varnothing\); \quad \(|f(x)|\ge\) negatif sayı \(\Rightarrow\mathbb{R}\).\\
+\(|x|>3\) için \(-3<x<3\) yazmak \textbf{yanlış}: doğrusu \(x<-3\) veya \(x>3\).
+\end{alertblock}
+\end{frame}
+
+\soru{Eşitsizlik -- Örnek 32}
+{\(|x-3|<5\) eşitsizliğinin çözüm kümesi nedir? Kaç tam sayı bu eşitsizliği sağlar?}
+{\[-5<x-3<5\ \Rightarrow\ -2<x<8\]
+\(\text{ÇK}=(-2,8)\); \ tam sayılar \(-1,0,\dots,7\): \ \(8-(-2)-1=9\) tane.}
+
+\soru{Eşitsizlik -- Örnek 33}
+{\(|2x+1|\le 7\) eşitsizliğini sağlayan tam sayıların toplamı kaçtır?}
+{\[-7\le 2x+1\le 7\ \Rightarrow\ -8\le 2x\le 6\ \Rightarrow\ -4\le x\le 3\]
+Tam sayılar \(-4,\dots,3\) (\(8\) tane): \ \(-3\), \(-2\), \(-1\) ile \(1,2,3\) birbirini götürür; toplam \(-4\).}
+
+\soru{Eşitsizlik -- Örnek 34}
+{\(|x+2|>3\) eşitsizliğinin çözüm kümesi nedir?}
+{\(x+2>3\Rightarrow x>1\) \quad veya \quad \(x+2<-3\Rightarrow x<-5\)\\[3pt]
+\(\text{ÇK}=(-\infty,-5)\cup(1,\infty)\)\qquad
+\sd{-7}{3}{\isin{-5}{-7.7}\isin{1}{3.7}\acik{-5}\acik{1}}}
+
+\soru{Eşitsizlik -- Örnek 35 (Tuzak)}
+{(a) \(|3x-1|<-4\) \qquad (b) \(|x+7|\ge 0\) \qquad (c) \(|x-2|\le 0\)}
+{(a) Mutlak değer negatif sayıdan küçük olamaz: \(\text{ÇK}=\varnothing\)\\[3pt]
+(b) Her \(x\) için doğru: \(\text{ÇK}=\mathbb{R}\)\\[3pt]
+(c) \(|x-2|\ge0\) olduğundan yalnızca \(|x-2|=0\): \(\text{ÇK}=\{2\}\)}
+
+\soru{İki Taraflı -- Örnek 36}
+{\(2\le|x-1|<5\) eşitsizliğini sağlayan kaç tam sayı vardır?}
+{\(|x-1|<5\Rightarrow -4<x<6\)\\
+\(|x-1|\ge 2\Rightarrow x\le -1\) veya \(x\ge 3\)\\[3pt]
+Kesişim tam sayıları: \(-3,-2,-1,\ 3,4,5\) \(\Rightarrow\) \(6\) tane.}
+
+\begin{frame}{Ders 3 -- Sınıfta Siz Çözün}
+\begin{columns}[t]
+\column{0.58\textwidth}
+\begin{enumerate}
+\item \(|-4|-|2-9|+|0|=?\)
+\item \(a<0<b\) ise \(|a|+|b-a|-|b|=?\) \(\star\)
+\item \(|2x-1|=9\) \ ÇK \(=?\)
+\item \(|x+1|\le 4\) kaç tam sayı sağlar? \(\star\)
+\item \(|x-2|>6\) \ ÇK \(=?\) \(\star\)
+\end{enumerate}
+\column{0.36\textwidth}
+\pause
+\textbf{Cevaplar:}
+\begin{enumerate}
+\item \(-3\)
+\item \(-2a\)
+\item \(\{-4,5\}\)
+\item \(9\) \ (\(-5\le x\le 3\))
+\item \((-\infty,-4)\cup(8,\infty)\)
+\end{enumerate}
+\end{columns}
+\vspace{4pt}{\footnotesize \(\star\) işaretli soruların adım adım çözümü sonraki slaytlardadır.}
+\end{frame}
+
+% ---- Ders 3 alıştırma çözümleri ----
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 2)}
+{\(a<0<b\) olduğuna göre \(|a|+|b-a|-|b|\) ifadesinin eşiti nedir?}
+{\(a<0\Rightarrow |a|=-a\); \quad \(b-a>0\Rightarrow |b-a|=b-a\); \quad \(|b|=b\)
+\[(-a)+(b-a)-b=-2a\]
+Kontrol: \(a=-1,\ b=2\): \ \(1+3-2=2=-2\cdot(-1)\) \ \checkmark}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 4)}
+{\(|x+1|\le 4\) eşitsizliğini kaç tam sayı sağlar?}
+{\[-4\le x+1\le 4\ \Rightarrow\ -5\le x\le 3\]
+\([-5,3]\) kapalı aralığındaki tam sayılar: \(3-(-5)+1=9\) tane.\\[3pt]
+\sd{-6}{4}{\cizgi{-5}{3}\kapali{-5}\kapali{3}}}
+
+\soru{Ders 3 -- Alıştırma Çözümü (Soru 5)}
+{\(|x-2|>6\) eşitsizliğinin çözüm kümesi nedir?}
+{\(x\)'in \(2\)'ye uzaklığı \(6\)'dan büyük:\\[2pt]
+\(x-2>6\Rightarrow x>8\) \quad veya \quad \(x-2<-6\Rightarrow x<-4\)\\[3pt]
+\(\text{ÇK}=(-\infty,-4)\cup(8,\infty)\)\\[2pt]
+\sd{-6}{10}{\isin{-4}{-6.7}\isin{8}{10.7}\acik{-4}\acik{8}}}
+
+\begin{frame}{Özet}
+\begin{columns}[t]
+\column{0.32\textwidth}
+\begin{block}{Ders 1}
+\small
+\begin{itemize}
+\item \(\infty\) yanında parantez açık
+\item Negatifle çarp/böl: yön değişir
+\item Eşitsizlikler yalnızca toplanır
+\item \(0<a<b\Rightarrow \frac1a>\frac1b\)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 2}
+\small
+\begin{itemize}
+\item \((a,b)\): \(b-a-1\) tam sayı
+\item \(x-y\): \(-y\) aralığı ile topla
+\item \(x\cdot y\): dört uç çarpımı
+\item \(0\) aralıktaysa \(\min x^2=0\) (dahil)
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\begin{block}{Ders 3}
+\small
+\begin{itemize}
+\item \(|x-a|\): \(a\)'ya uzaklık
+\item \(|A|=c<0\Rightarrow\varnothing\)
+\item \(|x-a|<b\): \(a-b<x<a+b\)
+\item \(|x-a|>b\): \(x<a-b\) veya \(x>a+b\)
+\end{itemize}
+\end{block}
+\end{columns}
+\vspace{2pt}
+\begin{alertblock}{Gelecek hafta: ARA SINAV (Hafta 1--7 konuları)}
+Ders notundaki \textbf{karma tekrar} sorularını çözerek hazırlanın.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\centering\Large İyi çalışmalar
+\end{frame}
+
+\end{document}
