@@ -1,6 +1,6 @@
 # MMAT105 Genel Matematik
 
-Lise / TYT düzeyinde, teorisi az, örnek ağırlıklı 15 haftalık ders materyali (2026–2027 Güz). Her örnekte önce soru, sonra çözüm gelir.
+MYO/ SMYO/ DGS/ Lise / TYT düzeyinde, teorisi az, örnek ağırlıklı 15 haftalık ders materyali (2026–2027 Güz). Her örnekte önce soru, sonra çözüm gelir.
 
 ## Haftalık plan
 
