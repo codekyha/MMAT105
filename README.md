@@ -33,3 +33,6 @@ XeLaTeX gerekir (DejaVu yazı tipleri ile):
 ```
 xelatex dosya.tex
 ```
+## Lisans
+
+Ders materyali olarak MIT lisansıyla paylaşılır; öğrenciler kendi projelerinde serbestçe kullanabilir. Bu materyaller, her ne şekilde olursa olsun hiçbir garanti verilmeksizin "olduğu gibi" sunulmaktadır; yazar, bunların kullanımından doğabilecek hiçbir sorumluluğu kabul etmez.
